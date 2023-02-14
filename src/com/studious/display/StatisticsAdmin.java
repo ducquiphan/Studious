@@ -67,6 +67,7 @@ public class StatisticsAdmin extends java.awt.Dialog {
         tblGridView6 = new javax.swing.JTable();
         cboOrdering3 = new javax.swing.JComboBox<>();
         cboArrange3 = new javax.swing.JComboBox<>();
+        lblTitle2 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(232, 255, 183));
         setTitle("THỐNG KÊ TÀI LIỆU");
@@ -100,6 +101,7 @@ public class StatisticsAdmin extends java.awt.Dialog {
         btnHome.setBackground(new java.awt.Color(232, 255, 183));
         btnHome.setForeground(new java.awt.Color(232, 255, 183));
         btnHome.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/studious/icons/home.png"))); // NOI18N
+        btnHome.setBorder(null);
         btnHome.setFocusable(false);
         btnHome.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnHome.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -107,6 +109,7 @@ public class StatisticsAdmin extends java.awt.Dialog {
 
         btnPersonalInfo.setBackground(new java.awt.Color(232, 255, 183));
         btnPersonalInfo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/studious/icons/account.png"))); // NOI18N
+        btnPersonalInfo.setBorder(null);
         btnPersonalInfo.setFocusable(false);
         btnPersonalInfo.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnPersonalInfo.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -114,6 +117,7 @@ public class StatisticsAdmin extends java.awt.Dialog {
 
         btnTeacher.setBackground(new java.awt.Color(232, 255, 183));
         btnTeacher.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/studious/icons/teacher.png"))); // NOI18N
+        btnTeacher.setBorder(null);
         btnTeacher.setFocusable(false);
         btnTeacher.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnTeacher.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -121,6 +125,7 @@ public class StatisticsAdmin extends java.awt.Dialog {
 
         btnStudent.setBackground(new java.awt.Color(232, 255, 183));
         btnStudent.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/studious/icons/student.png"))); // NOI18N
+        btnStudent.setBorder(null);
         btnStudent.setFocusable(false);
         btnStudent.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnStudent.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -128,6 +133,7 @@ public class StatisticsAdmin extends java.awt.Dialog {
 
         btnStatistic.setBackground(new java.awt.Color(232, 255, 183));
         btnStatistic.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/studious/icons/statistic.png"))); // NOI18N
+        btnStatistic.setBorder(null);
         btnStatistic.setFocusable(false);
         btnStatistic.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnStatistic.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -135,6 +141,7 @@ public class StatisticsAdmin extends java.awt.Dialog {
 
         btnQna.setBackground(new java.awt.Color(232, 255, 183));
         btnQna.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/studious/icons/QnA.png"))); // NOI18N
+        btnQna.setBorder(null);
         btnQna.setFocusable(false);
         btnQna.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnQna.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -142,6 +149,7 @@ public class StatisticsAdmin extends java.awt.Dialog {
 
         btnBack.setBackground(new java.awt.Color(232, 255, 183));
         btnBack.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/studious/icons/back.png"))); // NOI18N
+        btnBack.setBorder(null);
         btnBack.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnBack.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         jToolBar1.add(btnBack);
@@ -149,8 +157,12 @@ public class StatisticsAdmin extends java.awt.Dialog {
         btnLogout.setBackground(new java.awt.Color(232, 255, 183));
         btnLogout.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/studious/icons/logout.png"))); // NOI18N
         btnLogout.setToolTipText("");
+        btnLogout.setBorder(null);
         btnLogout.setFocusable(false);
         btnLogout.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnLogout.setMaximumSize(new java.awt.Dimension(35, 35));
+        btnLogout.setMinimumSize(new java.awt.Dimension(35, 35));
+        btnLogout.setPreferredSize(new java.awt.Dimension(35, 35));
         btnLogout.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         jToolBar1.add(btnLogout);
 
@@ -395,6 +407,9 @@ public class StatisticsAdmin extends java.awt.Dialog {
 
         jTabbedPane1.addTab("Điểm tổng", jPanel4);
 
+        lblTitle2.setBackground(new java.awt.Color(232, 255, 183));
+        lblTitle2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/studious/icons/Studious-255x68.png"))); // NOI18N
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -407,42 +422,50 @@ public class StatisticsAdmin extends java.awt.Dialog {
                         .addContainerGap())
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(lblTitle1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(lblTitle)
-                        .addContainerGap())
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 308, Short.MAX_VALUE)
-                        .addComponent(cboSubject, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblTitle2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 102, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(33, 33, 33)
-                                .addComponent(lblSearch))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(63, 63, 63)
-                                .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(6, 6, 6))))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(lblTitle)
+                                .addContainerGap())
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(cboSubject, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(33, 33, 33)
+                                        .addComponent(lblSearch))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(63, 63, 63)
+                                        .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(6, 6, 6))))))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(15, 15, 15)
                     .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(794, Short.MAX_VALUE)))
+                    .addContainerGap(804, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(24, 24, 24)
-                        .addComponent(lblTitle1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(lblTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(cboSubject, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtSearch, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblSearch))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(24, 24, 24)
+                                .addComponent(lblTitle1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(lblTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(cboSubject, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtSearch, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblSearch)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(lblTitle2)))
                 .addGap(24, 24, 24)
                 .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(51, 51, 51))
@@ -450,7 +473,7 @@ public class StatisticsAdmin extends java.awt.Dialog {
                 .addGroup(layout.createSequentialGroup()
                     .addGap(137, 137, 137)
                     .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(160, Short.MAX_VALUE)))
+                    .addContainerGap(222, Short.MAX_VALUE)))
         );
 
         pack();
@@ -515,6 +538,7 @@ public class StatisticsAdmin extends java.awt.Dialog {
     private javax.swing.JLabel lblSearch;
     private javax.swing.JLabel lblTitle;
     private javax.swing.JLabel lblTitle1;
+    private javax.swing.JLabel lblTitle2;
     private javax.swing.JTable tblGridView;
     private javax.swing.JTable tblGridView1;
     private javax.swing.JTable tblGridView2;
