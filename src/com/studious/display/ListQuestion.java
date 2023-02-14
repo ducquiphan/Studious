@@ -129,6 +129,11 @@ public class ListQuestion extends javax.swing.JFrame {
 
         btnSearch.setFont(new java.awt.Font("Readex Pro Medium", 0, 14)); // NOI18N
         btnSearch.setText("Tìm kiếm");
+        btnSearch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSearchActionPerformed(evt);
+            }
+        });
 
         btnSearch2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/studious/icons/icons8-search-24.png"))); // NOI18N
         btnSearch2.addActionListener(new java.awt.event.ActionListener() {
@@ -414,6 +419,10 @@ public class ListQuestion extends javax.swing.JFrame {
     private void btnSearch2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearch2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnSearch2ActionPerformed
+
+    private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnSearchActionPerformed
 
     /**
      * @param args the command line arguments
