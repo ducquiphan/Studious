@@ -27,7 +27,6 @@ public class StatisticsAdmin extends java.awt.Dialog {
     private void initComponents() {
 
         lblTitle = new javax.swing.JLabel();
-        lblSearch = new javax.swing.JLabel();
         cboSubject = new javax.swing.JComboBox<>();
         txtSearch = new javax.swing.JTextField();
         lblTitle1 = new javax.swing.JLabel();
@@ -67,6 +66,7 @@ public class StatisticsAdmin extends java.awt.Dialog {
         tblGridView6 = new javax.swing.JTable();
         cboOrdering3 = new javax.swing.JComboBox<>();
         cboArrange3 = new javax.swing.JComboBox<>();
+        btnSearch2 = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(232, 255, 183));
         setTitle("THỐNG KÊ TÀI LIỆU");
@@ -80,9 +80,6 @@ public class StatisticsAdmin extends java.awt.Dialog {
         lblTitle.setForeground(new java.awt.Color(47, 106, 1));
         lblTitle.setText("THỐNG KÊ ");
 
-        lblSearch.setBackground(new java.awt.Color(255, 255, 255));
-        lblSearch.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/studious/icons/icons8-search-24.png"))); // NOI18N
-
         cboSubject.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         cboSubject.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Môn học" }));
 
@@ -90,7 +87,7 @@ public class StatisticsAdmin extends java.awt.Dialog {
         txtSearch.setText("Tìm kiếm");
 
         lblTitle1.setBackground(new java.awt.Color(232, 255, 183));
-        lblTitle1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/studious/icons/Studious-255x68.png"))); // NOI18N
+        lblTitle1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/Studious-255x68.png"))); // NOI18N
 
         jToolBar1.setBackground(new java.awt.Color(232, 255, 183));
         jToolBar1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(232, 255, 183)));
@@ -406,6 +403,13 @@ public class StatisticsAdmin extends java.awt.Dialog {
 
         jTabbedPane1.addTab("Điểm tổng", jPanel4);
 
+        btnSearch2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/studious/icons/icons8-search-24.png"))); // NOI18N
+        btnSearch2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSearch2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -414,24 +418,21 @@ public class StatisticsAdmin extends java.awt.Dialog {
                 .addGap(86, 86, 86)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 965, Short.MAX_VALUE)
+                        .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                         .addContainerGap())
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(lblTitle1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 308, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addComponent(lblTitle)
                                 .addContainerGap())
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addComponent(cboSubject, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(33, 33, 33)
-                                        .addComponent(lblSearch))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(63, 63, 63)
-                                        .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(12, 12, 12)
+                                .addComponent(btnSearch2, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(6, 6, 6))))))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
@@ -448,13 +449,13 @@ public class StatisticsAdmin extends java.awt.Dialog {
                         .addComponent(lblTitle1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap(8, Short.MAX_VALUE)
                         .addComponent(lblTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(cboSubject, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtSearch, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblSearch))
+                    .addComponent(btnSearch2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(24, 24, 24)
                 .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(51, 51, 51))
@@ -462,7 +463,7 @@ public class StatisticsAdmin extends java.awt.Dialog {
                 .addGroup(layout.createSequentialGroup()
                     .addGap(137, 137, 137)
                     .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(209, Short.MAX_VALUE)))
+                    .addContainerGap(222, Short.MAX_VALUE)))
         );
 
         pack();
@@ -475,6 +476,10 @@ public class StatisticsAdmin extends java.awt.Dialog {
         setVisible(false);
         dispose();
     }//GEN-LAST:event_closeDialog
+
+    private void btnSearch2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearch2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnSearch2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -500,6 +505,7 @@ public class StatisticsAdmin extends java.awt.Dialog {
     private javax.swing.JButton btnLogout;
     private javax.swing.JButton btnPersonalInfo;
     private javax.swing.JButton btnQna;
+    private javax.swing.JButton btnSearch2;
     private javax.swing.JButton btnStatistic;
     private javax.swing.JButton btnStudent;
     private javax.swing.JButton btnTeacher;
@@ -524,7 +530,6 @@ public class StatisticsAdmin extends java.awt.Dialog {
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JToolBar jToolBar1;
-    private javax.swing.JLabel lblSearch;
     private javax.swing.JLabel lblTitle;
     private javax.swing.JLabel lblTitle1;
     private javax.swing.JTable tblGridView;

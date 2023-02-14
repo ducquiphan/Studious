@@ -33,12 +33,12 @@
               <EmptySpace min="-2" pref="86" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="1" attributes="0">
-                      <Component id="jTabbedPane1" pref="965" max="32767" attributes="0"/>
+                      <Component id="jTabbedPane1" pref="0" max="32767" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" attributes="0">
                       <Component id="lblTitle1" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="32767" attributes="0"/>
+                      <EmptySpace pref="308" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="1" attributes="0">
                               <Component id="lblTitle" min="-2" max="-2" attributes="0"/>
@@ -46,16 +46,10 @@
                           </Group>
                           <Group type="102" alignment="1" attributes="0">
                               <Component id="cboSubject" min="-2" pref="196" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" attributes="0">
-                                      <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
-                                      <Component id="lblSearch" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <EmptySpace min="-2" pref="63" max="-2" attributes="0"/>
-                                      <Component id="txtSearch" min="-2" pref="198" max="-2" attributes="0"/>
-                                  </Group>
-                              </Group>
+                              <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
+                              <Component id="btnSearch2" min="-2" pref="39" max="-2" attributes="0"/>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Component id="txtSearch" min="-2" pref="198" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
                           </Group>
                       </Group>
@@ -81,7 +75,7 @@
                       <EmptySpace max="32767" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="1" attributes="0">
-                      <EmptySpace max="32767" attributes="0"/>
+                      <EmptySpace pref="8" max="32767" attributes="0"/>
                       <Component id="lblTitle" min="-2" pref="59" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
@@ -89,7 +83,7 @@
               <Group type="103" groupAlignment="1" attributes="0">
                   <Component id="cboSubject" alignment="1" min="-2" max="-2" attributes="0"/>
                   <Component id="txtSearch" alignment="0" min="-2" max="-2" attributes="0"/>
-                  <Component id="lblSearch" alignment="1" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnSearch2" alignment="0" min="-2" pref="26" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
               <Component id="jTabbedPane1" min="-2" max="-2" attributes="0"/>
@@ -99,7 +93,7 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="137" max="-2" attributes="0"/>
                   <Component id="jToolBar1" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="209" max="32767" attributes="0"/>
+                  <EmptySpace pref="222" max="32767" attributes="0"/>
               </Group>
           </Group>
       </Group>
@@ -115,16 +109,6 @@
           <Color blue="1" green="6a" red="2f" type="rgb"/>
         </Property>
         <Property name="text" type="java.lang.String" value="TH&#x1ed0;NG K&#xca; "/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JLabel" name="lblSearch">
-      <Properties>
-        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="ff" green="ff" red="ff" type="rgb"/>
-        </Property>
-        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/com/studious/icons/icons8-search-24.png"/>
-        </Property>
       </Properties>
     </Component>
     <Component class="javax.swing.JComboBox" name="cboSubject">
@@ -156,7 +140,7 @@
           <Color blue="b7" green="ff" red="e8" type="rgb"/>
         </Property>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/com/studious/icons/Studious-255x68.png"/>
+          <Image iconType="3" name="/Icon/Studious-255x68.png"/>
         </Property>
       </Properties>
     </Component>
@@ -832,5 +816,15 @@
         </Container>
       </SubComponents>
     </Container>
+    <Component class="javax.swing.JButton" name="btnSearch2">
+      <Properties>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/com/studious/icons/icons8-search-24.png"/>
+        </Property>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSearch2ActionPerformed"/>
+      </Events>
+    </Component>
   </SubComponents>
 </Form>
