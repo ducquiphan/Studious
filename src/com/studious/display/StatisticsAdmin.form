@@ -96,7 +96,7 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="137" max="-2" attributes="0"/>
                   <Component id="jToolBar1" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="160" max="32767" attributes="0"/>
+                  <EmptySpace pref="209" max="32767" attributes="0"/>
               </Group>
           </Group>
       </Group>
@@ -120,7 +120,7 @@
           <Color blue="ff" green="ff" red="ff" type="rgb"/>
         </Property>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/Icon/search (1).png"/>
+          <Image iconType="3" name="/com/studious/icons/icons8-search-24.png"/>
         </Property>
       </Properties>
     </Component>
@@ -153,7 +153,7 @@
           <Color blue="b7" green="ff" red="e8" type="rgb"/>
         </Property>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/Icon/Studious-255x68.png"/>
+          <Image iconType="3" name="/com/studious/icons/Studious-255x68.png"/>
         </Property>
       </Properties>
     </Component>

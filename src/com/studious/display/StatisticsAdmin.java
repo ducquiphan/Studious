@@ -81,7 +81,7 @@ public class StatisticsAdmin extends java.awt.Dialog {
         lblTitle.setText("THỐNG KÊ ");
 
         lblSearch.setBackground(new java.awt.Color(255, 255, 255));
-        lblSearch.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/search (1).png"))); // NOI18N
+        lblSearch.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/studious/icons/icons8-search-24.png"))); // NOI18N
 
         cboSubject.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         cboSubject.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Môn học" }));
@@ -90,7 +90,7 @@ public class StatisticsAdmin extends java.awt.Dialog {
         txtSearch.setText("Tìm kiếm");
 
         lblTitle1.setBackground(new java.awt.Color(232, 255, 183));
-        lblTitle1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/Studious-255x68.png"))); // NOI18N
+        lblTitle1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/studious/icons/Studious-255x68.png"))); // NOI18N
 
         jToolBar1.setBackground(new java.awt.Color(232, 255, 183));
         jToolBar1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(232, 255, 183)));
@@ -450,7 +450,7 @@ public class StatisticsAdmin extends java.awt.Dialog {
                 .addGroup(layout.createSequentialGroup()
                     .addGap(137, 137, 137)
                     .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(160, Short.MAX_VALUE)))
+                    .addContainerGap(209, Short.MAX_VALUE)))
         );
 
         pack();
