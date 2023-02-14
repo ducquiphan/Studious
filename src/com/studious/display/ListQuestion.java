@@ -130,7 +130,7 @@ public class ListQuestion extends javax.swing.JFrame {
         btnSearch.setFont(new java.awt.Font("Readex Pro Medium", 0, 14)); // NOI18N
         btnSearch.setText("Tìm kiếm");
 
-        btnSearch2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/search1.png"))); // NOI18N
+        btnSearch2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/studious/icons/icons8-search-24.png"))); // NOI18N
         btnSearch2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSearch2ActionPerformed(evt);

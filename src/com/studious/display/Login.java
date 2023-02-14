@@ -41,7 +41,7 @@ public class Login extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
-        lblBackGround.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/bg-4.png"))); // NOI18N
+        lblBackGround.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/studious/icons/bg-4.png"))); // NOI18N
 
         lblTitle.setFont(new java.awt.Font("Inter", 1, 32)); // NOI18N
         lblTitle.setForeground(new java.awt.Color(1, 93, 10));
@@ -70,7 +70,7 @@ public class Login extends javax.swing.JFrame {
         btnEnd.setText("Kết thúc");
 
         lblForgotPass.setFont(new java.awt.Font("Inter", 0, 18)); // NOI18N
-        lblForgotPass.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/DMK - padlock.png"))); // NOI18N
+        lblForgotPass.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/studious/icons/DMK - padlock.png"))); // NOI18N
         lblForgotPass.setText("Quên mật khẩu?");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
