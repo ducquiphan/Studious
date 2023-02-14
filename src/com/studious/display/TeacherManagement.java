@@ -27,7 +27,7 @@ public class TeacherManagement extends java.awt.Dialog {
     private void initComponents() {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
-        jPanel1 = new javax.swing.JPanel();
+        pnlTeacher = new javax.swing.JPanel();
         lblTitle = new javax.swing.JLabel();
         tabs = new javax.swing.JTabbedPane();
         pnlManage = new javax.swing.JPanel();
@@ -79,7 +79,7 @@ public class TeacherManagement extends java.awt.Dialog {
             }
         });
 
-        jPanel1.setBackground(new java.awt.Color(232, 255, 183));
+        pnlTeacher.setBackground(new java.awt.Color(232, 255, 183));
 
         lblTitle.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         lblTitle.setForeground(new java.awt.Color(47, 106, 1));
@@ -139,7 +139,7 @@ public class TeacherManagement extends java.awt.Dialog {
         lblAvatar.setBackground(new java.awt.Color(255, 255, 255));
         lblAvatar.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        btnAddAvatar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/studious/icons/new2.png"))); // NOI18N
+        btnAddAvatar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/studious/icons/icons8-new-copy-24.png"))); // NOI18N
         btnAddAvatar.setText("Thêm ảnh");
 
         lblSpeciality.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -150,25 +150,25 @@ public class TeacherManagement extends java.awt.Dialog {
         txtSpeciality.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
         btnNew.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        btnNew.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/studious/icons/reset2.png"))); // NOI18N
+        btnNew.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/studious/icons/icons8-reset-24.png"))); // NOI18N
         btnNew.setText("Tạo mới");
 
         btnInsert.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        btnInsert.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/studious/icons/new2.png"))); // NOI18N
+        btnInsert.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/studious/icons/icons8-new-copy-24.png"))); // NOI18N
         btnInsert.setText("Thêm");
         btnInsert.setMaximumSize(new java.awt.Dimension(87, 26));
         btnInsert.setMinimumSize(new java.awt.Dimension(87, 26));
 
         btnEdit.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        btnEdit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/studious/icons/pencil1.png"))); // NOI18N
+        btnEdit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/studious/icons/icons8-pencil-24 (1).png"))); // NOI18N
         btnEdit.setText("Sửa");
 
         btnUpdate.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        btnUpdate.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/studious/icons/reset.png"))); // NOI18N
+        btnUpdate.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/studious/icons/icons8-available-updates-24.png"))); // NOI18N
         btnUpdate.setText("Cập nhật");
 
         btnDelete.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        btnDelete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/studious/icons/bin.png"))); // NOI18N
+        btnDelete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/studious/icons/icons8-bin-24.png"))); // NOI18N
         btnDelete.setText("Xóa");
 
         javax.swing.GroupLayout pnlManageLayout = new javax.swing.GroupLayout(pnlManage);
@@ -267,7 +267,7 @@ public class TeacherManagement extends java.awt.Dialog {
                     .addComponent(btnEdit)
                     .addComponent(btnUpdate)
                     .addComponent(btnDelete))
-                .addContainerGap(22, Short.MAX_VALUE))
+                .addContainerGap(23, Short.MAX_VALUE))
         );
 
         tabs.addTab("Quản lí", pnlManage);
@@ -289,7 +289,7 @@ public class TeacherManagement extends java.awt.Dialog {
         jScrollPane1.setViewportView(tblGridView);
 
         btnDeleteRow.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        btnDeleteRow.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/studious/icons/bin.png"))); // NOI18N
+        btnDeleteRow.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/studious/icons/icons8-bin-24.png"))); // NOI18N
         btnDeleteRow.setText("Xóa");
 
         javax.swing.GroupLayout pnlListLayout = new javax.swing.GroupLayout(pnlList);
@@ -323,7 +323,7 @@ public class TeacherManagement extends java.awt.Dialog {
         lblTitle1.setBackground(new java.awt.Color(232, 255, 183));
         lblTitle1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/studious/icons/Studious-255x68.png"))); // NOI18N
 
-        btnSearch.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/studious/icons/search1.png"))); // NOI18N
+        btnSearch.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/studious/icons/icons8-search-24.png"))); // NOI18N
         btnSearch.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSearchActionPerformed(evt);
@@ -391,41 +391,41 @@ public class TeacherManagement extends java.awt.Dialog {
         btnLogout1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         jToolBar.add(btnLogout1);
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        javax.swing.GroupLayout pnlTeacherLayout = new javax.swing.GroupLayout(pnlTeacher);
+        pnlTeacher.setLayout(pnlTeacherLayout);
+        pnlTeacherLayout.setHorizontalGroup(
+            pnlTeacherLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlTeacherLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jToolBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(pnlTeacherLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnlTeacherLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(pnlTeacherLayout.createSequentialGroup()
                             .addGap(515, 515, 515)
                             .addComponent(btnSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                             .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlTeacherLayout.createSequentialGroup()
                             .addComponent(lblTitle1)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(lblTitle)))
                     .addComponent(tabs, javax.swing.GroupLayout.PREFERRED_SIZE, 750, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        pnlTeacherLayout.setVerticalGroup(
+            pnlTeacherLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlTeacherLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(pnlTeacherLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblTitle1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(pnlTeacherLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(txtSearch)
                     .addComponent(btnSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(pnlTeacherLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(tabs, javax.swing.GroupLayout.PREFERRED_SIZE, 450, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jToolBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
@@ -436,13 +436,13 @@ public class TeacherManagement extends java.awt.Dialog {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(pnlTeacher, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(pnlTeacher, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
@@ -497,7 +497,6 @@ public class TeacherManagement extends java.awt.Dialog {
     private javax.swing.JButton btnTeacher1;
     private javax.swing.JButton btnUpdate;
     private javax.swing.ButtonGroup buttonGroup1;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JToolBar jToolBar;
     private javax.swing.JLabel lblAvatar;
@@ -512,6 +511,7 @@ public class TeacherManagement extends java.awt.Dialog {
     private javax.swing.JLabel lblTitle1;
     private javax.swing.JPanel pnlList;
     private javax.swing.JPanel pnlManage;
+    private javax.swing.JPanel pnlTeacher;
     private javax.swing.JRadioButton rdoFemale;
     private javax.swing.JRadioButton rdoMale;
     private javax.swing.JTabbedPane tabs;

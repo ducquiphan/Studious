@@ -107,25 +107,25 @@ public class LessonManagement extends java.awt.Dialog {
         cboGrade.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "10", "11", "12" }));
 
         btnNew1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        btnNew1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/reset2.png"))); // NOI18N
+        btnNew1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/studious/icons/icons8-reset-24.png"))); // NOI18N
         btnNew1.setText("Tạo mới");
 
         btnInsert1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        btnInsert1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/new2.png"))); // NOI18N
+        btnInsert1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/studious/icons/icons8-new-copy-24.png"))); // NOI18N
         btnInsert1.setText("Thêm");
         btnInsert1.setMaximumSize(new java.awt.Dimension(87, 26));
         btnInsert1.setMinimumSize(new java.awt.Dimension(87, 26));
 
         btnEdit1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        btnEdit1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/pencil1.png"))); // NOI18N
+        btnEdit1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/studious/icons/icons8-pencil-24 (1).png"))); // NOI18N
         btnEdit1.setText("Sửa");
 
         btnUpdate1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        btnUpdate1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/reset.png"))); // NOI18N
+        btnUpdate1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/studious/icons/icons8-available-updates-24.png"))); // NOI18N
         btnUpdate1.setText("Cập nhật");
 
         btnDelete1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        btnDelete1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/bin.png"))); // NOI18N
+        btnDelete1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/studious/icons/icons8-bin-24.png"))); // NOI18N
         btnDelete1.setText("Xóa");
 
         javax.swing.GroupLayout pnlManageLayout = new javax.swing.GroupLayout(pnlManage);
@@ -210,7 +210,7 @@ public class LessonManagement extends java.awt.Dialog {
         jScrollPane1.setViewportView(tblGridView);
 
         btnDeleteRow.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        btnDeleteRow.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/delete (1).png"))); // NOI18N
+        btnDeleteRow.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/studious/icons/icons8-bin-24.png"))); // NOI18N
         btnDeleteRow.setText("Xóa");
 
         javax.swing.GroupLayout pnlListLayout = new javax.swing.GroupLayout(pnlList);
