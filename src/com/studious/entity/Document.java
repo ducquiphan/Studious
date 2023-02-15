@@ -4,10 +4,18 @@
  */
 package com.studious.entity;
 
+import java.util.Date;
+
 /**
  *
  * @author Phan Qui Duc
  */
 public class Document {
-    
+    private int docID;
+    private String docTitle;
+    private String lesson;
+    private String content;
+    private Date creatDate;
+    private String teacherID;
+    private int lessonID;
 }
