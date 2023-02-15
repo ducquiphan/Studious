@@ -242,12 +242,14 @@ public class LessonManagement extends java.awt.Dialog {
 
         jToolBar.setBackground(new java.awt.Color(232, 255, 183));
         jToolBar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(232, 255, 183)));
+        jToolBar.setFloatable(false);
         jToolBar.setOrientation(javax.swing.SwingConstants.VERTICAL);
         jToolBar.setRollover(true);
 
         btnHome1.setBackground(new java.awt.Color(232, 255, 183));
         btnHome1.setForeground(new java.awt.Color(232, 255, 183));
         btnHome1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/studious/icons/home.png"))); // NOI18N
+        btnHome1.setBorder(null);
         btnHome1.setFocusable(false);
         btnHome1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnHome1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -255,6 +257,7 @@ public class LessonManagement extends java.awt.Dialog {
 
         btnPersonalInfo1.setBackground(new java.awt.Color(232, 255, 183));
         btnPersonalInfo1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/studious/icons/account.png"))); // NOI18N
+        btnPersonalInfo1.setBorder(null);
         btnPersonalInfo1.setFocusable(false);
         btnPersonalInfo1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnPersonalInfo1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -262,9 +265,10 @@ public class LessonManagement extends java.awt.Dialog {
 
         btnTeacher1.setBackground(new java.awt.Color(232, 255, 183));
         btnTeacher1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/studious/icons/lessons.png"))); // NOI18N
+        btnTeacher1.setBorder(null);
         btnTeacher1.setFocusable(false);
         btnTeacher1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnTeacher1.setMaximumSize(new java.awt.Dimension(46, 44));
+        btnTeacher1.setMaximumSize(new java.awt.Dimension(35, 35));
         btnTeacher1.setMinimumSize(new java.awt.Dimension(46, 44));
         btnTeacher1.setPreferredSize(new java.awt.Dimension(46, 44));
         btnTeacher1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -272,9 +276,10 @@ public class LessonManagement extends java.awt.Dialog {
 
         btnStudent1.setBackground(new java.awt.Color(232, 255, 183));
         btnStudent1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/studious/icons/mockExam.png"))); // NOI18N
+        btnStudent1.setBorder(null);
         btnStudent1.setFocusable(false);
         btnStudent1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnStudent1.setMaximumSize(new java.awt.Dimension(46, 44));
+        btnStudent1.setMaximumSize(new java.awt.Dimension(35, 35));
         btnStudent1.setMinimumSize(new java.awt.Dimension(46, 44));
         btnStudent1.setPreferredSize(new java.awt.Dimension(46, 44));
         btnStudent1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -282,8 +287,9 @@ public class LessonManagement extends java.awt.Dialog {
 
         btnStatistic.setBackground(new java.awt.Color(232, 255, 183));
         btnStatistic.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/studious/icons/statistic.png"))); // NOI18N
+        btnStatistic.setBorder(null);
         btnStatistic.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnStatistic.setMaximumSize(new java.awt.Dimension(46, 44));
+        btnStatistic.setMaximumSize(new java.awt.Dimension(35, 35));
         btnStatistic.setMinimumSize(new java.awt.Dimension(46, 44));
         btnStatistic.setPreferredSize(new java.awt.Dimension(46, 44));
         btnStatistic.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -291,6 +297,7 @@ public class LessonManagement extends java.awt.Dialog {
 
         btnBack1.setBackground(new java.awt.Color(232, 255, 183));
         btnBack1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/studious/icons/back.png"))); // NOI18N
+        btnBack1.setBorder(null);
         btnBack1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnBack1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         jToolBar.add(btnBack1);

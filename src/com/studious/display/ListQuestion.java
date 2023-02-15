@@ -26,16 +26,8 @@ public class ListQuestion extends javax.swing.JFrame {
 
         pnlBackground = new javax.swing.JPanel();
         lblTitle = new javax.swing.JLabel();
-        pnlMenuBar = new javax.swing.JPanel();
-        lblHomeMenuBar = new javax.swing.JLabel();
-        lblLogoutMenuBar = new javax.swing.JLabel();
-        lblAccountMenuBar = new javax.swing.JLabel();
-        lblLessonMenuBar = new javax.swing.JLabel();
-        lblTestMenuBar = new javax.swing.JLabel();
-        lblScoreMenuBar = new javax.swing.JLabel();
         lblTitle1 = new javax.swing.JLabel();
         pnlSearch = new javax.swing.JPanel();
-        lblIconSearch = new javax.swing.JLabel();
         btnSearch = new javax.swing.JTextField();
         btnSearch2 = new javax.swing.JButton();
         jTabbedPane1 = new javax.swing.JTabbedPane();
@@ -47,8 +39,8 @@ public class ListQuestion extends javax.swing.JFrame {
         cboSubject2 = new javax.swing.JComboBox<>();
         jLabel3 = new javax.swing.JLabel();
         pnlSearch1 = new javax.swing.JPanel();
-        lblIconSearch1 = new javax.swing.JLabel();
         btnSearch1 = new javax.swing.JTextField();
+        btnSearch3 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblScoreStudent = new javax.swing.JTable();
         cboSubject3 = new javax.swing.JComboBox<>();
@@ -67,65 +59,13 @@ public class ListQuestion extends javax.swing.JFrame {
         pnlBackground.setForeground(new java.awt.Color(232, 255, 183));
 
         lblTitle.setBackground(new java.awt.Color(232, 255, 183));
-        lblTitle.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/Studious-255x68.png"))); // NOI18N
-
-        pnlMenuBar.setBackground(new java.awt.Color(232, 255, 183));
-
-        lblHomeMenuBar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/Home-Menubar.png"))); // NOI18N
-
-        lblLogoutMenuBar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/logout-menubar.png"))); // NOI18N
-
-        lblAccountMenuBar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/account-Menubar.png"))); // NOI18N
-
-        lblLessonMenuBar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/baihoc-menubar.png"))); // NOI18N
-
-        lblTestMenuBar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/lambaithi-menubar.png"))); // NOI18N
-
-        lblScoreMenuBar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/xemdiem-menubar.png"))); // NOI18N
-
-        javax.swing.GroupLayout pnlMenuBarLayout = new javax.swing.GroupLayout(pnlMenuBar);
-        pnlMenuBar.setLayout(pnlMenuBarLayout);
-        pnlMenuBarLayout.setHorizontalGroup(
-            pnlMenuBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlMenuBarLayout.createSequentialGroup()
-                .addGap(12, 12, 12)
-                .addGroup(pnlMenuBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblLogoutMenuBar)
-                    .addComponent(lblAccountMenuBar)
-                    .addComponent(lblLessonMenuBar)
-                    .addComponent(lblHomeMenuBar)
-                    .addComponent(lblTestMenuBar)
-                    .addComponent(lblScoreMenuBar))
-                .addContainerGap(17, Short.MAX_VALUE))
-        );
-        pnlMenuBarLayout.setVerticalGroup(
-            pnlMenuBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlMenuBarLayout.createSequentialGroup()
-                .addGap(26, 26, 26)
-                .addComponent(lblHomeMenuBar)
-                .addGap(18, 18, 18)
-                .addComponent(lblAccountMenuBar)
-                .addGap(18, 18, 18)
-                .addComponent(lblLessonMenuBar)
-                .addGap(18, 18, 18)
-                .addComponent(lblTestMenuBar)
-                .addGap(18, 18, 18)
-                .addComponent(lblScoreMenuBar)
-                .addGap(18, 18, 18)
-                .addComponent(lblLogoutMenuBar)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+        lblTitle.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/studious/icons/Studious-255x68.png"))); // NOI18N
 
         lblTitle1.setFont(new java.awt.Font("Inter", 1, 32)); // NOI18N
         lblTitle1.setForeground(new java.awt.Color(47, 106, 1));
         lblTitle1.setText("CÂU HỎI");
 
         pnlSearch.setBackground(new java.awt.Color(255, 255, 255));
-
-        lblIconSearch.setBackground(new java.awt.Color(255, 255, 255));
-        lblIconSearch.setFont(new java.awt.Font("Readex Pro Medium", 0, 14)); // NOI18N
-        lblIconSearch.setForeground(new java.awt.Color(139, 150, 168));
-        lblIconSearch.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/search.png"))); // NOI18N
 
         btnSearch.setFont(new java.awt.Font("Readex Pro Medium", 0, 14)); // NOI18N
         btnSearch.setText("Tìm kiếm");
@@ -147,9 +87,7 @@ public class ListQuestion extends javax.swing.JFrame {
         pnlSearchLayout.setHorizontalGroup(
             pnlSearchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlSearchLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(lblIconSearch)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(17, Short.MAX_VALUE)
                 .addComponent(btnSearch2, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -161,8 +99,7 @@ public class ListQuestion extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(pnlSearchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnSearch2, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblIconSearch))
+                    .addComponent(btnSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -204,22 +141,24 @@ public class ListQuestion extends javax.swing.JFrame {
 
         pnlSearch1.setBackground(new java.awt.Color(233, 233, 233));
 
-        lblIconSearch1.setBackground(new java.awt.Color(233, 233, 233));
-        lblIconSearch1.setFont(new java.awt.Font("Readex Pro Medium", 0, 14)); // NOI18N
-        lblIconSearch1.setForeground(new java.awt.Color(139, 150, 168));
-        lblIconSearch1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/search.png"))); // NOI18N
-
         btnSearch1.setFont(new java.awt.Font("Readex Pro Medium", 0, 14)); // NOI18N
         btnSearch1.setText("Tìm kiếm");
+
+        btnSearch3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/studious/icons/icons8-search-24.png"))); // NOI18N
+        btnSearch3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSearch3ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout pnlSearch1Layout = new javax.swing.GroupLayout(pnlSearch1);
         pnlSearch1.setLayout(pnlSearch1Layout);
         pnlSearch1Layout.setHorizontalGroup(
             pnlSearch1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlSearch1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(lblIconSearch1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnSearch3, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnSearch1, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -228,9 +167,11 @@ public class ListQuestion extends javax.swing.JFrame {
             .addGroup(pnlSearch1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(pnlSearch1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnSearch1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblIconSearch1))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btnSearch3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addGroup(pnlSearch1Layout.createSequentialGroup()
+                        .addComponent(btnSearch1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 3, Short.MAX_VALUE)))
+                .addContainerGap())
         );
 
         tblScoreStudent.setFont(new java.awt.Font("Fira Code Light", 0, 12)); // NOI18N
@@ -268,10 +209,11 @@ public class ListQuestion extends javax.swing.JFrame {
                         .addGap(56, 56, 56)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(cboSubject, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(cboSubject1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(cboSubject2, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 130, Short.MAX_VALUE)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(cboSubject1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(cboSubject2, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 93, Short.MAX_VALUE)
                                 .addComponent(pnlSearch1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
@@ -308,7 +250,7 @@ public class ListQuestion extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(cboSubject3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnDo))
-                .addContainerGap(35, Short.MAX_VALUE))
+                .addGap(22, 22, 22))
         );
 
         jTabbedPane1.addTab("Danh sách", jPanel1);
@@ -367,20 +309,18 @@ public class ListQuestion extends javax.swing.JFrame {
         pnlBackgroundLayout.setHorizontalGroup(
             pnlBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlBackgroundLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(pnlMenuBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(21, 21, 21)
+                .addGap(62, 62, 62)
                 .addGroup(pnlBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnlBackgroundLayout.createSequentialGroup()
                         .addComponent(lblTitle)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 198, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 235, Short.MAX_VALUE)
                         .addGroup(pnlBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(lblTitle1)
                             .addComponent(pnlSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(100, 100, 100))
                     .addGroup(pnlBackgroundLayout.createSequentialGroup()
                         .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 772, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(72, Short.MAX_VALUE))))
+                        .addContainerGap(66, Short.MAX_VALUE))))
         );
         pnlBackgroundLayout.setVerticalGroup(
             pnlBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -393,9 +333,7 @@ public class ListQuestion extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(pnlSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(pnlBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(pnlMenuBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 445, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 445, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(27, 27, 27))
         );
 
@@ -423,6 +361,10 @@ public class ListQuestion extends javax.swing.JFrame {
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnSearchActionPerformed
+
+    private void btnSearch3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearch3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnSearch3ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -481,6 +423,7 @@ public class ListQuestion extends javax.swing.JFrame {
     private javax.swing.JTextField btnSearch;
     private javax.swing.JTextField btnSearch1;
     private javax.swing.JButton btnSearch2;
+    private javax.swing.JButton btnSearch3;
     private javax.swing.JComboBox<String> cboSubject;
     private javax.swing.JComboBox<String> cboSubject1;
     private javax.swing.JComboBox<String> cboSubject2;
@@ -493,18 +436,9 @@ public class ListQuestion extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JLabel lblAccountMenuBar;
-    private javax.swing.JLabel lblHomeMenuBar;
-    private javax.swing.JLabel lblIconSearch;
-    private javax.swing.JLabel lblIconSearch1;
-    private javax.swing.JLabel lblLessonMenuBar;
-    private javax.swing.JLabel lblLogoutMenuBar;
-    private javax.swing.JLabel lblScoreMenuBar;
-    private javax.swing.JLabel lblTestMenuBar;
     private javax.swing.JLabel lblTitle;
     private javax.swing.JLabel lblTitle1;
     private javax.swing.JPanel pnlBackground;
-    private javax.swing.JPanel pnlMenuBar;
     private javax.swing.JPanel pnlSearch;
     private javax.swing.JPanel pnlSearch1;
     private javax.swing.JTable tblScoreStudent;

@@ -27,14 +27,6 @@ public class MainWindow extends javax.swing.JFrame {
         pnlBackground = new javax.swing.JPanel();
         lblTitle = new javax.swing.JLabel();
         btnTeacher = new javax.swing.JButton();
-        pnlMenuBar = new javax.swing.JPanel();
-        lblHomeMenuBar = new javax.swing.JLabel();
-        lblAccountMenuBar = new javax.swing.JLabel();
-        lblTeacherMenuBar = new javax.swing.JLabel();
-        lblStudentMenuBar = new javax.swing.JLabel();
-        lblQnAMenuBar = new javax.swing.JLabel();
-        lblStatMenuBar = new javax.swing.JLabel();
-        lblLogoutMenuBar = new javax.swing.JLabel();
         btnStat = new javax.swing.JButton();
         btnStudent = new javax.swing.JButton();
         btnQnA = new javax.swing.JButton();
@@ -72,63 +64,6 @@ public class MainWindow extends javax.swing.JFrame {
                 btnTeacherActionPerformed(evt);
             }
         });
-
-        pnlMenuBar.setBackground(new java.awt.Color(231, 254, 182));
-
-        lblHomeMenuBar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/Home-Menubar.png"))); // NOI18N
-
-        lblAccountMenuBar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/account_circle.png"))); // NOI18N
-
-        lblTeacherMenuBar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/teacher-Menubar.png"))); // NOI18N
-
-        lblStudentMenuBar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/student-Menubar.png"))); // NOI18N
-
-        lblQnAMenuBar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/QnA-Menubar.png"))); // NOI18N
-
-        lblStatMenuBar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/statistics-Menubar.png"))); // NOI18N
-
-        lblLogoutMenuBar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/logout-menubar.png"))); // NOI18N
-
-        javax.swing.GroupLayout pnlMenuBarLayout = new javax.swing.GroupLayout(pnlMenuBar);
-        pnlMenuBar.setLayout(pnlMenuBarLayout);
-        pnlMenuBarLayout.setHorizontalGroup(
-            pnlMenuBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlMenuBarLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(pnlMenuBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlMenuBarLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(lblQnAMenuBar))
-                    .addGroup(pnlMenuBarLayout.createSequentialGroup()
-                        .addGroup(pnlMenuBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblHomeMenuBar)
-                            .addComponent(lblAccountMenuBar)
-                            .addComponent(lblTeacherMenuBar)
-                            .addComponent(lblStudentMenuBar)
-                            .addComponent(lblStatMenuBar)
-                            .addComponent(lblLogoutMenuBar))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
-        );
-        pnlMenuBarLayout.setVerticalGroup(
-            pnlMenuBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlMenuBarLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(lblHomeMenuBar)
-                .addGap(18, 18, 18)
-                .addComponent(lblAccountMenuBar)
-                .addGap(18, 18, 18)
-                .addComponent(lblTeacherMenuBar)
-                .addGap(18, 18, 18)
-                .addComponent(lblStudentMenuBar)
-                .addGap(18, 18, 18)
-                .addComponent(lblQnAMenuBar)
-                .addGap(18, 18, 18)
-                .addComponent(lblStatMenuBar)
-                .addGap(18, 18, 18)
-                .addComponent(lblLogoutMenuBar)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
 
         btnStat.setFont(new java.awt.Font("Inter", 0, 24)); // NOI18N
         btnStat.setForeground(new java.awt.Color(8, 115, 6));
@@ -177,6 +112,7 @@ public class MainWindow extends javax.swing.JFrame {
 
         jToolBar.setBackground(new java.awt.Color(232, 255, 183));
         jToolBar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(232, 255, 183)));
+        jToolBar.setFloatable(false);
         jToolBar.setOrientation(javax.swing.SwingConstants.VERTICAL);
         jToolBar.setRollover(true);
 
@@ -241,9 +177,7 @@ public class MainWindow extends javax.swing.JFrame {
         pnlBackgroundLayout.setHorizontalGroup(
             pnlBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlBackgroundLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(pnlMenuBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 127, Short.MAX_VALUE)
+                .addContainerGap(145, Short.MAX_VALUE)
                 .addGroup(pnlBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlBackgroundLayout.createSequentialGroup()
                         .addComponent(lblTitle)
@@ -275,10 +209,6 @@ public class MainWindow extends javax.swing.JFrame {
                     .addComponent(btnStudent, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnQnA, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(143, 143, 143))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlBackgroundLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(pnlMenuBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(113, 113, 113))
             .addGroup(pnlBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(pnlBackgroundLayout.createSequentialGroup()
                     .addGap(128, 128, 128)
@@ -357,15 +287,7 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JButton btnTeacher;
     private javax.swing.JButton btnTeacher1;
     private javax.swing.JToolBar jToolBar;
-    private javax.swing.JLabel lblAccountMenuBar;
-    private javax.swing.JLabel lblHomeMenuBar;
-    private javax.swing.JLabel lblLogoutMenuBar;
-    private javax.swing.JLabel lblQnAMenuBar;
-    private javax.swing.JLabel lblStatMenuBar;
-    private javax.swing.JLabel lblStudentMenuBar;
-    private javax.swing.JLabel lblTeacherMenuBar;
     private javax.swing.JLabel lblTitle;
     private javax.swing.JPanel pnlBackground;
-    private javax.swing.JPanel pnlMenuBar;
     // End of variables declaration//GEN-END:variables
 }
