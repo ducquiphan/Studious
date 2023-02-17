@@ -353,7 +353,7 @@ public class TestManagement extends java.awt.Dialog {
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(pnlQuestionList, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(18, 54, Short.MAX_VALUE)
+                .addGap(18, 60, Short.MAX_VALUE)
                 .addGroup(pnlManageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnNew)
                     .addComponent(btnInsert, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -393,16 +393,19 @@ public class TestManagement extends java.awt.Dialog {
 
         tblGridView.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "STT", "Mã đề thi", "Tên bài thi", "Ngày tạo", "Người tạo", "Số lượng câu hỏi"
             }
         ));
         jScrollPane3.setViewportView(tblGridView);
+        if (tblGridView.getColumnModel().getColumnCount() > 0) {
+            tblGridView.getColumnModel().getColumn(0).setPreferredWidth(30);
+        }
 
         cboArrange.setBackground(new java.awt.Color(233, 233, 233));
         cboArrange.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -498,7 +501,7 @@ public class TestManagement extends java.awt.Dialog {
                     .addComponent(lblTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblLogo))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(tabs))
+                .addComponent(tabs, javax.swing.GroupLayout.DEFAULT_SIZE, 619, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -510,7 +513,6 @@ public class TestManagement extends java.awt.Dialog {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
                 .addComponent(pnlBackground, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
