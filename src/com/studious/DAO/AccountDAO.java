@@ -1,7 +1,6 @@
 package com.studious.DAO;
 
 import com.studious.entity.Account;
-import com.studious.entity.Student;
 import com.studious.ultils.JdbcHelper;
 import java.sql.ResultSet;
 import java.util.ArrayList;
@@ -27,7 +26,7 @@ public class AccountDAO extends StudiousDAO<Account, String> {
 
     @Override
     public void update(Account entity) {
-        JdbcHelper.update(UPDATE_SQL, entity.getPassword(), entity.isStatus());
+        JdbcHelper.update(UPDATE_SQL, entity.getPassword(), entity.isStatus(), entity.getUserID());
     }
 
     @Override

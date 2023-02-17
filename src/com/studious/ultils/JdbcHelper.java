@@ -17,7 +17,7 @@ public class JdbcHelper {
     }
      
     public static PreparedStatement getStmt(String sql, Object... args) throws SQLException  {
-        String connectionUrl = "jdbc:sqlserver://localhost:1433;databaseName=Studious_db;user=sa;password=123"
+        String connectionUrl = "jdbc:sqlserver://localhost:1433;databaseName=Studious;user=sa;password=123"
                 + ";encrypt=true;trustServerCertificate=true";
         Connection con = DriverManager.getConnection(connectionUrl);
         PreparedStatement pstm = null;
