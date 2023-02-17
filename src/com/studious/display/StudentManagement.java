@@ -63,14 +63,14 @@ public class StudentManagement extends java.awt.Dialog {
         lblTitle1 = new javax.swing.JLabel();
         btnSearch1 = new javax.swing.JButton();
         jToolBar = new javax.swing.JToolBar();
-        btnHome1 = new javax.swing.JButton();
-        btnPersonalInfo1 = new javax.swing.JButton();
-        btnTeacher1 = new javax.swing.JButton();
-        btnStudent1 = new javax.swing.JButton();
+        btnHome = new javax.swing.JButton();
+        btnPersonalInfo = new javax.swing.JButton();
+        btnTeacher = new javax.swing.JButton();
+        btnStudent = new javax.swing.JButton();
         btnStatistic = new javax.swing.JButton();
-        btnQna1 = new javax.swing.JButton();
-        btnBack1 = new javax.swing.JButton();
-        btnLogout1 = new javax.swing.JButton();
+        btnQna = new javax.swing.JButton();
+        btnBack = new javax.swing.JButton();
+        btnLogout = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(232, 255, 183));
         setTitle("QUẢN LÝ HỌC SINH");
@@ -151,6 +151,11 @@ public class StudentManagement extends java.awt.Dialog {
         btnNew.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnNew.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/studious/icons/icons8-reset-24.png"))); // NOI18N
         btnNew.setText("Tạo mới");
+        btnNew.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNewActionPerformed(evt);
+            }
+        });
 
         btnInsert.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnInsert.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/studious/icons/icons8-new-copy-24.png"))); // NOI18N
@@ -186,6 +191,7 @@ public class StudentManagement extends java.awt.Dialog {
         lblStatus.setText("Trạng thái");
         lblStatus.setToolTipText("");
 
+        cboStatus.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         cboStatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Hiệu lực", "Vô hiệu hóa" }));
 
         javax.swing.GroupLayout pnlManageLayout = new javax.swing.GroupLayout(pnlManage);
@@ -223,17 +229,13 @@ public class StudentManagement extends java.awt.Dialog {
                     .addGroup(pnlManageLayout.createSequentialGroup()
                         .addGroup(pnlManageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(pnlManageLayout.createSequentialGroup()
-                                .addComponent(txtClass, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btnAddAvatar, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(pnlManageLayout.createSequentialGroup()
                                 .addGroup(pnlManageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(txtIdentifier, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
                                     .addComponent(txtName, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
                                     .addComponent(txtStudentID, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
                                     .addComponent(txtBirthDate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(lblAvatar, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(lblAvatar, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(pnlManageLayout.createSequentialGroup()
                                 .addGroup(pnlManageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -241,8 +243,12 @@ public class StudentManagement extends java.awt.Dialog {
                                         .addComponent(rdoMale)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addComponent(rdoFemale, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGap(0, 0, Short.MAX_VALUE)))
-                        .addGap(129, 129, 129))))
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(pnlManageLayout.createSequentialGroup()
+                                .addComponent(txtClass, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnAddAvatar, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(114, 114, 114))))
         );
         pnlManageLayout.setVerticalGroup(
             pnlManageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -363,83 +369,95 @@ public class StudentManagement extends java.awt.Dialog {
         jToolBar.setOrientation(javax.swing.SwingConstants.VERTICAL);
         jToolBar.setRollover(true);
 
-        btnHome1.setBackground(new java.awt.Color(232, 255, 183));
-        btnHome1.setForeground(new java.awt.Color(232, 255, 183));
-        btnHome1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/studious/icons/home.png"))); // NOI18N
-        btnHome1.setFocusable(false);
-        btnHome1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnHome1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jToolBar.add(btnHome1);
+        btnHome.setBackground(new java.awt.Color(232, 255, 183));
+        btnHome.setForeground(new java.awt.Color(232, 255, 183));
+        btnHome.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/studious/icons/home.png"))); // NOI18N
+        btnHome.setBorder(null);
+        btnHome.setFocusable(false);
+        btnHome.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnHome.setMaximumSize(new java.awt.Dimension(35, 35));
+        btnHome.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jToolBar.add(btnHome);
 
-        btnPersonalInfo1.setBackground(new java.awt.Color(232, 255, 183));
-        btnPersonalInfo1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/studious/icons/account.png"))); // NOI18N
-        btnPersonalInfo1.setFocusable(false);
-        btnPersonalInfo1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnPersonalInfo1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jToolBar.add(btnPersonalInfo1);
+        btnPersonalInfo.setBackground(new java.awt.Color(232, 255, 183));
+        btnPersonalInfo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/studious/icons/account.png"))); // NOI18N
+        btnPersonalInfo.setBorder(null);
+        btnPersonalInfo.setFocusable(false);
+        btnPersonalInfo.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnPersonalInfo.setMaximumSize(new java.awt.Dimension(35, 35));
+        btnPersonalInfo.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jToolBar.add(btnPersonalInfo);
 
-        btnTeacher1.setBackground(new java.awt.Color(232, 255, 183));
-        btnTeacher1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/studious/icons/teacher.png"))); // NOI18N
-        btnTeacher1.setFocusable(false);
-        btnTeacher1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnTeacher1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jToolBar.add(btnTeacher1);
+        btnTeacher.setBackground(new java.awt.Color(232, 255, 183));
+        btnTeacher.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/studious/icons/teacher.png"))); // NOI18N
+        btnTeacher.setBorder(null);
+        btnTeacher.setFocusable(false);
+        btnTeacher.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnTeacher.setMaximumSize(new java.awt.Dimension(35, 35));
+        btnTeacher.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jToolBar.add(btnTeacher);
 
-        btnStudent1.setBackground(new java.awt.Color(232, 255, 183));
-        btnStudent1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/studious/icons/student.png"))); // NOI18N
-        btnStudent1.setFocusable(false);
-        btnStudent1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnStudent1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jToolBar.add(btnStudent1);
+        btnStudent.setBackground(new java.awt.Color(232, 255, 183));
+        btnStudent.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/studious/icons/student.png"))); // NOI18N
+        btnStudent.setBorder(null);
+        btnStudent.setFocusable(false);
+        btnStudent.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnStudent.setMaximumSize(new java.awt.Dimension(35, 35));
+        btnStudent.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jToolBar.add(btnStudent);
 
         btnStatistic.setBackground(new java.awt.Color(232, 255, 183));
         btnStatistic.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/studious/icons/statistic.png"))); // NOI18N
+        btnStatistic.setBorder(null);
         btnStatistic.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnStatistic.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         jToolBar.add(btnStatistic);
 
-        btnQna1.setBackground(new java.awt.Color(232, 255, 183));
-        btnQna1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/studious/icons/QnA.png"))); // NOI18N
-        btnQna1.setFocusable(false);
-        btnQna1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnQna1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jToolBar.add(btnQna1);
+        btnQna.setBackground(new java.awt.Color(232, 255, 183));
+        btnQna.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/studious/icons/QnA.png"))); // NOI18N
+        btnQna.setBorder(null);
+        btnQna.setFocusable(false);
+        btnQna.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnQna.setMaximumSize(new java.awt.Dimension(35, 35));
+        btnQna.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jToolBar.add(btnQna);
 
-        btnBack1.setBackground(new java.awt.Color(232, 255, 183));
-        btnBack1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/studious/icons/back.png"))); // NOI18N
-        btnBack1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnBack1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jToolBar.add(btnBack1);
+        btnBack.setBackground(new java.awt.Color(232, 255, 183));
+        btnBack.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/studious/icons/back.png"))); // NOI18N
+        btnBack.setBorder(null);
+        btnBack.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnBack.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jToolBar.add(btnBack);
 
-        btnLogout1.setBackground(new java.awt.Color(232, 255, 183));
-        btnLogout1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/studious/icons/logout.png"))); // NOI18N
-        btnLogout1.setToolTipText("");
-        btnLogout1.setFocusable(false);
-        btnLogout1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnLogout1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jToolBar.add(btnLogout1);
+        btnLogout.setBackground(new java.awt.Color(232, 255, 183));
+        btnLogout.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/studious/icons/logout.png"))); // NOI18N
+        btnLogout.setToolTipText("");
+        btnLogout.setBorder(null);
+        btnLogout.setFocusable(false);
+        btnLogout.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnLogout.setMaximumSize(new java.awt.Dimension(35, 35));
+        btnLogout.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jToolBar.add(btnLogout);
 
         javax.swing.GroupLayout pnlStudentLayout = new javax.swing.GroupLayout(pnlStudent);
         pnlStudent.setLayout(pnlStudentLayout);
         pnlStudentLayout.setHorizontalGroup(
             pnlStudentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlStudentLayout.createSequentialGroup()
-                .addGroup(pnlStudentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlStudentLayout.createSequentialGroup()
+                .addComponent(jToolBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
+                .addGroup(pnlStudentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnlStudentLayout.createSequentialGroup()
                         .addComponent(lblTitle1)
-                        .addGap(298, 298, 298)
+                        .addGap(321, 321, 321)
                         .addGroup(pnlStudentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(lblTitle)
                             .addGroup(pnlStudentLayout.createSequentialGroup()
                                 .addComponent(btnSearch1, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(24, 24, 24))
-                    .addGroup(pnlStudentLayout.createSequentialGroup()
-                        .addComponent(jToolBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 750, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(0, 0, Short.MAX_VALUE))
+                                .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 750, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
         );
         pnlStudentLayout.setVerticalGroup(
             pnlStudentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -453,13 +471,12 @@ public class StudentManagement extends java.awt.Dialog {
                         .addGroup(pnlStudentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(txtSearch)
                             .addComponent(btnSearch1, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnlStudentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addGroup(pnlStudentLayout.createSequentialGroup()
                         .addComponent(jToolBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 130, Short.MAX_VALUE)))
-                .addContainerGap())
+                        .addContainerGap(193, Short.MAX_VALUE))
+                    .addComponent(jTabbedPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
         );
 
         jTabbedPane1.getAccessibleContext().setAccessibleName("");
@@ -470,8 +487,8 @@ public class StudentManagement extends java.awt.Dialog {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(pnlStudent, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(pnlStudent, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -504,6 +521,10 @@ public class StudentManagement extends java.awt.Dialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtClassActionPerformed
 
+    private void btnNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnNewActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -524,20 +545,20 @@ public class StudentManagement extends java.awt.Dialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAddAvatar;
-    private javax.swing.JButton btnBack1;
+    private javax.swing.JButton btnBack;
     private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnDeleteRow;
     private javax.swing.JButton btnEdit;
-    private javax.swing.JButton btnHome1;
+    private javax.swing.JButton btnHome;
     private javax.swing.JButton btnInsert;
-    private javax.swing.JButton btnLogout1;
+    private javax.swing.JButton btnLogout;
     private javax.swing.JButton btnNew;
-    private javax.swing.JButton btnPersonalInfo1;
-    private javax.swing.JButton btnQna1;
+    private javax.swing.JButton btnPersonalInfo;
+    private javax.swing.JButton btnQna;
     private javax.swing.JButton btnSearch1;
     private javax.swing.JButton btnStatistic;
-    private javax.swing.JButton btnStudent1;
-    private javax.swing.JButton btnTeacher1;
+    private javax.swing.JButton btnStudent;
+    private javax.swing.JButton btnTeacher;
     private javax.swing.JButton btnUpdate;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JComboBox<String> cboStatus;

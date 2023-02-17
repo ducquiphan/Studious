@@ -47,24 +47,22 @@
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace min="-2" pref="125" max="-2" attributes="0"/>
-                  <Component id="btnLessons" min="-2" pref="175" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
-                  <Component id="btnTest" min="-2" pref="220" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
-                  <Component id="btnScore" min="-2" pref="175" max="-2" attributes="0"/>
-                  <EmptySpace pref="125" max="32767" attributes="0"/>
+                  <EmptySpace min="-2" pref="200" max="-2" attributes="0"/>
+                  <Component id="btnQuestion" min="-2" pref="175" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="156" max="-2" attributes="0"/>
+                  <Component id="btnDocument" min="-2" pref="175" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="200" max="-2" attributes="0"/>
               </Group>
               <Group type="102" alignment="1" attributes="0">
-                  <EmptySpace max="32767" attributes="0"/>
+                  <EmptySpace min="-2" pref="280" max="-2" attributes="0"/>
                   <Component id="lblTitle" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="279" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="280" max="-2" attributes="0"/>
               </Group>
               <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jToolBar" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="856" max="32767" attributes="0"/>
+                      <EmptySpace pref="862" max="32767" attributes="0"/>
                   </Group>
               </Group>
           </Group>
@@ -72,38 +70,27 @@
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace min="-2" pref="100" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="99" max="-2" attributes="0"/>
                   <Component id="lblTitle" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace max="32767" attributes="0"/>
+                  <EmptySpace min="-2" pref="42" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="1" attributes="0">
-                      <Component id="btnScore" alignment="1" min="-2" pref="170" max="-2" attributes="0"/>
-                      <Component id="btnLessons" alignment="1" min="-2" pref="170" max="-2" attributes="0"/>
-                      <Component id="btnTest" min="-2" pref="210" max="-2" attributes="0"/>
+                      <Component id="btnDocument" alignment="1" min="-2" pref="170" max="-2" attributes="0"/>
+                      <Component id="btnQuestion" alignment="1" min="-2" pref="170" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="87" max="-2" attributes="0"/>
               </Group>
               <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="190" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="188" max="-2" attributes="0"/>
                       <Component id="jToolBar" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="191" max="32767" attributes="0"/>
+                      <EmptySpace pref="188" max="32767" attributes="0"/>
                   </Group>
               </Group>
           </Group>
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Component class="javax.swing.JLabel" name="lblTitle">
-          <Properties>
-            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="b7" green="ff" red="e8" type="rgb"/>
-            </Property>
-            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/com/studious/icons/Studious-350x350.png"/>
-            </Property>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JButton" name="btnLessons">
+        <Component class="javax.swing.JButton" name="btnQuestion">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Inter" size="24" style="0"/>
@@ -112,9 +99,9 @@
               <Color blue="6" green="73" red="8" type="rgb"/>
             </Property>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/com/studious/icons/baihoc.png"/>
+              <Image iconType="3" name="/com/studious/icons/Question.png"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="B&#xe0;i h&#x1ecd;c"/>
+            <Property name="text" type="java.lang.String" value="C&#xe2;u h&#x1ecf;i"/>
             <Property name="toolTipText" type="java.lang.String" value=""/>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
@@ -126,36 +113,10 @@
             <Property name="verticalTextPosition" type="int" value="3"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnLessonsActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnQuestionActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="btnScore">
-          <Properties>
-            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Inter" size="24" style="0"/>
-            </Property>
-            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="6" green="73" red="8" type="rgb"/>
-            </Property>
-            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/com/studious/icons/xemdiem.png"/>
-            </Property>
-            <Property name="text" type="java.lang.String" value="Xem &#x111;i&#x1ec3;m"/>
-            <Property name="toolTipText" type="java.lang.String" value=""/>
-            <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-              <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
-                <LineBorder/>
-              </Border>
-            </Property>
-            <Property name="horizontalTextPosition" type="int" value="0"/>
-            <Property name="iconTextGap" type="int" value="1"/>
-            <Property name="verticalTextPosition" type="int" value="3"/>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnScoreActionPerformed"/>
-          </Events>
-        </Component>
-        <Component class="javax.swing.JButton" name="btnTest">
+        <Component class="javax.swing.JButton" name="btnDocument">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Inter" size="24" style="0"/>
@@ -166,7 +127,7 @@
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="3" name="/com/studious/icons/lambaithi.png"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="L&#xe0;m b&#xe0;i thi"/>
+            <Property name="text" type="java.lang.String" value="T&#xe0;i li&#x1ec7;u"/>
             <Property name="toolTipText" type="java.lang.String" value=""/>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
@@ -178,8 +139,18 @@
             <Property name="verticalTextPosition" type="int" value="3"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnTestActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnDocumentActionPerformed"/>
           </Events>
+        </Component>
+        <Component class="javax.swing.JLabel" name="lblTitle">
+          <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="b7" green="ff" red="e8" type="rgb"/>
+            </Property>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/com/studious/icons/Studious-350x350.png"/>
+            </Property>
+          </Properties>
         </Component>
         <Container class="javax.swing.JToolBar" name="jToolBar">
           <Properties>
@@ -240,7 +211,7 @@
                 <Property name="verticalTextPosition" type="int" value="3"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JButton" name="btnLessons1">
+            <Component class="javax.swing.JButton" name="btnLessons">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="b7" green="ff" red="e8" type="rgb"/>
@@ -259,7 +230,7 @@
                 <Property name="verticalTextPosition" type="int" value="3"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JButton" name="btnTest1">
+            <Component class="javax.swing.JButton" name="btnTest">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="b7" green="ff" red="e8" type="rgb"/>
@@ -278,7 +249,7 @@
                 <Property name="verticalTextPosition" type="int" value="3"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JButton" name="btnScore1">
+            <Component class="javax.swing.JButton" name="btnScore">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="b7" green="ff" red="e8" type="rgb"/>

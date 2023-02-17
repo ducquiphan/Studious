@@ -43,8 +43,8 @@ public class FindDocument extends javax.swing.JFrame {
         cboSubject2 = new javax.swing.JComboBox<>();
         jLabel3 = new javax.swing.JLabel();
         pnlSearch1 = new javax.swing.JPanel();
-        lblIconSearch1 = new javax.swing.JLabel();
         btnSearch1 = new javax.swing.JTextField();
+        btnSearch3 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblScoreStudent = new javax.swing.JTable();
         cboStatisticsBySubject = new javax.swing.JComboBox<>();
@@ -157,22 +157,24 @@ public class FindDocument extends javax.swing.JFrame {
 
         pnlSearch1.setBackground(new java.awt.Color(233, 233, 233));
 
-        lblIconSearch1.setBackground(new java.awt.Color(233, 233, 233));
-        lblIconSearch1.setFont(new java.awt.Font("Readex Pro Medium", 0, 14)); // NOI18N
-        lblIconSearch1.setForeground(new java.awt.Color(139, 150, 168));
-        lblIconSearch1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/search.png"))); // NOI18N
-
         btnSearch1.setFont(new java.awt.Font("Readex Pro Medium", 0, 14)); // NOI18N
         btnSearch1.setText("Tìm kiếm");
+
+        btnSearch3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/studious/icons/icons8-search-24.png"))); // NOI18N
+        btnSearch3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSearch3ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout pnlSearch1Layout = new javax.swing.GroupLayout(pnlSearch1);
         pnlSearch1.setLayout(pnlSearch1Layout);
         pnlSearch1Layout.setHorizontalGroup(
             pnlSearch1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlSearch1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(lblIconSearch1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnSearch3, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnSearch1, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -180,9 +182,9 @@ public class FindDocument extends javax.swing.JFrame {
             pnlSearch1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlSearch1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(pnlSearch1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnSearch1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblIconSearch1))
+                .addGroup(pnlSearch1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btnSearch3, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnSearch1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -216,32 +218,31 @@ public class FindDocument extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(14, 14, 14)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel1))
+                .addGap(56, 56, 56)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(cboSubject, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cboSubject1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(14, 14, 14)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel1))
-                        .addGap(56, 56, 56)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(cboSubject, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(cboSubject1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(cboSubject2, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 155, Short.MAX_VALUE)
-                                .addComponent(pnlSearch1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane1))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(cboStatisticsBySubject, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnView)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnDelete)
-                        .addGap(19, 19, 19)))
+                        .addComponent(cboSubject2, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 113, Short.MAX_VALUE)
+                        .addComponent(pnlSearch1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(cboStatisticsBySubject, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnView)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnDelete)
+                .addGap(25, 25, 25))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1)
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -249,7 +250,7 @@ public class FindDocument extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(pnlSearch1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(pnlSearch1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel1)
@@ -276,30 +277,35 @@ public class FindDocument extends javax.swing.JFrame {
         jTabbedPane1.addTab("Danh sách", jPanel1);
 
         jToolBar.setBackground(new java.awt.Color(232, 255, 183));
-        jToolBar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(232, 255, 183)));
+        jToolBar.setBorder(null);
         jToolBar.setOrientation(javax.swing.SwingConstants.VERTICAL);
         jToolBar.setRollover(true);
 
         btnHome1.setBackground(new java.awt.Color(232, 255, 183));
         btnHome1.setForeground(new java.awt.Color(232, 255, 183));
         btnHome1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/studious/icons/home.png"))); // NOI18N
+        btnHome1.setBorder(null);
         btnHome1.setFocusable(false);
         btnHome1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnHome1.setMaximumSize(new java.awt.Dimension(35, 35));
         btnHome1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         jToolBar.add(btnHome1);
 
         btnPersonalInfo1.setBackground(new java.awt.Color(232, 255, 183));
         btnPersonalInfo1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/studious/icons/account.png"))); // NOI18N
+        btnPersonalInfo1.setBorder(null);
         btnPersonalInfo1.setFocusable(false);
         btnPersonalInfo1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnPersonalInfo1.setMaximumSize(new java.awt.Dimension(35, 35));
         btnPersonalInfo1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         jToolBar.add(btnPersonalInfo1);
 
         btnTeacher1.setBackground(new java.awt.Color(232, 255, 183));
         btnTeacher1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/studious/icons/lessons.png"))); // NOI18N
+        btnTeacher1.setBorder(null);
         btnTeacher1.setFocusable(false);
         btnTeacher1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnTeacher1.setMaximumSize(new java.awt.Dimension(46, 44));
+        btnTeacher1.setMaximumSize(new java.awt.Dimension(35, 35));
         btnTeacher1.setMinimumSize(new java.awt.Dimension(46, 44));
         btnTeacher1.setPreferredSize(new java.awt.Dimension(46, 44));
         btnTeacher1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -307,9 +313,10 @@ public class FindDocument extends javax.swing.JFrame {
 
         btnStudent1.setBackground(new java.awt.Color(232, 255, 183));
         btnStudent1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/studious/icons/mockExam.png"))); // NOI18N
+        btnStudent1.setBorder(null);
         btnStudent1.setFocusable(false);
         btnStudent1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnStudent1.setMaximumSize(new java.awt.Dimension(46, 44));
+        btnStudent1.setMaximumSize(new java.awt.Dimension(35, 35));
         btnStudent1.setMinimumSize(new java.awt.Dimension(46, 44));
         btnStudent1.setPreferredSize(new java.awt.Dimension(46, 44));
         btnStudent1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -317,8 +324,9 @@ public class FindDocument extends javax.swing.JFrame {
 
         btnStatistic.setBackground(new java.awt.Color(232, 255, 183));
         btnStatistic.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/studious/icons/score.png"))); // NOI18N
+        btnStatistic.setBorder(null);
         btnStatistic.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnStatistic.setMaximumSize(new java.awt.Dimension(46, 44));
+        btnStatistic.setMaximumSize(new java.awt.Dimension(35, 35));
         btnStatistic.setMinimumSize(new java.awt.Dimension(46, 44));
         btnStatistic.setPreferredSize(new java.awt.Dimension(46, 44));
         btnStatistic.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -326,15 +334,19 @@ public class FindDocument extends javax.swing.JFrame {
 
         btnBack1.setBackground(new java.awt.Color(232, 255, 183));
         btnBack1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/studious/icons/back.png"))); // NOI18N
+        btnBack1.setBorder(null);
         btnBack1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnBack1.setMaximumSize(new java.awt.Dimension(35, 35));
         btnBack1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         jToolBar.add(btnBack1);
 
         btnLogout1.setBackground(new java.awt.Color(232, 255, 183));
         btnLogout1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/studious/icons/logout.png"))); // NOI18N
         btnLogout1.setToolTipText("");
+        btnLogout1.setBorder(null);
         btnLogout1.setFocusable(false);
         btnLogout1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnLogout1.setMaximumSize(new java.awt.Dimension(35, 35));
         btnLogout1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         jToolBar.add(btnLogout1);
 
@@ -354,7 +366,7 @@ public class FindDocument extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(lblTitle1))
                     .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 768, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addContainerGap(21, Short.MAX_VALUE))
         );
         pnlBackgroundLayout.setVerticalGroup(
             pnlBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -392,6 +404,10 @@ public class FindDocument extends javax.swing.JFrame {
     private void cboSubjectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboSubjectActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_cboSubjectActionPerformed
+
+    private void btnSearch3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearch3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnSearch3ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -466,6 +482,7 @@ public class FindDocument extends javax.swing.JFrame {
     private javax.swing.JButton btnLogout1;
     private javax.swing.JButton btnPersonalInfo1;
     private javax.swing.JTextField btnSearch1;
+    private javax.swing.JButton btnSearch3;
     private javax.swing.JButton btnStatistic;
     private javax.swing.JButton btnStudent1;
     private javax.swing.JButton btnTeacher1;
@@ -483,7 +500,6 @@ public class FindDocument extends javax.swing.JFrame {
     private javax.swing.JToolBar jToolBar;
     private javax.swing.JLabel lblAccountMenuBar;
     private javax.swing.JLabel lblHomeMenuBar;
-    private javax.swing.JLabel lblIconSearch1;
     private javax.swing.JLabel lblLessonMenuBar;
     private javax.swing.JLabel lblLogoutMenuBar;
     private javax.swing.JLabel lblScoreMenuBar;
