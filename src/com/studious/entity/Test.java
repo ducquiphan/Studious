@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.studious.entity;
 
 import java.util.Date;
@@ -12,18 +8,19 @@ import java.util.List;
  * @author Phan Qui Duc
  */
 public class Test {
+
     private String testID;
     private String testTitle;
     private String lesson;
     private int grade;
     private Date createDate;
     private String teacherID;
-    private List<String> questionsList;
+    private String questionsList;
 
     public Test() {
     }
 
-    public Test(String testID, String testTitle, String lesson, int grade, Date createDate, String teacherID, List<String> questionsList) {
+    public Test(String testID, String testTitle, String lesson, int grade, Date createDate, String teacherID, String questionsList) {
         this.testID = testID;
         this.testTitle = testTitle;
         this.lesson = lesson;
@@ -81,11 +78,11 @@ public class Test {
         this.teacherID = teacherID;
     }
 
-    public List<String> getQuestionsList() {
+    public String getQuestionsList() {
         return questionsList;
     }
 
-    public void setQuestionsList(List<String> questionsList) {
+    public void setQuestionsList(String questionsList) {
         this.questionsList = questionsList;
     }
 
@@ -93,6 +90,5 @@ public class Test {
     public String toString() {
         return getTestTitle();
     }
-    
-    
+
 }

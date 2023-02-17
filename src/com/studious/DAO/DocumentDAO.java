@@ -12,11 +12,11 @@ import java.sql.ResultSet;
  */
 public class DocumentDAO extends StudiousDAO<Document, Integer> {
 
-    final String INSERT_SQL = "INSERT INTO TAILIEU(MaTL, TieuDe, MonHoc, NoiDungTL, NgayTao, MaGV, MaBH) VALUES (?,?,?,?,?,?,?)";
-    final String UPDATE_SQL = "UPDATE TAILIEU SET TieuDe = ?, MonHoc = ?, NoiDungTL = ?, NgayTao = ?, MaGV = ?, MaBH = ? WHERE MaTL = ?";
-    final String DELETE_SQL = "DELETE FROM TAILIEU WHERE MaTL = ?";
-    final String SELECTALL_SQL = "SELECT * FROM TAILIEU";
-    final String SELECTBYID_SQL = "SELECT * FROM TAILIEU WHERE MaTL = ?";
+    final String INSERT_SQL = "INSERT INTO TAILIEUONTAP(MaTL, TieuDe, MonHoc, NoiDungTL, NgayTao, MaGV, MaBH) VALUES (?,?,?,?,?,?,?)";
+    final String UPDATE_SQL = "UPDATE TAILIEUONTAP SET TieuDe = ?, MonHoc = ?, NoiDungTL = ?, NgayTao = ?, MaGV = ?, MaBH = ? WHERE MaTL = ?";
+    final String DELETE_SQL = "DELETE FROM TAILIEUONTAP WHERE MaTL = ?";
+    final String SELECTALL_SQL = "SELECT * FROM TAILIEUONTAP";
+    final String SELECTBYID_SQL = "SELECT * FROM TAILIEUONTAP WHERE MaTL = ?";
 
     @Override
     public void insert(Document entity) {

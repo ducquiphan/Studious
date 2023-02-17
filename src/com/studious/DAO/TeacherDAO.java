@@ -1,4 +1,4 @@
-package DAO;
+package com.studious.DAO;
 
 import com.studious.DAO.StudiousDAO;
 import com.studious.entity.Teacher;

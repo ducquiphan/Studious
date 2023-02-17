@@ -8,17 +8,15 @@ package com.studious.entity;
 public class Account {
     private String userID;
     private String password;
-    private String fullname;
     private int role;
     private boolean status;
 
     public Account () {
     }
 
-    public Account (String userID, String password, String fullname, int role, boolean status) {
+    public Account (String userID, String password, int role, boolean status) {
         this.userID = userID;
         this.password = password;
-        this.fullname = fullname;
         this.role = role;
         this.status = status;
     }
@@ -37,14 +35,6 @@ public class Account {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public String getFullname() {
-        return fullname;
-    }
-
-    public void setFullname(String fullname) {
-        this.fullname = fullname;
     }
 
     public int getRole() {
@@ -68,7 +58,6 @@ public class Account {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("Account{");
-        sb.append("fullname=").append(fullname);
         sb.append(", role=").append(role);
         sb.append('}');
         return sb.toString();

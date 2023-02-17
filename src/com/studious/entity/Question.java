@@ -5,7 +5,7 @@ package com.studious.entity;
  * @author Phan Qui Duc
  */
 public class Question {
-    private String questionID;
+    private int questionID;
     private String question;
     private String wrongAns1;
     private String wrongAns2;
@@ -18,7 +18,7 @@ public class Question {
     public Question() {
     }
 
-    public Question(String questionID, String question, String wrongAns1, String wrongAns2, String wrongAns3, String wrongAns4, String ans, int lessonID, String teacherID) {
+    public Question(int questionID, String question, String wrongAns1, String wrongAns2, String wrongAns3, String wrongAns4, String ans, int lessonID, String teacherID) {
         this.questionID = questionID;
         this.question = question;
         this.wrongAns1 = wrongAns1;
@@ -30,11 +30,11 @@ public class Question {
         this.teacherID = teacherID;
     }
 
-    public String getQuestionID() {
+    public int getQuestionID() {
         return questionID;
     }
 
-    public void setQuestionID(String questionID) {
+    public void setQuestionID(int questionID) {
         this.questionID = questionID;
     }
 

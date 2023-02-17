@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.studious.entity;
 
 import java.util.Date;
@@ -11,7 +7,7 @@ import java.util.Date;
  * @author Phan Qui Duc
  */
 public class QnA {
-    private String qnaID;
+    private int qnaID;
     private String content;
     private Date createDate;
     private String userID;
@@ -20,7 +16,7 @@ public class QnA {
     public QnA() {
     }
 
-    public QnA(String qnaID, String content, Date createDate, String userID, int questionID) {
+    public QnA(int qnaID, String content, Date createDate, String userID, int questionID) {
         this.qnaID = qnaID;
         this.content = content;
         this.createDate = createDate;
@@ -28,11 +24,11 @@ public class QnA {
         this.questionID = questionID;
     }
 
-    public String getQnaID() {
+    public int getQnaID() {
         return qnaID;
     }
 
-    public void setQnaID(String qnaID) {
+    public void setQnaID(int qnaID) {
         this.qnaID = qnaID;
     }
 

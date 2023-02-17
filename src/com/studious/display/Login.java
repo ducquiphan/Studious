@@ -1,5 +1,9 @@
 package com.studious.display;
 
+import com.studious.DAO.AccountDAO;
+import com.studious.entity.Account;
+import com.studious.ultils.MsgBox;
+
 /**
  *
  * @author SsuBii
@@ -13,7 +17,11 @@ public class Login extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null);
         setTitle("Studious - Đăng nhập");
+        init();
+
     }
+
+    AccountDAO dao = new AccountDAO();
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -29,7 +37,7 @@ public class Login extends javax.swing.JFrame {
         lblTitle = new javax.swing.JLabel();
         lblNameAccount = new javax.swing.JLabel();
         lblPassword = new javax.swing.JLabel();
-        txtNameAccount = new javax.swing.JTextField();
+        txtUsername = new javax.swing.JTextField();
         txtPassword = new javax.swing.JPasswordField();
         btnLogin = new javax.swing.JButton();
         btnEnd = new javax.swing.JButton();
@@ -53,9 +61,9 @@ public class Login extends javax.swing.JFrame {
         lblPassword.setFont(new java.awt.Font("Inter", 0, 18)); // NOI18N
         lblPassword.setText("Mật khẩu:");
 
-        txtNameAccount.setBackground(new java.awt.Color(217, 217, 217));
-        txtNameAccount.setFont(new java.awt.Font("Inter", 0, 14)); // NOI18N
-        txtNameAccount.setText("PS25579");
+        txtUsername.setBackground(new java.awt.Color(217, 217, 217));
+        txtUsername.setFont(new java.awt.Font("Inter", 0, 14)); // NOI18N
+        txtUsername.setText("PS25579");
 
         txtPassword.setBackground(new java.awt.Color(217, 217, 217));
         txtPassword.setFont(new java.awt.Font("Inter", 0, 14)); // NOI18N
@@ -68,6 +76,11 @@ public class Login extends javax.swing.JFrame {
         btnEnd.setBackground(new java.awt.Color(232, 255, 183));
         btnEnd.setFont(new java.awt.Font("Inter", 0, 18)); // NOI18N
         btnEnd.setText("Kết thúc");
+        btnEnd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEndActionPerformed(evt);
+            }
+        });
 
         lblForgotPass.setFont(new java.awt.Font("Inter", 0, 18)); // NOI18N
         lblForgotPass.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/studious/icons/DMK - padlock.png"))); // NOI18N
@@ -88,7 +101,7 @@ public class Login extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblPassword)
                             .addComponent(lblNameAccount)
-                            .addComponent(txtNameAccount, javax.swing.GroupLayout.PREFERRED_SIZE, 460, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 460, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                 .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 460, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
@@ -108,7 +121,7 @@ public class Login extends javax.swing.JFrame {
                 .addGap(55, 55, 55)
                 .addComponent(lblNameAccount)
                 .addGap(18, 18, 18)
-                .addComponent(txtNameAccount, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(27, 27, 27)
                 .addComponent(lblPassword)
                 .addGap(18, 18, 18)
@@ -136,6 +149,10 @@ public class Login extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnEndActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEndActionPerformed
+        End();
+    }//GEN-LAST:event_btnEndActionPerformed
 
     /**
      * @param args the command line arguments
@@ -181,7 +198,27 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JLabel lblNameAccount;
     private javax.swing.JLabel lblPassword;
     private javax.swing.JLabel lblTitle;
-    private javax.swing.JTextField txtNameAccount;
     private javax.swing.JPasswordField txtPassword;
+    private javax.swing.JTextField txtUsername;
     // End of variables declaration//GEN-END:variables
+
+    private void init() {
+
+    }
+
+    private void Login() {
+        String username = txtUsername.getText();
+        String pass = new String(txtPassword.getText());
+        Account acc = dao.selectById(username);
+        if (acc == null) {
+            MsgBox.alert(this, "Tên tài khoản không đúng");
+        } else {
+        }
+    }
+
+    private void End() {
+        if (MsgBox.confirm(this, "Bạn muốn đóng ứng dụng ?")) {
+            System.exit(0);
+        }
+    }
 }
