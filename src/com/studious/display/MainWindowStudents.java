@@ -32,9 +32,9 @@ public class MainWindowStudents extends javax.swing.JFrame {
         jToolBar = new javax.swing.JToolBar();
         btnHome1 = new javax.swing.JButton();
         btnPersonalInfo1 = new javax.swing.JButton();
-        btnTeacher1 = new javax.swing.JButton();
-        btnStudent1 = new javax.swing.JButton();
-        btnStatistic = new javax.swing.JButton();
+        btnLessonsTab = new javax.swing.JButton();
+        btnTestTab = new javax.swing.JButton();
+        btnScoreTab = new javax.swing.JButton();
         btnBack1 = new javax.swing.JButton();
         btnLogout1 = new javax.swing.JButton();
 
@@ -108,39 +108,38 @@ public class MainWindowStudents extends javax.swing.JFrame {
 
         btnPersonalInfo1.setBackground(new java.awt.Color(232, 255, 183));
         btnPersonalInfo1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/studious/icons/account.png"))); // NOI18N
-        btnPersonalInfo1.setFocusable(false);
         btnPersonalInfo1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnPersonalInfo1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         jToolBar.add(btnPersonalInfo1);
 
-        btnTeacher1.setBackground(new java.awt.Color(232, 255, 183));
-        btnTeacher1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/studious/icons/lessons.png"))); // NOI18N
-        btnTeacher1.setFocusable(false);
-        btnTeacher1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnTeacher1.setMaximumSize(new java.awt.Dimension(46, 44));
-        btnTeacher1.setMinimumSize(new java.awt.Dimension(46, 44));
-        btnTeacher1.setPreferredSize(new java.awt.Dimension(46, 44));
-        btnTeacher1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jToolBar.add(btnTeacher1);
+        btnLessonsTab.setBackground(new java.awt.Color(232, 255, 183));
+        btnLessonsTab.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/studious/icons/lessons.png"))); // NOI18N
+        btnLessonsTab.setFocusable(false);
+        btnLessonsTab.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnLessonsTab.setMaximumSize(new java.awt.Dimension(46, 44));
+        btnLessonsTab.setMinimumSize(new java.awt.Dimension(46, 44));
+        btnLessonsTab.setPreferredSize(new java.awt.Dimension(46, 44));
+        btnLessonsTab.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jToolBar.add(btnLessonsTab);
 
-        btnStudent1.setBackground(new java.awt.Color(232, 255, 183));
-        btnStudent1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/studious/icons/mockExam.png"))); // NOI18N
-        btnStudent1.setFocusable(false);
-        btnStudent1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnStudent1.setMaximumSize(new java.awt.Dimension(46, 44));
-        btnStudent1.setMinimumSize(new java.awt.Dimension(46, 44));
-        btnStudent1.setPreferredSize(new java.awt.Dimension(46, 44));
-        btnStudent1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jToolBar.add(btnStudent1);
+        btnTestTab.setBackground(new java.awt.Color(232, 255, 183));
+        btnTestTab.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/studious/icons/mockExam.png"))); // NOI18N
+        btnTestTab.setFocusable(false);
+        btnTestTab.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnTestTab.setMaximumSize(new java.awt.Dimension(46, 44));
+        btnTestTab.setMinimumSize(new java.awt.Dimension(46, 44));
+        btnTestTab.setPreferredSize(new java.awt.Dimension(46, 44));
+        btnTestTab.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jToolBar.add(btnTestTab);
 
-        btnStatistic.setBackground(new java.awt.Color(232, 255, 183));
-        btnStatistic.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/studious/icons/score.png"))); // NOI18N
-        btnStatistic.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnStatistic.setMaximumSize(new java.awt.Dimension(46, 44));
-        btnStatistic.setMinimumSize(new java.awt.Dimension(46, 44));
-        btnStatistic.setPreferredSize(new java.awt.Dimension(46, 44));
-        btnStatistic.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jToolBar.add(btnStatistic);
+        btnScoreTab.setBackground(new java.awt.Color(232, 255, 183));
+        btnScoreTab.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/studious/icons/score.png"))); // NOI18N
+        btnScoreTab.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnScoreTab.setMaximumSize(new java.awt.Dimension(46, 44));
+        btnScoreTab.setMinimumSize(new java.awt.Dimension(46, 44));
+        btnScoreTab.setPreferredSize(new java.awt.Dimension(46, 44));
+        btnScoreTab.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jToolBar.add(btnScoreTab);
 
         btnBack1.setBackground(new java.awt.Color(232, 255, 183));
         btnBack1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/studious/icons/back.png"))); // NOI18N
@@ -194,7 +193,7 @@ public class MainWindowStudents extends javax.swing.JFrame {
                 .addGroup(pnlBackgroundLayout.createSequentialGroup()
                     .addGap(155, 155, 155)
                     .addComponent(jToolBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(155, Short.MAX_VALUE)))
+                    .addContainerGap(199, Short.MAX_VALUE)))
         );
 
         getContentPane().add(pnlBackground, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 900, 600));
@@ -256,13 +255,13 @@ public class MainWindowStudents extends javax.swing.JFrame {
     private javax.swing.JButton btnBack1;
     private javax.swing.JButton btnHome1;
     private javax.swing.JButton btnLessons;
+    private javax.swing.JButton btnLessonsTab;
     private javax.swing.JButton btnLogout1;
     private javax.swing.JButton btnPersonalInfo1;
     private javax.swing.JButton btnScore;
-    private javax.swing.JButton btnStatistic;
-    private javax.swing.JButton btnStudent1;
-    private javax.swing.JButton btnTeacher1;
+    private javax.swing.JButton btnScoreTab;
     private javax.swing.JButton btnTest;
+    private javax.swing.JButton btnTestTab;
     private javax.swing.JToolBar jToolBar;
     private javax.swing.JLabel lblTitle;
     private javax.swing.JPanel pnlBackground;
