@@ -3,7 +3,7 @@ package com.studious.DAO;
 import com.studious.entity.Lesson;
 import java.util.ArrayList;
 import java.util.List;
-import com.studious.ultils.JdbcHelper;
+import com.studious.utils.JdbcHelper;
 import java.sql.ResultSet;
 
 /**
