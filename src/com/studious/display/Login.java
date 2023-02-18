@@ -2,8 +2,8 @@ package com.studious.display;
 
 import com.studious.DAO.AccountDAO;
 import com.studious.entity.Account;
-import com.studious.ultils.Auth;
-import com.studious.ultils.MsgBox;
+import com.studious.utils.Auth;
+import com.studious.utils.MsgBox;
 
 /**
  *
