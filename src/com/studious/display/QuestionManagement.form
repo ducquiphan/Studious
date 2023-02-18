@@ -1103,26 +1103,26 @@
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Component id="jScrollPane3" max="32767" attributes="0"/>
                                       <Group type="102" alignment="1" attributes="0">
-                                          <Group type="103" groupAlignment="0" attributes="0">
-                                              <Component id="lblGradeList" alignment="1" max="32767" attributes="0"/>
-                                              <Component id="lblSubjectList" alignment="1" pref="59" max="32767" attributes="0"/>
-                                              <Component id="lblLessonList" pref="59" max="32767" attributes="0"/>
+                                          <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                              <Component id="lblGradeList" alignment="0" max="32767" attributes="0"/>
+                                              <Component id="lblLessonList" alignment="0" max="32767" attributes="0"/>
+                                              <Component id="lblSubjectList" max="32767" attributes="0"/>
                                           </Group>
-                                          <EmptySpace min="29" pref="29" max="-2" attributes="0"/>
+                                          <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
                                           <Group type="103" groupAlignment="0" attributes="0">
                                               <Group type="102" attributes="0">
-                                                  <Component id="cboLessonList" pref="175" max="32767" attributes="0"/>
-                                                  <EmptySpace min="-2" pref="205" max="-2" attributes="0"/>
+                                                  <Component id="cboLessonList" min="-2" pref="250" max="-2" attributes="0"/>
+                                                  <EmptySpace pref="139" max="32767" attributes="0"/>
                                                   <Component id="btnSearchList" min="-2" pref="39" max="-2" attributes="0"/>
                                                   <EmptySpace max="-2" attributes="0"/>
                                                   <Component id="txtSearchList" min="-2" pref="200" max="-2" attributes="0"/>
                                               </Group>
                                               <Group type="102" attributes="0">
-                                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                                      <Component id="cboSubjectList" alignment="0" pref="175" max="32767" attributes="0"/>
-                                                      <Component id="cboGradeList" alignment="0" max="32767" attributes="0"/>
+                                                  <Group type="103" groupAlignment="0" attributes="0">
+                                                      <Component id="cboSubjectList" min="-2" pref="175" max="-2" attributes="0"/>
+                                                      <Component id="cboGradeList" min="-2" pref="100" max="-2" attributes="0"/>
                                                   </Group>
-                                                  <EmptySpace min="-2" pref="450" max="-2" attributes="0"/>
+                                                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                                               </Group>
                                           </Group>
                                       </Group>

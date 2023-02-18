@@ -8,12 +8,12 @@ package com.studious.display;
  *
  * @author Admin
  */
-public class LessonManagement extends java.awt.Dialog {
+public class DocumentManagement extends java.awt.Dialog {
 
     /**
-     * Creates new form LesspnManagement
+     * Creates new form DocumentManagement
      */
-    public LessonManagement(java.awt.Frame parent, boolean modal) {
+    public DocumentManagement(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
     }
@@ -29,13 +29,12 @@ public class LessonManagement extends java.awt.Dialog {
         lblTitle = new javax.swing.JLabel();
         tabs = new javax.swing.JTabbedPane();
         pnlManage = new javax.swing.JPanel();
-        lblLessonID = new javax.swing.JLabel();
-        txtLessonID = new javax.swing.JTextField();
         lblSubject = new javax.swing.JLabel();
-        lblLessonTitle = new javax.swing.JLabel();
-        txtLessonTitle = new javax.swing.JTextField();
         lblGrade = new javax.swing.JLabel();
-        cboSubject = new javax.swing.JComboBox<>();
+        lblLessonType = new javax.swing.JLabel();
+        txtLessonTitle = new javax.swing.JTextField();
+        lblLessonTitle = new javax.swing.JLabel();
+        cboLessonType = new javax.swing.JComboBox<>();
         cboGrade = new javax.swing.JComboBox<>();
         btnNew = new javax.swing.JButton();
         btnInsert = new javax.swing.JButton();
@@ -46,10 +45,23 @@ public class LessonManagement extends java.awt.Dialog {
         btnPrevious = new javax.swing.JButton();
         btnNext = new javax.swing.JButton();
         btnLast = new javax.swing.JButton();
+        lblChooseFile = new javax.swing.JLabel();
+        cboSubject = new javax.swing.JComboBox<>();
+        btnChooseFile = new javax.swing.JButton();
         pnlList = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
+        lblSubjectList = new javax.swing.JLabel();
+        cboSubjectList = new javax.swing.JComboBox<>();
+        lblGradeList = new javax.swing.JLabel();
+        cboGradeList = new javax.swing.JComboBox<>();
+        btnSearchList = new javax.swing.JButton();
+        txtSearchList = new javax.swing.JTextField();
+        jScrollPane3 = new javax.swing.JScrollPane();
         tblGridView = new javax.swing.JTable();
+        cboArrange = new javax.swing.JComboBox<>();
+        lblLessonList = new javax.swing.JLabel();
+        cboLessonList = new javax.swing.JComboBox<>();
         btnDeleteRow = new javax.swing.JButton();
+        btnView = new javax.swing.JButton();
         lblLogo = new javax.swing.JLabel();
         jToolBar = new javax.swing.JToolBar();
         btnHome = new javax.swing.JButton();
@@ -61,7 +73,6 @@ public class LessonManagement extends java.awt.Dialog {
         btnLogout = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(232, 255, 183));
-        setTitle("QUẢN LÝ BÀI HỌC");
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
                 closeDialog(evt);
@@ -70,7 +81,7 @@ public class LessonManagement extends java.awt.Dialog {
 
         lblTitle.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         lblTitle.setForeground(new java.awt.Color(47, 106, 1));
-        lblTitle.setText("QUẢN LÝ BÀI HỌC");
+        lblTitle.setText("QUẢN LÝ TÀI LIỆU");
 
         tabs.setBackground(new java.awt.Color(255, 255, 255));
         tabs.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -79,31 +90,28 @@ public class LessonManagement extends java.awt.Dialog {
         pnlManage.setBackground(new java.awt.Color(255, 255, 255));
         pnlManage.setBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED));
 
-        lblLessonID.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        lblLessonID.setText("Mã bài học:");
-        lblLessonID.setToolTipText("");
-
-        txtLessonID.setBackground(new java.awt.Color(204, 204, 204));
-        txtLessonID.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-
         lblSubject.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lblSubject.setText("Môn:");
         lblSubject.setToolTipText("");
-
-        lblLessonTitle.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        lblLessonTitle.setText("Tiêu đề bài học:");
-        lblLessonTitle.setToolTipText("");
-
-        txtLessonTitle.setBackground(new java.awt.Color(204, 204, 204));
-        txtLessonTitle.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
         lblGrade.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lblGrade.setText("Khối:");
         lblGrade.setToolTipText("");
 
-        cboSubject.setBackground(new java.awt.Color(204, 204, 204));
-        cboSubject.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        cboSubject.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Toán", "Vật Lí", "Hóa Học", "Tiếng Anh" }));
+        lblLessonType.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lblLessonType.setText("Bài học:");
+        lblLessonType.setToolTipText("");
+
+        txtLessonTitle.setBackground(new java.awt.Color(204, 204, 204));
+        txtLessonTitle.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+
+        lblLessonTitle.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lblLessonTitle.setText("Tiêu đề:");
+        lblLessonTitle.setToolTipText("");
+
+        cboLessonType.setBackground(new java.awt.Color(204, 204, 204));
+        cboLessonType.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        cboLessonType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Toán", "Vật Lí", "Hóa Học", "Tiếng Anh" }));
 
         cboGrade.setBackground(new java.awt.Color(204, 204, 204));
         cboGrade.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -139,6 +147,17 @@ public class LessonManagement extends java.awt.Dialog {
 
         btnLast.setText(">|");
 
+        lblChooseFile.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lblChooseFile.setText("Chọn tài liệu:");
+        lblChooseFile.setToolTipText("");
+
+        cboSubject.setBackground(new java.awt.Color(204, 204, 204));
+        cboSubject.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        cboSubject.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Toán", "Vật Lí", "Hóa Học", "Tiếng Anh" }));
+
+        btnChooseFile.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btnChooseFile.setText("No file Chosen");
+
         javax.swing.GroupLayout pnlManageLayout = new javax.swing.GroupLayout(pnlManage);
         pnlManage.setLayout(pnlManageLayout);
         pnlManageLayout.setHorizontalGroup(
@@ -146,10 +165,11 @@ public class LessonManagement extends java.awt.Dialog {
             .addGroup(pnlManageLayout.createSequentialGroup()
                 .addGap(32, 32, 32)
                 .addGroup(pnlManageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblLessonID)
                     .addComponent(lblSubject)
+                    .addComponent(lblGrade)
+                    .addComponent(lblLessonType)
                     .addComponent(lblLessonTitle)
-                    .addComponent(lblGrade))
+                    .addComponent(lblChooseFile))
                 .addGap(34, 34, 34)
                 .addGroup(pnlManageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnlManageLayout.createSequentialGroup()
@@ -162,53 +182,56 @@ public class LessonManagement extends java.awt.Dialog {
                         .addComponent(btnUpdate)
                         .addGap(18, 18, 18)
                         .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(pnlManageLayout.createSequentialGroup()
-                        .addComponent(btnFirst, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnPrevious, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnNext, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnLast, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(0, 34, Short.MAX_VALUE))
                     .addGroup(pnlManageLayout.createSequentialGroup()
                         .addGroup(pnlManageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtLessonID)
-                            .addComponent(txtLessonTitle)
+                            .addComponent(txtLessonTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 415, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cboSubject, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cboGrade, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cboLessonType, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(pnlManageLayout.createSequentialGroup()
-                                .addGroup(pnlManageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(cboSubject, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(cboGrade, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(0, 190, Short.MAX_VALUE)))
-                        .addGap(216, 216, 216))))
+                                .addGroup(pnlManageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(btnChooseFile, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pnlManageLayout.createSequentialGroup()
+                                        .addComponent(btnFirst, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(btnPrevious, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(18, 18, 18)
+                                .addComponent(btnNext, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnLast, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         pnlManageLayout.setVerticalGroup(
             pnlManageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlManageLayout.createSequentialGroup()
                 .addGap(36, 36, 36)
                 .addGroup(pnlManageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblLessonID)
-                    .addComponent(txtLessonID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(pnlManageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblSubject)
                     .addComponent(cboSubject, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(pnlManageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtLessonTitle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblLessonTitle))
-                .addGap(22, 22, 22)
                 .addGroup(pnlManageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblGrade)
                     .addComponent(cboGrade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(pnlManageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblLessonType)
+                    .addComponent(cboLessonType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(22, 22, 22)
+                .addGroup(pnlManageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblLessonTitle)
+                    .addComponent(txtLessonTitle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(pnlManageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblChooseFile)
+                    .addComponent(btnChooseFile))
+                .addGap(30, 30, 30)
+                .addGroup(pnlManageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnFirst, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnPrevious, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnNext, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnLast, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 50, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 84, Short.MAX_VALUE)
                 .addGroup(pnlManageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnNew)
                     .addComponent(btnInsert, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -221,46 +244,124 @@ public class LessonManagement extends java.awt.Dialog {
         tabs.addTab("Quản lí", pnlManage);
 
         pnlList.setBackground(new java.awt.Color(255, 255, 255));
-        pnlList.setBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED));
+
+        lblSubjectList.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lblSubjectList.setText("Môn:");
+        lblSubjectList.setToolTipText("");
+
+        cboSubjectList.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        cboSubjectList.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Toán" }));
+
+        lblGradeList.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lblGradeList.setText("Khối:");
+        lblGradeList.setToolTipText("");
+
+        cboGradeList.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        cboGradeList.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "10", "11", "12" }));
+
+        btnSearchList.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/studious/icons/icons8-search-24.png"))); // NOI18N
+        btnSearchList.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSearchListActionPerformed(evt);
+            }
+        });
+
+        txtSearchList.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txtSearchList.setText("Tìm kiếm");
 
         tblGridView.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "STT", "Mã bài học", "Tên bài học", "Ngày tạo", "Người tạo"
+                "STT", "Mã tài liệu", "Tên tài liệu", "Môn học", "Khối", "Người dùng"
             }
         ));
-        jScrollPane1.setViewportView(tblGridView);
+        jScrollPane3.setViewportView(tblGridView);
+
+        cboArrange.setBackground(new java.awt.Color(233, 233, 233));
+        cboArrange.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        cboArrange.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Thống kê theo môn học" }));
+
+        lblLessonList.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lblLessonList.setText("Bài học:");
+        lblLessonList.setToolTipText("");
+
+        cboLessonList.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        cboLessonList.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Hàm Logarit" }));
 
         btnDeleteRow.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnDeleteRow.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/studious/icons/icons8-bin-24.png"))); // NOI18N
         btnDeleteRow.setText("Xóa");
+
+        btnView.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btnView.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/studious/icons/icons8-view-24.png"))); // NOI18N
+        btnView.setText("Xem");
 
         javax.swing.GroupLayout pnlListLayout = new javax.swing.GroupLayout(pnlList);
         pnlList.setLayout(pnlListLayout);
         pnlListLayout.setHorizontalGroup(
             pnlListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlListLayout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(31, 31, 31)
                 .addGroup(pnlListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 734, Short.MAX_VALUE)
+                    .addComponent(jScrollPane3)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlListLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(btnDeleteRow, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(pnlListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblGradeList, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lblSubjectList, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 59, Short.MAX_VALUE)
+                            .addComponent(lblLessonList, javax.swing.GroupLayout.DEFAULT_SIZE, 59, Short.MAX_VALUE))
+                        .addGap(29, 29, 29)
+                        .addGroup(pnlListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(pnlListLayout.createSequentialGroup()
+                                .addComponent(cboLessonList, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnSearchList, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtSearchList, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(pnlListLayout.createSequentialGroup()
+                                .addGroup(pnlListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(cboSubjectList, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(cboGradeList, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(450, 450, 450))))
+                    .addGroup(pnlListLayout.createSequentialGroup()
+                        .addComponent(cboArrange, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnView, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnDeleteRow, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         pnlListLayout.setVerticalGroup(
             pnlListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlListLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 309, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(pnlListLayout.createSequentialGroup()
+                .addGap(14, 14, 14)
+                .addGroup(pnlListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblSubjectList)
+                    .addComponent(cboSubjectList, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnDeleteRow)
-                .addGap(86, 86, 86))
+                .addGroup(pnlListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblGradeList, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cboGradeList, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(pnlListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnlListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(txtSearchList, javax.swing.GroupLayout.DEFAULT_SIZE, 27, Short.MAX_VALUE)
+                        .addComponent(btnSearchList, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                    .addGroup(pnlListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(lblLessonList, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(cboLessonList, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(pnlListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cboArrange, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnDeleteRow)
+                    .addComponent(btnView))
+                .addGap(136, 136, 136))
         );
 
         tabs.addTab("Danh sách", pnlList);
@@ -367,9 +468,9 @@ public class LessonManagement extends java.awt.Dialog {
                     .addComponent(lblTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(tabs, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jToolBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(36, Short.MAX_VALUE))
+                    .addComponent(jToolBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tabs, javax.swing.GroupLayout.PREFERRED_SIZE, 490, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -383,13 +484,17 @@ public class LessonManagement extends java.awt.Dialog {
         dispose();
     }//GEN-LAST:event_closeDialog
 
+    private void btnSearchListActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchListActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnSearchListActionPerformed
+
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                LessonManagement dialog = new LessonManagement(new java.awt.Frame(), true);
+                DocumentManagement dialog = new DocumentManagement(new java.awt.Frame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     public void windowClosing(java.awt.event.WindowEvent e) {
                         System.exit(0);
@@ -403,6 +508,7 @@ public class LessonManagement extends java.awt.Dialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBack;
+    private javax.swing.JButton btnChooseFile;
     private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnDeleteRow;
     private javax.swing.JButton btnEdit;
@@ -415,25 +521,36 @@ public class LessonManagement extends java.awt.Dialog {
     private javax.swing.JButton btnNext;
     private javax.swing.JButton btnPersonalInfo;
     private javax.swing.JButton btnPrevious;
+    private javax.swing.JButton btnSearchList;
     private javax.swing.JButton btnStatistic;
     private javax.swing.JButton btnStudent;
     private javax.swing.JButton btnTeacher;
     private javax.swing.JButton btnUpdate;
+    private javax.swing.JButton btnView;
+    private javax.swing.JComboBox<String> cboArrange;
     private javax.swing.JComboBox<String> cboGrade;
+    private javax.swing.JComboBox<String> cboGradeList;
+    private javax.swing.JComboBox<String> cboLessonList;
+    private javax.swing.JComboBox<String> cboLessonType;
     private javax.swing.JComboBox<String> cboSubject;
-    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JComboBox<String> cboSubjectList;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JToolBar jToolBar;
+    private javax.swing.JLabel lblChooseFile;
     private javax.swing.JLabel lblGrade;
-    private javax.swing.JLabel lblLessonID;
+    private javax.swing.JLabel lblGradeList;
+    private javax.swing.JLabel lblLessonList;
     private javax.swing.JLabel lblLessonTitle;
+    private javax.swing.JLabel lblLessonType;
     private javax.swing.JLabel lblLogo;
     private javax.swing.JLabel lblSubject;
+    private javax.swing.JLabel lblSubjectList;
     private javax.swing.JLabel lblTitle;
     private javax.swing.JPanel pnlList;
     private javax.swing.JPanel pnlManage;
     private javax.swing.JTabbedPane tabs;
     private javax.swing.JTable tblGridView;
-    private javax.swing.JTextField txtLessonID;
     private javax.swing.JTextField txtLessonTitle;
+    private javax.swing.JTextField txtSearchList;
     // End of variables declaration//GEN-END:variables
 }
