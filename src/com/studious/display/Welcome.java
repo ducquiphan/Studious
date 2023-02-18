@@ -1,5 +1,7 @@
 package com.studious.display;
 
+import java.awt.event.KeyEvent;
+
 /**
  *
  * @author SsuBii
@@ -10,7 +12,7 @@ public class Welcome extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null);
         setTitle("Studious");
-        
+
     }
 
     /**
@@ -23,7 +25,7 @@ public class Welcome extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel2 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        btnWelcome = new javax.swing.JButton();
         lblBackGround = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -36,15 +38,20 @@ public class Welcome extends javax.swing.JFrame {
         jLabel2.setText("Tri thức ở đâu chúng tôi vươn cao tới đó");
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 330, -1, -1));
 
-        jButton1.setBackground(new java.awt.Color(232, 255, 183));
-        jButton1.setFont(new java.awt.Font("SVN-Book Antiqua", 1, 24)); // NOI18N
-        jButton1.setText("Chào Mừng");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnWelcome.setBackground(new java.awt.Color(232, 255, 183));
+        btnWelcome.setFont(new java.awt.Font("SVN-Book Antiqua", 1, 24)); // NOI18N
+        btnWelcome.setText("Chào Mừng");
+        btnWelcome.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnWelcomeActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 390, 230, 80));
+        btnWelcome.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                btnWelcomeKeyPressed(evt);
+            }
+        });
+        getContentPane().add(btnWelcome, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 390, 230, 80));
 
         lblBackGround.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/studious/icons/bg-3.png"))); // NOI18N
         getContentPane().add(lblBackGround, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
@@ -52,9 +59,21 @@ public class Welcome extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnWelcomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnWelcomeActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+        this.dispose();
+        Login login = new Login();
+        login.setVisible(true);
+    }//GEN-LAST:event_btnWelcomeActionPerformed
+
+    private void btnWelcomeKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnWelcomeKeyPressed
+        // TODO add your handling code here:
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            this.dispose();
+            Login login = new Login();
+            login.setVisible(true);
+        }
+    }//GEN-LAST:event_btnWelcomeKeyPressed
 
     /**
      * @param args the command line arguments
@@ -92,7 +111,7 @@ public class Welcome extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton btnWelcome;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel lblBackGround;
     // End of variables declaration//GEN-END:variables

@@ -8,12 +8,12 @@ package com.studious.display;
  *
  * @author Admin
  */
-public class MainWindowTest extends java.awt.Dialog {
+public class TestWindow extends java.awt.Dialog {
 
     /**
      * Creates new form MainWindowTest
      */
-    public MainWindowTest(java.awt.Frame parent, boolean modal) {
+    public TestWindow(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
     }
@@ -230,7 +230,7 @@ public class MainWindowTest extends java.awt.Dialog {
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                MainWindowTest dialog = new MainWindowTest(new java.awt.Frame(), true);
+                TestWindow dialog = new TestWindow(new java.awt.Frame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     public void windowClosing(java.awt.event.WindowEvent e) {
                         System.exit(0);
