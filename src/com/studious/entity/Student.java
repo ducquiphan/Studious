@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package com.studious.entity;
 
 import java.util.Date;
@@ -15,7 +12,7 @@ public class Student {
     private String fullname;
     private boolean gender;
     private Date birthDate;
-    private String grade;
+    private int grade;
     private String email;
     private String phone;
     private String avtURL;
@@ -24,7 +21,7 @@ public class Student {
     public Student() {
     }
 
-    public Student(String studentID, String fullname, boolean gender, Date birthDate, String grade, String email, String phone, String avtURL, String accountID) {
+    public Student(String studentID, String fullname, boolean gender, Date birthDate, int grade, String email, String phone, String avtURL, String accountID) {
         this.studentID = studentID;
         this.fullname = fullname;
         this.gender = gender;
@@ -68,11 +65,11 @@ public class Student {
         this.birthDate = birthDate;
     }
 
-    public String getGrade() {
+    public int getGrade() {
         return grade;
     }
 
-    public void setGrade(String grade) {
+    public void setGrade(int grade) {
         this.grade = grade;
     }
 

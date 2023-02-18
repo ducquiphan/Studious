@@ -1,15 +1,39 @@
 package com.studious.display;
 
+import com.studious.DAO.AccountDAO;
+import com.studious.DAO.StudentDAO;
+import com.studious.DAO.TeacherDAO;
+import com.studious.entity.Account;
+import com.studious.entity.Student;
+import com.studious.entity.Teacher;
+import com.studious.ultils.Auth;
+import com.studious.ultils.MsgBox;
+import java.awt.Frame;
+import static java.lang.ProcessBuilder.Redirect.to;
+import java.util.Properties;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
+
 /**
  *
  * @author SsuBii
  */
-public class ForgotPassword extends javax.swing.JFrame {
+public class ForgotPassword extends javax.swing.JDialog {
 
     /**
      * Creates new form Login
      */
-    public ForgotPassword() {
+    AccountDAO aDao = new AccountDAO();
+    TeacherDAO tDao = new TeacherDAO();
+    StudentDAO sDao = new StudentDAO();
+    
+    public ForgotPassword(Frame parent, boolean modal) {
+        super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
         setTitle("Studious - Quên mật khẩu");
@@ -29,12 +53,12 @@ public class ForgotPassword extends javax.swing.JFrame {
         lblTitle = new javax.swing.JLabel();
         lblNameAccount = new javax.swing.JLabel();
         lblPassword = new javax.swing.JLabel();
-        txtNameAccount = new javax.swing.JTextField();
+        txtUsername = new javax.swing.JTextField();
         btnConfirm = new javax.swing.JButton();
         btnBack = new javax.swing.JButton();
         txtEmail = new javax.swing.JTextField();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
         setResizable(false);
 
@@ -52,21 +76,31 @@ public class ForgotPassword extends javax.swing.JFrame {
         lblPassword.setFont(new java.awt.Font("Inter", 0, 18)); // NOI18N
         lblPassword.setText("Email");
 
-        txtNameAccount.setBackground(new java.awt.Color(217, 217, 217));
-        txtNameAccount.setFont(new java.awt.Font("Inter", 0, 14)); // NOI18N
-        txtNameAccount.setText("PS25468");
+        txtUsername.setBackground(new java.awt.Color(217, 217, 217));
+        txtUsername.setFont(new java.awt.Font("Inter", 0, 14)); // NOI18N
+        txtUsername.setText("GV25579");
 
         btnConfirm.setBackground(new java.awt.Color(232, 255, 183));
         btnConfirm.setFont(new java.awt.Font("Inter", 0, 18)); // NOI18N
         btnConfirm.setText("Xác nhận");
+        btnConfirm.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnConfirmActionPerformed(evt);
+            }
+        });
 
         btnBack.setBackground(new java.awt.Color(232, 255, 183));
         btnBack.setFont(new java.awt.Font("Inter", 0, 18)); // NOI18N
         btnBack.setText("Quay lại");
+        btnBack.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBackActionPerformed(evt);
+            }
+        });
 
         txtEmail.setBackground(new java.awt.Color(217, 217, 217));
         txtEmail.setFont(new java.awt.Font("Inter", 0, 14)); // NOI18N
-        txtEmail.setText("danhthps25468@fpt.edu.vn");
+        txtEmail.setText("nguyenvansi2l3@gmail.com");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -83,7 +117,7 @@ public class ForgotPassword extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblPassword)
                             .addComponent(lblNameAccount)
-                            .addComponent(txtNameAccount, javax.swing.GroupLayout.PREFERRED_SIZE, 460, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 460, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(btnConfirm, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(62, 62, 62)
@@ -100,12 +134,12 @@ public class ForgotPassword extends javax.swing.JFrame {
                 .addGap(55, 55, 55)
                 .addComponent(lblNameAccount)
                 .addGap(18, 18, 18)
-                .addComponent(txtNameAccount, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(27, 27, 27)
                 .addComponent(lblPassword)
                 .addGap(18, 18, 18)
                 .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(65, 65, 65)
+                .addGap(49, 49, 49)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnConfirm, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -124,6 +158,14 @@ public class ForgotPassword extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_btnBackActionPerformed
+
+    private void btnConfirmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmActionPerformed
+        getPass();
+    }//GEN-LAST:event_btnConfirmActionPerformed
 
     /**
      * @param args the command line arguments
@@ -156,7 +198,14 @@ public class ForgotPassword extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ForgotPassword().setVisible(true);
+                ForgotPassword dialog = new ForgotPassword(new javax.swing.JFrame(), true);
+                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
+                    @Override
+                    public void windowClosing(java.awt.event.WindowEvent e) {
+                        System.exit(0);
+                    }
+                });
+                dialog.setVisible(true);
             }
         });
     }
@@ -170,6 +219,82 @@ public class ForgotPassword extends javax.swing.JFrame {
     private javax.swing.JLabel lblPassword;
     private javax.swing.JLabel lblTitle;
     private javax.swing.JTextField txtEmail;
-    private javax.swing.JTextField txtNameAccount;
+    private javax.swing.JTextField txtUsername;
     // End of variables declaration//GEN-END:variables
+
+    private String getEmailOfAcc(int index, String key) {
+        String email = "";
+        if (index == 1) {
+            MsgBox.alert(this, "Danh tạo dùm tui cái bảng ADMIN nha");
+        } else if (index == 2) {
+            Teacher entity = tDao.selectById(key);
+            email = entity.getEmail();
+        } else {
+            Student entity = sDao.selectById(key);
+            email = entity.getEmail();
+        }
+        return email;
+    }
+    
+    private void updateAccount(Account entity) {
+        aDao.update(entity);
+    }
+    
+    private int getCode() {
+        return (int) (Math.random() * (999999 - 100000 + 1) + 100000);
+    }
+    
+    private void getPass() {
+        String username = txtUsername.getText();
+        String email = txtEmail.getText().trim();
+        final String from = "nguyenvansitqt2k3@gmail.com";
+        final String passMail = "caetrjhsiwhygemm";
+        Account acc = aDao.selectById(username);
+        
+        if (acc == null) {
+            MsgBox.alert(this, "Tên tài khoản không đúng");
+        } else {
+            String mailOfAcc = getEmailOfAcc(acc.getRole(), username);
+            if (mailOfAcc.equals(email)) {
+                Properties p = new Properties();
+                p.put("mail.smtp.auth", "true");
+                p.put("mail.smtp.starttls.enable", "true");
+                p.put("mail.smtp.host", "smtp.gmail.com");
+                p.put("mail.smtp.port", 587);
+                
+                Session session = Session.getInstance(p,
+                        new javax.mail.Authenticator() {
+                    @Override
+                    protected PasswordAuthentication getPasswordAuthentication() {
+                        return new PasswordAuthentication(from, passMail);
+                    }
+                });
+                try {
+                    int code = getCode();
+                    
+                    Message message = new MimeMessage(session);
+                    
+                    message.setFrom(new InternetAddress(from));
+                    
+                    message.setRecipient(Message.RecipientType.TO, new InternetAddress(email));
+                    
+                    message.setSubject("Studious - Mật khẩu mới");
+                    
+                    message.setText("Xin chào,\n"
+                            + "Chúng tôi đã nhận được yêu cầu đặt lại mật khẩu Studious của bạn.\n"
+                            + "Mật khẩu mới sau đây:\n"
+                            + code
+                            + "\n Bạn nên thay đổi lại mật khẩu cho mình để bảo đảm an toàn cho tài khoản.");
+                    Transport.send(message);
+                    
+                    acc.setPassword(String.valueOf(code));
+                    updateAccount(acc);
+                    
+                    MsgBox.alert(this, "Chúng tôi đã gửi mật khẩu mới đến email của bạn");
+                } catch (MessagingException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        }
+    }
 }

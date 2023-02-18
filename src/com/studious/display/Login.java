@@ -1,5 +1,10 @@
 package com.studious.display;
 
+import com.studious.DAO.AccountDAO;
+import com.studious.entity.Account;
+import com.studious.ultils.Auth;
+import com.studious.ultils.MsgBox;
+
 /**
  *
  * @author SsuBii
@@ -9,6 +14,8 @@ public class Login extends javax.swing.JFrame {
     /**
      * Creates new form Login
      */
+    AccountDAO dao = new AccountDAO();
+
     public Login() {
         initComponents();
         setLocationRelativeTo(null);
@@ -29,7 +36,7 @@ public class Login extends javax.swing.JFrame {
         lblTitle = new javax.swing.JLabel();
         lblNameAccount = new javax.swing.JLabel();
         lblPassword = new javax.swing.JLabel();
-        txtNameAccount = new javax.swing.JTextField();
+        txtUsername = new javax.swing.JTextField();
         txtPassword = new javax.swing.JPasswordField();
         btnLogin = new javax.swing.JButton();
         btnEnd = new javax.swing.JButton();
@@ -53,25 +60,50 @@ public class Login extends javax.swing.JFrame {
         lblPassword.setFont(new java.awt.Font("Inter", 0, 18)); // NOI18N
         lblPassword.setText("Mật khẩu:");
 
-        txtNameAccount.setBackground(new java.awt.Color(217, 217, 217));
-        txtNameAccount.setFont(new java.awt.Font("Inter", 0, 14)); // NOI18N
-        txtNameAccount.setText("PS25579");
+        txtUsername.setBackground(new java.awt.Color(217, 217, 217));
+        txtUsername.setFont(new java.awt.Font("Inter", 0, 14)); // NOI18N
+        txtUsername.setText("AD25579");
+        txtUsername.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtUsernameActionPerformed(evt);
+            }
+        });
 
         txtPassword.setBackground(new java.awt.Color(217, 217, 217));
         txtPassword.setFont(new java.awt.Font("Inter", 0, 14)); // NOI18N
-        txtPassword.setText("jPasswordField1");
+        txtPassword.setText("123");
+        txtPassword.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtPasswordActionPerformed(evt);
+            }
+        });
 
         btnLogin.setBackground(new java.awt.Color(232, 255, 183));
         btnLogin.setFont(new java.awt.Font("Inter", 0, 18)); // NOI18N
         btnLogin.setText("Đăng nhập");
+        btnLogin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLoginActionPerformed(evt);
+            }
+        });
 
         btnEnd.setBackground(new java.awt.Color(232, 255, 183));
         btnEnd.setFont(new java.awt.Font("Inter", 0, 18)); // NOI18N
         btnEnd.setText("Kết thúc");
+        btnEnd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEndActionPerformed(evt);
+            }
+        });
 
         lblForgotPass.setFont(new java.awt.Font("Inter", 0, 18)); // NOI18N
         lblForgotPass.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/studious/icons/DMK - padlock.png"))); // NOI18N
         lblForgotPass.setText("Quên mật khẩu?");
+        lblForgotPass.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblForgotPassMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -88,7 +120,7 @@ public class Login extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblPassword)
                             .addComponent(lblNameAccount)
-                            .addComponent(txtNameAccount, javax.swing.GroupLayout.PREFERRED_SIZE, 460, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 460, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                 .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 460, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
@@ -108,7 +140,7 @@ public class Login extends javax.swing.JFrame {
                 .addGap(55, 55, 55)
                 .addComponent(lblNameAccount)
                 .addGap(18, 18, 18)
-                .addComponent(txtNameAccount, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(27, 27, 27)
                 .addComponent(lblPassword)
                 .addGap(18, 18, 18)
@@ -136,6 +168,26 @@ public class Login extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnEndActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEndActionPerformed
+        End();
+    }//GEN-LAST:event_btnEndActionPerformed
+
+    private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
+        Login();
+    }//GEN-LAST:event_btnLoginActionPerformed
+
+    private void lblForgotPassMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblForgotPassMouseClicked
+        openForgotPassForm();
+    }//GEN-LAST:event_lblForgotPassMouseClicked
+
+    private void txtUsernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUsernameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtUsernameActionPerformed
+
+    private void txtPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPasswordActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtPasswordActionPerformed
 
     /**
      * @param args the command line arguments
@@ -181,7 +233,51 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JLabel lblNameAccount;
     private javax.swing.JLabel lblPassword;
     private javax.swing.JLabel lblTitle;
-    private javax.swing.JTextField txtNameAccount;
     private javax.swing.JPasswordField txtPassword;
+    private javax.swing.JTextField txtUsername;
     // End of variables declaration//GEN-END:variables
+
+    private void Login() {
+        String username = txtUsername.getText();
+        String pass = new String(txtPassword.getPassword());
+        Account acc = dao.selectById(username);
+        if (acc == null) {
+            MsgBox.alert(this, "Tên tài khoản không đúng");
+        } else {
+            if (acc.isStatus()) {
+                if (acc.getPassword().equals(pass)) {
+                    MsgBox.alert(this, "Đăng nhập thành công");
+                    int index = acc.getRole();
+                    Auth.user = acc;
+                    openMainForm(index);
+                } else {
+                    MsgBox.alert(this, "Mật khẩu không đúng");
+                }
+            } else {
+                MsgBox.alert(this, "Tài khoản của bạn đã bị khóa");
+            }
+        }
+    }
+
+    private void openMainForm(int index) {
+        if (index == 1 || index == 2) {
+            MainWindow main = new MainWindow();
+            main.setVisible(true);
+        } else {
+            MainWindowStudents main = new MainWindowStudents();
+            main.setVisible(true);
+        }
+        this.dispose();
+    }
+
+    private void openForgotPassForm() {
+        ForgotPassword fg = new ForgotPassword(this, true);
+        fg.setVisible(true);
+    }
+
+    private void End() {
+        if (MsgBox.confirm(this, "Bạn muốn đóng ứng dụng ?")) {
+            System.exit(0);
+        }
+    }
 }
