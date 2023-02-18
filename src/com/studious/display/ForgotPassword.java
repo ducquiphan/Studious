@@ -37,6 +37,7 @@ public class ForgotPassword extends javax.swing.JDialog {
         initComponents();
         setLocationRelativeTo(null);
         setTitle("Studious - Quên mật khẩu");
+        this.getRootPane().setDefaultButton(btnConfirm);
     }
 
     /**

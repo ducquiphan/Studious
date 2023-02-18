@@ -74,6 +74,11 @@ public class Login extends javax.swing.JFrame {
                 txtUsernameActionPerformed(evt);
             }
         });
+        txtUsername.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtUsernameKeyPressed(evt);
+            }
+        });
 
         txtPassword.setBackground(new java.awt.Color(217, 217, 217));
         txtPassword.setFont(new java.awt.Font("Inter", 0, 14)); // NOI18N
@@ -81,6 +86,11 @@ public class Login extends javax.swing.JFrame {
         txtPassword.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtPasswordActionPerformed(evt);
+            }
+        });
+        txtPassword.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtPasswordKeyPressed(evt);
             }
         });
 
@@ -209,10 +219,21 @@ public class Login extends javax.swing.JFrame {
 
     private void formKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyPressed
         // TODO add your handling code here:
+    }//GEN-LAST:event_formKeyPressed
+
+    private void txtUsernameKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtUsernameKeyPressed
+        // TODO add your handling code here:
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             login();
         }
-    }//GEN-LAST:event_formKeyPressed
+    }//GEN-LAST:event_txtUsernameKeyPressed
+
+    private void txtPasswordKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPasswordKeyPressed
+        // TODO add your handling code here:
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            login();
+        }
+    }//GEN-LAST:event_txtPasswordKeyPressed
 
     /**
      * @param args the command line arguments

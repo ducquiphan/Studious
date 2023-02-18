@@ -12,6 +12,7 @@ public class Welcome extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null);
         setTitle("Studious");
+        this.getRootPane().setDefaultButton(btnWelcome);
 
     }
 
