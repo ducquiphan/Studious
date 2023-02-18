@@ -306,11 +306,14 @@ public class Login extends javax.swing.JFrame {
     }
 
     private void openMainForm(int index) {
-        if (index == 1 || index == 2) {
+        if (index == 1 ) {
             MainWindow main = new MainWindow();
             main.setVisible(true);
-        } else {
+        } else if (index == 3){
             MainWindowStudents main = new MainWindowStudents();
+            main.setVisible(true);
+        } else {
+            MainWindowTeachers main = new MainWindowTeachers();
             main.setVisible(true);
         }
         this.dispose();
