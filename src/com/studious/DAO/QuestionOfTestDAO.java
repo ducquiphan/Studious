@@ -17,8 +17,10 @@ public class QuestionOfTestDAO extends StudiousDAO<QuestionOfTest, Integer> {
     final String DELETE_SQL = "DELETE FROM CAUHOIBAITHI WHERE MaCHBT = ?";
     final String SELECTALL_SQL = "SELECT * FROM CAUHOIBAITHI";
     final String SELECTBYID_SQL = "SELECT * FROM CAUHOIBAITHI WHERE MaCHBT = ?";
+    final String SELECTBYTESTID_SQL = "SELECT * FROM CAUHOIBAITHI WHERE MaBThi = ?";
 
     @Override
+
     public void insert(QuestionOfTest entity) {
         JdbcHelper.update(INSERT_SQL, entity.getQuestionOfTestID(), entity.getQuestionID(),
                 entity.getQuestionID());
@@ -45,6 +47,11 @@ public class QuestionOfTestDAO extends StudiousDAO<QuestionOfTest, Integer> {
             return null;
         }
         return list.get(0);
+    }
+
+    public List<QuestionOfTest> selectByTestId(Integer key) {
+        List<QuestionOfTest> list = selectSql(SELECTBYTESTID_SQL, key);
+        return list;
     }
 
     @Override
