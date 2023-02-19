@@ -2,7 +2,7 @@
 
 <Form version="1.2" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.DialogFormInfo">
   <NonVisualComponents>
-    <Component class="javax.swing.ButtonGroup" name="buttonGroup1">
+    <Component class="javax.swing.ButtonGroup" name="grChoose">
     </Component>
   </NonVisualComponents>
   <Properties>
@@ -32,12 +32,16 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="pnlBackground" alignment="0" max="32767" attributes="0"/>
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="pnlBackground" max="32767" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+          </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="0" attributes="0">
+          <Group type="102" alignment="1" attributes="0">
               <Component id="pnlBackground" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
           </Group>
@@ -56,31 +60,38 @@
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" attributes="0">
-                  <EmptySpace min="-2" pref="201" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="195" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="0" attributes="0">
+                      <Group type="102" attributes="0">
+                          <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
                           <Component id="lblDoneQuestion" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="32767" attributes="0"/>
-                          <Group type="103" groupAlignment="1" attributes="0">
-                              <Component id="lblTime" min="-2" max="-2" attributes="0"/>
-                              <Component id="btnEndTest" min="-2" pref="140" max="-2" attributes="0"/>
-                          </Group>
+                          <Component id="btnEndTest" min="-2" pref="140" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="52" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
                           <Component id="lblLogo" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="72" max="-2" attributes="0"/>
-                          <Component id="lblTitle" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace max="32767" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="102" attributes="0">
+                                  <EmptySpace min="-2" pref="72" max="-2" attributes="0"/>
+                                  <Component id="lblTitle" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="32767" attributes="0"/>
+                              </Group>
+                              <Group type="102" alignment="1" attributes="0">
+                                  <EmptySpace max="32767" attributes="0"/>
+                                  <Component id="lblTime" min="-2" pref="54" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="96" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
                       </Group>
                   </Group>
               </Group>
               <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="43" max="-2" attributes="0"/>
                   <Component id="pnlChooseAnswer" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="pnlContent" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="0" pref="46" max="32767" attributes="0"/>
+                  <EmptySpace min="0" pref="31" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -112,7 +123,7 @@
                       <Component id="pnlChooseAnswer" max="32767" attributes="0"/>
                       <Component id="pnlContent" max="32767" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="50" max="32767" attributes="0"/>
+                  <EmptySpace pref="18" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -174,7 +185,7 @@
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="33" green="0" red="ff" type="rgb"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="60:00"/>
+            <Property name="text" type="java.lang.String" value="00:00"/>
           </Properties>
         </Component>
         <Container class="javax.swing.JPanel" name="pnlContent">
@@ -231,6 +242,9 @@
                     </Property>
                     <Property name="text" type="java.lang.String" value="1"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn1ActionPerformed"/>
+                  </Events>
                 </Component>
                 <Component class="javax.swing.JButton" name="btn2">
                   <Properties>
@@ -239,6 +253,9 @@
                     </Property>
                     <Property name="text" type="java.lang.String" value="2"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn2ActionPerformed"/>
+                  </Events>
                 </Component>
                 <Component class="javax.swing.JButton" name="btn3">
                   <Properties>
@@ -247,6 +264,9 @@
                     </Property>
                     <Property name="text" type="java.lang.String" value="3"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn3ActionPerformed"/>
+                  </Events>
                 </Component>
                 <Component class="javax.swing.JButton" name="btn4">
                   <Properties>
@@ -255,6 +275,9 @@
                     </Property>
                     <Property name="text" type="java.lang.String" value="4"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn4ActionPerformed"/>
+                  </Events>
                 </Component>
                 <Component class="javax.swing.JButton" name="btn5">
                   <Properties>
@@ -263,6 +286,9 @@
                     </Property>
                     <Property name="text" type="java.lang.String" value="5"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn5ActionPerformed"/>
+                  </Events>
                 </Component>
                 <Component class="javax.swing.JButton" name="btn6">
                   <Properties>
@@ -271,6 +297,9 @@
                     </Property>
                     <Property name="text" type="java.lang.String" value="6"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn6ActionPerformed"/>
+                  </Events>
                 </Component>
                 <Component class="javax.swing.JButton" name="btn7">
                   <Properties>
@@ -287,6 +316,9 @@
                     </Property>
                     <Property name="text" type="java.lang.String" value="8"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn8ActionPerformed"/>
+                  </Events>
                 </Component>
                 <Component class="javax.swing.JButton" name="btn9">
                   <Properties>
@@ -295,6 +327,9 @@
                     </Property>
                     <Property name="text" type="java.lang.String" value="9"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn9ActionPerformed"/>
+                  </Events>
                 </Component>
                 <Component class="javax.swing.JButton" name="btn10">
                   <Properties>
@@ -303,6 +338,9 @@
                     </Property>
                     <Property name="text" type="java.lang.String" value="10"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn10ActionPerformed"/>
+                  </Events>
                 </Component>
                 <Component class="javax.swing.JButton" name="btn11">
                   <Properties>
@@ -311,6 +349,9 @@
                     </Property>
                     <Property name="text" type="java.lang.String" value="11"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn11ActionPerformed"/>
+                  </Events>
                 </Component>
                 <Component class="javax.swing.JButton" name="btn12">
                   <Properties>
@@ -319,6 +360,9 @@
                     </Property>
                     <Property name="text" type="java.lang.String" value="12"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn12ActionPerformed"/>
+                  </Events>
                 </Component>
                 <Component class="javax.swing.JButton" name="btn13">
                   <Properties>
@@ -327,6 +371,9 @@
                     </Property>
                     <Property name="text" type="java.lang.String" value="13"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn13ActionPerformed"/>
+                  </Events>
                 </Component>
                 <Component class="javax.swing.JButton" name="btn14">
                   <Properties>
@@ -335,6 +382,9 @@
                     </Property>
                     <Property name="text" type="java.lang.String" value="14"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn14ActionPerformed"/>
+                  </Events>
                 </Component>
                 <Component class="javax.swing.JButton" name="btn15">
                   <Properties>
@@ -343,6 +393,9 @@
                     </Property>
                     <Property name="text" type="java.lang.String" value="15"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn15ActionPerformed"/>
+                  </Events>
                 </Component>
                 <Component class="javax.swing.JButton" name="btn16">
                   <Properties>
@@ -351,6 +404,9 @@
                     </Property>
                     <Property name="text" type="java.lang.String" value="16"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn16ActionPerformed"/>
+                  </Events>
                 </Component>
                 <Component class="javax.swing.JButton" name="btn17">
                   <Properties>
@@ -359,6 +415,9 @@
                     </Property>
                     <Property name="text" type="java.lang.String" value="17"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn17ActionPerformed"/>
+                  </Events>
                 </Component>
                 <Component class="javax.swing.JButton" name="btn18">
                   <Properties>
@@ -367,6 +426,9 @@
                     </Property>
                     <Property name="text" type="java.lang.String" value="18"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn18ActionPerformed"/>
+                  </Events>
                 </Component>
                 <Component class="javax.swing.JButton" name="btn19">
                   <Properties>
@@ -375,6 +437,9 @@
                     </Property>
                     <Property name="text" type="java.lang.String" value="19"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn19ActionPerformed"/>
+                  </Events>
                 </Component>
                 <Component class="javax.swing.JButton" name="btn20">
                   <Properties>
@@ -383,6 +448,9 @@
                     </Property>
                     <Property name="text" type="java.lang.String" value="20"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn20ActionPerformed"/>
+                  </Events>
                 </Component>
                 <Component class="javax.swing.JButton" name="btn21">
                   <Properties>
@@ -391,6 +459,9 @@
                     </Property>
                     <Property name="text" type="java.lang.String" value="21"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn21ActionPerformed"/>
+                  </Events>
                 </Component>
                 <Component class="javax.swing.JButton" name="btn22">
                   <Properties>
@@ -399,6 +470,9 @@
                     </Property>
                     <Property name="text" type="java.lang.String" value="22"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn22ActionPerformed"/>
+                  </Events>
                 </Component>
                 <Component class="javax.swing.JButton" name="btn23">
                   <Properties>
@@ -407,6 +481,9 @@
                     </Property>
                     <Property name="text" type="java.lang.String" value="23"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn23ActionPerformed"/>
+                  </Events>
                 </Component>
                 <Component class="javax.swing.JButton" name="btn24">
                   <Properties>
@@ -415,6 +492,9 @@
                     </Property>
                     <Property name="text" type="java.lang.String" value="24"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn24ActionPerformed"/>
+                  </Events>
                 </Component>
                 <Component class="javax.swing.JButton" name="btn25">
                   <Properties>
@@ -423,6 +503,9 @@
                     </Property>
                     <Property name="text" type="java.lang.String" value="25"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn25ActionPerformed"/>
+                  </Events>
                 </Component>
                 <Component class="javax.swing.JButton" name="btn26">
                   <Properties>
@@ -431,6 +514,9 @@
                     </Property>
                     <Property name="text" type="java.lang.String" value="26"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn26ActionPerformed"/>
+                  </Events>
                 </Component>
                 <Component class="javax.swing.JButton" name="btn27">
                   <Properties>
@@ -439,6 +525,9 @@
                     </Property>
                     <Property name="text" type="java.lang.String" value="27"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn27ActionPerformed"/>
+                  </Events>
                 </Component>
                 <Component class="javax.swing.JButton" name="btn28">
                   <Properties>
@@ -447,6 +536,9 @@
                     </Property>
                     <Property name="text" type="java.lang.String" value="28"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn28ActionPerformed"/>
+                  </Events>
                 </Component>
                 <Component class="javax.swing.JButton" name="btn29">
                   <Properties>
@@ -455,6 +547,9 @@
                     </Property>
                     <Property name="text" type="java.lang.String" value="29"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn29ActionPerformed"/>
+                  </Events>
                 </Component>
                 <Component class="javax.swing.JButton" name="btn30">
                   <Properties>
@@ -463,6 +558,9 @@
                     </Property>
                     <Property name="text" type="java.lang.String" value="30"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn30ActionPerformed"/>
+                  </Events>
                 </Component>
                 <Component class="javax.swing.JButton" name="btn31">
                   <Properties>
@@ -471,6 +569,9 @@
                     </Property>
                     <Property name="text" type="java.lang.String" value="31"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn31ActionPerformed"/>
+                  </Events>
                 </Component>
                 <Component class="javax.swing.JButton" name="btn32">
                   <Properties>
@@ -479,6 +580,9 @@
                     </Property>
                     <Property name="text" type="java.lang.String" value="32"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn32ActionPerformed"/>
+                  </Events>
                 </Component>
                 <Component class="javax.swing.JButton" name="btn33">
                   <Properties>
@@ -487,6 +591,9 @@
                     </Property>
                     <Property name="text" type="java.lang.String" value="33"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn33ActionPerformed"/>
+                  </Events>
                 </Component>
                 <Component class="javax.swing.JButton" name="btn34">
                   <Properties>
@@ -495,6 +602,9 @@
                     </Property>
                     <Property name="text" type="java.lang.String" value="34"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn34ActionPerformed"/>
+                  </Events>
                 </Component>
                 <Component class="javax.swing.JButton" name="btn35">
                   <Properties>
@@ -503,6 +613,9 @@
                     </Property>
                     <Property name="text" type="java.lang.String" value="35"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn35ActionPerformed"/>
+                  </Events>
                 </Component>
                 <Component class="javax.swing.JButton" name="btn36">
                   <Properties>
@@ -511,6 +624,9 @@
                     </Property>
                     <Property name="text" type="java.lang.String" value="36"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn36ActionPerformed"/>
+                  </Events>
                 </Component>
                 <Component class="javax.swing.JButton" name="btn37">
                   <Properties>
@@ -519,6 +635,9 @@
                     </Property>
                     <Property name="text" type="java.lang.String" value="37"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn37ActionPerformed"/>
+                  </Events>
                 </Component>
                 <Component class="javax.swing.JButton" name="btn38">
                   <Properties>
@@ -527,6 +646,9 @@
                     </Property>
                     <Property name="text" type="java.lang.String" value="38"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn38ActionPerformed"/>
+                  </Events>
                 </Component>
                 <Component class="javax.swing.JButton" name="btn39">
                   <Properties>
@@ -535,6 +657,9 @@
                     </Property>
                     <Property name="text" type="java.lang.String" value="39"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn39ActionPerformed"/>
+                  </Events>
                 </Component>
                 <Component class="javax.swing.JButton" name="btn40">
                   <Properties>
@@ -543,6 +668,9 @@
                     </Property>
                     <Property name="text" type="java.lang.String" value="40"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn40ActionPerformed"/>
+                  </Events>
                 </Component>
               </SubComponents>
             </Container>
@@ -556,32 +684,27 @@
               <Layout>
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="1" attributes="0">
-                          <EmptySpace max="32767" attributes="0"/>
-                          <Component id="lblTitleTest" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="289" max="-2" attributes="0"/>
-                      </Group>
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="lblShowAnsD" min="-2" max="-2" attributes="0"/>
                               <Component id="lblShowAnsC" min="-2" max="-2" attributes="0"/>
                               <Component id="lblShowAnsB" min="-2" max="-2" attributes="0"/>
-                              <Component id="lblQuestionNumber" min="-2" pref="698" max="-2" attributes="0"/>
                               <Component id="lblShowAnsA" min="-2" max="-2" attributes="0"/>
+                              <Component id="lblQuestionNumber" alignment="0" min="-2" pref="696" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace pref="25" max="32767" attributes="0"/>
+                          <EmptySpace pref="27" max="32767" attributes="0"/>
                       </Group>
+                      <Component id="lblTitleTest" alignment="0" max="32767" attributes="0"/>
                   </Group>
                 </DimensionLayout>
                 <DimensionLayout dim="1">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace max="-2" attributes="0"/>
                           <Component id="lblTitleTest" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Component id="lblQuestionNumber" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+                          <Component id="lblQuestionNumber" min="-2" pref="99" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
                           <Component id="lblShowAnsA" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Component id="lblShowAnsB" min="-2" max="-2" attributes="0"/>
@@ -589,7 +712,7 @@
                           <Component id="lblShowAnsC" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Component id="lblShowAnsD" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace pref="152" max="32767" attributes="0"/>
+                          <EmptySpace pref="87" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -600,7 +723,9 @@
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Segoe UI" size="24" style="0"/>
                     </Property>
+                    <Property name="horizontalAlignment" type="int" value="0"/>
                     <Property name="text" type="java.lang.String" value="TI&#xca;U &#x110;&#x1ec0; B&#xc0;I THI"/>
+                    <Property name="horizontalTextPosition" type="int" value="0"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="lblQuestionNumber">
@@ -708,33 +833,39 @@
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" attributes="0">
-                              <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
-                              <Component id="lblChooseAns" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="1" attributes="0">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="btnPrev" min="-2" pref="95" max="-2" attributes="0"/>
+                              <Component id="btnNext" min="-2" pref="94" max="-2" attributes="0"/>
                           </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="rdoChooseAnsC" min="-2" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                      <Component id="rdoChooseAnsA" max="32767" attributes="0"/>
-                                      <Component id="rdoChooseAnsB" max="32767" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="102" alignment="0" attributes="0">
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="lblChooseAns" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <EmptySpace min="-2" pref="47" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="rdoChooseAnsC" min="-2" max="-2" attributes="0"/>
+                                      <Component id="rdoChooseAnsD" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
+                                          <Component id="rdoChooseAnsB" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="rdoChooseAnsA" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      </Group>
                                   </Group>
-                                  <Component id="rdoChooseAnsD" alignment="0" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
-                      <EmptySpace pref="31" max="32767" attributes="0"/>
+                      <EmptySpace pref="29" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="59" max="-2" attributes="0"/>
                       <Component id="lblChooseAns" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="76" max="-2" attributes="0"/>
                       <Component id="rdoChooseAnsA" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="rdoChooseAnsB" min="-2" max="-2" attributes="0"/>
@@ -742,6 +873,10 @@
                       <Component id="rdoChooseAnsC" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="rdoChooseAnsD" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="65" max="-2" attributes="0"/>
+                      <Component id="btnPrev" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="btnNext" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
@@ -762,14 +897,17 @@
                   <Color blue="e5" green="e5" red="e5" type="rgb"/>
                 </Property>
                 <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
-                  <ComponentRef name="buttonGroup1"/>
+                  <ComponentRef name="grChoose"/>
                 </Property>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Segoe UI" size="16" style="0"/>
                 </Property>
                 <Property name="selected" type="boolean" value="true"/>
-                <Property name="text" type="java.lang.String" value="A. &#x110;&#xe1;p &#xe1;n 1"/>
+                <Property name="text" type="java.lang.String" value="A"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rdoChooseAnsAActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JRadioButton" name="rdoChooseAnsB">
               <Properties>
@@ -777,13 +915,16 @@
                   <Color blue="e5" green="e5" red="e5" type="rgb"/>
                 </Property>
                 <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
-                  <ComponentRef name="buttonGroup1"/>
+                  <ComponentRef name="grChoose"/>
                 </Property>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Segoe UI" size="16" style="0"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="B. &#x110;&#xe1;p &#xe1;n 2"/>
+                <Property name="text" type="java.lang.String" value="B"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rdoChooseAnsBActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JRadioButton" name="rdoChooseAnsC">
               <Properties>
@@ -791,13 +932,16 @@
                   <Color blue="e5" green="e5" red="e5" type="rgb"/>
                 </Property>
                 <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
-                  <ComponentRef name="buttonGroup1"/>
+                  <ComponentRef name="grChoose"/>
                 </Property>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Segoe UI" size="16" style="0"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="C. &#x110;&#xe1;p &#xe1;n 3"/>
+                <Property name="text" type="java.lang.String" value="C"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rdoChooseAnsCActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JRadioButton" name="rdoChooseAnsD">
               <Properties>
@@ -805,13 +949,52 @@
                   <Color blue="e5" green="e5" red="e5" type="rgb"/>
                 </Property>
                 <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
-                  <ComponentRef name="buttonGroup1"/>
+                  <ComponentRef name="grChoose"/>
                 </Property>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Segoe UI" size="16" style="0"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="D. &#x110;&#xe1;p &#xe1;n 4"/>
+                <Property name="text" type="java.lang.String" value="D"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rdoChooseAnsDActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JButton" name="btnPrev">
+              <Properties>
+                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="0" green="66" red="0" type="rgb"/>
+                </Property>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Segoe UI" size="12" style="1"/>
+                </Property>
+                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="C&#xe2;u tr&#x1b0;&#x1edb;c"/>
+                <Property name="focusable" type="boolean" value="false"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnPrevActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JButton" name="btnNext">
+              <Properties>
+                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="0" green="66" red="0" type="rgb"/>
+                </Property>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Segoe UI" size="12" style="1"/>
+                </Property>
+                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="C&#xe2;u ti&#x1ebf;p"/>
+                <Property name="focusable" type="boolean" value="false"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnNextActionPerformed"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>

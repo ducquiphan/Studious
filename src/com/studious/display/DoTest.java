@@ -1,8 +1,25 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/AWTForms/Dialog.java to edit this template
- */
 package com.studious.display;
+
+import com.studious.DAO.QuestionDAO;
+import com.studious.DAO.QuestionOfTestDAO;
+import com.studious.DAO.ResutlDAO;
+import com.studious.DAO.StudentDAO;
+import com.studious.DAO.TestDAO;
+import com.studious.entity.Question;
+import com.studious.entity.QuestionOfTest;
+import com.studious.entity.Result;
+import com.studious.entity.Student;
+import com.studious.entity.Test;
+import com.studious.utils.MsgBox;
+import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.JButton;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import javax.swing.Timer;
 
 /**
  *
@@ -17,6 +34,7 @@ public class DoTest extends java.awt.Dialog {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
+        init();
     }
 
     /**
@@ -27,7 +45,7 @@ public class DoTest extends java.awt.Dialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        buttonGroup1 = new javax.swing.ButtonGroup();
+        grChoose = new javax.swing.ButtonGroup();
         pnlBackground = new javax.swing.JPanel();
         lblLogo = new javax.swing.JLabel();
         lblTitle = new javax.swing.JLabel();
@@ -89,6 +107,8 @@ public class DoTest extends java.awt.Dialog {
         rdoChooseAnsB = new javax.swing.JRadioButton();
         rdoChooseAnsC = new javax.swing.JRadioButton();
         rdoChooseAnsD = new javax.swing.JRadioButton();
+        btnPrev = new javax.swing.JButton();
+        btnNext = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(232, 255, 183));
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -121,7 +141,7 @@ public class DoTest extends java.awt.Dialog {
 
         lblTime.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         lblTime.setForeground(new java.awt.Color(255, 0, 51));
-        lblTime.setText("60:00");
+        lblTime.setText("00:00");
 
         pnlContent.setBackground(new java.awt.Color(232, 255, 183));
 
@@ -130,26 +150,56 @@ public class DoTest extends java.awt.Dialog {
 
         btn1.setBackground(new java.awt.Color(229, 229, 229));
         btn1.setText("1");
+        btn1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn1ActionPerformed(evt);
+            }
+        });
         pnlButton.add(btn1);
 
         btn2.setBackground(new java.awt.Color(229, 229, 229));
         btn2.setText("2");
+        btn2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn2ActionPerformed(evt);
+            }
+        });
         pnlButton.add(btn2);
 
         btn3.setBackground(new java.awt.Color(229, 229, 229));
         btn3.setText("3");
+        btn3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn3ActionPerformed(evt);
+            }
+        });
         pnlButton.add(btn3);
 
         btn4.setBackground(new java.awt.Color(229, 229, 229));
         btn4.setText("4");
+        btn4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn4ActionPerformed(evt);
+            }
+        });
         pnlButton.add(btn4);
 
         btn5.setBackground(new java.awt.Color(229, 229, 229));
         btn5.setText("5");
+        btn5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn5ActionPerformed(evt);
+            }
+        });
         pnlButton.add(btn5);
 
         btn6.setBackground(new java.awt.Color(229, 229, 229));
         btn6.setText("6");
+        btn6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn6ActionPerformed(evt);
+            }
+        });
         pnlButton.add(btn6);
 
         btn7.setBackground(new java.awt.Color(229, 229, 229));
@@ -158,140 +208,307 @@ public class DoTest extends java.awt.Dialog {
 
         btn8.setBackground(new java.awt.Color(229, 229, 229));
         btn8.setText("8");
+        btn8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn8ActionPerformed(evt);
+            }
+        });
         pnlButton.add(btn8);
 
         btn9.setBackground(new java.awt.Color(229, 229, 229));
         btn9.setText("9");
+        btn9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn9ActionPerformed(evt);
+            }
+        });
         pnlButton.add(btn9);
 
         btn10.setBackground(new java.awt.Color(229, 229, 229));
         btn10.setText("10");
+        btn10.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn10ActionPerformed(evt);
+            }
+        });
         pnlButton.add(btn10);
 
         btn11.setBackground(new java.awt.Color(229, 229, 229));
         btn11.setText("11");
+        btn11.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn11ActionPerformed(evt);
+            }
+        });
         pnlButton.add(btn11);
 
         btn12.setBackground(new java.awt.Color(229, 229, 229));
         btn12.setText("12");
+        btn12.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn12ActionPerformed(evt);
+            }
+        });
         pnlButton.add(btn12);
 
         btn13.setBackground(new java.awt.Color(229, 229, 229));
         btn13.setText("13");
+        btn13.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn13ActionPerformed(evt);
+            }
+        });
         pnlButton.add(btn13);
 
         btn14.setBackground(new java.awt.Color(229, 229, 229));
         btn14.setText("14");
+        btn14.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn14ActionPerformed(evt);
+            }
+        });
         pnlButton.add(btn14);
 
         btn15.setBackground(new java.awt.Color(229, 229, 229));
         btn15.setText("15");
+        btn15.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn15ActionPerformed(evt);
+            }
+        });
         pnlButton.add(btn15);
 
         btn16.setBackground(new java.awt.Color(229, 229, 229));
         btn16.setText("16");
+        btn16.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn16ActionPerformed(evt);
+            }
+        });
         pnlButton.add(btn16);
 
         btn17.setBackground(new java.awt.Color(229, 229, 229));
         btn17.setText("17");
+        btn17.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn17ActionPerformed(evt);
+            }
+        });
         pnlButton.add(btn17);
 
         btn18.setBackground(new java.awt.Color(229, 229, 229));
         btn18.setText("18");
+        btn18.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn18ActionPerformed(evt);
+            }
+        });
         pnlButton.add(btn18);
 
         btn19.setBackground(new java.awt.Color(229, 229, 229));
         btn19.setText("19");
+        btn19.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn19ActionPerformed(evt);
+            }
+        });
         pnlButton.add(btn19);
 
         btn20.setBackground(new java.awt.Color(229, 229, 229));
         btn20.setText("20");
+        btn20.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn20ActionPerformed(evt);
+            }
+        });
         pnlButton.add(btn20);
 
         btn21.setBackground(new java.awt.Color(229, 229, 229));
         btn21.setText("21");
+        btn21.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn21ActionPerformed(evt);
+            }
+        });
         pnlButton.add(btn21);
 
         btn22.setBackground(new java.awt.Color(229, 229, 229));
         btn22.setText("22");
+        btn22.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn22ActionPerformed(evt);
+            }
+        });
         pnlButton.add(btn22);
 
         btn23.setBackground(new java.awt.Color(229, 229, 229));
         btn23.setText("23");
+        btn23.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn23ActionPerformed(evt);
+            }
+        });
         pnlButton.add(btn23);
 
         btn24.setBackground(new java.awt.Color(229, 229, 229));
         btn24.setText("24");
+        btn24.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn24ActionPerformed(evt);
+            }
+        });
         pnlButton.add(btn24);
 
         btn25.setBackground(new java.awt.Color(229, 229, 229));
         btn25.setText("25");
+        btn25.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn25ActionPerformed(evt);
+            }
+        });
         pnlButton.add(btn25);
 
         btn26.setBackground(new java.awt.Color(229, 229, 229));
         btn26.setText("26");
+        btn26.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn26ActionPerformed(evt);
+            }
+        });
         pnlButton.add(btn26);
 
         btn27.setBackground(new java.awt.Color(229, 229, 229));
         btn27.setText("27");
+        btn27.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn27ActionPerformed(evt);
+            }
+        });
         pnlButton.add(btn27);
 
         btn28.setBackground(new java.awt.Color(229, 229, 229));
         btn28.setText("28");
+        btn28.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn28ActionPerformed(evt);
+            }
+        });
         pnlButton.add(btn28);
 
         btn29.setBackground(new java.awt.Color(229, 229, 229));
         btn29.setText("29");
+        btn29.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn29ActionPerformed(evt);
+            }
+        });
         pnlButton.add(btn29);
 
         btn30.setBackground(new java.awt.Color(229, 229, 229));
         btn30.setText("30");
+        btn30.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn30ActionPerformed(evt);
+            }
+        });
         pnlButton.add(btn30);
 
         btn31.setBackground(new java.awt.Color(229, 229, 229));
         btn31.setText("31");
+        btn31.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn31ActionPerformed(evt);
+            }
+        });
         pnlButton.add(btn31);
 
         btn32.setBackground(new java.awt.Color(229, 229, 229));
         btn32.setText("32");
+        btn32.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn32ActionPerformed(evt);
+            }
+        });
         pnlButton.add(btn32);
 
         btn33.setBackground(new java.awt.Color(229, 229, 229));
         btn33.setText("33");
+        btn33.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn33ActionPerformed(evt);
+            }
+        });
         pnlButton.add(btn33);
 
         btn34.setBackground(new java.awt.Color(229, 229, 229));
         btn34.setText("34");
+        btn34.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn34ActionPerformed(evt);
+            }
+        });
         pnlButton.add(btn34);
 
         btn35.setBackground(new java.awt.Color(229, 229, 229));
         btn35.setText("35");
+        btn35.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn35ActionPerformed(evt);
+            }
+        });
         pnlButton.add(btn35);
 
         btn36.setBackground(new java.awt.Color(229, 229, 229));
         btn36.setText("36");
+        btn36.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn36ActionPerformed(evt);
+            }
+        });
         pnlButton.add(btn36);
 
         btn37.setBackground(new java.awt.Color(229, 229, 229));
         btn37.setText("37");
+        btn37.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn37ActionPerformed(evt);
+            }
+        });
         pnlButton.add(btn37);
 
         btn38.setBackground(new java.awt.Color(229, 229, 229));
         btn38.setText("38");
+        btn38.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn38ActionPerformed(evt);
+            }
+        });
         pnlButton.add(btn38);
 
         btn39.setBackground(new java.awt.Color(229, 229, 229));
         btn39.setText("39");
+        btn39.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn39ActionPerformed(evt);
+            }
+        });
         pnlButton.add(btn39);
 
         btn40.setBackground(new java.awt.Color(229, 229, 229));
         btn40.setText("40");
+        btn40.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn40ActionPerformed(evt);
+            }
+        });
         pnlButton.add(btn40);
 
         pnlShowQuestion.setBackground(new java.awt.Color(255, 255, 255));
 
         lblTitleTest.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        lblTitleTest.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblTitleTest.setText("TIÊU ĐỀ BÀI THI");
+        lblTitleTest.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         lblQuestionNumber.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         lblQuestionNumber.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
@@ -342,28 +559,24 @@ public class DoTest extends java.awt.Dialog {
         pnlShowQuestion.setLayout(pnlShowQuestionLayout);
         pnlShowQuestionLayout.setHorizontalGroup(
             pnlShowQuestionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlShowQuestionLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(lblTitleTest)
-                .addGap(289, 289, 289))
             .addGroup(pnlShowQuestionLayout.createSequentialGroup()
                 .addGap(25, 25, 25)
                 .addGroup(pnlShowQuestionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblShowAnsD, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblShowAnsC, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblShowAnsB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblQuestionNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 698, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblShowAnsA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(25, Short.MAX_VALUE))
+                    .addComponent(lblShowAnsA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblQuestionNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 696, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(27, Short.MAX_VALUE))
+            .addComponent(lblTitleTest, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         pnlShowQuestionLayout.setVerticalGroup(
             pnlShowQuestionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlShowQuestionLayout.createSequentialGroup()
-                .addContainerGap()
                 .addComponent(lblTitleTest)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(lblQuestionNumber, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
+                .addComponent(lblQuestionNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblShowAnsA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(lblShowAnsB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -371,7 +584,7 @@ public class DoTest extends java.awt.Dialog {
                 .addComponent(lblShowAnsC, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(lblShowAnsD, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(152, Short.MAX_VALUE))
+                .addContainerGap(87, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout pnlContentLayout = new javax.swing.GroupLayout(pnlContent);
@@ -401,51 +614,97 @@ public class DoTest extends java.awt.Dialog {
         lblChooseAns.setText("Chọn đáp án:");
 
         rdoChooseAnsA.setBackground(new java.awt.Color(229, 229, 229));
-        buttonGroup1.add(rdoChooseAnsA);
+        grChoose.add(rdoChooseAnsA);
         rdoChooseAnsA.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         rdoChooseAnsA.setSelected(true);
-        rdoChooseAnsA.setText("A. Đáp án 1");
+        rdoChooseAnsA.setText("A");
+        rdoChooseAnsA.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rdoChooseAnsAActionPerformed(evt);
+            }
+        });
 
         rdoChooseAnsB.setBackground(new java.awt.Color(229, 229, 229));
-        buttonGroup1.add(rdoChooseAnsB);
+        grChoose.add(rdoChooseAnsB);
         rdoChooseAnsB.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        rdoChooseAnsB.setText("B. Đáp án 2");
+        rdoChooseAnsB.setText("B");
+        rdoChooseAnsB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rdoChooseAnsBActionPerformed(evt);
+            }
+        });
 
         rdoChooseAnsC.setBackground(new java.awt.Color(229, 229, 229));
-        buttonGroup1.add(rdoChooseAnsC);
+        grChoose.add(rdoChooseAnsC);
         rdoChooseAnsC.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        rdoChooseAnsC.setText("C. Đáp án 3");
+        rdoChooseAnsC.setText("C");
+        rdoChooseAnsC.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rdoChooseAnsCActionPerformed(evt);
+            }
+        });
 
         rdoChooseAnsD.setBackground(new java.awt.Color(229, 229, 229));
-        buttonGroup1.add(rdoChooseAnsD);
+        grChoose.add(rdoChooseAnsD);
         rdoChooseAnsD.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        rdoChooseAnsD.setText("D. Đáp án 4");
+        rdoChooseAnsD.setText("D");
+        rdoChooseAnsD.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rdoChooseAnsDActionPerformed(evt);
+            }
+        });
+
+        btnPrev.setBackground(new java.awt.Color(0, 102, 0));
+        btnPrev.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnPrev.setForeground(new java.awt.Color(255, 255, 255));
+        btnPrev.setText("Câu trước");
+        btnPrev.setFocusable(false);
+        btnPrev.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPrevActionPerformed(evt);
+            }
+        });
+
+        btnNext.setBackground(new java.awt.Color(0, 102, 0));
+        btnNext.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnNext.setForeground(new java.awt.Color(255, 255, 255));
+        btnNext.setText("Câu tiếp");
+        btnNext.setFocusable(false);
+        btnNext.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNextActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout pnlChooseAnswerLayout = new javax.swing.GroupLayout(pnlChooseAnswer);
         pnlChooseAnswer.setLayout(pnlChooseAnswerLayout);
         pnlChooseAnswerLayout.setHorizontalGroup(
             pnlChooseAnswerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlChooseAnswerLayout.createSequentialGroup()
-                .addGroup(pnlChooseAnswerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pnlChooseAnswerLayout.createSequentialGroup()
-                        .addGap(20, 20, 20)
-                        .addComponent(lblChooseAns))
-                    .addGroup(pnlChooseAnswerLayout.createSequentialGroup()
-                        .addGap(40, 40, 40)
-                        .addGroup(pnlChooseAnswerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(rdoChooseAnsC)
-                            .addGroup(pnlChooseAnswerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(rdoChooseAnsA, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(rdoChooseAnsB, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addComponent(rdoChooseAnsD))))
-                .addContainerGap(31, Short.MAX_VALUE))
+                .addGroup(pnlChooseAnswerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(pnlChooseAnswerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(btnPrev, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnNext, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(pnlChooseAnswerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(pnlChooseAnswerLayout.createSequentialGroup()
+                            .addContainerGap()
+                            .addComponent(lblChooseAns))
+                        .addGroup(pnlChooseAnswerLayout.createSequentialGroup()
+                            .addGap(47, 47, 47)
+                            .addGroup(pnlChooseAnswerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(rdoChooseAnsC)
+                                .addComponent(rdoChooseAnsD)
+                                .addGroup(pnlChooseAnswerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(rdoChooseAnsB, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(rdoChooseAnsA, javax.swing.GroupLayout.Alignment.LEADING))))))
+                .addContainerGap(29, Short.MAX_VALUE))
         );
         pnlChooseAnswerLayout.setVerticalGroup(
             pnlChooseAnswerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlChooseAnswerLayout.createSequentialGroup()
-                .addGap(23, 23, 23)
+                .addGap(59, 59, 59)
                 .addComponent(lblChooseAns)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(76, 76, 76)
                 .addComponent(rdoChooseAnsA)
                 .addGap(18, 18, 18)
                 .addComponent(rdoChooseAnsB)
@@ -453,6 +712,10 @@ public class DoTest extends java.awt.Dialog {
                 .addComponent(rdoChooseAnsC)
                 .addGap(18, 18, 18)
                 .addComponent(rdoChooseAnsD)
+                .addGap(65, 65, 65)
+                .addComponent(btnPrev)
+                .addGap(18, 18, 18)
+                .addComponent(btnNext)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -461,26 +724,31 @@ public class DoTest extends java.awt.Dialog {
         pnlBackgroundLayout.setHorizontalGroup(
             pnlBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlBackgroundLayout.createSequentialGroup()
-                .addGap(201, 201, 201)
+                .addGap(195, 195, 195)
                 .addGroup(pnlBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnlBackgroundLayout.createSequentialGroup()
+                        .addGap(6, 6, 6)
                         .addComponent(lblDoneQuestion)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(pnlBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(lblTime)
-                            .addComponent(btnEndTest, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(btnEndTest, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(52, 52, 52))
                     .addGroup(pnlBackgroundLayout.createSequentialGroup()
                         .addComponent(lblLogo)
-                        .addGap(72, 72, 72)
-                        .addComponent(lblTitle)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addGroup(pnlBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(pnlBackgroundLayout.createSequentialGroup()
+                                .addGap(72, 72, 72)
+                                .addComponent(lblTitle)
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlBackgroundLayout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(lblTime, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(96, 96, 96))))))
             .addGroup(pnlBackgroundLayout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(43, 43, 43)
                 .addComponent(pnlChooseAnswer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(pnlContent, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 46, Short.MAX_VALUE))
+                .addGap(0, 31, Short.MAX_VALUE))
         );
         pnlBackgroundLayout.setVerticalGroup(
             pnlBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -504,18 +772,21 @@ public class DoTest extends java.awt.Dialog {
                 .addGroup(pnlBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(pnlChooseAnswer, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(pnlContent, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(50, Short.MAX_VALUE))
+                .addContainerGap(18, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pnlBackground, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(pnlBackground, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addComponent(pnlBackground, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
@@ -527,13 +798,196 @@ public class DoTest extends java.awt.Dialog {
      * Closes the dialog
      */
     private void closeDialog(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_closeDialog
-        setVisible(false);
-        dispose();
+        EndTest();
     }//GEN-LAST:event_closeDialog
 
     private void btnEndTestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEndTestActionPerformed
-        // TODO add your handling code here:
+        EndTest();
     }//GEN-LAST:event_btnEndTestActionPerformed
+
+    private void rdoChooseAnsAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdoChooseAnsAActionPerformed
+        updateAwsSelected();
+        setStatus();
+    }//GEN-LAST:event_rdoChooseAnsAActionPerformed
+
+    private void btn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn1ActionPerformed
+        selectedQuestion(1);
+    }//GEN-LAST:event_btn1ActionPerformed
+
+    private void btn2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn2ActionPerformed
+        selectedQuestion(2);
+    }//GEN-LAST:event_btn2ActionPerformed
+
+    private void btn3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn3ActionPerformed
+        selectedQuestion(3);
+    }//GEN-LAST:event_btn3ActionPerformed
+
+    private void rdoChooseAnsBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdoChooseAnsBActionPerformed
+        updateAwsSelected();
+        setStatus();
+    }//GEN-LAST:event_rdoChooseAnsBActionPerformed
+
+    private void rdoChooseAnsCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdoChooseAnsCActionPerformed
+        updateAwsSelected();
+        setStatus();
+    }//GEN-LAST:event_rdoChooseAnsCActionPerformed
+
+    private void rdoChooseAnsDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdoChooseAnsDActionPerformed
+        updateAwsSelected();
+        setStatus();
+    }//GEN-LAST:event_rdoChooseAnsDActionPerformed
+
+    private void btn4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn4ActionPerformed
+        selectedQuestion(4);
+    }//GEN-LAST:event_btn4ActionPerformed
+
+    private void btn5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn5ActionPerformed
+        selectedQuestion(5);
+    }//GEN-LAST:event_btn5ActionPerformed
+
+    private void btn6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn6ActionPerformed
+        selectedQuestion(7);
+    }//GEN-LAST:event_btn6ActionPerformed
+
+    private void btn8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn8ActionPerformed
+        selectedQuestion(8);
+    }//GEN-LAST:event_btn8ActionPerformed
+
+    private void btn9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn9ActionPerformed
+        selectedQuestion(9);
+    }//GEN-LAST:event_btn9ActionPerformed
+
+    private void btn10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn10ActionPerformed
+        selectedQuestion(10);
+    }//GEN-LAST:event_btn10ActionPerformed
+
+    private void btn11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn11ActionPerformed
+        selectedQuestion(11);
+    }//GEN-LAST:event_btn11ActionPerformed
+
+    private void btn12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn12ActionPerformed
+        selectedQuestion(12);
+    }//GEN-LAST:event_btn12ActionPerformed
+
+    private void btn13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn13ActionPerformed
+        selectedQuestion(13);
+    }//GEN-LAST:event_btn13ActionPerformed
+
+    private void btn14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn14ActionPerformed
+        selectedQuestion(14);
+    }//GEN-LAST:event_btn14ActionPerformed
+
+    private void btn15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn15ActionPerformed
+        selectedQuestion(15);
+    }//GEN-LAST:event_btn15ActionPerformed
+
+    private void btn16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn16ActionPerformed
+        selectedQuestion(16);
+    }//GEN-LAST:event_btn16ActionPerformed
+
+    private void btn17ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn17ActionPerformed
+        selectedQuestion(17);
+    }//GEN-LAST:event_btn17ActionPerformed
+
+    private void btn18ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn18ActionPerformed
+        selectedQuestion(18);
+    }//GEN-LAST:event_btn18ActionPerformed
+
+    private void btn19ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn19ActionPerformed
+        selectedQuestion(19);
+    }//GEN-LAST:event_btn19ActionPerformed
+
+    private void btn20ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn20ActionPerformed
+        selectedQuestion(20);
+    }//GEN-LAST:event_btn20ActionPerformed
+
+    private void btn21ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn21ActionPerformed
+        selectedQuestion(21);
+    }//GEN-LAST:event_btn21ActionPerformed
+
+    private void btn22ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn22ActionPerformed
+        selectedQuestion(22);
+    }//GEN-LAST:event_btn22ActionPerformed
+
+    private void btn23ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn23ActionPerformed
+        selectedQuestion(23);
+    }//GEN-LAST:event_btn23ActionPerformed
+
+    private void btn24ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn24ActionPerformed
+        selectedQuestion(24);
+    }//GEN-LAST:event_btn24ActionPerformed
+
+    private void btn25ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn25ActionPerformed
+        selectedQuestion(25);
+    }//GEN-LAST:event_btn25ActionPerformed
+
+    private void btn26ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn26ActionPerformed
+        selectedQuestion(26);
+    }//GEN-LAST:event_btn26ActionPerformed
+
+    private void btn27ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn27ActionPerformed
+        selectedQuestion(27);
+    }//GEN-LAST:event_btn27ActionPerformed
+
+    private void btn28ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn28ActionPerformed
+        selectedQuestion(28);
+    }//GEN-LAST:event_btn28ActionPerformed
+
+    private void btn29ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn29ActionPerformed
+        selectedQuestion(29);
+    }//GEN-LAST:event_btn29ActionPerformed
+
+    private void btn30ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn30ActionPerformed
+        selectedQuestion(30);
+    }//GEN-LAST:event_btn30ActionPerformed
+
+    private void btn31ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn31ActionPerformed
+        selectedQuestion(31);
+    }//GEN-LAST:event_btn31ActionPerformed
+
+    private void btn32ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn32ActionPerformed
+        selectedQuestion(32);
+    }//GEN-LAST:event_btn32ActionPerformed
+
+    private void btn33ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn33ActionPerformed
+        selectedQuestion(33);
+    }//GEN-LAST:event_btn33ActionPerformed
+
+    private void btn34ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn34ActionPerformed
+        selectedQuestion(34);
+    }//GEN-LAST:event_btn34ActionPerformed
+
+    private void btn35ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn35ActionPerformed
+        selectedQuestion(35);
+    }//GEN-LAST:event_btn35ActionPerformed
+
+    private void btn36ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn36ActionPerformed
+        selectedQuestion(36);
+    }//GEN-LAST:event_btn36ActionPerformed
+
+    private void btn37ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn37ActionPerformed
+        selectedQuestion(37);
+    }//GEN-LAST:event_btn37ActionPerformed
+
+    private void btn38ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn38ActionPerformed
+        selectedQuestion(38);
+    }//GEN-LAST:event_btn38ActionPerformed
+
+    private void btn39ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn39ActionPerformed
+        selectedQuestion(39);
+    }//GEN-LAST:event_btn39ActionPerformed
+
+    private void btn40ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn40ActionPerformed
+        selectedQuestion(40);
+    }//GEN-LAST:event_btn40ActionPerformed
+
+    private void btnPrevActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrevActionPerformed
+        prev();
+    }//GEN-LAST:event_btnPrevActionPerformed
+
+    private void btnNextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNextActionPerformed
+        next();
+    }//GEN-LAST:event_btnNextActionPerformed
 
     /**
      * @param args the command line arguments
@@ -541,10 +995,9 @@ public class DoTest extends java.awt.Dialog {
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                DoTest dialog = new DoTest(new java.awt.Frame(), true);
+                DoTest dialog = new DoTest(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);
                     }
                 });
                 dialog.setVisible(true);
@@ -595,7 +1048,9 @@ public class DoTest extends java.awt.Dialog {
     private javax.swing.JButton btn8;
     private javax.swing.JButton btn9;
     private javax.swing.JButton btnEndTest;
-    private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.JButton btnNext;
+    private javax.swing.JButton btnPrev;
+    private javax.swing.ButtonGroup grChoose;
     private javax.swing.JLabel lblChooseAns;
     private javax.swing.JLabel lblDoneQuestion;
     private javax.swing.JLabel lblLogo;
@@ -617,4 +1072,246 @@ public class DoTest extends java.awt.Dialog {
     private javax.swing.JRadioButton rdoChooseAnsC;
     private javax.swing.JRadioButton rdoChooseAnsD;
     // End of variables declaration//GEN-END:variables
+
+    ResutlDAO rDao = new ResutlDAO();
+    QuestionOfTestDAO QOTDao = new QuestionOfTestDAO();
+    QuestionDAO qDao = new QuestionDAO();
+    TestDAO tDao = new TestDAO();
+    StudentDAO sDao = new StudentDAO();
+    public static Test testEntity = null;
+    public static Student sEntity = null;
+    List<QuestionOfTest> listQOT;
+    List<Question> listQ = new ArrayList<>();
+    List<JButton> listButton = new ArrayList<>();
+    public static List<Result> listR = new ArrayList<>();
+    public static int indexTest = 0;
+    int indexQuestion = 1;
+    int mm = 1;
+    int ss = 10;
+    public static Timer clock;
+    int timeDefaul = 0;
+    public static int timeTested = 0;
+
+    private void fillQuestion(Question qEntity, Result rEntity) {
+        lblQuestionNumber.setText("Câu " + rEntity.getIndexQuestion() + ": " + qEntity.getQuestion());
+        String A = qEntity.getAns1();
+        String B = qEntity.getAns2();
+        String C = qEntity.getAns3();
+        String D = qEntity.getAns4();
+
+        lblShowAnsA.setText("A. " + A);
+        lblShowAnsB.setText("B. " + B);
+        lblShowAnsC.setText("C. " + C);
+        lblShowAnsD.setText("D. " + D);
+
+        if (rEntity.getAnsSelected().equals("A")) {
+            rdoChooseAnsA.setSelected(true);
+        } else if (rEntity.getAnsSelected().equals("B")) {
+            rdoChooseAnsB.setSelected(true);
+        } else if (rEntity.getAnsSelected().equals("C")) {
+            rdoChooseAnsC.setSelected(true);
+        } else if (rEntity.getAnsSelected().equals("D")) {
+            rdoChooseAnsD.setSelected(true);
+        } else {
+            grChoose.clearSelection();
+        }
+    }
+
+    private void loadData() {
+        lblTitleTest.setText(testEntity.getTestTitle());
+        listQOT = QOTDao.selectByTestId(testEntity.getTestID());
+        int i = 1;
+        for (QuestionOfTest QOTEntity : listQOT) {
+            Question qEntity = qDao.selectById(QOTEntity.getQuestionID());
+            listQ.add(qEntity);
+
+            Result rEntity = new Result();
+            rEntity.setIndexTest(indexTest);
+            rEntity.setStudentID(sEntity.getStudentID());
+            rEntity.setTestID(testEntity.getTestID());
+            rEntity.setIndexQuestion(i);
+            rEntity.setAnsSelected("");
+            rEntity.setAnsCorrect(qEntity.getAns());
+            rDao.insert(rEntity);
+            i++;
+        }
+        setLblDoneQuestion();
+    }
+
+    private void setIndexTest() {
+        Result lastResult = rDao.selectByTestStudent(sEntity.getStudentID(), testEntity.getTestID());
+        if (lastResult == null) {
+            indexTest = 1;
+        } else {
+            indexTest = lastResult.getIndexTest() + 1;
+        }
+    }
+
+    private void selectedQuestion(int index) {
+        try {
+            Question qEntity = listQ.get(index - 1);
+            Result rEntity = rDao.selectByIdSupport(indexTest, sEntity.getStudentID(), testEntity.getTestID(), index);
+            fillQuestion(qEntity, rEntity);
+            indexQuestion = index;
+        } catch (Exception e) {
+            Question qEntity = new Question(0, "", "", "", "", "", "", 0, "");
+            Result rEntity = new Result(0, "", "", 0, "", "", new Date());
+            fillQuestion(qEntity, rEntity);
+        }
+    }
+
+    private void setLblDoneQuestion() {
+        int sum = listQOT.size();
+        int done = 0;
+        List<Result> rList = rDao.selectByIndexTest(sEntity.getStudentID(), testEntity.getTestID(), indexTest);
+        for (Result result : rList) {
+            if (!result.getAnsSelected().equals("")) {
+                done++;
+            }
+        }
+        lblDoneQuestion.setText("Số câu đã làm: " + done + "/" + sum);
+    }
+
+    private void updateAwsSelected() {
+        Result rEntity = rDao.selectByIdSupport(indexTest, sEntity.getStudentID(), testEntity.getTestID(), indexQuestion);
+        if (rdoChooseAnsA.isSelected()) {
+            rEntity.setAnsSelected("A");
+        } else if (rdoChooseAnsB.isSelected()) {
+            rEntity.setAnsSelected("B");
+        } else if (rdoChooseAnsC.isSelected()) {
+            rEntity.setAnsSelected("C");
+        } else if (rdoChooseAnsD.isSelected()) {
+            rEntity.setAnsSelected("D");
+        }
+        rDao.update(rEntity);
+        setLblDoneQuestion();
+    }
+
+    private void addButton() {
+        listButton.add(btn1);
+        listButton.add(btn2);
+        listButton.add(btn3);
+        listButton.add(btn4);
+        listButton.add(btn5);
+        listButton.add(btn6);
+        listButton.add(btn7);
+        listButton.add(btn8);
+        listButton.add(btn9);
+        listButton.add(btn10);
+        listButton.add(btn11);
+        listButton.add(btn12);
+        listButton.add(btn13);
+        listButton.add(btn14);
+        listButton.add(btn15);
+        listButton.add(btn16);
+        listButton.add(btn17);
+        listButton.add(btn18);
+        listButton.add(btn19);
+        listButton.add(btn20);
+        listButton.add(btn21);
+        listButton.add(btn22);
+        listButton.add(btn23);
+        listButton.add(btn24);
+        listButton.add(btn25);
+        listButton.add(btn26);
+        listButton.add(btn27);
+        listButton.add(btn28);
+        listButton.add(btn29);
+        listButton.add(btn30);
+        listButton.add(btn31);
+        listButton.add(btn32);
+        listButton.add(btn33);
+        listButton.add(btn34);
+        listButton.add(btn35);
+        listButton.add(btn36);
+        listButton.add(btn37);
+        listButton.add(btn38);
+        listButton.add(btn39);
+        listButton.add(btn40);
+    }
+
+    private void setStatusButton() {
+        for (int i = 39; i >= listQOT.size(); i--) {
+            listButton.get(i).setEnabled(false);
+        }
+    }
+
+    private void setStatus() {
+        Result rEntity = rDao.selectByIdSupport(indexTest, sEntity.getStudentID(), testEntity.getTestID(), indexQuestion);
+        if (!rEntity.getAnsSelected().equals("")) {
+            listButton.get(indexQuestion - 1).setBackground(Color.green);
+        } else {
+            listButton.get(indexQuestion - 1).setBackground(Color.red);
+        }
+    }
+
+    private void EndTest() {
+        if (MsgBox.confirm(this, "Bạn có chắc chắn muốn kết thúc bài thi không ?")) {
+            timeDefaul = Integer.parseInt(lblTime.getText().substring(0, 2));
+            timeTested = 60 - timeDefaul;
+            DoTestReport ReportTest = new DoTestReport();
+            ReportTest.setVisible(true);
+            this.setVisible(false);
+            this.dispose();
+        }
+    }
+
+    private void prev() {
+        if (this.indexQuestion > 1) {
+            this.indexQuestion--;
+            Question qEntity = listQ.get(indexQuestion - 1);
+            Result rEntity = rDao.selectByIdSupport(indexTest, sEntity.getStudentID(), testEntity.getTestID(), indexQuestion);
+            fillQuestion(qEntity, rEntity);
+            fillQuestion(qEntity, rEntity);
+        }
+    }
+
+    private void next() {
+        if (this.indexQuestion < listQOT.size()) {
+            this.indexQuestion++;
+            Question qEntity = listQ.get(indexQuestion - 1);
+            Result rEntity = rDao.selectByIdSupport(indexTest, sEntity.getStudentID(), testEntity.getTestID(), indexQuestion);
+            fillQuestion(qEntity, rEntity);
+            fillQuestion(qEntity, rEntity);
+        }
+    }
+
+    private void setTime() {
+        clock = new Timer(1000, new ActionListener() {
+            SimpleDateFormat format = new SimpleDateFormat("mm:ss");
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                ss--;
+                if (mm > 0 && ss == 00) {
+                    mm--;
+                    if (mm == 0) {
+                        ss = 59;
+                    }
+                }
+
+                if (mm == 0 && ss == 0) {
+                    EndTest();
+                }
+                lblTime.setText(format.format(new Date(0, 0, 0, 0, mm, ss)));
+            }
+        });
+        clock.start();
+    }
+
+    public Timer getClock() {
+        return clock;
+    }
+
+    private void init() {
+        testEntity = tDao.selectById("TOA01");
+        sEntity = sDao.selectById("HS25579");
+        setTime();
+        addButton();
+        setIndexTest();
+        loadData();
+        setStatusButton();
+        Result rEntity = rDao.selectByIdSupport(indexTest, sEntity.getStudentID(), testEntity.getTestID(), 1);
+        fillQuestion(listQ.get(0), rEntity);
+    }
 }

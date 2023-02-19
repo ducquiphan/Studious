@@ -1,5 +1,9 @@
 package com.studious.display;
 
+import com.studious.DAO.AccountDAO;
+import com.studious.utils.Auth;
+import com.studious.utils.MsgBox;
+
 /**
  *
  * @author SsuBii
@@ -68,6 +72,11 @@ public class ChangePassword extends javax.swing.JFrame {
         btnUpdate.setBackground(new java.awt.Color(232, 255, 183));
         btnUpdate.setFont(new java.awt.Font("Inter", 0, 18)); // NOI18N
         btnUpdate.setText("Cập nhật");
+        btnUpdate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUpdateActionPerformed(evt);
+            }
+        });
 
         btnBack.setBackground(new java.awt.Color(232, 255, 183));
         btnBack.setFont(new java.awt.Font("Inter", 0, 18)); // NOI18N
@@ -89,9 +98,8 @@ public class ChangePassword extends javax.swing.JFrame {
                                 .addGap(62, 62, 62)
                                 .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(lblOldPassword)
-                            .addGroup(pnlBackGroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(txtNewPassword, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 361, Short.MAX_VALUE)
-                                .addComponent(txtOldPassword, javax.swing.GroupLayout.Alignment.LEADING))
+                            .addComponent(txtNewPassword)
+                            .addComponent(txtOldPassword)
                             .addComponent(txtConfirmPassword)))
                     .addGroup(pnlBackGroundLayout.createSequentialGroup()
                         .addGap(116, 116, 116)
@@ -135,6 +143,13 @@ public class ChangePassword extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
+        // TODO add your handling code here:
+        if (MsgBox.confirm(this, "Bạn có chắc muốn đổi mật khẩu không?")) {
+            updatePass();
+        }
+    }//GEN-LAST:event_btnUpdateActionPerformed
 
     /**
      * @param args the command line arguments
@@ -183,4 +198,21 @@ public class ChangePassword extends javax.swing.JFrame {
     private javax.swing.JPasswordField txtNewPassword;
     private javax.swing.JPasswordField txtOldPassword;
     // End of variables declaration//GEN-END:variables
+    AccountDAO aDao = new AccountDAO();
+    private void updatePass() {
+        String passOld = new String(txtOldPassword.getPassword());
+        String passConfirm = new String(txtConfirmPassword.getPassword());
+        String passNew = new String(txtNewPassword.getPassword());
+        if (Auth.user.getPassword().equals(passOld)) {
+            if (passNew.equals(passConfirm)) {
+                Auth.user.setPassword(passNew);
+                aDao.update(Auth.user);
+                MsgBox.alert(this, "Cập nhật mật khẩu thành công !");
+            } else {
+                MsgBox.alert(this, "Xác nhận mật khổng không khớp");
+            }
+        } else {
+            MsgBox.alert(this, "Mật khẩu hiện tại không đúng!");
+        }
+    }
 }

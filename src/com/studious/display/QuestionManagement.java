@@ -9,6 +9,7 @@ import com.studious.DAO.QuestionDAO;
 import com.studious.entity.Lesson;
 import com.studious.entity.Question;
 import com.studious.utils.MsgBox;
+import java.awt.Color;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.table.DefaultTableModel;
@@ -31,6 +32,7 @@ public class QuestionManagement extends java.awt.Dialog {
     QuestionDAO qdao = new QuestionDAO();
     LessonDAO ldao = new LessonDAO();
     int row = -1;
+    Question quest = null;
 
     private void init() {
         this.setLocationRelativeTo(this);
@@ -38,6 +40,10 @@ public class QuestionManagement extends java.awt.Dialog {
         //setIconImage(XImage.getAppIcon());
         setResizable(false);
         doTest(false);
+        rdoChooseAnsA.setName("a");
+        rdoChooseAnsB.setName("b");
+        rdoChooseAnsC.setName("c");
+        rdoChooseAnsD.setName("d");
     }
 
     private void fillCboSubjectList() {
@@ -112,10 +118,11 @@ public class QuestionManagement extends java.awt.Dialog {
 
     private void doTest(boolean check) {
         if (check) {
+            grpButtonAns.clearSelection();
             pnlQnA.setVisible(check);
             pnlQuest.setVisible(check);
             Integer questionID = (Integer) tblQuestions.getValueAt(this.row, 1);
-            Question quest = qdao.selectById(questionID);
+            quest = qdao.selectById(questionID);
             lblTitleDoTest.setVisible(check);
             lblTitleDoTest.setText("Tiêu đề: " + quest.getQuestion());
             lblAnswer.setVisible(check);
@@ -139,7 +146,7 @@ public class QuestionManagement extends java.awt.Dialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        buttonGroup1 = new javax.swing.ButtonGroup();
+        grpButtonAns = new javax.swing.ButtonGroup();
         pnlBackground = new javax.swing.JPanel();
         lblLogo = new javax.swing.JLabel();
         lblTitle = new javax.swing.JLabel();
@@ -500,7 +507,7 @@ public class QuestionManagement extends java.awt.Dialog {
         lblResult.setToolTipText("");
 
         rdoChooseAnsA.setBackground(new java.awt.Color(255, 255, 255));
-        buttonGroup1.add(rdoChooseAnsA);
+        grpButtonAns.add(rdoChooseAnsA);
         rdoChooseAnsA.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         rdoChooseAnsA.setSelected(true);
         rdoChooseAnsA.setText("A. 2");
@@ -511,12 +518,12 @@ public class QuestionManagement extends java.awt.Dialog {
         });
 
         rdoChooseAnsB.setBackground(new java.awt.Color(255, 255, 255));
-        buttonGroup1.add(rdoChooseAnsB);
+        grpButtonAns.add(rdoChooseAnsB);
         rdoChooseAnsB.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         rdoChooseAnsB.setText("B. 1");
 
         rdoChooseAnsD.setBackground(new java.awt.Color(255, 255, 255));
-        buttonGroup1.add(rdoChooseAnsD);
+        grpButtonAns.add(rdoChooseAnsD);
         rdoChooseAnsD.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         rdoChooseAnsD.setText("D. 9");
 
@@ -524,14 +531,24 @@ public class QuestionManagement extends java.awt.Dialog {
         btnCheck.setText("Kiểm tra");
         btnCheck.setMaximumSize(new java.awt.Dimension(87, 26));
         btnCheck.setMinimumSize(new java.awt.Dimension(87, 26));
+        btnCheck.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCheckActionPerformed(evt);
+            }
+        });
 
         btnRemake.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnRemake.setText("Làm lại");
         btnRemake.setMaximumSize(new java.awt.Dimension(87, 26));
         btnRemake.setMinimumSize(new java.awt.Dimension(87, 26));
+        btnRemake.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRemakeActionPerformed(evt);
+            }
+        });
 
         rdoChooseAnsC.setBackground(new java.awt.Color(255, 255, 255));
-        buttonGroup1.add(rdoChooseAnsC);
+        grpButtonAns.add(rdoChooseAnsC);
         rdoChooseAnsC.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         rdoChooseAnsC.setText("C. 0");
 
@@ -552,17 +569,16 @@ public class QuestionManagement extends java.awt.Dialog {
                         .addComponent(lblTitleDoTest)
                         .addGap(18, 18, 18)
                         .addComponent(lblShowQuestionDoTest, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlQuestLayout.createSequentialGroup()
-                        .addGroup(pnlQuestLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(rdoChooseAnsC, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(lblResult, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 225, Short.MAX_VALUE)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pnlQuestLayout.createSequentialGroup()
-                                .addComponent(lblAnswer)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addComponent(rdoChooseAnsA, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(rdoChooseAnsB, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(rdoChooseAnsD, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(470, 470, 470)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlQuestLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(rdoChooseAnsC, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(rdoChooseAnsA, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(rdoChooseAnsB, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(rdoChooseAnsD, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pnlQuestLayout.createSequentialGroup()
+                            .addGroup(pnlQuestLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(lblAnswer, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(lblResult, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGap(0, 0, Short.MAX_VALUE))))
                 .addContainerGap())
         );
         pnlQuestLayout.setVerticalGroup(
@@ -710,7 +726,7 @@ public class QuestionManagement extends java.awt.Dialog {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(pnlQuest, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(pnlQnA, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(46, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -728,8 +744,7 @@ public class QuestionManagement extends java.awt.Dialog {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -794,7 +809,6 @@ public class QuestionManagement extends java.awt.Dialog {
         });
 
         txtSearchList.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        txtSearchList.setText("Tìm kiếm");
 
         tblQuestions.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -1039,6 +1053,19 @@ public class QuestionManagement extends java.awt.Dialog {
 
     private void btnSearchListActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchListActionPerformed
         // TODO add your handling code here:
+        try {
+            DefaultTableModel model = (DefaultTableModel) tblQuestions.getModel();
+            model.setRowCount(0);
+            List<Question> list = qdao.selectByQuestion(txtSearchList.getText());
+            if (list != null) {
+                for (int i = 0; i < list.size(); i++) {
+                    Question question = list.get(i);
+                    model.addRow(new Object[]{i + 1, question.getQuestionID(), question.getQuestion(), question.getAns(), question.getAns1(), question.getAns2(), question.getAns3(), question.getAns4()});
+                }
+            }
+        } catch (Exception e) {
+           e.toString();
+        }
     }//GEN-LAST:event_btnSearchListActionPerformed
 
     private void txtTitleQuestionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTitleQuestionActionPerformed
@@ -1091,7 +1118,6 @@ public class QuestionManagement extends java.awt.Dialog {
             if (this.row >= 0) {
                 //this.edit();
                 tabs.setSelectedIndex(0);
-
             }
         }
         this.row = tblQuestions.rowAtPoint(evt.getPoint());
@@ -1103,8 +1129,70 @@ public class QuestionManagement extends java.awt.Dialog {
             //this.edit();
             tabs.setSelectedIndex(1);
             doTest(true);
+            btnRemake.setEnabled(false);
+
         }
     }//GEN-LAST:event_btnDoActionPerformed
+
+    private void btnCheckActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCheckActionPerformed
+        // TODO add your handling code here:
+        switch (quest.getAns()) {
+            case "a" -> {
+                if (rdoChooseAnsA.isSelected()) {
+                    lblResult.setText("Bạn đã trả lời đúng!");
+                    lblResult.setVisible(true);
+                } else {
+                    lblResult.setText("Bạn đã trả lời sai! Câu trả lời đúng là: " + quest.getAns());
+                    lblResult.setVisible(true);
+                    lblResult.setForeground(Color.red);
+                }
+            }
+            case "b" -> {
+                if (rdoChooseAnsB.isSelected()) {
+                    lblResult.setText("Bạn đã trả lời đúng!");
+                    lblResult.setVisible(true);
+                } else {
+                    lblResult.setText("Bạn đã trả lời sai! Câu trả lời đúng là: " + quest.getAns());
+                    lblResult.setVisible(true);
+                    lblResult.setForeground(Color.red);
+                }
+            }
+            case "c" -> {
+                if (rdoChooseAnsD.isSelected()) {
+                    lblResult.setText("Bạn đã trả lời đúng!");
+                    lblResult.setVisible(true);
+                } else {
+                    lblResult.setText("Bạn đã trả lời sai! Câu trả lời đúng là: " + quest.getAns());
+                    lblResult.setVisible(true);
+                    lblResult.setForeground(Color.red);
+                }
+            }
+            case "d" -> {
+                if (rdoChooseAnsD.isSelected()) {
+                    lblResult.setText("Bạn đã trả lời đúng!");
+                    lblResult.setVisible(true);
+                } else {
+                    lblResult.setText("Bạn đã trả lời sai! Câu trả lời đúng là: " + quest.getAns());
+                    lblResult.setVisible(true);
+                    lblResult.setForeground(Color.red);
+                }
+            }
+            default ->
+                throw new AssertionError();
+
+        }
+        btnCheck.setEnabled(false);
+        btnRemake.setEnabled(true);
+    }//GEN-LAST:event_btnCheckActionPerformed
+
+    private void btnRemakeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemakeActionPerformed
+        // TODO add your handling code here:
+        lblResult.setForeground(Color.black);
+        lblResult.setVisible(false);
+        grpButtonAns.clearSelection();
+        btnCheck.setEnabled(true);
+        btnRemake.setEnabled(false);
+    }//GEN-LAST:event_btnRemakeActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1148,7 +1236,6 @@ public class QuestionManagement extends java.awt.Dialog {
     private javax.swing.JButton btnStatistic;
     private javax.swing.JButton btnTest;
     private javax.swing.JButton btnUpdate;
-    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JComboBox<String> cboArrange;
     private javax.swing.JComboBox<String> cboGrade;
     private javax.swing.JComboBox<String> cboGradeList;
@@ -1157,6 +1244,7 @@ public class QuestionManagement extends java.awt.Dialog {
     private javax.swing.JComboBox<String> cboRightAns;
     private javax.swing.JComboBox<String> cboSubject;
     private javax.swing.JComboBox<String> cboSubjectList;
+    private javax.swing.ButtonGroup grpButtonAns;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;

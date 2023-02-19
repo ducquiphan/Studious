@@ -315,16 +315,4 @@ SELECT Khoi FROM BAIHOC WHERE MonHoc = N'TOÁN' GROUP BY Khoi
 
 insert into CAUHOI(De, DapAn1, DapAn2, DapAn3, DapAn4, DapAnDung, MaBH, MaGV) values (N'Một cộng một bằng mấy?', N'1', N'-1', N'0', N'2', N'd', 26,'GV67890')
 
-CREATE TABLE CAUHOI (
-	MaCH INT IDENTITY NOT NULL,
-	De NVARCHAR(150),
-	DapAn1 NVARCHAR(30),
-	DapAn2 NVARCHAR(30),
-	DapAn3 NVARCHAR(30),
-	DapAn4 NVARCHAR(30),
-	DapAnDung NVARCHAR(30),
-	MaBH INT,
-	MaGV VARCHAR(10)
-)
-
-
+select * from CAUHOI where De like N'%Một%'
