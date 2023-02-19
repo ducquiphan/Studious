@@ -277,28 +277,54 @@ AS BEGIN
 		GROUP BY BAOCAOBAITHI.MaBThi, TieuDe
 	END
 END
-
+GO
+-- In danh sách môn
+CREATE PROC sp_DanhSachMonHoc
+AS BEGIN
+	SELECT MonHoc FROM BAIHOC GROUP BY MonHoc
+END
+GO
+-- In danh sách khối
+CREATE PROC sp_DanhSachBaiHocTheoMon (@MonHoc NVARCHAR(100))
+AS BEGIN
+	SELECT Khoi FROM BAIHOC WHERE MonHoc = @MonHoc GROUP BY Khoi
+END
+GO
 -----------------------------------
 GO
 INSERT INTO TAIKHOAN(TenTaiKhoan, MatKhau, VaiTro, TrangThai) VALUES
 ('GV12345', '123456', 2, 1),
 ('GV67890', '123456', 2, 1)
+go
 
+INSERT INTO GIAOVIEN(MaGV, HoVaTen, GioiTinh, NgaySinh, ChuyenMon, Email, SoDT, PathIMG, MaTK) VALUES ('GV12345', N'Trần Hoàng Danh', 0, '04/11/2003', N'TOÁN', 'danhth@gmail.com', '0971714478', 'image/img1', 'GV12345')
+INSERT INTO GIAOVIEN(MaGV, HoVaTen, GioiTinh, NgaySinh, ChuyenMon, Email, SoDT, PathIMG, MaTK) VALUES ('GV67890', N'Phan Quí Đức', 0, '06/23/2000', N'ANH VĂN', 'ducpq@gmail.com', '0964856254', 'image/img1', 'GV67890')
+go
 
-INSERT INTO GIAOVIEN(MaGV, HoVaTen, GioiTinh, NgaySinh, ChuyenMon, Email, SoDT, PathIMG, MaTK) VALUES
-('GV12345', 'Trần Hoàng Danh', 0, '04/11/2003', 'TOÁN', 'danhth@gmail.com', '0971714478', 'image/img1', 'GV12345'),
-('GV67890', 'Phan Quí Đức', 0, '23/06/2000', 'ANH VĂN', 'ducpq@gmail.com', '0964856254', 'image/img1', 'GV67890')
+INSERT INTO BAIHOC(TenBH, MonHoc, Khoi, MaGV) VALUES (N'TOÁN CỘNG TRỪ', N'TOÁN',10,'GV12345')
+INSERT INTO BAIHOC(TenBH, MonHoc, Khoi, MaGV) VALUES (N'TOÁN NHÂN CHIA', N'TOÁN',11,'GV12345')
+INSERT INTO BAIHOC(TenBH, MonHoc, Khoi, MaGV) VALUES (N'TOPIC 1', N'ANH VĂN',10,'GV67890')
+INSERT INTO BAIHOC(TenBH, MonHoc, Khoi, MaGV) VALUES (N'TOPIC 2', N'ANH VĂN',11,'GV67890')
+INSERT INTO BAIHOC(TenBH, MonHoc, Khoi, MaGV) VALUES (N'TOPIC 3', N'ANH VĂN',12,'GV67890')
+go
+select * from BAIHOC
+delete from BAIHOC
+delete from CAUHOI
 
+SELECT Khoi FROM BAIHOC WHERE MonHoc = N'TOÁN' GROUP BY Khoi
 
-INSERT INTO BAIHOC(TenBH, MonHoc, Khoi, MaGV) VALUES
-('TOÁN CỘNG TRỪ', 'TOÁN','10','GV12345'),
-('TOÁN NHÂN CHIA', 'TOÁN','11','GV12345'),
-('TOPIC 1', 'ANH VĂN','10','GV67890'),
-('TOPIC 2', 'ANH VĂN','11','GV67890'),
-('TOPIC 3', 'ANH VĂN','12','GV67890')
+insert into CAUHOI(De, DapAn1, DapAn2, DapAn3, DapAn4, DapAnDung, MaBH, MaGV) values (N'Một cộng một bằng mấy?', N'1', N'-1', N'0', N'2', N'd', 26,'GV67890')
 
-
-
-
+CREATE TABLE CAUHOI (
+	MaCH INT IDENTITY NOT NULL,
+	De NVARCHAR(150),
+	DapAn1 NVARCHAR(30),
+	DapAn2 NVARCHAR(30),
+	DapAn3 NVARCHAR(30),
+	DapAn4 NVARCHAR(30),
+	DapAnDung NVARCHAR(30),
+	MaBH INT,
+	MaGV VARCHAR(10)
+)
 
 

@@ -187,6 +187,7 @@ public class Lessons extends javax.swing.JFrame {
 
     private void btnQuestionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQuestionActionPerformed
         // TODO add your handling code here:
+        
     }//GEN-LAST:event_btnQuestionActionPerformed
 
     private void btnDocumentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDocumentActionPerformed

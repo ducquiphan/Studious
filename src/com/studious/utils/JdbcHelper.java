@@ -45,7 +45,7 @@ public class JdbcHelper {
         }
     }
     
-    public static ResultSet quyery(String sql, Object... args) {
+    public static ResultSet query(String sql, Object... args) {
         try {
             PreparedStatement stmt = getStmt(sql, args);
             return stmt.executeQuery();
@@ -56,7 +56,7 @@ public class JdbcHelper {
     
     public static Object value(String sql, Object... args){
         try {
-            ResultSet rs = quyery(sql, args);
+            ResultSet rs = query(sql, args);
             if (rs.next()) {
                 return rs.getObject(0);
             }
@@ -65,5 +65,26 @@ public class JdbcHelper {
             return new RuntimeException(e);
         }
         return null;
+    }
+
+    public static ResultSet executeQuery(String sql, Object... args) throws SQLException {
+        PreparedStatement pstmt = JdbcHelper.preparedStatement(sql, args);
+        return pstmt.executeQuery();
+    }
+
+    public static PreparedStatement preparedStatement(String sql, Object... args) throws SQLException {
+        String connectionUrl = "jdbc:sqlserver://localhost:1433;databaseName=Studious;user=sa;password=123"
+                + ";encrypt=true;trustServerCertificate=true";
+        Connection con = DriverManager.getConnection(connectionUrl);
+        PreparedStatement pstmt = null;
+        if (sql.startsWith("{")) {
+            pstmt = con.prepareCall(sql);
+        } else {
+            pstmt = con.prepareStatement(sql);
+        }
+        for (int i = 0; i < args.length; i++) {
+            pstmt.setObject(i + 1, args[i]);
+        }
+        return pstmt;
     }
 }

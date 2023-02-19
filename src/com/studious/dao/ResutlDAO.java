@@ -71,7 +71,7 @@ public class ResutlDAO extends StudiousDAO<Result, Integer> {
     public List<Result> selectSql(String Sql, Object... args) {
         List<Result> list = new ArrayList<>();
         try {
-            ResultSet rs = JdbcHelper.quyery(Sql, args);
+            ResultSet rs = JdbcHelper.query(Sql, args);
             while (rs.next()) {
                 Result entity = new Result();
                 entity.setIndexTest(rs.getInt(1));

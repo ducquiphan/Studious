@@ -4,6 +4,15 @@
  */
 package com.studious.display;
 
+import com.studious.DAO.LessonDAO;
+import com.studious.DAO.QuestionDAO;
+import com.studious.entity.Lesson;
+import com.studious.entity.Question;
+import com.studious.utils.MsgBox;
+import java.util.List;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Admin
@@ -16,6 +25,87 @@ public class QuestionManagement extends java.awt.Dialog {
     public QuestionManagement(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        init();
+    }
+
+    QuestionDAO qdao = new QuestionDAO();
+    LessonDAO ldao = new LessonDAO();
+
+    private void init() {
+        this.setLocationRelativeTo(this);
+        this.fillCboSubjectList();
+        //setIconImage(XImage.getAppIcon());
+        setResizable(false);
+    }
+
+    private void fillCboSubjectList() {
+        try {
+            DefaultComboBoxModel model = (DefaultComboBoxModel) cboSubjectList.getModel();
+            model.removeAllElements();
+            List<Object> list = ldao.selectSubject();
+            if (list != null) {
+                for (Object subject : list) {
+                    model.addElement(subject);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void fillCboGradeList() {
+        try {
+            DefaultComboBoxModel model = (DefaultComboBoxModel) cboGradeList.getModel();
+            model.removeAllElements();
+            String subject = (String) cboSubjectList.getSelectedItem();
+            List<Object> list = ldao.selectGradeBySubject(subject);
+            if (list != null) {
+                for (Object grade : list) {
+                    model.addElement(grade);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void fillCboLessonList() {
+        try {
+            DefaultComboBoxModel model = (DefaultComboBoxModel) cboLessonList.getModel();
+            model.removeAllElements();
+            String subject = String.valueOf(cboSubjectList.getSelectedItem());
+            Integer grade = (Integer) cboGradeList.getSelectedItem();
+            if (subject != null && grade != null) {
+                List<Lesson> list = ldao.selectBySubjectAndGrade(subject, grade);
+                if (list != null) {
+                    for (Lesson lesson : list) {
+                        model.addElement(lesson);
+                    }
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void fillTableQuestions() {
+        try {
+            DefaultTableModel model = (DefaultTableModel) tblQuestions.getModel();
+            model.setRowCount(0);
+            Lesson lesson = (Lesson) cboLessonList.getSelectedItem();
+            if (lesson != null) {
+                List<Question> list = qdao.selectByLessonID(lesson.getLessonID());
+                if (list != null) {
+                    for (int i = 0; i < list.size(); i++) {
+                        Question question = list.get(i);
+                        model.addRow(new Object[]{i + 1, question.getQuestionID(), question.getQuestion(), question.getAns(), question.getWrongAns1(), question.getWrongAns2(), question.getWrongAns3(), question.getWrongAns4()});
+                    }
+                }
+
+            }
+        } catch (Exception e) {
+            MsgBox.alert(this, e.toString());
+        }
     }
 
     /**
@@ -50,7 +140,6 @@ public class QuestionManagement extends java.awt.Dialog {
         lblAnswer3 = new javax.swing.JLabel();
         lblAnswer4 = new javax.swing.JLabel();
         txtTitleQuestion = new javax.swing.JTextField();
-        txtCorrectAns = new javax.swing.JTextField();
         txtAnswer1 = new javax.swing.JTextField();
         txtAnswer2 = new javax.swing.JTextField();
         txtAnswer3 = new javax.swing.JTextField();
@@ -59,6 +148,7 @@ public class QuestionManagement extends java.awt.Dialog {
         btnPrevious = new javax.swing.JButton();
         btnNext = new javax.swing.JButton();
         btnLast = new javax.swing.JButton();
+        cboRightAns = new javax.swing.JComboBox<>();
         pnlDoTest = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jPanel1 = new javax.swing.JPanel();
@@ -93,7 +183,7 @@ public class QuestionManagement extends java.awt.Dialog {
         btnSearchList = new javax.swing.JButton();
         txtSearchList = new javax.swing.JTextField();
         jScrollPane3 = new javax.swing.JScrollPane();
-        tblGridView = new javax.swing.JTable();
+        tblQuestions = new javax.swing.JTable();
         cboArrange = new javax.swing.JComboBox<>();
         lblLessonList = new javax.swing.JLabel();
         cboLessonList = new javax.swing.JComboBox<>();
@@ -208,14 +298,6 @@ public class QuestionManagement extends java.awt.Dialog {
             }
         });
 
-        txtCorrectAns.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        txtCorrectAns.setText("2");
-        txtCorrectAns.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtCorrectAnsActionPerformed(evt);
-            }
-        });
-
         txtAnswer1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         txtAnswer1.setText("1");
         txtAnswer1.addActionListener(new java.awt.event.ActionListener() {
@@ -256,6 +338,8 @@ public class QuestionManagement extends java.awt.Dialog {
 
         btnLast.setText(">|");
 
+        cboRightAns.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "a", "b", "c", "d" }));
+
         javax.swing.GroupLayout pnlManageLayout = new javax.swing.GroupLayout(pnlManage);
         pnlManage.setLayout(pnlManageLayout);
         pnlManageLayout.setHorizontalGroup(
@@ -271,7 +355,7 @@ public class QuestionManagement extends java.awt.Dialog {
                 .addComponent(btnUpdate)
                 .addGap(18, 18, 18)
                 .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(107, Short.MAX_VALUE))
             .addGroup(pnlManageLayout.createSequentialGroup()
                 .addGap(31, 31, 31)
                 .addGroup(pnlManageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -295,20 +379,20 @@ public class QuestionManagement extends java.awt.Dialog {
                         .addGap(18, 18, 18)
                         .addComponent(btnLast, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(pnlManageLayout.createSequentialGroup()
-                        .addGroup(pnlManageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(pnlManageLayout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlManageLayout.createSequentialGroup()
+                        .addGroup(pnlManageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(cboRightAns, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pnlManageLayout.createSequentialGroup()
                                 .addGroup(pnlManageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(cboLesson, 0, 254, Short.MAX_VALUE)
                                     .addComponent(cboGrade, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(cboSubject, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addGap(0, 194, Short.MAX_VALUE))
-                            .addComponent(txtTitleQuestion)
-                            .addComponent(txtCorrectAns)
-                            .addComponent(txtAnswer1)
-                            .addComponent(txtAnswer2)
-                            .addComponent(txtAnswer3)
-                            .addComponent(txtAnswer4))
+                            .addComponent(txtTitleQuestion, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtAnswer1, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtAnswer2, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtAnswer3, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtAnswer4, javax.swing.GroupLayout.Alignment.LEADING))
                         .addGap(111, 111, 111))))
         );
         pnlManageLayout.setVerticalGroup(
@@ -333,7 +417,7 @@ public class QuestionManagement extends java.awt.Dialog {
                 .addGap(18, 18, 18)
                 .addGroup(pnlManageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblCorrectAns)
-                    .addComponent(txtCorrectAns, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cboRightAns, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(pnlManageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblAnswer1)
@@ -356,7 +440,7 @@ public class QuestionManagement extends java.awt.Dialog {
                     .addComponent(btnPrevious, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnNext, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnLast, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
                 .addGroup(pnlManageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnNew)
                     .addComponent(btnInsert, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -661,6 +745,11 @@ public class QuestionManagement extends java.awt.Dialog {
 
         cboSubjectList.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         cboSubjectList.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Toán" }));
+        cboSubjectList.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cboSubjectListActionPerformed(evt);
+            }
+        });
 
         lblGradeList.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lblGradeList.setText("Khối:");
@@ -668,6 +757,11 @@ public class QuestionManagement extends java.awt.Dialog {
 
         cboGradeList.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         cboGradeList.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "10", "11", "12" }));
+        cboGradeList.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cboGradeListActionPerformed(evt);
+            }
+        });
 
         btnSearchList.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/studious/icons/icons8-search-24.png"))); // NOI18N
         btnSearchList.addActionListener(new java.awt.event.ActionListener() {
@@ -679,7 +773,7 @@ public class QuestionManagement extends java.awt.Dialog {
         txtSearchList.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         txtSearchList.setText("Tìm kiếm");
 
-        tblGridView.setModel(new javax.swing.table.DefaultTableModel(
+        tblQuestions.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null, null},
@@ -690,9 +784,9 @@ public class QuestionManagement extends java.awt.Dialog {
                 "STT", "Mã câu hỏi", "Câu hỏi", "Đáp án đúng", "Đáp án 1", "Đáp án 2", "Đáp án 3", "Đáp án 4"
             }
         ));
-        jScrollPane3.setViewportView(tblGridView);
-        if (tblGridView.getColumnModel().getColumnCount() > 0) {
-            tblGridView.getColumnModel().getColumn(0).setPreferredWidth(30);
+        jScrollPane3.setViewportView(tblQuestions);
+        if (tblQuestions.getColumnModel().getColumnCount() > 0) {
+            tblQuestions.getColumnModel().getColumn(0).setPreferredWidth(30);
         }
 
         cboArrange.setBackground(new java.awt.Color(233, 233, 233));
@@ -705,6 +799,11 @@ public class QuestionManagement extends java.awt.Dialog {
 
         cboLessonList.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         cboLessonList.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Hàm Logarit" }));
+        cboLessonList.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cboLessonListActionPerformed(evt);
+            }
+        });
 
         btnDo.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnDo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/studious/icons/icons8-pencil-24 (1).png"))); // NOI18N
@@ -913,10 +1012,6 @@ public class QuestionManagement extends java.awt.Dialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtTitleQuestionActionPerformed
 
-    private void txtCorrectAnsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCorrectAnsActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtCorrectAnsActionPerformed
-
     private void txtAnswer1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtAnswer1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtAnswer1ActionPerformed
@@ -940,6 +1035,21 @@ public class QuestionManagement extends java.awt.Dialog {
     private void rdoChooseAnsAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdoChooseAnsAActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_rdoChooseAnsAActionPerformed
+
+    private void cboSubjectListActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboSubjectListActionPerformed
+        // TODO add your handling code here:
+        fillCboGradeList();
+    }//GEN-LAST:event_cboSubjectListActionPerformed
+
+    private void cboGradeListActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboGradeListActionPerformed
+        // TODO add your handling code here:
+        fillCboLessonList();
+    }//GEN-LAST:event_cboGradeListActionPerformed
+
+    private void cboLessonListActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboLessonListActionPerformed
+        // TODO add your handling code here:
+        fillTableQuestions();
+    }//GEN-LAST:event_cboLessonListActionPerformed
 
     /**
      * @param args the command line arguments
@@ -989,6 +1099,7 @@ public class QuestionManagement extends java.awt.Dialog {
     private javax.swing.JComboBox<String> cboGradeList;
     private javax.swing.JComboBox<String> cboLesson;
     private javax.swing.JComboBox<String> cboLessonList;
+    private javax.swing.JComboBox<String> cboRightAns;
     private javax.swing.JComboBox<String> cboSubject;
     private javax.swing.JComboBox<String> cboSubjectList;
     private javax.swing.JLabel jLabel1;
@@ -1032,12 +1143,11 @@ public class QuestionManagement extends java.awt.Dialog {
     private javax.swing.JRadioButton rdoChooseAnsC;
     private javax.swing.JRadioButton rdoChooseAnsD;
     private javax.swing.JTabbedPane tabs;
-    private javax.swing.JTable tblGridView;
+    private javax.swing.JTable tblQuestions;
     private javax.swing.JTextField txtAnswer1;
     private javax.swing.JTextField txtAnswer2;
     private javax.swing.JTextField txtAnswer3;
     private javax.swing.JTextField txtAnswer4;
-    private javax.swing.JTextField txtCorrectAns;
     private javax.swing.JTextField txtSearchList;
     private javax.swing.JTextField txtTitleQuestion;
     // End of variables declaration//GEN-END:variables
