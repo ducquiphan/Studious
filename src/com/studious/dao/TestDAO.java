@@ -10,13 +10,13 @@ import java.util.List;
  *
  * @author NGUYEN VAN SI
  */
-public class TestDAO extends StudiousDAO<Test, Integer> {
+public class TestDAO extends StudiousDAO<Test, String> {
 
-    final String INSERT_SQL = "INSERT INTO BAITHI(MaBT, TieuDe, MonHoc, Khoi, NgayTao, MaGV, DanhSachMaCHBT) VALUES (?,?,?,?,?,?,?)";
-    final String UPDATE_SQL = "UPDATE BAITHI SET TieuDe = ?, MonHoc = ?, Khoi = ?, NgayTao = ?, MaGV = ?, DanhSachMaCHBT = ? WHERE MaBT = ?";
-    final String DELETE_SQL = "DELETE FROM BAITHI WHERE MaBT = ?";
+    final String INSERT_SQL = "INSERT INTO BAITHI(MaBThi, TieuDe, MonHoc, Khoi, NgayTao, MaGV, DanhSachMaCHBT) VALUES (?,?,?,?,?,?,?)";
+    final String UPDATE_SQL = "UPDATE BAITHI SET TieuDe = ?, MonHoc = ?, Khoi = ?, NgayTao = ?, MaGV = ?, DanhSachMaCHBT = ? WHERE MaBThi = ?";
+    final String DELETE_SQL = "DELETE FROM BAITHI WHERE MaBThi = ?";
     final String SELECTALL_SQL = "SELECT * FROM BAITHI";
-    final String SELECTBYID_SQL = "SELECT * FROM BAITHI WHERE MaBT = ?";
+    final String SELECTBYID_SQL = "SELECT * FROM BAITHI WHERE MaBThi = ?";
 
     @Override
     public void insert(Test entity) {
@@ -35,7 +35,7 @@ public class TestDAO extends StudiousDAO<Test, Integer> {
     }
 
     @Override
-    public void delete(Integer key) {
+    public void delete(String key) {
         JdbcHelper.update(DELETE_SQL, key);
     }
 
@@ -45,7 +45,7 @@ public class TestDAO extends StudiousDAO<Test, Integer> {
     }
 
     @Override
-    public Test selectById(Integer key) {
+    public Test selectById(String key) {
         List<Test> list = selectSql(SELECTBYID_SQL, key);
         if (list.isEmpty()) {
             return null;

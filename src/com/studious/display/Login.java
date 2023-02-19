@@ -2,6 +2,7 @@ package com.studious.display;
 
 import com.studious.DAO.AccountDAO;
 import com.studious.entity.Account;
+import javax.swing.JFrame;
 import com.studious.utils.Auth;
 import com.studious.utils.MsgBox;
 import java.awt.event.KeyEvent;
@@ -12,10 +13,9 @@ import java.awt.event.KeyEvent;
  */
 public class Login extends javax.swing.JFrame {
 
-    /**
-     * Creates new form Login
-     */
+
     AccountDAO dao = new AccountDAO();
+    public static JFrame main;
 
     public Login() {
         initComponents();
@@ -317,6 +317,8 @@ public class Login extends javax.swing.JFrame {
             main.setVisible(true);
         }
         this.dispose();
+        ChangePassword test = new ChangePassword();
+        test.setVisible(true);
     }
 
     private void openForgotPassForm() {

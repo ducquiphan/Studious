@@ -49,11 +49,10 @@ public class ChangePassword extends javax.swing.JFrame {
         lblTitle.setText("ĐỔI MẬT KHẨU");
 
         lblOldPassword.setFont(new java.awt.Font("Inter", 0, 18)); // NOI18N
-        lblOldPassword.setText("Mật khẩu cũ");
+        lblOldPassword.setText("Mật khẩu hiện tại");
 
         txtOldPassword.setBackground(new java.awt.Color(217, 217, 217));
         txtOldPassword.setFont(new java.awt.Font("Inter", 0, 14)); // NOI18N
-        txtOldPassword.setText("jPasswordField1");
 
         lblNewPass.setFont(new java.awt.Font("Inter", 0, 18)); // NOI18N
         lblNewPass.setText("Mật khẩu mới");
@@ -63,11 +62,9 @@ public class ChangePassword extends javax.swing.JFrame {
 
         txtNewPassword.setBackground(new java.awt.Color(217, 217, 217));
         txtNewPassword.setFont(new java.awt.Font("Inter", 0, 14)); // NOI18N
-        txtNewPassword.setText("jPasswordField1");
 
         txtConfirmPassword.setBackground(new java.awt.Color(217, 217, 217));
         txtConfirmPassword.setFont(new java.awt.Font("Inter", 0, 14)); // NOI18N
-        txtConfirmPassword.setText("jPasswordField1");
 
         btnUpdate.setBackground(new java.awt.Color(232, 255, 183));
         btnUpdate.setFont(new java.awt.Font("Inter", 0, 18)); // NOI18N
@@ -81,6 +78,11 @@ public class ChangePassword extends javax.swing.JFrame {
         btnBack.setBackground(new java.awt.Color(232, 255, 183));
         btnBack.setFont(new java.awt.Font("Inter", 0, 18)); // NOI18N
         btnBack.setText("Quay lại");
+        btnBack.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBackActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout pnlBackGroundLayout = new javax.swing.GroupLayout(pnlBackGround);
         pnlBackGround.setLayout(pnlBackGroundLayout);
@@ -144,8 +146,11 @@ public class ChangePassword extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
+    private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
         // TODO add your handling code here:
+    }//GEN-LAST:event_btnBackActionPerformed
+
+    private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
         if (MsgBox.confirm(this, "Bạn có chắc muốn đổi mật khẩu không?")) {
             updatePass();
         }
@@ -198,8 +203,10 @@ public class ChangePassword extends javax.swing.JFrame {
     private javax.swing.JPasswordField txtNewPassword;
     private javax.swing.JPasswordField txtOldPassword;
     // End of variables declaration//GEN-END:variables
+
     AccountDAO aDao = new AccountDAO();
-    private void updatePass() {
+
+    public void updatePass() {
         String passOld = new String(txtOldPassword.getPassword());
         String passConfirm = new String(txtConfirmPassword.getPassword());
         String passNew = new String(txtNewPassword.getPassword());

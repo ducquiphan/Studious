@@ -1,22 +1,23 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/AWTForms/Dialog.java to edit this template
- */
 package com.studious.display;
+
+import com.studious.DAO.ResutlDAO;
+import com.studious.entity.Result;
+import java.util.List;
 
 /**
  *
  * @author Admin
  */
-public class DoTestReport extends java.awt.Dialog {
+public class DoTestReport extends java.awt.Frame {
 
     /**
      * Creates new form DoTestReport
      */
-    public DoTestReport(java.awt.Frame parent, boolean modal) {
-        super(parent, modal);
+    public DoTestReport() {
+        DoTest.clock.stop();
         initComponents();
         setLocationRelativeTo(null);
+        init();
     }
 
     /**
@@ -53,6 +54,7 @@ public class DoTestReport extends java.awt.Dialog {
         btnLogout = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(232, 255, 183));
+        setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
                 closeDialog(evt);
@@ -103,6 +105,11 @@ public class DoTestReport extends java.awt.Dialog {
         btnReturn.setBackground(new java.awt.Color(229, 229, 229));
         btnReturn.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnReturn.setText("Trở về");
+        btnReturn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnReturnActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -288,25 +295,19 @@ public class DoTestReport extends java.awt.Dialog {
      * Closes the dialog
      */
     private void closeDialog(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_closeDialog
-        setVisible(false);
-        dispose();
+        Login.main.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_closeDialog
+
+    private void btnReturnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReturnActionPerformed
+        Login.main.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnReturnActionPerformed
 
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                DoTestReport dialog = new DoTestReport(new java.awt.Frame(), true);
-                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                    public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);
-                    }
-                });
-                dialog.setVisible(true);
-            }
-        });
     }
 
 
@@ -336,4 +337,52 @@ public class DoTestReport extends java.awt.Dialog {
     private javax.swing.JLabel lblTitleReport;
     private javax.swing.JPanel pnlBackground;
     // End of variables declaration//GEN-END:variables
+
+    ResutlDAO rDao = new ResutlDAO();
+    List<Result> listResult = rDao.selectByIndexTest(DoTest.sEntity.getStudentID(), DoTest.testEntity.getTestID(), DoTest.indexTest);
+    int sumQuestion = listResult.size();
+    double eachPoint = 10.0 / sumQuestion;
+    int sumCorrect = 0;
+    int sumSelected = 0;
+    double sumPoint = 0;
+
+    public void fillReport() {
+        lblTimeNumber.setText(DoTest.timeTested + " phút");
+        lblScoreNumber.setText(sumPoint + " điểm");
+        lblRightAnswerNumber.setText(sumCorrect + "/" + sumQuestion);
+        lblDoneAnswerNumber.setText(sumSelected + "/" + sumQuestion);
+    }
+
+    public void calculateReport() {
+        for (Result result : listResult) {
+            if (!result.getAnsSelected().equals("")) {
+                sumSelected++;
+                if (result.getAnsSelected().equals(result.getAnsCorrect())) {
+                    sumCorrect++;
+                }
+            }
+        }
+        sumPoint = sumCorrect * eachPoint;
+        System.out.println(eachPoint);
+    }
+
+    public void vote() {
+        if (sumPoint >= 9) {
+            lblShowRate.setText("Xuất sắc");
+        } else if (sumPoint >= 8) {
+            lblShowRate.setText("Giỏi");
+        } else if (sumPoint >= 6) {
+            lblShowRate.setText("Khá");
+        } else if (sumPoint >= 4) {
+            lblShowRate.setText("Trung bình");
+        } else {
+            lblShowRate.setText("Yếu");
+        }
+    }
+
+    private void init() {
+        calculateReport();
+        fillReport();
+        vote();
+    }
 }

@@ -2,7 +2,7 @@ package com.studious.DAO;
 
 import com.studious.entity.Result;
 import com.studious.entity.Test;
-import com.studious.utils.JdbcHelper;
+import com.studious.ultils.JdbcHelper;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
@@ -81,7 +81,7 @@ public class ResutlDAO extends StudiousDAO<Result, Integer> {
     public List<Result> selectSql(String Sql, Object... args) {
         List<Result> list = new ArrayList<>();
         try {
-            ResultSet rs = JdbcHelper.query(Sql, args);
+            ResultSet rs = JdbcHelper.quyery(Sql, args);
             while (rs.next()) {
                 Result entity = new Result();
                 entity.setIndexTest(rs.getInt(2));
@@ -102,7 +102,7 @@ public class ResutlDAO extends StudiousDAO<Result, Integer> {
     public List<Result> selectSqlSuport(String Sql, Object... args) {
         List<Result> list = new ArrayList<>();
         try {
-            ResultSet rs = JdbcHelper.query(Sql, args);
+            ResultSet rs = JdbcHelper.quyery(Sql, args);
             while (rs.next()) {
                 Result entity = new Result();
                 entity.setIndexTest(rs.getInt(1));

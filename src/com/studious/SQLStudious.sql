@@ -47,6 +47,7 @@ GO
 CREATE TABLE BAITHI (
 	MaBThi VARCHAR(10) NOT NULL,
 	TieuDe NVARCHAR(100),
+	ThoiGian INT,
 	MonHoc NVARCHAR(30),
 	Khoi INT,
 	NgayTao	DATE DEFAULT GETDATE(),
@@ -100,15 +101,18 @@ CREATE TABLE HOIDAP (
 )
 GO
 CREATE TABLE KETQUA (
+	STT INT IDENTITY NOT NULL,
 	MaLanThi INT NOT NULL,
 	MaHS VARCHAR(10) NOT NULL,
-	MaBThi VARCHAR(10) NOT NULL,
-	MaCau INT,
-	DanAnChon NVARCHAR(30),
-	DanAnDung NVARCHAR(30),
+	MaBTHI VARCHAR(10) NOT NULL,
+	MaCau INT NOT NULL,
+	DanAnChon VARCHAR(30),
+	DanAnDung VARCHAR(30),
 	NgayThi DATE DEFAULT GETDATE()
 )
+GO
 
+ALTER TABLE KETQUA ADD CONSTRAINT pk_KETQUA PRIMARY KEY (STT)
 
 
 -------------------------------------------
@@ -300,7 +304,11 @@ go
 INSERT INTO GIAOVIEN(MaGV, HoVaTen, GioiTinh, NgaySinh, ChuyenMon, Email, SoDT, PathIMG, MaTK) VALUES ('GV12345', N'Trần Hoàng Danh', 0, '04/11/2003', N'TOÁN', 'danhth@gmail.com', '0971714478', 'image/img1', 'GV12345')
 INSERT INTO GIAOVIEN(MaGV, HoVaTen, GioiTinh, NgaySinh, ChuyenMon, Email, SoDT, PathIMG, MaTK) VALUES ('GV67890', N'Phan Quí Đức', 0, '06/23/2000', N'ANH VĂN', 'ducpq@gmail.com', '0964856254', 'image/img1', 'GV67890')
 go
+-----------------------------------
+INSERT INTO BAIHOC(TenBH, MonHoc, Khoi, NgayTao, MaGV) VALUES
+('TOÁN CỘNG TRỪ', 'TOÁN','10', '11-11-2020','GV25579')
 
+SELECT * FROM KETQUA WHERE (MaLanThi = '' AND MaHS = '' AND MaBTHI = '' AND MaCau = '')
 INSERT INTO BAIHOC(TenBH, MonHoc, Khoi, MaGV) VALUES (N'TOÁN CỘNG TRỪ', N'TOÁN',10,'GV12345')
 INSERT INTO BAIHOC(TenBH, MonHoc, Khoi, MaGV) VALUES (N'TOÁN NHÂN CHIA', N'TOÁN',11,'GV12345')
 INSERT INTO BAIHOC(TenBH, MonHoc, Khoi, MaGV) VALUES (N'TOPIC 1', N'ANH VĂN',10,'GV67890')

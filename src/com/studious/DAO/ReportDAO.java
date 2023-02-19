@@ -1,6 +1,6 @@
 package com.studious.DAO;
 
-import com.studious.utils.JdbcHelper;
+import com.studious.ultils.JdbcHelper;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,7 +14,7 @@ public class ReportDAO {
     private List<Object[]> getListofArray(String sql, String[] cols, Object... args) {
         try {
             List<Object[]> list = new ArrayList<>();
-            ResultSet rs = JdbcHelper.query(sql, args);
+            ResultSet rs = JdbcHelper.quyery(sql, args);
             while (rs.next()) {
                 Object[] vals = new Object[cols.length];
                 for (int i = 0; i < cols.length; i++) {

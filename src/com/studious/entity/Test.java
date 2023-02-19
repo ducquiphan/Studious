@@ -11,6 +11,7 @@ public class Test {
 
     private String testID;
     private String testTitle;
+    private int timeTest;
     private String lesson;
     private int grade;
     private Date createDate;
@@ -20,9 +21,10 @@ public class Test {
     public Test() {
     }
 
-    public Test(String testID, String testTitle, String lesson, int grade, Date createDate, String teacherID, String questionsList) {
+    public Test(String testID, String testTitle, int timeTest, String lesson, int grade, Date createDate, String teacherID, String questionsList) {
         this.testID = testID;
         this.testTitle = testTitle;
+        this.timeTest = timeTest;
         this.lesson = lesson;
         this.grade = grade;
         this.createDate = createDate;
@@ -89,6 +91,14 @@ public class Test {
     @Override
     public String toString() {
         return getTestTitle();
+    }
+
+    public int getTimeTest() {
+        return timeTest;
+    }
+
+    public void setTimeTest(int timeTest) {
+        this.timeTest = timeTest;
     }
 
 }

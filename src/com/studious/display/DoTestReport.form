@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
-<Form version="1.2" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.DialogFormInfo">
+<Form version="1.2" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.FrameFormInfo">
   <Properties>
     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
       <Color blue="b7" green="ff" red="e8" type="rgb"/>
     </Property>
+    <Property name="resizable" type="boolean" value="false"/>
   </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
@@ -286,6 +287,9 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Tr&#x1edf; v&#x1ec1;"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnReturnActionPerformed"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>
