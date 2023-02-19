@@ -13,7 +13,7 @@ import java.sql.ResultSet;
 public class LessonDAO extends StudiousDAO<Lesson, Integer> {
 
     final String INSERT_SQL = "INSERT INTO BAIHOC(TenBH, MonHoc, Khoi, MaGV) VALUES (?,?,?,?)";
-    final String UPDATE_SQL = "UPDATE BAIHOC SET TenBH = ?, MonHoc = ?, Khoi = ?, NgayTao = ?, MaGV = ? WHERE MaBH = ?";
+    final String UPDATE_SQL = "UPDATE BAIHOC SET TenBH = ?, MonHoc = ?, Khoi = ? WHERE MaBH = ?";
     final String DELETE_SQL = "DELETE FROM BAIHOC WHERE MaBH = ?";
     final String SELECTALL_SQL = "SELECT * FROM BAIHOC";
     final String SELECTBYID_SQL = "SELECT * FROM BAIHOC WHERE MaBH = ?";
@@ -21,17 +21,17 @@ public class LessonDAO extends StudiousDAO<Lesson, Integer> {
 
     @Override
     public void insert(Lesson entity) {
-        JdbcHelper.update(INSERT_SQL, entity.getLessonID(),
+        JdbcHelper.update(INSERT_SQL,
                 entity.getLessonName(), entity.getSubject(),
-                entity.getGrade(), entity.getDateCreated(),
+                entity.getGrade(),
                 entity.getTeacherID());
     }
-    
+
     private List<Object> getListofArray(String sql, Object... args) {
         try {
             List<Object> list = new ArrayList<>();
             ResultSet rs = JdbcHelper.executeQuery(sql, args);
-            while(rs.next()) {
+            while (rs.next()) {
                 Object val = new Object();
                 val = rs.getObject(1);
                 list.add(val);
@@ -42,12 +42,11 @@ public class LessonDAO extends StudiousDAO<Lesson, Integer> {
             throw new RuntimeException(e);
         }
     }
-    
+
     @Override
     public void update(Lesson entity) {
         JdbcHelper.update(UPDATE_SQL, entity.getLessonName(),
                 entity.getSubject(), entity.getGrade(),
-                entity.getDateCreated(), entity.getTeacherID(),
                 entity.getLessonID());
     }
 
@@ -69,12 +68,12 @@ public class LessonDAO extends StudiousDAO<Lesson, Integer> {
         }
         return list.get(0);
     }
-    
+
     public List<Object> selectGradeBySubject(String subject) {
         String sql = "{CALL  sp_DanhSachBaiHocTheoMon(?)}";
         return getListofArray(sql, subject);
     }
-    
+
     public List<Lesson> selectBySubjectAndGrade(String subject, Integer grade) {
         List<Lesson> list = selectSql(SELECTSUBJECTBYGRADE_SQL, subject, grade);
         if (list.isEmpty()) {
@@ -82,12 +81,11 @@ public class LessonDAO extends StudiousDAO<Lesson, Integer> {
         }
         return list;
     }
-    
+
     public List<Object> selectSubject() {
         String sql = "{CALL  sp_DanhSachMonHoc}";
         return getListofArray(sql);
     }
-    
 
     @Override
     public List<Lesson> selectSql(String Sql, Object... args) {

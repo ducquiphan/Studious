@@ -19,12 +19,13 @@ public class QuestionDAO extends StudiousDAO<Question, Integer> {
     final String SELECTALL_SQL = "SELECT * FROM CAUHOI";
     final String SELECTBYID_SQL = "SELECT * FROM CAUHOI WHERE MaCH = ?";
     final String SELECTBYLESSONID_SQL = "SELECT * FROM CAUHOI WHERE MaBH = ?";
+    final String SELECTBYQUESTION_SQL = "SELECT * FROM CAUHOI WHERE De LIKE %?%";
 
     @Override
     public void insert(Question entity) {
-        JdbcHelper.update(INSERT_SQL, entity.getQuestionID(), entity.getQuestion(),
-                entity.getWrongAns1(), entity.getWrongAns2(),
-                entity.getWrongAns3(), entity.getWrongAns4(),
+        JdbcHelper.update(INSERT_SQL, entity.getQuestion(),
+                entity.getAns1(), entity.getAns2(),
+                entity.getAns3(), entity.getAns4(),
                 entity.getAns(), entity.getLessonID(),
                 entity.getTeacherID()
         );
@@ -33,8 +34,8 @@ public class QuestionDAO extends StudiousDAO<Question, Integer> {
     @Override
     public void update(Question entity) {
         JdbcHelper.update(UPDATE_SQL, entity.getQuestion(),
-                entity.getWrongAns1(), entity.getWrongAns2(),
-                entity.getWrongAns3(), entity.getWrongAns4(),
+                entity.getAns1(), entity.getAns2(),
+                entity.getAns3(), entity.getAns4(),
                 entity.getAns(), entity.getLessonID(),
                 entity.getTeacherID(), entity.getQuestionID());
     }
@@ -66,6 +67,14 @@ public class QuestionDAO extends StudiousDAO<Question, Integer> {
         return list;
     }
     
+    public List<Question> selectByQuestion(String question){
+        List<Question> list = selectSql(SELECTBYQUESTION_SQL, question);
+        if (list.isEmpty()) {
+            return null;
+        }
+        return list;
+    }
+    
     @Override
     public List<Question> selectSql(String Sql, Object... args) {
         List<Question> list = new ArrayList<>();
@@ -75,10 +84,10 @@ public class QuestionDAO extends StudiousDAO<Question, Integer> {
                 Question entity = new Question();
                 entity.setQuestionID(rs.getInt(1));
                 entity.setQuestion(rs.getString(2));
-                entity.setWrongAns1(rs.getString(3));
-                entity.setWrongAns2(rs.getString(4));
-                entity.setWrongAns3(rs.getString(5));
-                entity.setWrongAns4(rs.getString(6));
+                entity.setAns1(rs.getString(3));
+                entity.setAns2(rs.getString(4));
+                entity.setAns3(rs.getString(5));
+                entity.setAns4(rs.getString(6));
                 entity.setAns(rs.getString(7));
                 entity.setLessonID(rs.getInt(8));
                 entity.setTeacherID(rs.getString(9));
