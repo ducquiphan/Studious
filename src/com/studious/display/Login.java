@@ -4,6 +4,7 @@ import com.studious.DAO.AccountDAO;
 import com.studious.entity.Account;
 import com.studious.ultils.Auth;
 import com.studious.ultils.MsgBox;
+import javax.swing.JFrame;
 
 /**
  *
@@ -11,10 +12,9 @@ import com.studious.ultils.MsgBox;
  */
 public class Login extends javax.swing.JFrame {
 
-    /**
-     * Creates new form Login
-     */
+
     AccountDAO dao = new AccountDAO();
+    public static JFrame main;
 
     public Login() {
         initComponents();
@@ -261,10 +261,10 @@ public class Login extends javax.swing.JFrame {
 
     private void openMainForm(int index) {
         if (index == 1 || index == 2) {
-            MainWindow main = new MainWindow();
+            main = new MainWindow();
             main.setVisible(true);
         } else {
-            MainWindowStudents main = new MainWindowStudents();
+            main = new MainWindowStudents();
             main.setVisible(true);
         }
         this.dispose();

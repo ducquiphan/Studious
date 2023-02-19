@@ -213,7 +213,8 @@ public class MainWindowStudents extends javax.swing.JFrame {
     }//GEN-LAST:event_btnScoreActionPerformed
 
     private void btnTestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTestActionPerformed
-        // TODO add your handling code here:
+        new DoTest(this, true).setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_btnTestActionPerformed
 
     /**

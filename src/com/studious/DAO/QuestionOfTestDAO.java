@@ -49,7 +49,7 @@ public class QuestionOfTestDAO extends StudiousDAO<QuestionOfTest, Integer> {
         return list.get(0);
     }
 
-    public List<QuestionOfTest> selectByTestId(Integer key) {
+    public List<QuestionOfTest> selectByTestId(String key) {
         List<QuestionOfTest> list = selectSql(SELECTBYTESTID_SQL, key);
         return list;
     }

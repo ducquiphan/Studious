@@ -13,18 +13,20 @@ import java.util.List;
  */
 public class ResutlDAO extends StudiousDAO<Result, Integer> {
 
-    final String INSERT_SQL = "INSERT INTO LANTHI(MaLanThi, MaHS, MaBTHI, MaCau, DanAnChon, DanAnDung, NgayThi) VALUES (?,?,?,?,?,?,?)";
-    final String UPDATE_SQL = "UPDATE LANTHI SET DanAnChon = ? WHERE (MaLanThi = ? AND MaHS = ? AND MaBTHI = ? AND MaCau = ?)";
-    final String DELETE_SQL = "DELETE FROM LANTHI WHERE (MaLanThi = ? AND MaHS = ? AND MaBTHI = ? AND MaCau = ?)";
-    final String SELECTALL_SQL = "SELECT * FROM LANTHI";
-    final String SELECTBYID_SQL = "SELECT * FROM LANTHI WHERE (MaLanThi = ? AND MaHS = ? AND MaBTHI = ? AND MaCau = ?)";
+    final String INSERT_SQL = "INSERT INTO KETQUA(MaLanThi, MaHS, MaBTHI, MaCau, DanAnChon, DanAnDung) VALUES (?,?,?,?,?,?)";
+    final String UPDATE_SQL = "UPDATE KETQUA SET DanAnChon = ? WHERE (MaLanThi = ? AND MaHS = ? AND MaBTHI = ? AND MaCau = ?)";
+    final String DELETE_SQL = "DELETE FROM KETQUA WHERE (MaLanThi = ? AND MaHS = ? AND MaBTHI = ? AND MaCau = ?)";
+    final String SELECTALL_SQL = "SELECT * FROM KETQUA";
+    final String SELECTBYID_SQL = "SELECT * FROM KETQUA WHERE (MaLanThi = ? AND MaHS = ? AND MaBTHI = ? AND MaCau = ?)";
+    final String SELECTBYTESTSTUDENT = "SELECT MaLanThi, MaHS, MaBTHI FROM KETQUA WHERE (MaHS = ? AND MaBTHI = ?) GROUP BY MaHS, MaBTHI, MaLanThi ORDER BY MaLanThi DESC";
+    final String SELECTBYINDEXTEST = "SELECT * FROM KETQUA WHERE (MaHS = ? AND MaBTHI = ? AND MaLanThi = ?) ";
 
     @Override
     public void insert(Result entity) {
         JdbcHelper.update(INSERT_SQL, entity.getIndexTest(),
                 entity.getStudentID(), entity.getTestID(),
                 entity.getIndexQuestion(), entity.getAnsSelected(),
-                entity.getAnsCorrect(), entity.getDateTest());
+                entity.getAnsCorrect());
     }
 
     @Override
@@ -53,14 +55,22 @@ public class ResutlDAO extends StudiousDAO<Result, Integer> {
 
     @Override
     public Result selectById(Integer key) {
-        Result entity = selectById(key);
-        return selectByIdSupport(entity);
+        return null;
     }
 
-    public Result selectByIdSupport(Result entity) {
-        List<Result> list = selectSql(SELECTBYID_SQL, entity.getIndexTest(),
-                entity.getStudentID(), entity.getTestID(),
-                entity.getIndexQuestion());
+    public Result selectByIdSupport(int indexTest, String studentID, String testID, int indexQuestion) {
+        List<Result> list = selectSql(SELECTBYID_SQL, indexTest,
+                studentID, testID,
+                indexQuestion);
+        if (list.isEmpty()) {
+            return null;
+        }
+        return list.get(0);
+    }
+
+    public Result selectByTestStudent(String StudentID, String TestID) {
+        List<Result> list = selectSqlSuport(SELECTBYTESTSTUDENT,
+                StudentID, TestID);
         if (list.isEmpty()) {
             return null;
         }
@@ -74,16 +84,40 @@ public class ResutlDAO extends StudiousDAO<Result, Integer> {
             ResultSet rs = JdbcHelper.quyery(Sql, args);
             while (rs.next()) {
                 Result entity = new Result();
-                entity.setIndexTest(rs.getInt(1));
-                entity.setStudentID(rs.getString(2));
-                entity.setTestID(rs.getString(3));
-                entity.setDateTest(rs.getDate(4));
+                entity.setIndexTest(rs.getInt(2));
+                entity.setStudentID(rs.getString(3));
+                entity.setTestID(rs.getString(4));
+                entity.setIndexQuestion(rs.getInt(5));
+                entity.setAnsSelected(rs.getString(6));
+                entity.setAnsCorrect(rs.getString(7));
+                entity.setDateTest(rs.getDate(8));
                 list.add(entity);
             }
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
         return list;
+    }
+
+    public List<Result> selectSqlSuport(String Sql, Object... args) {
+        List<Result> list = new ArrayList<>();
+        try {
+            ResultSet rs = JdbcHelper.quyery(Sql, args);
+            while (rs.next()) {
+                Result entity = new Result();
+                entity.setIndexTest(rs.getInt(1));
+                entity.setStudentID(rs.getString(2));
+                entity.setTestID(rs.getString(3));
+                list.add(entity);
+            }
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+        return list;
+    }
+
+    public List<Result> selectByIndexTest(String studentID, String testID, int indexTest) {
+        return selectSql(SELECTBYINDEXTEST, studentID, testID, indexTest);
     }
 
 }
