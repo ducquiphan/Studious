@@ -748,7 +748,7 @@ public class DoTest extends java.awt.Dialog {
                 .addComponent(pnlChooseAnswer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(pnlContent, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(0, 31, Short.MAX_VALUE))
         );
         pnlBackgroundLayout.setVerticalGroup(
             pnlBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -772,7 +772,7 @@ public class DoTest extends java.awt.Dialog {
                 .addGroup(pnlBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(pnlChooseAnswer, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(pnlContent, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(50, Short.MAX_VALUE))
+                .addContainerGap(18, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -1082,10 +1082,10 @@ public class DoTest extends java.awt.Dialog {
     public static Student sEntity = null;
     List<QuestionOfTest> listQOT;
     List<Question> listQ = new ArrayList<>();
+    List<JButton> listButton = new ArrayList<>();
     public static List<Result> listR = new ArrayList<>();
     public static int indexTest = 0;
     int indexQuestion = 1;
-    List<JButton> listButton = new ArrayList<>();
     int mm = 1;
     int ss = 10;
     public static Timer clock;
@@ -1093,7 +1093,7 @@ public class DoTest extends java.awt.Dialog {
     public static int timeTested = 0;
 
     private void fillQuestion(Question qEntity, Result rEntity) {
-        lblQuestionNumber.setText("Câu" + rEntity.getIndexQuestion() + ": " + qEntity.getQuestion());
+        lblQuestionNumber.setText("Câu " + rEntity.getIndexQuestion() + ": " + qEntity.getQuestion());
         String A = qEntity.getWrongAns1();
         String B = qEntity.getWrongAns2();
         String C = qEntity.getWrongAns3();
@@ -1239,9 +1239,9 @@ public class DoTest extends java.awt.Dialog {
     private void setStatus() {
         Result rEntity = rDao.selectByIdSupport(indexTest, sEntity.getStudentID(), testEntity.getTestID(), indexQuestion);
         if (!rEntity.getAnsSelected().equals("")) {
-            listButton.get(indexQuestion - 1).setBackground(Color.WHITE);
+            listButton.get(indexQuestion - 1).setBackground(Color.green);
         } else {
-            listButton.get(indexQuestion - 1).setBackground(Color.GRAY);
+            listButton.get(indexQuestion - 1).setBackground(Color.red);
         }
     }
 
@@ -1254,18 +1254,6 @@ public class DoTest extends java.awt.Dialog {
             this.setVisible(false);
             this.dispose();
         }
-    }
-
-    private void init() {
-        testEntity = tDao.selectById("TOA01");
-        sEntity = sDao.selectById("HS25579");
-        setTime();
-        addButton();
-        setIndexTest();
-        loadData();
-        setStatusButton();
-        Result rEntity = rDao.selectByIdSupport(indexTest, sEntity.getStudentID(), testEntity.getTestID(), 1);
-        fillQuestion(listQ.get(0), rEntity);
     }
 
     private void prev() {
@@ -1313,5 +1301,17 @@ public class DoTest extends java.awt.Dialog {
 
     public Timer getClock() {
         return clock;
+    }
+
+    private void init() {
+        testEntity = tDao.selectById("TOA01");
+        sEntity = sDao.selectById("HS25579");
+        setTime();
+        addButton();
+        setIndexTest();
+        loadData();
+        setStatusButton();
+        Result rEntity = rDao.selectByIdSupport(indexTest, sEntity.getStudentID(), testEntity.getTestID(), 1);
+        fillQuestion(listQ.get(0), rEntity);
     }
 }

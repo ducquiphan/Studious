@@ -268,6 +268,8 @@ public class Login extends javax.swing.JFrame {
             main.setVisible(true);
         }
         this.dispose();
+        ChangePassword test = new ChangePassword();
+        test.setVisible(true);
     }
 
     private void openForgotPassForm() {
