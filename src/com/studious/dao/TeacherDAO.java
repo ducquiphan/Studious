@@ -1,6 +1,6 @@
-package com.studious.DAO;
+package com.studious.dao;
 
-import com.studious.DAO.StudiousDAO;
+import com.studious.dao.StudiousDAO;
 import com.studious.entity.Teacher;
 import java.util.ArrayList;
 import java.util.List;

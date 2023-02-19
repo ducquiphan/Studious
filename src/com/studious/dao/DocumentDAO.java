@@ -1,4 +1,4 @@
-package com.studious.DAO;
+package com.studious.dao;
 
 import com.studious.entity.Document;
 import com.studious.utils.JdbcHelper;

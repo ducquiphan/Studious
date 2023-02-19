@@ -1,5 +1,4 @@
-
-package com.studious.DAO;
+package com.studious.dao;
 
 import java.util.List;
 
