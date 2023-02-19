@@ -641,8 +641,8 @@
                                   <Group type="102" attributes="0">
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                          <Component id="jPanel3" max="32767" attributes="0"/>
-                                          <Component id="jPanel4" max="32767" attributes="0"/>
+                                          <Component id="pnlQuest" max="32767" attributes="0"/>
+                                          <Component id="pnlQnA" max="32767" attributes="0"/>
                                       </Group>
                                       <EmptySpace max="32767" attributes="0"/>
                                   </Group>
@@ -652,16 +652,16 @@
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" alignment="0" attributes="0">
                                       <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="jPanel3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="pnlQuest" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                      <Component id="jPanel4" max="32767" attributes="0"/>
+                                      <Component id="pnlQnA" max="32767" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                             </DimensionLayout>
                           </Layout>
                           <SubComponents>
-                            <Container class="javax.swing.JPanel" name="jPanel3">
+                            <Container class="javax.swing.JPanel" name="pnlQuest">
                               <Properties>
                                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                                   <Color blue="ff" green="ff" red="ff" type="rgb"/>
@@ -682,7 +682,7 @@
                                                   <EmptySpace min="-2" pref="49" max="-2" attributes="0"/>
                                               </Group>
                                               <Group type="102" alignment="0" attributes="0">
-                                                  <Component id="lblTitileDoTest" min="-2" max="-2" attributes="0"/>
+                                                  <Component id="lblTitleDoTest" min="-2" max="-2" attributes="0"/>
                                                   <EmptySpace type="separate" max="-2" attributes="0"/>
                                                   <Component id="lblShowQuestionDoTest" max="32767" attributes="0"/>
                                               </Group>
@@ -710,7 +710,7 @@
                                       <Group type="102" alignment="0" attributes="0">
                                           <EmptySpace max="-2" attributes="0"/>
                                           <Group type="103" groupAlignment="3" attributes="0">
-                                              <Component id="lblTitileDoTest" alignment="3" min="-2" max="-2" attributes="0"/>
+                                              <Component id="lblTitleDoTest" alignment="3" min="-2" max="-2" attributes="0"/>
                                               <Component id="lblShowQuestionDoTest" alignment="3" min="-2" max="-2" attributes="0"/>
                                           </Group>
                                           <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -736,7 +736,7 @@
                                 </DimensionLayout>
                               </Layout>
                               <SubComponents>
-                                <Component class="javax.swing.JLabel" name="lblTitileDoTest">
+                                <Component class="javax.swing.JLabel" name="lblTitleDoTest">
                                   <Properties>
                                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                                       <Font name="Segoe UI" size="14" style="0"/>
@@ -862,7 +862,7 @@
                                 </Component>
                               </SubComponents>
                             </Container>
-                            <Container class="javax.swing.JPanel" name="jPanel4">
+                            <Container class="javax.swing.JPanel" name="pnlQnA">
                               <Properties>
                                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                                   <Color blue="ff" green="ff" red="ff" type="rgb"/>
@@ -1321,6 +1321,9 @@
                           <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
                         </Property>
                       </Properties>
+                      <Events>
+                        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tblQuestionsMouseClicked"/>
+                      </Events>
                     </Component>
                   </SubComponents>
                 </Container>
@@ -1379,6 +1382,9 @@
                     </Property>
                     <Property name="text" type="java.lang.String" value="L&#xe0;m"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnDoActionPerformed"/>
+                  </Events>
                 </Component>
               </SubComponents>
             </Container>

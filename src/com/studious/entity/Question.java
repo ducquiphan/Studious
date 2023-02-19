@@ -7,10 +7,10 @@ package com.studious.entity;
 public class Question {
     private int questionID;
     private String question;
-    private String wrongAns1;
-    private String wrongAns2;
-    private String wrongAns3;
-    private String wrongAns4;
+    private String ans1;
+    private String ans2;
+    private String ans3;
+    private String ans4;
     private String ans;
     private int lessonID;
     private String teacherID;
@@ -18,18 +18,55 @@ public class Question {
     public Question() {
     }
 
-    public Question(int questionID, String question, String wrongAns1, String wrongAns2, String wrongAns3, String wrongAns4, String ans, int lessonID, String teacherID) {
+    public Question(int questionID, String question, String ans1, String ans2, String ans3, String ans4, String ans, int lessonID, String teacherID) {
         this.questionID = questionID;
         this.question = question;
-        this.wrongAns1 = wrongAns1;
-        this.wrongAns2 = wrongAns2;
-        this.wrongAns3 = wrongAns3;
-        this.wrongAns4 = wrongAns4;
+        this.ans1 = ans1;
+        this.ans2 = ans2;
+        this.ans3 = ans3;
+        this.ans4 = ans4;
         this.ans = ans;
         this.lessonID = lessonID;
         this.teacherID = teacherID;
     }
 
+    public String getAns1() {
+        return ans1;
+    }
+
+    public void setAns1(String ans1) {
+        this.ans1 = ans1;
+    }
+
+    public String getAns2() {
+        return ans2;
+    }
+
+    public void setAns2(String ans2) {
+        this.ans2 = ans2;
+    }
+
+    public String getAns3() {
+        return ans3;
+    }
+
+    public void setAns3(String ans3) {
+        this.ans3 = ans3;
+    }
+
+    public String getAns4() {
+        return ans4;
+    }
+
+    public void setAns4(String ans4) {
+        this.ans4 = ans4;
+    }
+
+
+    
+
+    
+    
     public int getQuestionID() {
         return questionID;
     }
@@ -45,39 +82,6 @@ public class Question {
     public void setQuestion(String question) {
         this.question = question;
     }
-
-    public String getWrongAns1() {
-        return wrongAns1;
-    }
-
-    public void setWrongAns1(String wrongAns1) {
-        this.wrongAns1 = wrongAns1;
-    }
-
-    public String getWrongAns2() {
-        return wrongAns2;
-    }
-
-    public void setWrongAns2(String wrongAns2) {
-        this.wrongAns2 = wrongAns2;
-    }
-
-    public String getWrongAns3() {
-        return wrongAns3;
-    }
-
-    public void setWrongAns3(String wrongAns3) {
-        this.wrongAns3 = wrongAns3;
-    }
-
-    public String getWrongAns4() {
-        return wrongAns4;
-    }
-
-    public void setWrongAns4(String wrongAns4) {
-        this.wrongAns4 = wrongAns4;
-    }
-
     public String getAns() {
         return ans;
     }

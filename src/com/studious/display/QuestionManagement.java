@@ -30,12 +30,14 @@ public class QuestionManagement extends java.awt.Dialog {
 
     QuestionDAO qdao = new QuestionDAO();
     LessonDAO ldao = new LessonDAO();
+    int row = -1;
 
     private void init() {
         this.setLocationRelativeTo(this);
         this.fillCboSubjectList();
         //setIconImage(XImage.getAppIcon());
         setResizable(false);
+        doTest(false);
     }
 
     private void fillCboSubjectList() {
@@ -98,13 +100,34 @@ public class QuestionManagement extends java.awt.Dialog {
                 if (list != null) {
                     for (int i = 0; i < list.size(); i++) {
                         Question question = list.get(i);
-                        model.addRow(new Object[]{i + 1, question.getQuestionID(), question.getQuestion(), question.getAns(), question.getWrongAns1(), question.getWrongAns2(), question.getWrongAns3(), question.getWrongAns4()});
+                        model.addRow(new Object[]{i + 1, question.getQuestionID(), question.getQuestion(), question.getAns(), question.getAns1(), question.getAns2(), question.getAns3(), question.getAns4()});
                     }
                 }
 
             }
         } catch (Exception e) {
             MsgBox.alert(this, e.toString());
+        }
+    }
+
+    private void doTest(boolean check) {
+        if (check) {
+            pnlQnA.setVisible(check);
+            pnlQuest.setVisible(check);
+            Integer questionID = (Integer) tblQuestions.getValueAt(this.row, 1);
+            Question quest = qdao.selectById(questionID);
+            lblTitleDoTest.setVisible(check);
+            lblTitleDoTest.setText("Tiêu đề: " + quest.getQuestion());
+            lblAnswer.setVisible(check);
+            lblResult.setVisible(!check);
+            rdoChooseAnsA.setText(quest.getAns1());
+            rdoChooseAnsB.setText(quest.getAns2());
+            rdoChooseAnsC.setText(quest.getAns3());
+            rdoChooseAnsD.setText(quest.getAns4());
+
+        } else {
+            pnlQnA.setVisible(check);
+            pnlQuest.setVisible(check);
         }
     }
 
@@ -153,8 +176,8 @@ public class QuestionManagement extends java.awt.Dialog {
         jScrollPane1 = new javax.swing.JScrollPane();
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
-        jPanel3 = new javax.swing.JPanel();
-        lblTitileDoTest = new javax.swing.JLabel();
+        pnlQuest = new javax.swing.JPanel();
+        lblTitleDoTest = new javax.swing.JLabel();
         lblShowQuestionDoTest = new javax.swing.JLabel();
         lblAnswer = new javax.swing.JLabel();
         lblResult = new javax.swing.JLabel();
@@ -164,7 +187,7 @@ public class QuestionManagement extends java.awt.Dialog {
         btnCheck = new javax.swing.JButton();
         btnRemake = new javax.swing.JButton();
         rdoChooseAnsC = new javax.swing.JRadioButton();
-        jPanel4 = new javax.swing.JPanel();
+        pnlQnA = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         lblAvatar = new javax.swing.JLabel();
         lblName = new javax.swing.JLabel();
@@ -458,11 +481,11 @@ public class QuestionManagement extends java.awt.Dialog {
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
 
-        jPanel3.setBackground(new java.awt.Color(255, 255, 255));
+        pnlQuest.setBackground(new java.awt.Color(255, 255, 255));
 
-        lblTitileDoTest.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        lblTitileDoTest.setText("Tiêu đề:");
-        lblTitileDoTest.setToolTipText("");
+        lblTitleDoTest.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lblTitleDoTest.setText("Tiêu đề:");
+        lblTitleDoTest.setToolTipText("");
 
         lblShowQuestionDoTest.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lblShowQuestionDoTest.setText("1+1 = ?");
@@ -512,28 +535,28 @@ public class QuestionManagement extends java.awt.Dialog {
         rdoChooseAnsC.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         rdoChooseAnsC.setText("C. 0");
 
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
+        javax.swing.GroupLayout pnlQuestLayout = new javax.swing.GroupLayout(pnlQuest);
+        pnlQuest.setLayout(pnlQuestLayout);
+        pnlQuestLayout.setHorizontalGroup(
+            pnlQuestLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlQuestLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addGroup(pnlQuestLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlQuestLayout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(btnCheck, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(btnRemake, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(49, 49, 49))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(lblTitileDoTest)
+                    .addGroup(pnlQuestLayout.createSequentialGroup()
+                        .addComponent(lblTitleDoTest)
                         .addGap(18, 18, 18)
                         .addComponent(lblShowQuestionDoTest, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlQuestLayout.createSequentialGroup()
+                        .addGroup(pnlQuestLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(rdoChooseAnsC, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(lblResult, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 225, Short.MAX_VALUE)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createSequentialGroup()
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pnlQuestLayout.createSequentialGroup()
                                 .addComponent(lblAnswer)
                                 .addGap(0, 0, Short.MAX_VALUE))
                             .addComponent(rdoChooseAnsA, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -542,12 +565,12 @@ public class QuestionManagement extends java.awt.Dialog {
                         .addGap(470, 470, 470)))
                 .addContainerGap())
         );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
+        pnlQuestLayout.setVerticalGroup(
+            pnlQuestLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlQuestLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblTitileDoTest)
+                .addGroup(pnlQuestLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblTitleDoTest)
                     .addComponent(lblShowQuestionDoTest))
                 .addGap(18, 18, 18)
                 .addComponent(lblAnswer)
@@ -562,13 +585,13 @@ public class QuestionManagement extends java.awt.Dialog {
                 .addGap(18, 18, 18)
                 .addComponent(rdoChooseAnsD)
                 .addGap(25, 25, 25)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(pnlQuestLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnRemake, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnCheck, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel4.setBackground(new java.awt.Color(255, 255, 255));
+        pnlQnA.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/studious/icons/HD - chat.png"))); // NOI18N
 
@@ -633,21 +656,21 @@ public class QuestionManagement extends java.awt.Dialog {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
+        javax.swing.GroupLayout pnlQnALayout = new javax.swing.GroupLayout(pnlQnA);
+        pnlQnA.setLayout(pnlQnALayout);
+        pnlQnALayout.setHorizontalGroup(
+            pnlQnALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlQnALayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGroup(pnlQnALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(pnlQnALayout.createSequentialGroup()
                         .addComponent(lblAvatar, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(pnlQnALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblName, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lblID, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lblComment, javax.swing.GroupLayout.PREFERRED_SIZE, 592, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel4Layout.createSequentialGroup()
+                            .addGroup(pnlQnALayout.createSequentialGroup()
                                 .addComponent(btnReport)
                                 .addGap(18, 18, 18)
                                 .addComponent(btnDeleteComment))))
@@ -655,14 +678,14 @@ public class QuestionManagement extends java.awt.Dialog {
                     .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
+        pnlQnALayout.setVerticalGroup(
+            pnlQnALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlQnALayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGroup(pnlQnALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(pnlQnALayout.createSequentialGroup()
                         .addComponent(lblName)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(lblID))
@@ -670,7 +693,7 @@ public class QuestionManagement extends java.awt.Dialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(lblComment, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(pnlQnALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnReport)
                     .addComponent(btnDeleteComment))
                 .addGap(18, 18, 18)
@@ -685,17 +708,17 @@ public class QuestionManagement extends java.awt.Dialog {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(pnlQuest, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(pnlQnA, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(pnlQuest, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(pnlQnA, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -784,6 +807,11 @@ public class QuestionManagement extends java.awt.Dialog {
                 "STT", "Mã câu hỏi", "Câu hỏi", "Đáp án đúng", "Đáp án 1", "Đáp án 2", "Đáp án 3", "Đáp án 4"
             }
         ));
+        tblQuestions.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblQuestionsMouseClicked(evt);
+            }
+        });
         jScrollPane3.setViewportView(tblQuestions);
         if (tblQuestions.getColumnModel().getColumnCount() > 0) {
             tblQuestions.getColumnModel().getColumn(0).setPreferredWidth(30);
@@ -808,6 +836,11 @@ public class QuestionManagement extends java.awt.Dialog {
         btnDo.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnDo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/studious/icons/icons8-pencil-24 (1).png"))); // NOI18N
         btnDo.setText("Làm");
+        btnDo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDoActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout pnlListLayout = new javax.swing.GroupLayout(pnlList);
         pnlList.setLayout(pnlListLayout);
@@ -1051,6 +1084,28 @@ public class QuestionManagement extends java.awt.Dialog {
         fillTableQuestions();
     }//GEN-LAST:event_cboLessonListActionPerformed
 
+    private void tblQuestionsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblQuestionsMouseClicked
+        // TODO add your handling code here:
+        if (evt.getClickCount() == 2) {
+            this.row = tblQuestions.rowAtPoint(evt.getPoint()); //lấy vị trí dòng được chọn
+            if (this.row >= 0) {
+                //this.edit();
+                tabs.setSelectedIndex(0);
+
+            }
+        }
+        this.row = tblQuestions.rowAtPoint(evt.getPoint());
+    }//GEN-LAST:event_tblQuestionsMouseClicked
+
+    private void btnDoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDoActionPerformed
+        // TODO add your handling code here:
+        if (this.row >= 0) {
+            //this.edit();
+            tabs.setSelectedIndex(1);
+            doTest(true);
+        }
+    }//GEN-LAST:event_btnDoActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1105,8 +1160,6 @@ public class QuestionManagement extends java.awt.Dialog {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane3;
@@ -1131,13 +1184,15 @@ public class QuestionManagement extends java.awt.Dialog {
     private javax.swing.JLabel lblShowQuestionDoTest;
     private javax.swing.JLabel lblSubject;
     private javax.swing.JLabel lblSubjectList;
-    private javax.swing.JLabel lblTitileDoTest;
     private javax.swing.JLabel lblTitle;
+    private javax.swing.JLabel lblTitleDoTest;
     private javax.swing.JLabel lblTitleQuestion;
     private javax.swing.JPanel pnlBackground;
     private javax.swing.JPanel pnlDoTest;
     private javax.swing.JPanel pnlList;
     private javax.swing.JPanel pnlManage;
+    private javax.swing.JPanel pnlQnA;
+    private javax.swing.JPanel pnlQuest;
     private javax.swing.JRadioButton rdoChooseAnsA;
     private javax.swing.JRadioButton rdoChooseAnsB;
     private javax.swing.JRadioButton rdoChooseAnsC;
