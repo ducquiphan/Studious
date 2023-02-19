@@ -1,5 +1,17 @@
 package com.studious.display;
 
+import com.studious.DAO.StudentDAO;
+import com.studious.entity.Student;
+import com.studious.utils.Auth;
+import com.studious.utils.MsgBox;
+import com.studious.utils.XDate;
+import java.awt.Image;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
+import javax.swing.ImageIcon;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Admin
@@ -12,6 +24,7 @@ public class StudentManagement extends java.awt.Dialog {
     public StudentManagement(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        this.init();
     }
 
     /**
@@ -25,7 +38,7 @@ public class StudentManagement extends java.awt.Dialog {
         buttonGroup1 = new javax.swing.ButtonGroup();
         pnlStudent = new javax.swing.JPanel();
         lblTitle = new javax.swing.JLabel();
-        jTabbedPane1 = new javax.swing.JTabbedPane();
+        tabs = new javax.swing.JTabbedPane();
         pnlManage = new javax.swing.JPanel();
         lblStudentID = new javax.swing.JLabel();
         txtStudentID = new javax.swing.JTextField();
@@ -57,7 +70,7 @@ public class StudentManagement extends java.awt.Dialog {
         btnDeleteRow = new javax.swing.JButton();
         txtSearch = new javax.swing.JTextField();
         lblTitle1 = new javax.swing.JLabel();
-        btnSearch1 = new javax.swing.JButton();
+        btnSearch = new javax.swing.JButton();
         jToolBar = new javax.swing.JToolBar();
         btnHome1 = new javax.swing.JButton();
         btnPersonalInfo1 = new javax.swing.JButton();
@@ -82,9 +95,9 @@ public class StudentManagement extends java.awt.Dialog {
         lblTitle.setForeground(new java.awt.Color(47, 106, 1));
         lblTitle.setText("QUẢN LÝ HỌC SINH");
 
-        jTabbedPane1.setBackground(new java.awt.Color(255, 255, 255));
-        jTabbedPane1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        jTabbedPane1.setName(""); // NOI18N
+        tabs.setBackground(new java.awt.Color(255, 255, 255));
+        tabs.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        tabs.setName(""); // NOI18N
 
         pnlManage.setBackground(new java.awt.Color(255, 255, 255));
         pnlManage.setBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED));
@@ -143,28 +156,58 @@ public class StudentManagement extends java.awt.Dialog {
 
         btnAddAvatar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/studious/icons/icons8-new-copy-24.png"))); // NOI18N
         btnAddAvatar.setText("Thêm ảnh");
+        btnAddAvatar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddAvatarActionPerformed(evt);
+            }
+        });
 
         btnNew.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnNew.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/studious/icons/icons8-reset-24.png"))); // NOI18N
         btnNew.setText("Tạo mới");
+        btnNew.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNewActionPerformed(evt);
+            }
+        });
 
         btnInsert.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnInsert.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/studious/icons/icons8-new-copy-24.png"))); // NOI18N
         btnInsert.setText("Thêm");
         btnInsert.setMaximumSize(new java.awt.Dimension(87, 26));
         btnInsert.setMinimumSize(new java.awt.Dimension(87, 26));
+        btnInsert.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnInsertActionPerformed(evt);
+            }
+        });
 
         btnEdit.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnEdit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/studious/icons/icons8-pencil-24 (1).png"))); // NOI18N
         btnEdit.setText("Sửa");
+        btnEdit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditActionPerformed(evt);
+            }
+        });
 
         btnUpdate.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnUpdate.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/studious/icons/icons8-available-updates-24.png"))); // NOI18N
         btnUpdate.setText("Cập nhật");
+        btnUpdate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUpdateActionPerformed(evt);
+            }
+        });
 
         btnDelete.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnDelete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/studious/icons/icons8-bin-24.png"))); // NOI18N
         btnDelete.setText("Xóa");
+        btnDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeleteActionPerformed(evt);
+            }
+        });
 
         lblClass.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lblClass.setText("Lớp");
@@ -189,7 +232,7 @@ public class StudentManagement extends java.awt.Dialog {
         pnlManageLayout.setHorizontalGroup(
             pnlManageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlManageLayout.createSequentialGroup()
-                .addContainerGap(103, Short.MAX_VALUE)
+                .addContainerGap(98, Short.MAX_VALUE)
                 .addComponent(btnNew)
                 .addGap(18, 18, 18)
                 .addComponent(btnInsert, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -221,15 +264,7 @@ public class StudentManagement extends java.awt.Dialog {
                             .addGroup(pnlManageLayout.createSequentialGroup()
                                 .addComponent(txtClass, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btnAddAvatar, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(pnlManageLayout.createSequentialGroup()
-                                .addGroup(pnlManageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(txtIdentifier, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
-                                    .addComponent(txtName, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
-                                    .addComponent(txtStudentID, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
-                                    .addComponent(txtBirthDate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(lblAvatar, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(btnAddAvatar, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(pnlManageLayout.createSequentialGroup()
                                 .addGroup(pnlManageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -237,8 +272,16 @@ public class StudentManagement extends java.awt.Dialog {
                                         .addComponent(rdoMale)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addComponent(rdoFemale, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGap(0, 0, Short.MAX_VALUE)))
-                        .addGap(129, 129, 129))))
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(pnlManageLayout.createSequentialGroup()
+                                .addGroup(pnlManageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(txtIdentifier, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
+                                    .addComponent(txtName, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
+                                    .addComponent(txtStudentID, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
+                                    .addComponent(txtBirthDate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(lblAvatar, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(119, 119, 119))))
         );
         pnlManageLayout.setVerticalGroup(
             pnlManageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -292,7 +335,7 @@ public class StudentManagement extends java.awt.Dialog {
                 .addContainerGap())
         );
 
-        jTabbedPane1.addTab("Quản lí", pnlManage);
+        tabs.addTab("Quản lí", pnlManage);
         pnlManage.getAccessibleContext().setAccessibleName("");
 
         pnlList.setBackground(new java.awt.Color(255, 255, 255));
@@ -309,6 +352,11 @@ public class StudentManagement extends java.awt.Dialog {
                 "Mã HS", "Họ tên", "Ngày sinh", "Mã định danh", "Giới tính", "Email"
             }
         ));
+        tblGridView.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblGridViewMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tblGridView);
 
         btnDeleteRow.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -338,7 +386,7 @@ public class StudentManagement extends java.awt.Dialog {
                 .addGap(15, 15, 15))
         );
 
-        jTabbedPane1.addTab("Danh sách", pnlList);
+        tabs.addTab("Danh sách", pnlList);
         pnlList.getAccessibleContext().setAccessibleName("");
 
         txtSearch.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -347,10 +395,10 @@ public class StudentManagement extends java.awt.Dialog {
         lblTitle1.setBackground(new java.awt.Color(232, 255, 183));
         lblTitle1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/studious/icons/Studious-255x68.png"))); // NOI18N
 
-        btnSearch1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/studious/icons/icons8-search-24.png"))); // NOI18N
-        btnSearch1.addActionListener(new java.awt.event.ActionListener() {
+        btnSearch.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/studious/icons/icons8-search-24.png"))); // NOI18N
+        btnSearch.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSearch1ActionPerformed(evt);
+                btnSearchActionPerformed(evt);
             }
         });
 
@@ -364,6 +412,7 @@ public class StudentManagement extends java.awt.Dialog {
         btnHome1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/studious/icons/home.png"))); // NOI18N
         btnHome1.setFocusable(false);
         btnHome1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnHome1.setMaximumSize(new java.awt.Dimension(35, 41));
         btnHome1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         jToolBar.add(btnHome1);
 
@@ -371,6 +420,7 @@ public class StudentManagement extends java.awt.Dialog {
         btnPersonalInfo1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/studious/icons/account.png"))); // NOI18N
         btnPersonalInfo1.setFocusable(false);
         btnPersonalInfo1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnPersonalInfo1.setMaximumSize(new java.awt.Dimension(35, 35));
         btnPersonalInfo1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         jToolBar.add(btnPersonalInfo1);
 
@@ -378,6 +428,7 @@ public class StudentManagement extends java.awt.Dialog {
         btnTeacher1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/studious/icons/teacher.png"))); // NOI18N
         btnTeacher1.setFocusable(false);
         btnTeacher1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnTeacher1.setMaximumSize(new java.awt.Dimension(35, 35));
         btnTeacher1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         jToolBar.add(btnTeacher1);
 
@@ -385,12 +436,14 @@ public class StudentManagement extends java.awt.Dialog {
         btnStudent1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/studious/icons/student.png"))); // NOI18N
         btnStudent1.setFocusable(false);
         btnStudent1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnStudent1.setMaximumSize(new java.awt.Dimension(35, 35));
         btnStudent1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         jToolBar.add(btnStudent1);
 
         btnStatistic.setBackground(new java.awt.Color(232, 255, 183));
         btnStatistic.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/studious/icons/statistic.png"))); // NOI18N
         btnStatistic.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnStatistic.setMaximumSize(new java.awt.Dimension(35, 35));
         btnStatistic.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         jToolBar.add(btnStatistic);
 
@@ -398,12 +451,14 @@ public class StudentManagement extends java.awt.Dialog {
         btnQna1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/studious/icons/QnA.png"))); // NOI18N
         btnQna1.setFocusable(false);
         btnQna1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnQna1.setMaximumSize(new java.awt.Dimension(35, 35));
         btnQna1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         jToolBar.add(btnQna1);
 
         btnBack1.setBackground(new java.awt.Color(232, 255, 183));
         btnBack1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/studious/icons/back.png"))); // NOI18N
         btnBack1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnBack1.setMaximumSize(new java.awt.Dimension(35, 35));
         btnBack1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         jToolBar.add(btnBack1);
 
@@ -412,6 +467,7 @@ public class StudentManagement extends java.awt.Dialog {
         btnLogout1.setToolTipText("");
         btnLogout1.setFocusable(false);
         btnLogout1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnLogout1.setMaximumSize(new java.awt.Dimension(35, 35));
         btnLogout1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         jToolBar.add(btnLogout1);
 
@@ -427,14 +483,14 @@ public class StudentManagement extends java.awt.Dialog {
                         .addGroup(pnlStudentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(lblTitle)
                             .addGroup(pnlStudentLayout.createSequentialGroup()
-                                .addComponent(btnSearch1, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btnSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(24, 24, 24))
                     .addGroup(pnlStudentLayout.createSequentialGroup()
                         .addComponent(jToolBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 750, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(tabs, javax.swing.GroupLayout.PREFERRED_SIZE, 750, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         pnlStudentLayout.setVerticalGroup(
@@ -448,17 +504,17 @@ public class StudentManagement extends java.awt.Dialog {
                         .addGap(18, 18, 18)
                         .addGroup(pnlStudentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(txtSearch)
-                            .addComponent(btnSearch1, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(btnSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(pnlStudentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(tabs, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addGroup(pnlStudentLayout.createSequentialGroup()
                         .addComponent(jToolBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 130, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
-        jTabbedPane1.getAccessibleContext().setAccessibleName("");
+        tabs.getAccessibleContext().setAccessibleName("");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -488,9 +544,9 @@ public class StudentManagement extends java.awt.Dialog {
         dispose();
     }//GEN-LAST:event_closeDialog
 
-    private void btnSearch1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearch1ActionPerformed
+    private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnSearch1ActionPerformed
+    }//GEN-LAST:event_btnSearchActionPerformed
 
     private void txtIdentifierActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIdentifierActionPerformed
         // TODO add your handling code here:
@@ -499,6 +555,37 @@ public class StudentManagement extends java.awt.Dialog {
     private void txtClassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtClassActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtClassActionPerformed
+
+    private void tblGridViewMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblGridViewMouseClicked
+           if(evt.getClickCount() == 2){
+                      this.row = tblGridView.getSelectedRow();
+//                      this.edit();
+        }
+    }//GEN-LAST:event_tblGridViewMouseClicked
+
+    private void btnNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnNewActionPerformed
+
+    private void btnInsertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInsertActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnInsertActionPerformed
+
+    private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnEditActionPerformed
+
+    private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnUpdateActionPerformed
+
+    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnDeleteActionPerformed
+
+    private void btnAddAvatarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddAvatarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnAddAvatarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -530,7 +617,7 @@ public class StudentManagement extends java.awt.Dialog {
     private javax.swing.JButton btnNew;
     private javax.swing.JButton btnPersonalInfo1;
     private javax.swing.JButton btnQna1;
-    private javax.swing.JButton btnSearch1;
+    private javax.swing.JButton btnSearch;
     private javax.swing.JButton btnStatistic;
     private javax.swing.JButton btnStudent1;
     private javax.swing.JButton btnTeacher1;
@@ -538,7 +625,6 @@ public class StudentManagement extends java.awt.Dialog {
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JComboBox<String> cboStatus;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JToolBar jToolBar;
     private javax.swing.JLabel lblAvatar;
     private javax.swing.JLabel lblBirthday;
@@ -556,6 +642,7 @@ public class StudentManagement extends java.awt.Dialog {
     private javax.swing.JPanel pnlStudent;
     private javax.swing.JRadioButton rdoFemale;
     private javax.swing.JRadioButton rdoMale;
+    private javax.swing.JTabbedPane tabs;
     private javax.swing.JTable tblGridView;
     private com.toedter.calendar.JDateChooser txtBirthDate;
     private javax.swing.JTextField txtClass;
@@ -565,4 +652,96 @@ public class StudentManagement extends java.awt.Dialog {
     private javax.swing.JTextField txtSearch;
     private javax.swing.JTextField txtStudentID;
     // End of variables declaration//GEN-END:variables
+
+           StudentDAO dao = new StudentDAO();
+           int row = -1;
+           public String pathString = "";
+           public String hinhPath = "src\\com\\studious\\images\\";
+    
+           void init() {
+                     setLocationRelativeTo(null);
+                     this.fillTable();
+                     this.row = -1;
+           }
+
+           void fillTable() {
+                      DefaultTableModel model = (DefaultTableModel) tblGridView.getModel();
+                      model.setRowCount(0);
+                      try {
+                                String keyword = txtSearch.getText();
+                                List<Student> list = dao.selectByKeyword(keyword);
+                                for (Student st : list) {
+                                           String gioiTinh = String.valueOf(st.isGender());
+                                           if (gioiTinh.equals("true")) {
+                                                gioiTinh = "Nam";
+                                           } else {
+                                                gioiTinh = "Nữ";
+                                           }
+                                           Object[] row = {
+                                                      st.getStudentID(),
+                                                      st.getFullname(),
+                                                      XDate.toString(st.getBirthDate(), "MM/dd/yyyy"),
+                                                      st.getAccountID(),
+                                                      gioiTinh,  
+                                                      st.getEmail(),
+                                           };
+                                 model.addRow(row);
+                                }
+                     } 
+                     catch (Exception e) {
+                                MsgBox.alert(this, "Lỗi truy vấn dữ liệu!");
+                     }
+           }
+           
+           void insert(){
+                     Student model = getForm();
+                     try {
+                                dao.insert(model);
+                                this.fillTable();
+                                this.clearForm();
+                                MsgBox.alert(this, "Thêm mới thành công!");
+                     } 
+                     catch (Exception e) {
+                                MsgBox.alert(this, "Thêm mới thất bại!");
+                     }
+           }
+           
+           
+           void clearForm(){
+                      Student st = new Student();
+                      this.setForm(st);
+            }
+           
+           void setForm(Student st){
+                     txtStudentID.setText(st.getStudentID());
+                     txtName.setText(st.getFullname());
+                     txtIdentifier.setText(st.getAccountID());
+                     SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+//                     txtBirthDate.setText(XDate.toString(st.getBirthDate(), "MM/dd/yyyy"));
+                     txtClass.setText(String.valueOf(st.getGrade()));
+                     boolean gt = st.isGender();
+                     if (gt == true) {
+                                rdoMale.setSelected(true);
+                     } else {
+                                rdoFemale.setSelected(true);
+                      }
+                     txtEmail.setText(st.getEmail());
+                     pathString = st.getAvtURL();
+                     ImageIcon nvA = new ImageIcon(new ImageIcon(hinhPath + pathString).getImage()
+                                .getScaledInstance(lblAvatar.getWidth(), lblAvatar.getHeight(), Image.SCALE_DEFAULT));
+                     lblAvatar.setIcon(nvA);
+           }
+           
+           Student getForm() {
+                      Student st = new Student();
+                      st.setStudentID(txtStudentID.getText());
+                      st.setFullname(txtName.getText());
+                      st.setBirthDate(XDate.toDate(txtBirthDate.getDateFormatString(), "MM/dd/yyyy"));
+                      st.setAccountID(txtIdentifier.getText());
+                      st.setGrade(Integer.valueOf(txtClass.getText()));
+                      st.setGender(rdoMale.isSelected());
+                      st.setEmail(txtEmail.getText());
+                      st.setAvtURL(pathString + hinhPath);
+                      return st;                     
+         }
 }
