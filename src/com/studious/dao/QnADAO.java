@@ -54,7 +54,7 @@ public class QnADAO extends StudiousDAO<QnA, Integer> {
     public List<QnA> selectSql(String Sql, Object... args) {
         List<QnA> list = new ArrayList<>();
         try {
-            ResultSet rs = JdbcHelper.quyery(Sql, args);
+            ResultSet rs = JdbcHelper.query(Sql, args);
             while (rs.next()) {
                 QnA entity = new QnA();
                 entity.setQnaID(rs.getInt(1));

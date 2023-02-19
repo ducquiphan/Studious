@@ -52,7 +52,7 @@ public class AccountDAO extends StudiousDAO<Account, String> {
     public List<Account> selectSql(String Sql, Object... args) {
         List<Account> list = new ArrayList<>();
         try {
-            ResultSet rs = JdbcHelper.quyery(Sql, args);
+            ResultSet rs = JdbcHelper.query(Sql, args);
             while (rs.next()) {
                 Account entity = new Account();
                 entity.setUserID(rs.getString(1));

@@ -12,11 +12,12 @@ import java.sql.ResultSet;
  */
 public class LessonDAO extends StudiousDAO<Lesson, Integer> {
 
-    final String INSERT_SQL = "INSERT INTO BAIHOC(MaBH, TenBH, MonHoc, Khoi, NgayTao, MaGV) VALUES (?,?,?,?,?,?)";
+    final String INSERT_SQL = "INSERT INTO BAIHOC(TenBH, MonHoc, Khoi, MaGV) VALUES (?,?,?,?)";
     final String UPDATE_SQL = "UPDATE BAIHOC SET TenBH = ?, MonHoc = ?, Khoi = ?, NgayTao = ?, MaGV = ? WHERE MaBH = ?";
     final String DELETE_SQL = "DELETE FROM BAIHOC WHERE MaBH = ?";
     final String SELECTALL_SQL = "SELECT * FROM BAIHOC";
     final String SELECTBYID_SQL = "SELECT * FROM BAIHOC WHERE MaBH = ?";
+    final String SELECTSUBJECTBYGRADE_SQL = "SELECT * FROM BAIHOC WHERE MonHoc = ? and Khoi = ?";
 
     @Override
     public void insert(Lesson entity) {
@@ -25,7 +26,23 @@ public class LessonDAO extends StudiousDAO<Lesson, Integer> {
                 entity.getGrade(), entity.getDateCreated(),
                 entity.getTeacherID());
     }
-
+    
+    private List<Object> getListofArray(String sql, Object... args) {
+        try {
+            List<Object> list = new ArrayList<>();
+            ResultSet rs = JdbcHelper.executeQuery(sql, args);
+            while(rs.next()) {
+                Object val = new Object();
+                val = rs.getObject(1);
+                list.add(val);
+            }
+            rs.getStatement().getConnection().close();
+            return list;
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+    
     @Override
     public void update(Lesson entity) {
         JdbcHelper.update(UPDATE_SQL, entity.getLessonName(),
@@ -52,12 +69,31 @@ public class LessonDAO extends StudiousDAO<Lesson, Integer> {
         }
         return list.get(0);
     }
+    
+    public List<Object> selectGradeBySubject(String subject) {
+        String sql = "{CALL  sp_DanhSachBaiHocTheoMon(?)}";
+        return getListofArray(sql, subject);
+    }
+    
+    public List<Lesson> selectBySubjectAndGrade(String subject, Integer grade) {
+        List<Lesson> list = selectSql(SELECTSUBJECTBYGRADE_SQL, subject, grade);
+        if (list.isEmpty()) {
+            return null;
+        }
+        return list;
+    }
+    
+    public List<Object> selectSubject() {
+        String sql = "{CALL  sp_DanhSachMonHoc}";
+        return getListofArray(sql);
+    }
+    
 
     @Override
     public List<Lesson> selectSql(String Sql, Object... args) {
         List<Lesson> list = new ArrayList<>();
         try {
-            ResultSet rs = JdbcHelper.quyery(Sql, args);
+            ResultSet rs = JdbcHelper.query(Sql, args);
             while (rs.next()) {
                 Lesson entity = new Lesson();
                 entity.setLessonID(rs.getInt(1));

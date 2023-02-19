@@ -13,11 +13,12 @@ import java.util.List;
  */
 public class QuestionDAO extends StudiousDAO<Question, Integer> {
 
-    final String INSERT_SQL = "INSERT INTO CAUHOI(MaCH, De, DapAn1, DapAn2, DapAn3, DapAn4, DapAnDung, MaBH, MaGV) VALUES (?,?,?,?,?,?,?,?,?)";
+    final String INSERT_SQL = "INSERT INTO CAUHOI(De, DapAn1, DapAn2, DapAn3, DapAn4, DapAnDung, MaBH, MaGV) VALUES (?,?,?,?,?,?,?,?)";
     final String UPDATE_SQL = "UPDATE CAUHOI SET De = ?, DapAn1 = ?, DapAn2 = ?, DapAn3 = ?, DapAn4 = ?, DapAnDung = ?, MaBH = ?, MaGV = ? WHERE MaCH = ?";
     final String DELETE_SQL = "DELETE FROM CAUHOI WHERE MaCH = ?";
     final String SELECTALL_SQL = "SELECT * FROM CAUHOI";
     final String SELECTBYID_SQL = "SELECT * FROM CAUHOI WHERE MaCH = ?";
+    final String SELECTBYLESSONID_SQL = "SELECT * FROM CAUHOI WHERE MaBH = ?";
 
     @Override
     public void insert(Question entity) {
@@ -56,12 +57,20 @@ public class QuestionDAO extends StudiousDAO<Question, Integer> {
         }
         return list.get(0);
     }
-
+    
+    public List<Question> selectByLessonID(Integer key){
+        List<Question> list = selectSql(SELECTBYLESSONID_SQL, key);
+        if (list.isEmpty()) {
+            return null;
+        }
+        return list;
+    }
+    
     @Override
     public List<Question> selectSql(String Sql, Object... args) {
         List<Question> list = new ArrayList<>();
         try {
-            ResultSet rs = JdbcHelper.quyery(Sql, args);
+            ResultSet rs = JdbcHelper.query(Sql, args);
             while (rs.next()) {
                 Question entity = new Question();
                 entity.setQuestionID(rs.getInt(1));

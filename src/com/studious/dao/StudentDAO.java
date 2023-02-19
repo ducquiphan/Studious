@@ -57,7 +57,7 @@ public class StudentDAO extends StudiousDAO<Student, String> {
     public List<Student> selectSql(String Sql, Object... args) {
         List<Student> list = new ArrayList<>();
         try {
-            ResultSet rs = JdbcHelper.quyery(Sql, args);
+            ResultSet rs = JdbcHelper.query(Sql, args);
             while (rs.next()) {
                 Student entity = new Student();
                 entity.setStudentID(rs.getString(1));

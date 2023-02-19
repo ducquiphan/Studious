@@ -51,7 +51,7 @@ public class QuestionOfTestDAO extends StudiousDAO<QuestionOfTest, Integer> {
     public List<QuestionOfTest> selectSql(String Sql, Object... args) {
         List<QuestionOfTest> list = new ArrayList<>();
         try {
-            ResultSet rs = JdbcHelper.quyery(Sql, args);
+            ResultSet rs = JdbcHelper.query(Sql, args);
             while (rs.next()) {
                 QuestionOfTest entity = new QuestionOfTest();
                 entity.setQuestionOfTestID(rs.getInt(1));

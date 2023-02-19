@@ -52,7 +52,7 @@ public class TestReportDAO extends StudiousDAO<TestReport, String> {
     public List<TestReport> selectSql(String Sql, Object... args) {
         List<TestReport> list = new ArrayList<>();
         try {
-            ResultSet rs = JdbcHelper.quyery(Sql, args);
+            ResultSet rs = JdbcHelper.query(Sql, args);
             while (rs.next()) {
                 TestReport entity = new TestReport();
                 entity.setTestReportID(rs.getString(1));

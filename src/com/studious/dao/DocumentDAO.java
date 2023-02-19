@@ -57,7 +57,7 @@ public class DocumentDAO extends StudiousDAO<Document, Integer> {
     public List<Document> selectSql(String Sql, Object... args) {
         List<Document> list = new ArrayList<>();
         try {
-            ResultSet rs = JdbcHelper.quyery(Sql, args);
+            ResultSet rs = JdbcHelper.query(Sql, args);
             while (rs.next()) {
                 Document entity = new Document();
                 entity.setDocID(rs.getInt(1));
