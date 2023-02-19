@@ -1,8 +1,8 @@
-package com.studious.DAO;
+package com.studious.dao;
 
 import com.studious.entity.QuestionOfTest;
 import com.studious.entity.TestReport;
-import com.studious.utils.JdbcHelper;
+import com.studious.ultils.JdbcHelper;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
@@ -58,7 +58,7 @@ public class QuestionOfTestDAO extends StudiousDAO<QuestionOfTest, Integer> {
     public List<QuestionOfTest> selectSql(String Sql, Object... args) {
         List<QuestionOfTest> list = new ArrayList<>();
         try {
-            ResultSet rs = JdbcHelper.query(Sql, args);
+            ResultSet rs = JdbcHelper.quyery(Sql, args);
             while (rs.next()) {
                 QuestionOfTest entity = new QuestionOfTest();
                 entity.setQuestionOfTestID(rs.getInt(1));
