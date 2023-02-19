@@ -13,15 +13,15 @@ import java.awt.event.KeyEvent;
  */
 public class Login extends javax.swing.JFrame {
 
-
-    AccountDAO dao = new AccountDAO();
-    public static JFrame main;
-
     public Login() {
         initComponents();
         setLocationRelativeTo(null);
         setTitle("Studious - Đăng nhập");
+        this.setLocationRelativeTo(null);
     }
+    
+    AccountDAO dao = new AccountDAO();
+    public static JFrame main;
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -68,7 +68,6 @@ public class Login extends javax.swing.JFrame {
 
         txtUsername.setBackground(new java.awt.Color(217, 217, 217));
         txtUsername.setFont(new java.awt.Font("Inter", 0, 14)); // NOI18N
-        txtUsername.setText("AD25579");
         txtUsername.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtUsernameActionPerformed(evt);
@@ -82,7 +81,6 @@ public class Login extends javax.swing.JFrame {
 
         txtPassword.setBackground(new java.awt.Color(217, 217, 217));
         txtPassword.setFont(new java.awt.Font("Inter", 0, 14)); // NOI18N
-        txtPassword.setText("123");
         txtPassword.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtPasswordActionPerformed(evt);
@@ -283,6 +281,7 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JTextField txtUsername;
     // End of variables declaration//GEN-END:variables
 
+    
     private void login() {
         String username = txtUsername.getText();
         String pass = new String(txtPassword.getPassword());
@@ -307,23 +306,24 @@ public class Login extends javax.swing.JFrame {
 
     private void openMainForm(int index) {
         if (index == 1 ) {
-            MainWindow main = new MainWindow();
+            main = new MainWindow();
             main.setVisible(true);
         } else if (index == 3){
-            MainWindowStudents main = new MainWindowStudents();
+            main = new MainWindowStudents();
             main.setVisible(true);
         } else {
-            MainWindowTeachers main = new MainWindowTeachers();
+            main = new MainWindowTeachers();
             main.setVisible(true);
         }
         this.dispose();
-        ChangePassword test = new ChangePassword();
-        test.setVisible(true);
+        //ChangePassword test = new ChangePassword();
+        //test.setVisible(true);
     }
 
     private void openForgotPassForm() {
         ForgotPassword fg = new ForgotPassword(this, true);
         fg.setVisible(true);
+        this.setEnabled(false);
     }
 
     private void end() {

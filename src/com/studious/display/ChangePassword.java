@@ -1,3 +1,7 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JDialog.java to edit this template
+ */
 package com.studious.display;
 
 import com.studious.dao.AccountDAO;
@@ -6,19 +10,37 @@ import com.studious.utils.MsgBox;
 
 /**
  *
- * @author SsuBii
+ * @author Admin
  */
-public class ChangePassword extends javax.swing.JFrame {
+public class ChangePassword extends javax.swing.JDialog {
 
     /**
      * Creates new form ChangePassword
      */
-    public ChangePassword() {
+    public ChangePassword(java.awt.Frame parent, boolean modal) {
+        super(parent, modal);
         initComponents();
-        setLocationRelativeTo(null);
-        setTitle("Studious - Đổi mật khẩu");
     }
+    
+    
+    AccountDAO aDao = new AccountDAO();
 
+    public void updatePass() {
+        String passOld = new String(txtOldPassword.getPassword());
+        String passConfirm = new String(txtConfirmPassword.getPassword());
+        String passNew = new String(txtNewPassword.getPassword());
+        if (Auth.user.getPassword().equals(passOld)) {
+            if (passNew.equals(passConfirm)) {
+                Auth.user.setPassword(passNew);
+                aDao.update(Auth.user);
+                MsgBox.alert(this, "Cập nhật mật khẩu thành công !");
+            } else {
+                MsgBox.alert(this, "Xác nhận mật khổng không khớp");
+            }
+        } else {
+            MsgBox.alert(this, "Mật khẩu hiện tại không đúng!");
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -39,8 +61,7 @@ public class ChangePassword extends javax.swing.JFrame {
         btnUpdate = new javax.swing.JButton();
         btnBack = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setResizable(false);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         pnlBackGround.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -146,15 +167,15 @@ public class ChangePassword extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnBackActionPerformed
-
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
         if (MsgBox.confirm(this, "Bạn có chắc muốn đổi mật khẩu không?")) {
             updatePass();
         }
     }//GEN-LAST:event_btnUpdateActionPerformed
+    
+    private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnBackActionPerformed
 
     /**
      * @param args the command line arguments
@@ -183,10 +204,17 @@ public class ChangePassword extends javax.swing.JFrame {
         }
         //</editor-fold>
 
-        /* Create and display the form */
+        /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ChangePassword().setVisible(true);
+                ChangePassword dialog = new ChangePassword(new javax.swing.JFrame(), true);
+                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
+                    @Override
+                    public void windowClosing(java.awt.event.WindowEvent e) {
+                        System.exit(0);
+                    }
+                });
+                dialog.setVisible(true);
             }
         });
     }
@@ -204,22 +232,5 @@ public class ChangePassword extends javax.swing.JFrame {
     private javax.swing.JPasswordField txtOldPassword;
     // End of variables declaration//GEN-END:variables
 
-    AccountDAO aDao = new AccountDAO();
 
-    public void updatePass() {
-        String passOld = new String(txtOldPassword.getPassword());
-        String passConfirm = new String(txtConfirmPassword.getPassword());
-        String passNew = new String(txtNewPassword.getPassword());
-        if (Auth.user.getPassword().equals(passOld)) {
-            if (passNew.equals(passConfirm)) {
-                Auth.user.setPassword(passNew);
-                aDao.update(Auth.user);
-                MsgBox.alert(this, "Cập nhật mật khẩu thành công !");
-            } else {
-                MsgBox.alert(this, "Xác nhận mật khổng không khớp");
-            }
-        } else {
-            MsgBox.alert(this, "Mật khẩu hiện tại không đúng!");
-        }
-    }
 }

@@ -72,7 +72,6 @@ public class TestManagement extends java.awt.Dialog {
         jScrollPane3 = new javax.swing.JScrollPane();
         tblGridView = new javax.swing.JTable();
         cboArrange = new javax.swing.JComboBox<>();
-        btnDo = new javax.swing.JButton();
         btnDeleteRow = new javax.swing.JButton();
         jToolBar = new javax.swing.JToolBar();
         btnHome = new javax.swing.JButton();
@@ -447,10 +446,6 @@ public class TestManagement extends java.awt.Dialog {
         cboArrange.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         cboArrange.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Thống kê theo môn học" }));
 
-        btnDo.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        btnDo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/studious/icons/icons8-pencil-24 (1).png"))); // NOI18N
-        btnDo.setText("Làm");
-
         btnDeleteRow.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnDeleteRow.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/studious/icons/icons8-bin-24.png"))); // NOI18N
         btnDeleteRow.setText("Xóa");
@@ -483,8 +478,6 @@ public class TestManagement extends java.awt.Dialog {
                     .addGroup(pnlListLayout.createSequentialGroup()
                         .addComponent(cboArrange, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnDo, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
                         .addComponent(btnDeleteRow, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap())))
         );
@@ -508,7 +501,6 @@ public class TestManagement extends java.awt.Dialog {
                 .addGap(27, 27, 27)
                 .addGroup(pnlListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cboArrange, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnDo)
                     .addComponent(btnDeleteRow))
                 .addGap(18, 18, 18))
         );
@@ -680,7 +672,6 @@ public class TestManagement extends java.awt.Dialog {
     private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnDeleteQuestion;
     private javax.swing.JButton btnDeleteRow;
-    private javax.swing.JButton btnDo;
     private javax.swing.JButton btnEdit;
     private javax.swing.JButton btnFirst;
     private javax.swing.JButton btnHome;

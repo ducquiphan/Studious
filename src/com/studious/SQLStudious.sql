@@ -296,9 +296,10 @@ END
 GO
 -----------------------------------
 GO
-INSERT INTO TAIKHOAN(TenTaiKhoan, MatKhau, VaiTro, TrangThai) VALUES
-('GV12345', '123456', 2, 1),
-('GV67890', '123456', 2, 1)
+INSERT INTO TAIKHOAN(TenTaiKhoan, MatKhau, VaiTro, TrangThai) VALUES ('GV12345', '123456', 2, 1)
+INSERT INTO TAIKHOAN(TenTaiKhoan, MatKhau, VaiTro, TrangThai) VALUES ('GV67890', '123456', 2, 1)
+INSERT INTO TAIKHOAN(TenTaiKhoan, MatKhau, VaiTro, TrangThai) VALUES ('HS12345', '123456', 3, 1)
+INSERT INTO TAIKHOAN(TenTaiKhoan, MatKhau, VaiTro, TrangThai) VALUES ('AD12345', '123456', 1, 1)
 go
 
 INSERT INTO GIAOVIEN(MaGV, HoVaTen, GioiTinh, NgaySinh, ChuyenMon, Email, SoDT, PathIMG, MaTK) VALUES ('GV12345', N'Trần Hoàng Danh', 0, '04/11/2003', N'TOÁN', 'danhth@gmail.com', '0971714478', 'image/img1', 'GV12345')

@@ -9,6 +9,7 @@ public class MainWindowStudents extends javax.swing.JFrame {
     /**
      * Creates new form Main
      */
+    
     public MainWindowStudents() {
         initComponents();
         setLocationRelativeTo(null);
@@ -95,6 +96,7 @@ public class MainWindowStudents extends javax.swing.JFrame {
 
         jToolBar.setBackground(new java.awt.Color(232, 255, 183));
         jToolBar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(232, 255, 183)));
+        jToolBar.setFloatable(false);
         jToolBar.setOrientation(javax.swing.SwingConstants.VERTICAL);
         jToolBar.setRollover(true);
 
@@ -106,6 +108,11 @@ public class MainWindowStudents extends javax.swing.JFrame {
         btnHome.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnHome.setMaximumSize(new java.awt.Dimension(35, 35));
         btnHome.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnHome.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnHomeActionPerformed(evt);
+            }
+        });
         jToolBar.add(btnHome);
 
         btnPersonalInfo.setBackground(new java.awt.Color(232, 255, 183));
@@ -216,6 +223,10 @@ public class MainWindowStudents extends javax.swing.JFrame {
         new DoTest(this, true).setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnTestActionPerformed
+
+    private void btnHomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHomeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnHomeActionPerformed
 
     /**
      * @param args the command line arguments

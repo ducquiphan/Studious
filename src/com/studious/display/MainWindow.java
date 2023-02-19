@@ -111,6 +111,7 @@ public class MainWindow extends javax.swing.JFrame {
 
         jToolBar.setBackground(new java.awt.Color(232, 255, 183));
         jToolBar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(232, 255, 183)));
+        jToolBar.setFloatable(false);
         jToolBar.setOrientation(javax.swing.SwingConstants.VERTICAL);
         jToolBar.setRollover(true);
 
@@ -159,7 +160,6 @@ public class MainWindow extends javax.swing.JFrame {
         btnStatistic.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/studious/icons/statistic.png"))); // NOI18N
         btnStatistic.setBorder(null);
         btnStatistic.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnStatistic.setMaximumSize(new java.awt.Dimension(35, 35));
         btnStatistic.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         jToolBar.add(btnStatistic);
 
@@ -177,7 +177,6 @@ public class MainWindow extends javax.swing.JFrame {
         btnBack.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/studious/icons/back.png"))); // NOI18N
         btnBack.setBorder(null);
         btnBack.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnBack.setMaximumSize(new java.awt.Dimension(35, 35));
         btnBack.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         jToolBar.add(btnBack);
 
@@ -252,6 +251,8 @@ public class MainWindow extends javax.swing.JFrame {
 
     private void btnTeacherMainActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTeacherMainActionPerformed
         // TODO add your handling code here:
+        TeacherManagement teacherManagement = new TeacherManagement(this, rootPaneCheckingEnabled);
+        teacherManagement.setVisible(true);
     }//GEN-LAST:event_btnTeacherMainActionPerformed
 
     private void btnStatisticMainActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStatisticMainActionPerformed
