@@ -4,8 +4,8 @@
  */
 package com.studious.display;
 
-import com.studious.DAO.LessonDAO;
-import com.studious.DAO.QuestionDAO;
+import com.studious.dao.LessonDAO;
+import com.studious.dao.QuestionDAO;
 import com.studious.entity.Lesson;
 import com.studious.entity.Question;
 import com.studious.utils.MsgBox;

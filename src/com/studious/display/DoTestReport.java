@@ -1,6 +1,6 @@
 package com.studious.display;
 
-import com.studious.DAO.ResutlDAO;
+import com.studious.dao.ResutlDAO;
 import com.studious.entity.Result;
 import java.util.List;
 

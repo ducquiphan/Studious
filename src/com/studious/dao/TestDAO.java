@@ -1,6 +1,5 @@
 package com.studious.dao;
 
-import com.studious.dao;
 import com.studious.entity.Test;
 import com.studious.utils.JdbcHelper;
 import java.sql.ResultSet;
@@ -58,7 +57,7 @@ public class TestDAO extends StudiousDAO<Test, String> {
     public List<Test> selectSql(String Sql, Object... args) {
         List<Test> list = new ArrayList<>();
         try {
-            ResultSet rs = JdbcHelper.quyery(Sql, args);
+            ResultSet rs = JdbcHelper.query(Sql, args);
             while (rs.next()) {
                 Test entity = new Test();
                 entity.setTestID(rs.getString(1));

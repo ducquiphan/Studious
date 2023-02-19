@@ -1,6 +1,6 @@
 package com.studious.display;
 
-import com.studious.DAO.AccountDAO;
+import com.studious.dao.AccountDAO;
 import com.studious.entity.Account;
 import javax.swing.JFrame;
 import com.studious.utils.Auth;

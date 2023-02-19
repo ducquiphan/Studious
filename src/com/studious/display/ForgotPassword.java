@@ -1,8 +1,8 @@
 package com.studious.display;
 
-import com.studious.DAO.AccountDAO;
-import com.studious.DAO.StudentDAO;
-import com.studious.DAO.TeacherDAO;
+import com.studious.dao.AccountDAO;
+import com.studious.dao.StudentDAO;
+import com.studious.dao.TeacherDAO;
 import com.studious.entity.Account;
 import com.studious.entity.Student;
 import com.studious.entity.Teacher;

@@ -1,10 +1,10 @@
 package com.studious.display;
 
-import com.studious.DAO.QuestionDAO;
-import com.studious.DAO.QuestionOfTestDAO;
-import com.studious.DAO.ResutlDAO;
-import com.studious.DAO.StudentDAO;
-import com.studious.DAO.TestDAO;
+import com.studious.dao.QuestionDAO;
+import com.studious.dao.QuestionOfTestDAO;
+import com.studious.dao.ResutlDAO;
+import com.studious.dao.StudentDAO;
+import com.studious.dao.TestDAO;
 import com.studious.entity.Question;
 import com.studious.entity.QuestionOfTest;
 import com.studious.entity.Result;

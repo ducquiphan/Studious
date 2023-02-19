@@ -1,6 +1,6 @@
 package com.studious.display;
 
-import com.studious.DAO.AccountDAO;
+import com.studious.dao.AccountDAO;
 import com.studious.utils.Auth;
 import com.studious.utils.MsgBox;
 
