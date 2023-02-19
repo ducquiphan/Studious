@@ -4,6 +4,13 @@
  */
 package com.studious.display;
 
+import com.studious.DAO.QuestionDAO;
+import com.studious.entity.Question;
+import com.studious.ultils.Auth;
+import com.studious.ultils.MsgBox;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Admin
@@ -16,6 +23,8 @@ public class QuestionManagement extends java.awt.Dialog {
     public QuestionManagement(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        setLocationRelativeTo(null);
+        init();
     }
 
     /**
@@ -162,18 +171,38 @@ public class QuestionManagement extends java.awt.Dialog {
         btnInsert.setText("Thêm");
         btnInsert.setMaximumSize(new java.awt.Dimension(87, 26));
         btnInsert.setMinimumSize(new java.awt.Dimension(87, 26));
+        btnInsert.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnInsertActionPerformed(evt);
+            }
+        });
 
         btnEdit.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnEdit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/studious/icons/icons8-pencil-24 (1).png"))); // NOI18N
         btnEdit.setText("Sửa");
+        btnEdit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditActionPerformed(evt);
+            }
+        });
 
         btnUpdate.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnUpdate.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/studious/icons/icons8-available-updates-24.png"))); // NOI18N
         btnUpdate.setText("Cập nhật");
+        btnUpdate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUpdateActionPerformed(evt);
+            }
+        });
 
         btnDelete.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnDelete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/studious/icons/icons8-bin-24.png"))); // NOI18N
         btnDelete.setText("Xóa");
+        btnDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeleteActionPerformed(evt);
+            }
+        });
 
         lblTitleQuestion.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lblTitleQuestion.setText("Tiêu đề:");
@@ -902,7 +931,7 @@ public class QuestionManagement extends java.awt.Dialog {
     }//GEN-LAST:event_closeDialog
 
     private void btnNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewActionPerformed
-        // TODO add your handling code here:
+        clearForm();
     }//GEN-LAST:event_btnNewActionPerformed
 
     private void btnSearchListActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchListActionPerformed
@@ -940,6 +969,22 @@ public class QuestionManagement extends java.awt.Dialog {
     private void rdoChooseAnsAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdoChooseAnsAActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_rdoChooseAnsAActionPerformed
+
+    private void btnInsertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInsertActionPerformed
+        insert();
+    }//GEN-LAST:event_btnInsertActionPerformed
+
+    private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
+        
+    }//GEN-LAST:event_btnEditActionPerformed
+
+    private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
+        update();
+    }//GEN-LAST:event_btnUpdateActionPerformed
+
+    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
+        delete();
+    }//GEN-LAST:event_btnDeleteActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1041,4 +1086,137 @@ public class QuestionManagement extends java.awt.Dialog {
     private javax.swing.JTextField txtSearchList;
     private javax.swing.JTextField txtTitleQuestion;
     // End of variables declaration//GEN-END:variables
+
+    int row = -1;
+    QuestionDAO dao = new QuestionDAO();
+
+    void init() {
+        this.fillTable();
+        this.row = -1;
+        updateStatus();
+    }
+
+    void insert() {
+        Question qt = getForm();
+        try {
+            dao.insert(qt);
+            this.clearForm();
+            MsgBox.alert(this, "Thêm mới thành công!");
+        } catch (Exception e) {
+            MsgBox.alert(this, "Thêm mới thất bại");
+        }
+    }
+
+    void update() {
+        Question qt = getForm();
+        try {
+            dao.update(qt);
+            MsgBox.alert(this, "Cập nhật thành công!");
+        } catch (Exception e) {
+            MsgBox.alert(this, "Cập nhật thất bại!");
+        }
+    }
+
+    void delete() {
+        try {
+            //dao.delete(txtTitleQuestion.getText());
+            this.clearForm();
+            MsgBox.alert(this, "Xóa thành công!");
+        } catch (Exception e) {
+            MsgBox.alert(this, "Xóa thất bại!");
+        }
+    }
+
+    void clearForm() {
+        
+        this.row = -1;
+    }
+
+    void edit() {
+        String TeacherID = (String) tblGridView.getValueAt(this.row, 0);
+        //Question gv = dao.selectById(TeacherID);
+        //this.setForm(gv);
+        tabs.setSelectedIndex(0);
+        this.updateStatus();
+    }
+    
+    void frist() {
+        this.row = 0;
+        this.edit();
+    }
+
+    void prev() {
+        if (this.row > 0) {
+            this.row--;
+            this.edit();
+        }
+    }
+
+    void next() {
+        if (this.row < tblGridView.getRowCount() - 1) {
+            this.row++;
+            this.edit();
+        }
+    }
+
+    void last() {
+        this.row = tblGridView.getRowCount() - 1;
+        this.edit();
+    }
+
+    void fillTable() {
+        DefaultTableModel model = (DefaultTableModel) tblGridView.getModel();
+        model.setRowCount(0);
+        try {
+            List<Question> list = dao.selectAll();
+            for (Question qt : list) {
+                Object[] row = {};
+                model.addRow(row);
+            }
+        } catch (Exception e) {
+            MsgBox.alert(this, "Lỗi truy vẫn dữ liệu");
+        }
+    }
+
+    void updateStatus() {
+        boolean edit = (this.row >= 0);
+        boolean first = (this.row == 0);
+        boolean last = (this.row == tblGridView.getRowCount() - 1);
+        //trang thai form
+        btnInsert.setEnabled(!edit);
+        btnUpdate.setEnabled(edit);
+        btnDelete.setEnabled(edit);
+        //Trang thai dieu huong
+        btnFirst.setEnabled(edit && !first);
+        btnPrevious.setEnabled(edit && !first);
+        btnNext.setEnabled(edit && !last);
+        btnLast.setEnabled(edit && !last);
+
+    }
+    
+    void setForm(Question qt) {
+        
+        txtTitleQuestion.setText(qt.getQuestion());
+        txtAnswer1.setText(qt.getWrongAns1());
+        txtAnswer2.setText(qt.getWrongAns2());
+        txtAnswer3.setText(qt.getWrongAns3());
+        txtAnswer4.setText(qt.getWrongAns4());
+        txtCorrectAns.setText(qt.getAns());
+    }
+
+    Question getForm() {
+        Question qt = new Question();
+        qt.setQuestion(txtTitleQuestion.getText());
+        qt.setWrongAns1(txtAnswer1.getText());
+        qt.setWrongAns2(txtAnswer2.getText());
+        qt.setWrongAns3(txtAnswer3.getText());
+        qt.setWrongAns4(txtAnswer4.getText());
+        qt.setAns(txtCorrectAns.getText());
+        
+        
+        return qt;
+    }
+    
 }
+
+
