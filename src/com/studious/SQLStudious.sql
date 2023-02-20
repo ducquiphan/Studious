@@ -147,7 +147,7 @@ ALTER TABLE KETQUA ADD CONSTRAINT FK_KETQUA_HOCSINH FOREIGN KEY (MaHS) REFERENCE
 ALTER TABLE KETQUA ADD CONSTRAINT FK_KETQUA_BAITHI FOREIGN KEY (MaBThi) REFERENCES BAITHI(MaBThi)
 
 
-/*
+
 -------------------------------------------
 -- Thống kê điểm cá nhân học sinh: số thứ tự, tên bài thi, điểm, lần thi, thời gian làm bài.
 GO
@@ -281,7 +281,7 @@ AS BEGIN
 		GROUP BY BAOCAOBAITHI.MaBThi, TieuDe
 	END
 END
-*/
+
 
 -- In danh sách môn
 GO
@@ -507,3 +507,4 @@ INSERT INTO KETQUA(LanThi, MaHS, MaBThi, MaCau, DanAnChon, DanAnDung) VALUES
 
 
 
+select * from CAUHOI where De like N'%1%'

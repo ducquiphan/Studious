@@ -80,6 +80,7 @@ public class LessonsManagement extends javax.swing.JFrame {
         lblLessonID.setText("Mã bài học:");
         lblLessonID.setToolTipText("");
 
+        txtLessonID.setEditable(false);
         txtLessonID.setBackground(new java.awt.Color(204, 204, 204));
         txtLessonID.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
