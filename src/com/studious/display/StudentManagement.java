@@ -72,14 +72,14 @@ public class StudentManagement extends java.awt.Dialog {
         lblTitle1 = new javax.swing.JLabel();
         btnSearch = new javax.swing.JButton();
         jToolBar = new javax.swing.JToolBar();
-        btnHome1 = new javax.swing.JButton();
-        btnPersonalInfo1 = new javax.swing.JButton();
-        btnTeacher1 = new javax.swing.JButton();
-        btnStudent1 = new javax.swing.JButton();
+        btnHome = new javax.swing.JButton();
+        btnPersonalInfo = new javax.swing.JButton();
+        btnTeacher = new javax.swing.JButton();
+        btnStudent = new javax.swing.JButton();
         btnStatistic = new javax.swing.JButton();
-        btnQna1 = new javax.swing.JButton();
-        btnBack1 = new javax.swing.JButton();
-        btnLogout1 = new javax.swing.JButton();
+        btnQnA = new javax.swing.JButton();
+        btnBack = new javax.swing.JButton();
+        btnLogout = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(232, 255, 183));
         setTitle("QUẢN LÝ HỌC SINH");
@@ -407,38 +407,38 @@ public class StudentManagement extends java.awt.Dialog {
         jToolBar.setOrientation(javax.swing.SwingConstants.VERTICAL);
         jToolBar.setRollover(true);
 
-        btnHome1.setBackground(new java.awt.Color(232, 255, 183));
-        btnHome1.setForeground(new java.awt.Color(232, 255, 183));
-        btnHome1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/studious/icons/home.png"))); // NOI18N
-        btnHome1.setFocusable(false);
-        btnHome1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnHome1.setMaximumSize(new java.awt.Dimension(35, 41));
-        btnHome1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jToolBar.add(btnHome1);
+        btnHome.setBackground(new java.awt.Color(232, 255, 183));
+        btnHome.setForeground(new java.awt.Color(232, 255, 183));
+        btnHome.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/studious/icons/home.png"))); // NOI18N
+        btnHome.setFocusable(false);
+        btnHome.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnHome.setMaximumSize(new java.awt.Dimension(35, 41));
+        btnHome.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jToolBar.add(btnHome);
 
-        btnPersonalInfo1.setBackground(new java.awt.Color(232, 255, 183));
-        btnPersonalInfo1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/studious/icons/account.png"))); // NOI18N
-        btnPersonalInfo1.setFocusable(false);
-        btnPersonalInfo1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnPersonalInfo1.setMaximumSize(new java.awt.Dimension(35, 35));
-        btnPersonalInfo1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jToolBar.add(btnPersonalInfo1);
+        btnPersonalInfo.setBackground(new java.awt.Color(232, 255, 183));
+        btnPersonalInfo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/studious/icons/account.png"))); // NOI18N
+        btnPersonalInfo.setFocusable(false);
+        btnPersonalInfo.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnPersonalInfo.setMaximumSize(new java.awt.Dimension(35, 35));
+        btnPersonalInfo.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jToolBar.add(btnPersonalInfo);
 
-        btnTeacher1.setBackground(new java.awt.Color(232, 255, 183));
-        btnTeacher1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/studious/icons/teacher.png"))); // NOI18N
-        btnTeacher1.setFocusable(false);
-        btnTeacher1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnTeacher1.setMaximumSize(new java.awt.Dimension(35, 35));
-        btnTeacher1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jToolBar.add(btnTeacher1);
+        btnTeacher.setBackground(new java.awt.Color(232, 255, 183));
+        btnTeacher.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/studious/icons/teacher.png"))); // NOI18N
+        btnTeacher.setFocusable(false);
+        btnTeacher.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnTeacher.setMaximumSize(new java.awt.Dimension(35, 35));
+        btnTeacher.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jToolBar.add(btnTeacher);
 
-        btnStudent1.setBackground(new java.awt.Color(232, 255, 183));
-        btnStudent1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/studious/icons/student.png"))); // NOI18N
-        btnStudent1.setFocusable(false);
-        btnStudent1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnStudent1.setMaximumSize(new java.awt.Dimension(35, 35));
-        btnStudent1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jToolBar.add(btnStudent1);
+        btnStudent.setBackground(new java.awt.Color(232, 255, 183));
+        btnStudent.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/studious/icons/student.png"))); // NOI18N
+        btnStudent.setFocusable(false);
+        btnStudent.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnStudent.setMaximumSize(new java.awt.Dimension(35, 35));
+        btnStudent.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jToolBar.add(btnStudent);
 
         btnStatistic.setBackground(new java.awt.Color(232, 255, 183));
         btnStatistic.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/studious/icons/statistic.png"))); // NOI18N
@@ -447,29 +447,34 @@ public class StudentManagement extends java.awt.Dialog {
         btnStatistic.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         jToolBar.add(btnStatistic);
 
-        btnQna1.setBackground(new java.awt.Color(232, 255, 183));
-        btnQna1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/studious/icons/QnA.png"))); // NOI18N
-        btnQna1.setFocusable(false);
-        btnQna1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnQna1.setMaximumSize(new java.awt.Dimension(35, 35));
-        btnQna1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jToolBar.add(btnQna1);
+        btnQnA.setBackground(new java.awt.Color(232, 255, 183));
+        btnQnA.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/studious/icons/QnA.png"))); // NOI18N
+        btnQnA.setFocusable(false);
+        btnQnA.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnQnA.setMaximumSize(new java.awt.Dimension(35, 35));
+        btnQnA.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jToolBar.add(btnQnA);
 
-        btnBack1.setBackground(new java.awt.Color(232, 255, 183));
-        btnBack1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/studious/icons/back.png"))); // NOI18N
-        btnBack1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnBack1.setMaximumSize(new java.awt.Dimension(35, 35));
-        btnBack1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jToolBar.add(btnBack1);
+        btnBack.setBackground(new java.awt.Color(232, 255, 183));
+        btnBack.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/studious/icons/back.png"))); // NOI18N
+        btnBack.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnBack.setMaximumSize(new java.awt.Dimension(35, 35));
+        btnBack.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnBack.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBackActionPerformed(evt);
+            }
+        });
+        jToolBar.add(btnBack);
 
-        btnLogout1.setBackground(new java.awt.Color(232, 255, 183));
-        btnLogout1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/studious/icons/logout.png"))); // NOI18N
-        btnLogout1.setToolTipText("");
-        btnLogout1.setFocusable(false);
-        btnLogout1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnLogout1.setMaximumSize(new java.awt.Dimension(35, 35));
-        btnLogout1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jToolBar.add(btnLogout1);
+        btnLogout.setBackground(new java.awt.Color(232, 255, 183));
+        btnLogout.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/studious/icons/logout.png"))); // NOI18N
+        btnLogout.setToolTipText("");
+        btnLogout.setFocusable(false);
+        btnLogout.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnLogout.setMaximumSize(new java.awt.Dimension(35, 35));
+        btnLogout.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jToolBar.add(btnLogout);
 
         javax.swing.GroupLayout pnlStudentLayout = new javax.swing.GroupLayout(pnlStudent);
         pnlStudent.setLayout(pnlStudentLayout);
@@ -587,6 +592,10 @@ public class StudentManagement extends java.awt.Dialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnAddAvatarActionPerformed
 
+    private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnBackActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -607,20 +616,20 @@ public class StudentManagement extends java.awt.Dialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAddAvatar;
-    private javax.swing.JButton btnBack1;
+    private javax.swing.JButton btnBack;
     private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnDeleteRow;
     private javax.swing.JButton btnEdit;
-    private javax.swing.JButton btnHome1;
+    private javax.swing.JButton btnHome;
     private javax.swing.JButton btnInsert;
-    private javax.swing.JButton btnLogout1;
+    private javax.swing.JButton btnLogout;
     private javax.swing.JButton btnNew;
-    private javax.swing.JButton btnPersonalInfo1;
-    private javax.swing.JButton btnQna1;
+    private javax.swing.JButton btnPersonalInfo;
+    private javax.swing.JButton btnQnA;
     private javax.swing.JButton btnSearch;
     private javax.swing.JButton btnStatistic;
-    private javax.swing.JButton btnStudent1;
-    private javax.swing.JButton btnTeacher1;
+    private javax.swing.JButton btnStudent;
+    private javax.swing.JButton btnTeacher;
     private javax.swing.JButton btnUpdate;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JComboBox<String> cboStatus;
@@ -667,30 +676,30 @@ public class StudentManagement extends java.awt.Dialog {
            void fillTable() {
                       DefaultTableModel model = (DefaultTableModel) tblGridView.getModel();
                       model.setRowCount(0);
-                      try {
-                                String keyword = txtSearch.getText();
-                                List<Student> list = dao.selectByKeyword(keyword);
-                                for (Student st : list) {
-                                           String gioiTinh = String.valueOf(st.isGender());
-                                           if (gioiTinh.equals("true")) {
-                                                gioiTinh = "Nam";
-                                           } else {
-                                                gioiTinh = "Nữ";
-                                           }
-                                           Object[] row = {
-                                                      st.getStudentID(),
-                                                      st.getFullname(),
-                                                      XDate.toString(st.getBirthDate(), "MM/dd/yyyy"),
-                                                      st.getAccountID(),
-                                                      gioiTinh,  
-                                                      st.getEmail(),
-                                           };
-                                 model.addRow(row);
-                                }
-                     } 
-                     catch (Exception e) {
-                                MsgBox.alert(this, "Lỗi truy vấn dữ liệu!");
-                     }
+//                      try {
+//                                String keyword = txtSearch.getText();
+//                                List<Student> list = dao.selectByKeyword(keyword);
+//                                for (Student st : list) {
+//                                           String gioiTinh = String.valueOf(st.isGender());
+//                                           if (gioiTinh.equals("true")) {
+//                                                gioiTinh = "Nam";
+//                                           } else {
+//                                                gioiTinh = "Nữ";
+//                                           }
+//                                           Object[] row = {
+//                                                      st.getStudentID(),
+//                                                      st.getFullname(),
+//                                                      XDate.toString(st.getBirthDate(), "MM/dd/yyyy"),
+//                                                      st.getAccountID(),
+//                                                      gioiTinh,  
+//                                                      st.getEmail(),
+//                                           };
+//                                 model.addRow(row);
+//                                }
+//                     } 
+//                     catch (Exception e) {
+//                                MsgBox.alert(this, "Lỗi truy vấn dữ liệu!");
+//                     }
            }
            
            void insert(){

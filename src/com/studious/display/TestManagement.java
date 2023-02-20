@@ -52,7 +52,6 @@ public class TestManagement extends java.awt.Dialog {
         jScrollPane2 = new javax.swing.JScrollPane();
         tblQuestionList = new javax.swing.JTable();
         btnDeleteQuestion = new javax.swing.JButton();
-        btnAddQuestion = new javax.swing.JButton();
         btnNew = new javax.swing.JButton();
         btnInsert = new javax.swing.JButton();
         btnEdit = new javax.swing.JButton();
@@ -62,6 +61,7 @@ public class TestManagement extends java.awt.Dialog {
         btnPrevious = new javax.swing.JButton();
         btnNext = new javax.swing.JButton();
         btnLast = new javax.swing.JButton();
+        btnAddQuestion = new javax.swing.JButton();
         pnlList = new javax.swing.JPanel();
         lblTestTypeList = new javax.swing.JLabel();
         cboTestTypeList = new javax.swing.JComboBox<>();
@@ -260,12 +260,6 @@ public class TestManagement extends java.awt.Dialog {
         btnDeleteQuestion.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btnDeleteQuestion.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
 
-        btnAddQuestion.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        btnAddQuestion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/studious/icons/add.png"))); // NOI18N
-        btnAddQuestion.setText("Thêm câu hỏi");
-        btnAddQuestion.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        btnAddQuestion.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-
         btnNew.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnNew.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/studious/icons/icons8-reset-24.png"))); // NOI18N
         btnNew.setText("Tạo mới");
@@ -301,6 +295,12 @@ public class TestManagement extends java.awt.Dialog {
 
         btnLast.setText(">|");
 
+        btnAddQuestion.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btnAddQuestion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/studious/icons/add.png"))); // NOI18N
+        btnAddQuestion.setText("Thêm câu hỏi");
+        btnAddQuestion.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btnAddQuestion.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+
         javax.swing.GroupLayout pnlManageLayout = new javax.swing.GroupLayout(pnlManage);
         pnlManage.setLayout(pnlManageLayout);
         pnlManageLayout.setHorizontalGroup(
@@ -327,8 +327,8 @@ public class TestManagement extends java.awt.Dialog {
                                     .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                                 .addGap(18, 18, 18)
                                 .addGroup(pnlManageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(btnDeleteQuestion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(btnAddQuestion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                    .addComponent(btnAddQuestion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(btnDeleteQuestion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 66, Short.MAX_VALUE)
                         .addComponent(pnlQuestionList, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlManageLayout.createSequentialGroup()
@@ -376,7 +376,7 @@ public class TestManagement extends java.awt.Dialog {
                     .addGroup(pnlManageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                         .addGroup(pnlManageLayout.createSequentialGroup()
                             .addComponent(btnAddQuestion)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                             .addComponent(btnDeleteQuestion))
                         .addGroup(pnlManageLayout.createSequentialGroup()
                             .addComponent(pnlAdvancedSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)

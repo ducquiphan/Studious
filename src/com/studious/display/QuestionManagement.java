@@ -59,7 +59,7 @@ public class QuestionManagement extends java.awt.Dialog {
         btnPrevious = new javax.swing.JButton();
         btnNext = new javax.swing.JButton();
         btnLast = new javax.swing.JButton();
-        pnlDoTest = new javax.swing.JPanel();
+        pnlCreateQuestion = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
@@ -368,7 +368,7 @@ public class QuestionManagement extends java.awt.Dialog {
 
         tabs.addTab("Quản lí", pnlManage);
 
-        pnlDoTest.setBackground(new java.awt.Color(255, 255, 255));
+        pnlCreateQuestion.setBackground(new java.awt.Color(255, 255, 255));
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -634,24 +634,24 @@ public class QuestionManagement extends java.awt.Dialog {
 
         jScrollPane1.setViewportView(jPanel1);
 
-        javax.swing.GroupLayout pnlDoTestLayout = new javax.swing.GroupLayout(pnlDoTest);
-        pnlDoTest.setLayout(pnlDoTestLayout);
-        pnlDoTestLayout.setHorizontalGroup(
-            pnlDoTestLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlDoTestLayout.createSequentialGroup()
+        javax.swing.GroupLayout pnlCreateQuestionLayout = new javax.swing.GroupLayout(pnlCreateQuestion);
+        pnlCreateQuestion.setLayout(pnlCreateQuestionLayout);
+        pnlCreateQuestionLayout.setHorizontalGroup(
+            pnlCreateQuestionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlCreateQuestionLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 738, Short.MAX_VALUE)
                 .addContainerGap())
         );
-        pnlDoTestLayout.setVerticalGroup(
-            pnlDoTestLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlDoTestLayout.createSequentialGroup()
+        pnlCreateQuestionLayout.setVerticalGroup(
+            pnlCreateQuestionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlCreateQuestionLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 491, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        tabs.addTab("Làm câu hỏi", pnlDoTest);
+        tabs.addTab("Làm câu hỏi", pnlCreateQuestion);
 
         pnlList.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -1024,7 +1024,7 @@ public class QuestionManagement extends java.awt.Dialog {
     private javax.swing.JLabel lblTitle;
     private javax.swing.JLabel lblTitleQuestion;
     private javax.swing.JPanel pnlBackground;
-    private javax.swing.JPanel pnlDoTest;
+    private javax.swing.JPanel pnlCreateQuestion;
     private javax.swing.JPanel pnlList;
     private javax.swing.JPanel pnlManage;
     private javax.swing.JRadioButton rdoChooseAnsA;

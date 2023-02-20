@@ -4,12 +4,12 @@ package com.studious.display;
  *
  * @author SsuBii
  */
-public class MainWindowLessons extends javax.swing.JFrame {
+public class WindowLessonsTeacher extends javax.swing.JFrame {
 
     /**
      * Creates new form Main
      */
-    public MainWindowLessons() {
+    public WindowLessonsTeacher() {
         initComponents();
         setLocationRelativeTo(null);
         setTitle("Studious - Bài học");
@@ -25,6 +25,7 @@ public class MainWindowLessons extends javax.swing.JFrame {
     private void initComponents() {
 
         pnlBackground = new javax.swing.JPanel();
+        btnLesson = new javax.swing.JButton();
         btnQuestion = new javax.swing.JButton();
         btnDocument = new javax.swing.JButton();
         lblTitle = new javax.swing.JLabel();
@@ -33,7 +34,7 @@ public class MainWindowLessons extends javax.swing.JFrame {
         btnPersonalInfo = new javax.swing.JButton();
         btnLessons = new javax.swing.JButton();
         btnTest = new javax.swing.JButton();
-        btnScore = new javax.swing.JButton();
+        btnStatistic = new javax.swing.JButton();
         btnBack = new javax.swing.JButton();
         btnLogout = new javax.swing.JButton();
 
@@ -44,14 +45,32 @@ public class MainWindowLessons extends javax.swing.JFrame {
         pnlBackground.setBackground(new java.awt.Color(232, 255, 183));
         pnlBackground.setForeground(new java.awt.Color(232, 255, 183));
 
+        btnLesson.setFont(new java.awt.Font("Inter", 0, 24)); // NOI18N
+        btnLesson.setForeground(new java.awt.Color(8, 115, 6));
+        btnLesson.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/studious/icons/open-book.png"))); // NOI18N
+        btnLesson.setText("Quản lí bài học");
+        btnLesson.setToolTipText("");
+        btnLesson.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        btnLesson.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnLesson.setIconTextGap(1);
+        btnLesson.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnLesson.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLessonActionPerformed(evt);
+            }
+        });
+
         btnQuestion.setFont(new java.awt.Font("Inter", 0, 24)); // NOI18N
         btnQuestion.setForeground(new java.awt.Color(8, 115, 6));
-        btnQuestion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/studious/icons/Question.png"))); // NOI18N
+        btnQuestion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/studious/icons/question 1.png"))); // NOI18N
         btnQuestion.setText("Câu hỏi");
         btnQuestion.setToolTipText("");
         btnQuestion.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         btnQuestion.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnQuestion.setIconTextGap(1);
+        btnQuestion.setMaximumSize(new java.awt.Dimension(170, 140));
+        btnQuestion.setMinimumSize(new java.awt.Dimension(170, 140));
+        btnQuestion.setPreferredSize(new java.awt.Dimension(170, 140));
         btnQuestion.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         btnQuestion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -61,7 +80,7 @@ public class MainWindowLessons extends javax.swing.JFrame {
 
         btnDocument.setFont(new java.awt.Font("Inter", 0, 24)); // NOI18N
         btnDocument.setForeground(new java.awt.Color(8, 115, 6));
-        btnDocument.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/studious/icons/lambaithi.png"))); // NOI18N
+        btnDocument.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/studious/icons/documents 1.png"))); // NOI18N
         btnDocument.setText("Tài liệu");
         btnDocument.setToolTipText("");
         btnDocument.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -119,12 +138,12 @@ public class MainWindowLessons extends javax.swing.JFrame {
         btnTest.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         jToolBar.add(btnTest);
 
-        btnScore.setBackground(new java.awt.Color(232, 255, 183));
-        btnScore.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/studious/icons/score.png"))); // NOI18N
-        btnScore.setBorder(null);
-        btnScore.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnScore.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jToolBar.add(btnScore);
+        btnStatistic.setBackground(new java.awt.Color(232, 255, 183));
+        btnStatistic.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/studious/icons/statistic.png"))); // NOI18N
+        btnStatistic.setBorder(null);
+        btnStatistic.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnStatistic.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jToolBar.add(btnStatistic);
 
         btnBack.setBackground(new java.awt.Color(232, 255, 183));
         btnBack.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/studious/icons/back.png"))); // NOI18N
@@ -148,36 +167,40 @@ public class MainWindowLessons extends javax.swing.JFrame {
         pnlBackgroundLayout.setHorizontalGroup(
             pnlBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlBackgroundLayout.createSequentialGroup()
-                .addGap(200, 200, 200)
-                .addComponent(btnQuestion, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(156, 156, 156)
-                .addComponent(btnDocument, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(200, 200, 200))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlBackgroundLayout.createSequentialGroup()
-                .addGap(280, 280, 280)
-                .addComponent(lblTitle)
-                .addGap(280, 280, 280))
+                .addContainerGap(106, Short.MAX_VALUE)
+                .addGroup(pnlBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlBackgroundLayout.createSequentialGroup()
+                        .addComponent(btnLesson, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(50, 50, 50)
+                        .addComponent(btnDocument, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(49, 49, 49)
+                        .addComponent(btnQuestion, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(95, 95, 95))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlBackgroundLayout.createSequentialGroup()
+                        .addComponent(lblTitle)
+                        .addGap(280, 280, 280))))
             .addGroup(pnlBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(pnlBackgroundLayout.createSequentialGroup()
                     .addContainerGap()
                     .addComponent(jToolBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(864, Short.MAX_VALUE)))
+                    .addContainerGap(858, Short.MAX_VALUE)))
         );
         pnlBackgroundLayout.setVerticalGroup(
             pnlBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlBackgroundLayout.createSequentialGroup()
                 .addGap(99, 99, 99)
                 .addComponent(lblTitle)
-                .addGap(42, 42, 42)
-                .addGroup(pnlBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btnDocument, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnQuestion, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(87, 87, 87))
+                .addGap(50, 50, 50)
+                .addGroup(pnlBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnLesson, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnDocument, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnQuestion, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(79, 79, 79))
             .addGroup(pnlBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(pnlBackgroundLayout.createSequentialGroup()
                     .addGap(188, 188, 188)
                     .addComponent(jToolBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(190, Short.MAX_VALUE)))
+                    .addContainerGap(180, Short.MAX_VALUE)))
         );
 
         getContentPane().add(pnlBackground, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 900, 600));
@@ -192,6 +215,10 @@ public class MainWindowLessons extends javax.swing.JFrame {
     private void btnDocumentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDocumentActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnDocumentActionPerformed
+
+    private void btnLessonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLessonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnLessonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -210,14 +237,62 @@ public class MainWindowLessons extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(MainWindowLessons.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(WindowLessonsTeacher.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(MainWindowLessons.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(WindowLessonsTeacher.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(MainWindowLessons.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(WindowLessonsTeacher.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(MainWindowLessons.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(WindowLessonsTeacher.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -238,7 +313,7 @@ public class MainWindowLessons extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new MainWindowLessons().setVisible(true);
+                new WindowLessonsTeacher().setVisible(true);
             }
         });
     }
@@ -247,11 +322,12 @@ public class MainWindowLessons extends javax.swing.JFrame {
     private javax.swing.JButton btnBack;
     private javax.swing.JButton btnDocument;
     private javax.swing.JButton btnHome;
+    private javax.swing.JButton btnLesson;
     private javax.swing.JButton btnLessons;
     private javax.swing.JButton btnLogout;
     private javax.swing.JButton btnPersonalInfo;
     private javax.swing.JButton btnQuestion;
-    private javax.swing.JButton btnScore;
+    private javax.swing.JButton btnStatistic;
     private javax.swing.JButton btnTest;
     private javax.swing.JToolBar jToolBar;
     private javax.swing.JLabel lblTitle;

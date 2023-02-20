@@ -167,8 +167,8 @@
                                           </Group>
                                           <EmptySpace type="separate" max="-2" attributes="0"/>
                                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                              <Component id="btnDeleteQuestion" max="32767" attributes="0"/>
                                               <Component id="btnAddQuestion" max="32767" attributes="0"/>
+                                              <Component id="btnDeleteQuestion" max="32767" attributes="0"/>
                                           </Group>
                                       </Group>
                                   </Group>
@@ -230,7 +230,7 @@
                               <Group type="103" groupAlignment="1" attributes="0">
                                   <Group type="102" attributes="0">
                                       <Component id="btnAddQuestion" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
                                       <Component id="btnDeleteQuestion" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <Group type="102" attributes="0">
@@ -618,19 +618,6 @@
                     <Property name="horizontalTextPosition" type="int" value="4"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JButton" name="btnAddQuestion">
-                  <Properties>
-                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                      <Font name="Segoe UI" size="14" style="0"/>
-                    </Property>
-                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/com/studious/icons/add.png"/>
-                    </Property>
-                    <Property name="text" type="java.lang.String" value="Th&#xea;m c&#xe2;u h&#x1ecf;i"/>
-                    <Property name="horizontalAlignment" type="int" value="2"/>
-                    <Property name="horizontalTextPosition" type="int" value="4"/>
-                  </Properties>
-                </Component>
                 <Component class="javax.swing.JButton" name="btnNew">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -713,6 +700,19 @@
                 <Component class="javax.swing.JButton" name="btnLast">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="&gt;|"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JButton" name="btnAddQuestion">
+                  <Properties>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Segoe UI" size="14" style="0"/>
+                    </Property>
+                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                      <Image iconType="3" name="/com/studious/icons/add.png"/>
+                    </Property>
+                    <Property name="text" type="java.lang.String" value="Th&#xea;m c&#xe2;u h&#x1ecf;i"/>
+                    <Property name="horizontalAlignment" type="int" value="2"/>
+                    <Property name="horizontalTextPosition" type="int" value="4"/>
                   </Properties>
                 </Component>
               </SubComponents>

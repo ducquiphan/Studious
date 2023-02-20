@@ -8,12 +8,12 @@ package com.studious.display;
  *
  * @author Admin
  */
-public class MainWindowTest extends java.awt.Dialog {
+public class WindowLessonsStudent extends java.awt.Dialog {
 
     /**
-     * Creates new form MainWindowTest
+     * Creates new form WindowLessonsStudent
      */
-    public MainWindowTest(java.awt.Frame parent, boolean modal) {
+    public WindowLessonsStudent(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
     }
@@ -27,8 +27,8 @@ public class MainWindowTest extends java.awt.Dialog {
     private void initComponents() {
 
         pnlBackground = new javax.swing.JPanel();
-        btnTestManager = new javax.swing.JButton();
-        btnDoTest = new javax.swing.JButton();
+        btnQuestion = new javax.swing.JButton();
+        btnDocument = new javax.swing.JButton();
         lblTitle = new javax.swing.JLabel();
         jToolBar = new javax.swing.JToolBar();
         btnHome = new javax.swing.JButton();
@@ -48,33 +48,36 @@ public class MainWindowTest extends java.awt.Dialog {
         pnlBackground.setBackground(new java.awt.Color(232, 255, 183));
         pnlBackground.setForeground(new java.awt.Color(232, 255, 183));
 
-        btnTestManager.setFont(new java.awt.Font("Inter", 0, 24)); // NOI18N
-        btnTestManager.setForeground(new java.awt.Color(8, 115, 6));
-        btnTestManager.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/studious/icons/Question.png"))); // NOI18N
-        btnTestManager.setText("Quản lí bài thi");
-        btnTestManager.setToolTipText("");
-        btnTestManager.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        btnTestManager.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnTestManager.setIconTextGap(1);
-        btnTestManager.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        btnTestManager.addActionListener(new java.awt.event.ActionListener() {
+        btnQuestion.setFont(new java.awt.Font("Inter", 0, 24)); // NOI18N
+        btnQuestion.setForeground(new java.awt.Color(8, 115, 6));
+        btnQuestion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/studious/icons/question 1.png"))); // NOI18N
+        btnQuestion.setText("Câu hỏi");
+        btnQuestion.setToolTipText("");
+        btnQuestion.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        btnQuestion.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnQuestion.setIconTextGap(1);
+        btnQuestion.setMaximumSize(new java.awt.Dimension(170, 140));
+        btnQuestion.setMinimumSize(new java.awt.Dimension(170, 140));
+        btnQuestion.setPreferredSize(new java.awt.Dimension(170, 140));
+        btnQuestion.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnQuestion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnTestManagerActionPerformed(evt);
+                btnQuestionActionPerformed(evt);
             }
         });
 
-        btnDoTest.setFont(new java.awt.Font("Inter", 0, 24)); // NOI18N
-        btnDoTest.setForeground(new java.awt.Color(8, 115, 6));
-        btnDoTest.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/studious/icons/lambaithi.png"))); // NOI18N
-        btnDoTest.setText("Làm bài thi");
-        btnDoTest.setToolTipText("");
-        btnDoTest.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        btnDoTest.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnDoTest.setIconTextGap(1);
-        btnDoTest.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        btnDoTest.addActionListener(new java.awt.event.ActionListener() {
+        btnDocument.setFont(new java.awt.Font("Inter", 0, 24)); // NOI18N
+        btnDocument.setForeground(new java.awt.Color(8, 115, 6));
+        btnDocument.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/studious/icons/documents 1.png"))); // NOI18N
+        btnDocument.setText("Tài liệu");
+        btnDocument.setToolTipText("");
+        btnDocument.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        btnDocument.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnDocument.setIconTextGap(1);
+        btnDocument.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnDocument.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnDoTestActionPerformed(evt);
+                btnDocumentActionPerformed(evt);
             }
         });
 
@@ -82,7 +85,7 @@ public class MainWindowTest extends java.awt.Dialog {
         lblTitle.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/studious/icons/Studious-350x350.png"))); // NOI18N
 
         jToolBar.setBackground(new java.awt.Color(232, 255, 183));
-        jToolBar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(232, 255, 183)));
+        jToolBar.setBorder(null);
         jToolBar.setOrientation(javax.swing.SwingConstants.VERTICAL);
         jToolBar.setRollover(true);
 
@@ -152,36 +155,37 @@ public class MainWindowTest extends java.awt.Dialog {
         pnlBackgroundLayout.setHorizontalGroup(
             pnlBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlBackgroundLayout.createSequentialGroup()
-                .addGap(200, 200, 200)
-                .addComponent(btnTestManager, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(156, 156, 156)
-                .addComponent(btnDoTest, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(200, 200, 200))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlBackgroundLayout.createSequentialGroup()
-                .addGap(280, 280, 280)
-                .addComponent(lblTitle)
-                .addGap(280, 280, 280))
+                .addContainerGap(203, Short.MAX_VALUE)
+                .addGroup(pnlBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlBackgroundLayout.createSequentialGroup()
+                        .addComponent(btnQuestion, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(100, 100, 100)
+                        .addComponent(btnDocument, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(197, 197, 197))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlBackgroundLayout.createSequentialGroup()
+                        .addComponent(lblTitle)
+                        .addGap(280, 280, 280))))
             .addGroup(pnlBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(pnlBackgroundLayout.createSequentialGroup()
                     .addContainerGap()
                     .addComponent(jToolBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(862, Short.MAX_VALUE)))
+                    .addContainerGap(858, Short.MAX_VALUE)))
         );
         pnlBackgroundLayout.setVerticalGroup(
             pnlBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlBackgroundLayout.createSequentialGroup()
                 .addGap(99, 99, 99)
                 .addComponent(lblTitle)
-                .addGap(42, 42, 42)
-                .addGroup(pnlBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btnDoTest, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnTestManager, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(87, 87, 87))
+                .addGap(50, 50, 50)
+                .addGroup(pnlBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnDocument, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnQuestion, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(79, 79, 79))
             .addGroup(pnlBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(pnlBackgroundLayout.createSequentialGroup()
                     .addGap(188, 188, 188)
                     .addComponent(jToolBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(188, Short.MAX_VALUE)))
+                    .addContainerGap(180, Short.MAX_VALUE)))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -192,7 +196,7 @@ public class MainWindowTest extends java.awt.Dialog {
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(pnlBackground, javax.swing.GroupLayout.PREFERRED_SIZE, 900, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(pnlBackground, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGap(0, 0, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
@@ -201,7 +205,7 @@ public class MainWindowTest extends java.awt.Dialog {
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(pnlBackground, javax.swing.GroupLayout.PREFERRED_SIZE, 600, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(pnlBackground, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGap(0, 0, Short.MAX_VALUE)))
         );
 
@@ -216,13 +220,13 @@ public class MainWindowTest extends java.awt.Dialog {
         dispose();
     }//GEN-LAST:event_closeDialog
 
-    private void btnTestManagerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTestManagerActionPerformed
+    private void btnQuestionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQuestionActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnTestManagerActionPerformed
+    }//GEN-LAST:event_btnQuestionActionPerformed
 
-    private void btnDoTestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDoTestActionPerformed
+    private void btnDocumentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDocumentActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnDoTestActionPerformed
+    }//GEN-LAST:event_btnDocumentActionPerformed
 
     /**
      * @param args the command line arguments
@@ -230,7 +234,7 @@ public class MainWindowTest extends java.awt.Dialog {
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                MainWindowTest dialog = new MainWindowTest(new java.awt.Frame(), true);
+                WindowLessonsStudent dialog = new WindowLessonsStudent(new java.awt.Frame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     public void windowClosing(java.awt.event.WindowEvent e) {
                         System.exit(0);
@@ -244,14 +248,14 @@ public class MainWindowTest extends java.awt.Dialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBack;
-    private javax.swing.JButton btnDoTest;
+    private javax.swing.JButton btnDocument;
     private javax.swing.JButton btnHome;
     private javax.swing.JButton btnLessons;
     private javax.swing.JButton btnLogout;
     private javax.swing.JButton btnPersonalInfo;
+    private javax.swing.JButton btnQuestion;
     private javax.swing.JButton btnScore;
     private javax.swing.JButton btnTest;
-    private javax.swing.JButton btnTestManager;
     private javax.swing.JToolBar jToolBar;
     private javax.swing.JLabel lblTitle;
     private javax.swing.JPanel pnlBackground;
