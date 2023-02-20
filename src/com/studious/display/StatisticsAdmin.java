@@ -26,9 +26,6 @@ public class StatisticsAdmin extends java.awt.Dialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        lblTitle = new javax.swing.JLabel();
-        cboSubject = new javax.swing.JComboBox<>();
-        txtSearch = new javax.swing.JTextField();
         jToolBar1 = new javax.swing.JToolBar();
         btnHome = new javax.swing.JButton();
         btnPersonalInfo = new javax.swing.JButton();
@@ -59,13 +56,11 @@ public class StatisticsAdmin extends java.awt.Dialog {
         tblGridViewSumScore = new javax.swing.JTable();
         cboOrderingSumScore = new javax.swing.JComboBox<>();
         cboArrangeSumScore = new javax.swing.JComboBox<>();
-        pnlTest = new javax.swing.JPanel();
-        jScrollPane8 = new javax.swing.JScrollPane();
-        tblGridViewTest = new javax.swing.JTable();
-        cboArrangeTest = new javax.swing.JComboBox<>();
-        cboOrderingTest = new javax.swing.JComboBox<>();
-        btnSearch = new javax.swing.JButton();
-        lblTitle2 = new javax.swing.JLabel();
+        btnSearch2 = new javax.swing.JButton();
+        lblTitle1 = new javax.swing.JLabel();
+        lblTitle = new javax.swing.JLabel();
+        cboSubject = new javax.swing.JComboBox<>();
+        txtSearch = new javax.swing.JTextField();
 
         setBackground(new java.awt.Color(232, 255, 183));
         setTitle("THỐNG KÊ TÀI LIỆU");
@@ -74,16 +69,6 @@ public class StatisticsAdmin extends java.awt.Dialog {
                 closeDialog(evt);
             }
         });
-
-        lblTitle.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        lblTitle.setForeground(new java.awt.Color(47, 106, 1));
-        lblTitle.setText("THỐNG KÊ ");
-
-        cboSubject.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        cboSubject.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Môn học" }));
-
-        txtSearch.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        txtSearch.setText("Tìm kiếm");
 
         jToolBar1.setBackground(new java.awt.Color(232, 255, 183));
         jToolBar1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(232, 255, 183)));
@@ -172,9 +157,17 @@ public class StatisticsAdmin extends java.awt.Dialog {
                 {null, null, null}
             },
             new String [] {
-                "STT", "Môn Học", "Số Lượng Tài Liệu"
+                "STT", "Môn Học", "Số Lượng Câu Hỏi"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane1.setViewportView(tblGridViewQuestion);
 
         cboOrderingQuestion.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -192,12 +185,12 @@ public class StatisticsAdmin extends java.awt.Dialog {
                 .addComponent(cboArrangeQuestion, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(cboOrderingQuestion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(436, Short.MAX_VALUE))
+                .addContainerGap(568, Short.MAX_VALUE))
             .addGroup(pnlQuestionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlQuestionLayout.createSequentialGroup()
                     .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 752, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(16, Short.MAX_VALUE)))
+                    .addContainerGap(149, Short.MAX_VALUE)))
         );
         pnlQuestionLayout.setVerticalGroup(
             pnlQuestionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -224,9 +217,17 @@ public class StatisticsAdmin extends java.awt.Dialog {
                 {null, null, null}
             },
             new String [] {
-                "STT", "Môn Học", "Số Lượng Câu Hỏi"
+                "STT", "Môn Học", "Số Lượng Tài Liệu"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane3.setViewportView(tblGridViewDocument);
 
         cboArrangeDocument.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -274,7 +275,15 @@ public class StatisticsAdmin extends java.awt.Dialog {
             new String [] {
                 "STT", "Mã bài thi", "Điểm trung bình tổng", "Số lượt thi"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane5.setViewportView(tblGridViewAverageScore);
 
         cboOrderingAverageScore.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -314,15 +323,23 @@ public class StatisticsAdmin extends java.awt.Dialog {
 
         tblGridViewSumScore.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
             },
             new String [] {
-                "STT", "Mã bài thi", "Điểm trung bình tổng", "Số lượt thi"
+                "Mã HS", "Họ Tên", "Khối", "Mã Bài Thi", "Bài Thi", "Điểm", "Ngày Làm"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane7.setViewportView(tblGridViewSumScore);
 
         cboOrderingSumScore.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -360,124 +377,69 @@ public class StatisticsAdmin extends java.awt.Dialog {
 
         jTabbedPane1.addTab("Điểm tổng", pnlSumScore);
 
-        tblGridViewTest.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
-            },
-            new String [] {
-                "STT", "Mã bài thi", "Bài thi", "Title 4", "Title 5"
-            }
-        ));
-        jScrollPane8.setViewportView(tblGridViewTest);
-
-        cboArrangeTest.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        cboArrangeTest.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Sắp xếp theo số lượng" }));
-        cboArrangeTest.addActionListener(new java.awt.event.ActionListener() {
+        btnSearch2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/studious/icons/icons8-search-24.png"))); // NOI18N
+        btnSearch2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cboArrangeTestActionPerformed(evt);
+                btnSearch2ActionPerformed(evt);
             }
         });
 
-        cboOrderingTest.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        cboOrderingTest.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "A - Z", "Z - A" }));
+        lblTitle1.setBackground(new java.awt.Color(232, 255, 183));
+        lblTitle1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/studious/icons/Studious-255x68.png"))); // NOI18N
 
-        javax.swing.GroupLayout pnlTestLayout = new javax.swing.GroupLayout(pnlTest);
-        pnlTest.setLayout(pnlTestLayout);
-        pnlTestLayout.setHorizontalGroup(
-            pnlTestLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlTestLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(pnlTestLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane8, javax.swing.GroupLayout.DEFAULT_SIZE, 764, Short.MAX_VALUE)
-                    .addGroup(pnlTestLayout.createSequentialGroup()
-                        .addComponent(cboArrangeTest, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(cboOrderingTest, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
-        );
-        pnlTestLayout.setVerticalGroup(
-            pnlTestLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlTestLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(pnlTestLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cboArrangeTest, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cboOrderingTest, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(13, Short.MAX_VALUE))
-        );
+        lblTitle.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        lblTitle.setForeground(new java.awt.Color(47, 106, 1));
+        lblTitle.setText("THỐNG KÊ ");
 
-        jTabbedPane1.addTab("Bài thi", pnlTest);
+        cboSubject.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        cboSubject.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Môn học" }));
 
-        btnSearch.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/studious/icons/icons8-search-24.png"))); // NOI18N
-        btnSearch.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSearchActionPerformed(evt);
-            }
-        });
-
-        lblTitle2.setBackground(new java.awt.Color(232, 255, 183));
-        lblTitle2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/studious/icons/Studious-255x68.png"))); // NOI18N
+        txtSearch.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txtSearch.setText("Tìm kiếm");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(86, 86, 86)
+                .addGap(78, 78, 78)
+                .addComponent(lblTitle1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(40, 40, 40)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                        .addContainerGap())
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addComponent(lblTitle2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 111, Short.MAX_VALUE)
+                        .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 908, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(57, 77, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(lblTitle)
-                                .addContainerGap())
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addComponent(cboSubject, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(btnSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(6, 6, 6))))))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addContainerGap()
-                    .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(824, Short.MAX_VALUE)))
+                                .addGap(12, 12, 12)
+                                .addComponent(btnSearch2, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(lblTitle, javax.swing.GroupLayout.Alignment.TRAILING)))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lblTitle1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(cboSubject, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtSearch, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnSearch2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(lblTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(cboSubject, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnSearch, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtSearch, javax.swing.GroupLayout.Alignment.LEADING))
-                        .addGap(24, 24, 24))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(lblTitle2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(51, 51, 51))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(137, 137, 137)
-                    .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(249, Short.MAX_VALUE)))
+                    .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -491,13 +453,9 @@ public class StatisticsAdmin extends java.awt.Dialog {
         dispose();
     }//GEN-LAST:event_closeDialog
 
-    private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
+    private void btnSearch2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearch2ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnSearchActionPerformed
-
-    private void cboArrangeTestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboArrangeTestActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cboArrangeTestActionPerformed
+    }//GEN-LAST:event_btnSearch2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -523,7 +481,7 @@ public class StatisticsAdmin extends java.awt.Dialog {
     private javax.swing.JButton btnLogout;
     private javax.swing.JButton btnPersonalInfo;
     private javax.swing.JButton btnQna;
-    private javax.swing.JButton btnSearch;
+    private javax.swing.JButton btnSearch2;
     private javax.swing.JButton btnStatistic;
     private javax.swing.JButton btnStudent;
     private javax.swing.JButton btnTeacher;
@@ -531,31 +489,26 @@ public class StatisticsAdmin extends java.awt.Dialog {
     private javax.swing.JComboBox<String> cboArrangeDocument;
     private javax.swing.JComboBox<String> cboArrangeQuestion;
     private javax.swing.JComboBox<String> cboArrangeSumScore;
-    private javax.swing.JComboBox<String> cboArrangeTest;
     private javax.swing.JComboBox<String> cboOrderingAverageScore;
     private javax.swing.JComboBox<String> cboOrderingDocument;
     private javax.swing.JComboBox<String> cboOrderingQuestion;
     private javax.swing.JComboBox<String> cboOrderingSumScore;
-    private javax.swing.JComboBox<String> cboOrderingTest;
     private javax.swing.JComboBox<String> cboSubject;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane7;
-    private javax.swing.JScrollPane jScrollPane8;
     private javax.swing.JToolBar jToolBar1;
     private javax.swing.JLabel lblTitle;
-    private javax.swing.JLabel lblTitle2;
+    private javax.swing.JLabel lblTitle1;
     private javax.swing.JPanel pnlAverageScore;
     private javax.swing.JPanel pnlDocument;
     private javax.swing.JPanel pnlQuestion;
     private javax.swing.JPanel pnlSumScore;
-    private javax.swing.JPanel pnlTest;
     private javax.swing.JTable tblGridViewAverageScore;
     private javax.swing.JTable tblGridViewDocument;
     private javax.swing.JTable tblGridViewQuestion;
     private javax.swing.JTable tblGridViewSumScore;
-    private javax.swing.JTable tblGridViewTest;
     private javax.swing.JTextField txtSearch;
     // End of variables declaration//GEN-END:variables
 }

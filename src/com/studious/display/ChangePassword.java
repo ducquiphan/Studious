@@ -62,6 +62,7 @@ public class ChangePassword extends javax.swing.JDialog {
         btnBack = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setResizable(false);
 
         pnlBackGround.setBackground(new java.awt.Color(255, 255, 255));
 

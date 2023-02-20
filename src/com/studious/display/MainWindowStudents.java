@@ -55,6 +55,7 @@ public class MainWindowStudents extends javax.swing.JFrame {
         btnLessons.setText("Bài học");
         btnLessons.setToolTipText("");
         btnLessons.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        btnLessons.setBorderPainted(false);
         btnLessons.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnLessons.setIconTextGap(1);
         btnLessons.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -70,6 +71,7 @@ public class MainWindowStudents extends javax.swing.JFrame {
         btnScore.setText("Xem điểm");
         btnScore.setToolTipText("");
         btnScore.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        btnScore.setBorderPainted(false);
         btnScore.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnScore.setIconTextGap(1);
         btnScore.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -85,6 +87,7 @@ public class MainWindowStudents extends javax.swing.JFrame {
         btnTest.setText("Làm bài thi");
         btnTest.setToolTipText("");
         btnTest.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        btnTest.setBorderPainted(false);
         btnTest.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnTest.setIconTextGap(1);
         btnTest.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);

@@ -1305,7 +1305,7 @@ public class DoTest extends java.awt.Dialog {
 
     private void init() {
         testEntity = tDao.selectById("TOA01");
-        sEntity = sDao.selectById("HS25579");
+        sEntity = sDao.selectById("HS12345");
         setTime();
         addButton();
         setIndexTest();

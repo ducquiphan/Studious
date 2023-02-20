@@ -308,6 +308,16 @@ public class DoTestReport extends java.awt.Frame {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                DoTest dialog = new DoTest(new javax.swing.JFrame(), true);
+                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
+                    public void windowClosing(java.awt.event.WindowEvent e) {
+                    }
+                });
+                dialog.setVisible(true);
+            }
+        });
     }
 
 

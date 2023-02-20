@@ -222,10 +222,7 @@ public class LessonManagement extends java.awt.Dialog {
 
         tblGridView.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+
             },
             new String [] {
                 "STT", "Mã bài học", "Tên bài học", "Ngày tạo", "Người tạo"
