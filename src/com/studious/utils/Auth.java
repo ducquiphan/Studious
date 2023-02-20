@@ -1,4 +1,4 @@
-package com.studious.ultils;
+package com.studious.utils;
 
 import com.studious.entity.Account;
 

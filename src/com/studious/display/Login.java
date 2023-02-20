@@ -2,8 +2,8 @@ package com.studious.display;
 
 import com.studious.DAO.AccountDAO;
 import com.studious.entity.Account;
-import com.studious.ultils.Auth;
-import com.studious.ultils.MsgBox;
+import com.studious.utils.Auth;
+import com.studious.utils.MsgBox;
 import javax.swing.JFrame;
 
 /**
@@ -11,7 +11,6 @@ import javax.swing.JFrame;
  * @author SsuBii
  */
 public class Login extends javax.swing.JFrame {
-
 
     AccountDAO dao = new AccountDAO();
     public static JFrame main;
@@ -260,7 +259,10 @@ public class Login extends javax.swing.JFrame {
     }
 
     private void openMainForm(int index) {
-        if (index == 1 || index == 2) {
+        if (index == 1) {
+            main = new MainWindow();
+            main.setVisible(true);
+        } else if (index == 2) {
             main = new MainWindow();
             main.setVisible(true);
         } else {

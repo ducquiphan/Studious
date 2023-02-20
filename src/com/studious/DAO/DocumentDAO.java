@@ -1,7 +1,7 @@
 package com.studious.DAO;
 
 import com.studious.entity.Document;
-import com.studious.ultils.JdbcHelper;
+import com.studious.utils.JdbcHelper;
 import java.util.ArrayList;
 import java.util.List;
 import java.sql.ResultSet;

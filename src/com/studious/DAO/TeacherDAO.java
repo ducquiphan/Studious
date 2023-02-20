@@ -4,7 +4,7 @@ import com.studious.DAO.StudiousDAO;
 import com.studious.entity.Teacher;
 import java.util.ArrayList;
 import java.util.List;
-import com.studious.ultils.JdbcHelper;
+import com.studious.utils.JdbcHelper;
 import java.sql.ResultSet;
 
 /**

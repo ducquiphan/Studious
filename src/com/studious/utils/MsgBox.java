@@ -1,4 +1,4 @@
-package com.studious.ultils;
+package com.studious.utils;
 
 import java.awt.Component;
 import javax.swing.JOptionPane;
