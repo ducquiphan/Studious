@@ -19,7 +19,6 @@ public class QuestionDAO extends StudiousDAO<Question, Integer> {
     final String SELECTALL_SQL = "SELECT * FROM CAUHOI";
     final String SELECTBYID_SQL = "SELECT * FROM CAUHOI WHERE MaCH = ?";
     final String SELECTBYLESSONID_SQL = "SELECT * FROM CAUHOI WHERE MaBH = ?";
-    final String SELECTBYQUESTION_SQL = "SELECT * FROM CAUHOI WHERE De LIKE %?%";
 
     @Override
     public void insert(Question entity) {
@@ -68,7 +67,8 @@ public class QuestionDAO extends StudiousDAO<Question, Integer> {
     }
     
     public List<Question> selectByQuestion(String question){
-        List<Question> list = selectSql(SELECTBYQUESTION_SQL, question);
+        String sql = "SELECT * FROM CAUHOI WHERE De LIKE N'%"+question+"%'";
+        List<Question> list = selectSql(sql);
         if (list.isEmpty()) {
             return null;
         }
@@ -94,7 +94,7 @@ public class QuestionDAO extends StudiousDAO<Question, Integer> {
                 list.add(entity);
             }
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            e.printStackTrace();
         }
         return list;
     }
