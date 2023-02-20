@@ -81,7 +81,7 @@ public class MainWindowTeachers extends javax.swing.JFrame {
         btnStat1.setFont(new java.awt.Font("Inter", 0, 24)); // NOI18N
         btnStat1.setForeground(new java.awt.Color(8, 115, 6));
         btnStat1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/studious/icons/test.png"))); // NOI18N
-        btnStat1.setText("Thống kê");
+        btnStat1.setText("Thi thử");
         btnStat1.setToolTipText("");
         btnStat1.setBorder(null);
         btnStat1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);

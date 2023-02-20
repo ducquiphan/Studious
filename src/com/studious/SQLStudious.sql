@@ -47,7 +47,6 @@ GO
 CREATE TABLE BAITHI (
 	MaBThi VARCHAR(10) NOT NULL,
 	TieuDe NVARCHAR(100),
-	ThoiGian INT,
 	MonHoc NVARCHAR(30),
 	Khoi INT,
 	NgayTao	DATE DEFAULT GETDATE(),
@@ -101,18 +100,16 @@ CREATE TABLE HOIDAP (
 )
 GO
 CREATE TABLE KETQUA (
-	STT INT IDENTITY NOT NULL,
-	MaLanThi INT NOT NULL,
-	MaHS VARCHAR(10) NOT NULL,
-	MaBTHI VARCHAR(10) NOT NULL,
-	MaCau INT NOT NULL,
-	DanAnChon VARCHAR(30),
-	DanAnDung VARCHAR(30),
+	MaKQ INT IDENTITY NOT NULL, 
+	LanThi INT,
+	MaHS VARCHAR(10),
+	MaBThi VARCHAR(10),
+	MaCau INT,
+	DanAnChon NVARCHAR(30),
+	DanAnDung NVARCHAR(30),
 	NgayThi DATE DEFAULT GETDATE()
 )
-GO
 
-ALTER TABLE KETQUA ADD CONSTRAINT pk_KETQUA PRIMARY KEY (STT)
 
 
 -------------------------------------------
@@ -127,7 +124,7 @@ ALTER TABLE CAUHOI ADD CONSTRAINT PK_CAUHOI PRIMARY KEY (MaCH)
 ALTER TABLE CAUHOIBAITHI ADD CONSTRAINT PK_CAUHOIBAITHI PRIMARY KEY (MaCHBT)
 ALTER TABLE BAOCAOBAITHI ADD CONSTRAINT PK_BAOCAOBAITHI PRIMARY KEY (MaBCBT)
 ALTER TABLE HOIDAP ADD CONSTRAINT PK_HOIDAP PRIMARY KEY (MaHD)
-ALTER TABLE KETQUA ADD CONSTRAINT PK_KETQUA PRIMARY KEY (MaLanThi, MaHS, MaBThi)
+ALTER TABLE KETQUA ADD CONSTRAINT PK_KETQUA PRIMARY KEY (MaKQ)
 
 
 -------------------------------------------
@@ -146,8 +143,11 @@ ALTER TABLE BAOCAOBAITHI ADD CONSTRAINT FK_BAOCAOBAITHI_BAITHI FOREIGN KEY (MaBT
 ALTER TABLE BAOCAOBAITHI ADD CONSTRAINT FK_BAOCAOBAITHI_HOCSINH FOREIGN KEY (MaHS) REFERENCES HOCSINH(MaHS)
 ALTER TABLE HOIDAP ADD CONSTRAINT FK_HOIDAP_TAIKHOAN FOREIGN KEY (NguoiTao) REFERENCES TAIKHOAN(TenTaiKhoan)
 ALTER TABLE HOIDAP ADD CONSTRAINT FK_HOIDAP_CAUHOI FOREIGN KEY (MaCH) REFERENCES CAUHOI(MaCH)
+ALTER TABLE KETQUA ADD CONSTRAINT FK_KETQUA_HOCSINH FOREIGN KEY (MaHS) REFERENCES HOCSINH(MaHS)
+ALTER TABLE KETQUA ADD CONSTRAINT FK_KETQUA_BAITHI FOREIGN KEY (MaBThi) REFERENCES BAITHI(MaBThi)
 
 
+/*
 -------------------------------------------
 -- Thống kê điểm cá nhân học sinh: số thứ tự, tên bài thi, điểm, lần thi, thời gian làm bài.
 GO
@@ -281,47 +281,229 @@ AS BEGIN
 		GROUP BY BAOCAOBAITHI.MaBThi, TieuDe
 	END
 END
-GO
+*/
+
 -- In danh sách môn
+GO
 CREATE PROC sp_DanhSachMonHoc
 AS BEGIN
 	SELECT MonHoc FROM BAIHOC GROUP BY MonHoc
 END
-GO
+
 -- In danh sách khối
+GO
 CREATE PROC sp_DanhSachBaiHocTheoMon (@MonHoc NVARCHAR(100))
 AS BEGIN
 	SELECT Khoi FROM BAIHOC WHERE MonHoc = @MonHoc GROUP BY Khoi
 END
 GO
+
+
+
+
 -----------------------------------
 GO
-INSERT INTO TAIKHOAN(TenTaiKhoan, MatKhau, VaiTro, TrangThai) VALUES ('GV12345', '123456', 2, 1)
-INSERT INTO TAIKHOAN(TenTaiKhoan, MatKhau, VaiTro, TrangThai) VALUES ('GV67890', '123456', 2, 1)
-INSERT INTO TAIKHOAN(TenTaiKhoan, MatKhau, VaiTro, TrangThai) VALUES ('HS12345', '123456', 3, 1)
-INSERT INTO TAIKHOAN(TenTaiKhoan, MatKhau, VaiTro, TrangThai) VALUES ('AD12345', '123456', 1, 1)
-go
+INSERT INTO TAIKHOAN(TenTaiKhoan, MatKhau, VaiTro, TrangThai) VALUES
+('AD1', '123456', 1, 1),
+('GV1', '123456', 2, 1),
+('HS1', '123456', 3, 1),
+('HS2', '123456', 3, 0)
 
-INSERT INTO GIAOVIEN(MaGV, HoVaTen, GioiTinh, NgaySinh, ChuyenMon, Email, SoDT, PathIMG, MaTK) VALUES ('GV12345', N'Trần Hoàng Danh', 0, '04/11/2003', N'TOÁN', 'danhth@gmail.com', '0971714478', 'image/img1', 'GV12345')
-INSERT INTO GIAOVIEN(MaGV, HoVaTen, GioiTinh, NgaySinh, ChuyenMon, Email, SoDT, PathIMG, MaTK) VALUES ('GV67890', N'Phan Quí Đức', 0, '06/23/2000', N'ANH VĂN', 'ducpq@gmail.com', '0964856254', 'image/img1', 'GV67890')
-go
------------------------------------
-INSERT INTO BAIHOC(TenBH, MonHoc, Khoi, NgayTao, MaGV) VALUES
-('TOÁN CỘNG TRỪ', 'TOÁN','10', '11-11-2020','GV25579')
+GO
+INSERT INTO GIAOVIEN(MaGV, HoVaTen, GioiTinh, NgaySinh, ChuyenMon, Email, SoDT, PathIMG, MaTK) VALUES 
+('GV1', N'Trần Hoàng Danh', 1, '11/04/2003', N'Toán', 'danhth@gmail.com', '0971714478', 'image/imgGV', 'GV1')
 
-SELECT * FROM KETQUA WHERE (MaLanThi = '' AND MaHS = '' AND MaBTHI = '' AND MaCau = '')
-INSERT INTO BAIHOC(TenBH, MonHoc, Khoi, MaGV) VALUES (N'TOÁN CỘNG TRỪ', N'TOÁN',10,'GV12345')
-INSERT INTO BAIHOC(TenBH, MonHoc, Khoi, MaGV) VALUES (N'TOÁN NHÂN CHIA', N'TOÁN',11,'GV12345')
-INSERT INTO BAIHOC(TenBH, MonHoc, Khoi, MaGV) VALUES (N'TOPIC 1', N'ANH VĂN',10,'GV67890')
-INSERT INTO BAIHOC(TenBH, MonHoc, Khoi, MaGV) VALUES (N'TOPIC 2', N'ANH VĂN',11,'GV67890')
-INSERT INTO BAIHOC(TenBH, MonHoc, Khoi, MaGV) VALUES (N'TOPIC 3', N'ANH VĂN',12,'GV67890')
-go
-select * from BAIHOC
-delete from BAIHOC
-delete from CAUHOI
+GO
+INSERT INTO HOCSINH(MaHS, HoVaTen, GioiTinh, NgaySinh, Email, SoDT, Khoi, PathIMG, MaTK) VALUES 
+('HS1', N'Phan Quí Đức', 0, '06/23/2000', 'ducpq@gmail.com', '0964856254', 10, 'image/imgHS', 'HS1')
 
-SELECT Khoi FROM BAIHOC WHERE MonHoc = N'TOÁN' GROUP BY Khoi
+GO
+INSERT INTO BAIHOC(TenBH, MonHoc, Khoi, MaGV) VALUES 
+(N'TOÁN CỘNG TRỪ', N'Toán',10,'GV1'),
+(N'TOÁN NHÂN CHIA', N'Toán',11,'GV1'),
+(N'TOPIC 1', N'Anh văn',10,'GV1'),
+(N'TOPIC 2', N'Anh văn',11,'GV1'),
+(N'TOPIC 3', N'Anh văn',12,'GV1')
 
-insert into CAUHOI(De, DapAn1, DapAn2, DapAn3, DapAn4, DapAnDung, MaBH, MaGV) values (N'Một cộng một bằng mấy?', N'1', N'-1', N'0', N'2', N'd', 26,'GV67890')
+GO
+INSERT INTO BAITHI(MaBThi, TieuDe, MonHoc, Khoi, MaGV, DanhSachMaCHBT) VALUES
+('TOAN01', N'Đề thi kiểm tra cuối kỳ 1', N'Toán', 10, 'GV1', NULL)
 
-select * from CAUHOI where De like N'%Một%'
+GO
+INSERT INTO TAILIEUONTAP(TieuDe, URLTaiLieu, MaGV, MaBH) VALUES
+(N'Tài liệu ôn thi cuối kỳ 1 môn Toán khối 10', N'tailieu/tailieuonthi.txt', 'GV1', 1)
+
+GO
+INSERT INTO CAUHOI(De, DapAn1, DapAn2, DapAn3, DapAn4, DapAnDung, MaBH, MaGV) VALUES 
+(N'1 + 1 = ?', N'1', N'3', N'0', N'2', N'd', 1,'GV1'),
+(N'3 x 2 = ?', N'1', N'3', N'8', N'6', N'd', 2,'GV1'),
+(N'5 + 7 = ?', N'10', N'12', N'14', N'16', N'b', 1,'GV1'),
+(N'4 x 2 = ?', N'6', N'7', N'8', N'9', N'c', 2,'GV1'),
+(N'3 x 1 = ?', N'3', N'1', N'0', N'2', N'a', 2,'GV1'),
+(N'1 + 1 = ?', N'1', N'-1', N'0', N'2', N'd', 1,'GV1'),
+(N'1 + 1 = ?', N'1', N'-1', N'0', N'2', N'd', 1,'GV1'),
+(N'1 + 1 = ?', N'1', N'-1', N'0', N'2', N'd', 1,'GV1'),
+(N'1 + 1 = ?', N'1', N'-1', N'0', N'2', N'd', 1,'GV1'),
+(N'1 + 1 = ?', N'1', N'-1', N'0', N'2', N'd', 1,'GV1'),
+(N'1 + 1 = ?', N'1', N'-1', N'0', N'2', N'd', 1,'GV1'),
+(N'1 + 1 = ?', N'1', N'-1', N'0', N'2', N'd', 1,'GV1'),
+(N'1 + 1 = ?', N'1', N'-1', N'0', N'2', N'd', 1,'GV1'),
+(N'1 + 1 = ?', N'1', N'-1', N'0', N'2', N'd', 1,'GV1'),
+(N'1 + 1 = ?', N'1', N'-1', N'0', N'2', N'd', 1,'GV1'),
+(N'1 + 1 = ?', N'1', N'-1', N'0', N'2', N'd', 1,'GV1'),
+(N'1 + 1 = ?', N'1', N'-1', N'0', N'2', N'd', 1,'GV1'),
+(N'1 + 1 = ?', N'1', N'-1', N'0', N'2', N'd', 1,'GV1'),
+(N'1 + 1 = ?', N'1', N'-1', N'0', N'2', N'd', 1,'GV1'),
+(N'1 + 1 = ?', N'1', N'-1', N'0', N'2', N'd', 1,'GV1'),
+(N'1 + 1 = ?', N'1', N'-1', N'0', N'2', N'd', 1,'GV1'),
+(N'1 + 1 = ?', N'1', N'-1', N'0', N'2', N'd', 1,'GV1'),
+(N'1 + 1 = ?', N'1', N'-1', N'0', N'2', N'd', 1,'GV1'),
+(N'1 + 1 = ?', N'1', N'-1', N'0', N'2', N'd', 1,'GV1'),
+(N'1 + 1 = ?', N'1', N'-1', N'0', N'2', N'd', 1,'GV1'),
+(N'1 + 1 = ?', N'1', N'-1', N'0', N'2', N'd', 1,'GV1'),
+(N'1 + 1 = ?', N'1', N'-1', N'0', N'2', N'd', 1,'GV1'),
+(N'1 + 1 = ?', N'1', N'-1', N'0', N'2', N'd', 1,'GV1'),
+(N'1 + 1 = ?', N'1', N'-1', N'0', N'2', N'd', 1,'GV1'),
+(N'1 + 1 = ?', N'1', N'-1', N'0', N'2', N'd', 1,'GV1'),
+(N'1 + 1 = ?', N'1', N'-1', N'0', N'2', N'd', 1,'GV1'),
+(N'1 + 1 = ?', N'1', N'-1', N'0', N'2', N'd', 1,'GV1'),
+(N'1 + 1 = ?', N'1', N'-1', N'0', N'2', N'd', 1,'GV1'),
+(N'1 + 1 = ?', N'1', N'-1', N'0', N'2', N'd', 1,'GV1'),
+(N'1 + 1 = ?', N'1', N'-1', N'0', N'2', N'd', 1,'GV1'),
+(N'1 + 1 = ?', N'1', N'-1', N'0', N'2', N'd', 1,'GV1'),
+(N'1 + 1 = ?', N'1', N'-1', N'0', N'2', N'd', 1,'GV1'),
+(N'1 + 1 = ?', N'1', N'-1', N'0', N'2', N'd', 1,'GV1'),
+(N'1 + 1 = ?', N'1', N'-1', N'0', N'2', N'd', 1,'GV1'),
+(N'1 + 1 = ?', N'1', N'-1', N'0', N'2', N'd', 1,'GV1'),
+(N'1 + 1 = ?', N'1', N'-1', N'0', N'2', N'd', 1,'GV1'),
+(N'1 + 1 = ?', N'1', N'-1', N'0', N'2', N'd', 1,'GV1'),
+(N'1 + 1 = ?', N'1', N'-1', N'0', N'2', N'd', 1,'GV1'),
+(N'1 + 1 = ?', N'1', N'-1', N'0', N'2', N'd', 1,'GV1'),
+(N'1 + 1 = ?', N'1', N'-1', N'0', N'2', N'd', 1,'GV1'),
+(N'1 + 1 = ?', N'1', N'-1', N'0', N'2', N'd', 1,'GV1'),
+(N'1 + 1 = ?', N'1', N'-1', N'0', N'2', N'd', 1,'GV1'),
+(N'1 + 1 = ?', N'1', N'-1', N'0', N'2', N'd', 1,'GV1'),
+(N'1 + 1 = ?', N'1', N'-1', N'0', N'2', N'd', 1,'GV1'),
+(N'1 + 1 = ?', N'1', N'-1', N'0', N'2', N'd', 1,'GV1')
+
+GO
+INSERT INTO CAUHOIBAITHI(MaCH, MaBThi) VALUES
+(1, 'TOAN01'),
+(2, 'TOAN01'),
+(3, 'TOAN01'),
+(4, 'TOAN01'),
+(5, 'TOAN01'),
+(6, 'TOAN01'),
+(7, 'TOAN01'),
+(8, 'TOAN01'),
+(9, 'TOAN01'),
+(10, 'TOAN01'),
+(11, 'TOAN01'),
+(12, 'TOAN01'),
+(13, 'TOAN01'),
+(14, 'TOAN01'),
+(15, 'TOAN01'),
+(16, 'TOAN01'),
+(17, 'TOAN01'),
+(18, 'TOAN01'),
+(19, 'TOAN01'),
+(20, 'TOAN01'),
+(21, 'TOAN01'),
+(22, 'TOAN01'),
+(23, 'TOAN01'),
+(24, 'TOAN01'),
+(25, 'TOAN01'),
+(26, 'TOAN01'),
+(27, 'TOAN01'),
+(28, 'TOAN01'),
+(29, 'TOAN01'),
+(30, 'TOAN01'),
+(31, 'TOAN01'),
+(32, 'TOAN01'),
+(33, 'TOAN01'),
+(34, 'TOAN01'),
+(35, 'TOAN01'),
+(36, 'TOAN01'),
+(37, 'TOAN01'),
+(38, 'TOAN01'),
+(39, 'TOAN01'),
+(40, 'TOAN01'),
+(41, 'TOAN01'),
+(42, 'TOAN01'),
+(43, 'TOAN01'),
+(44, 'TOAN01'),
+(45, 'TOAN01'),
+(46, 'TOAN01'),
+(47, 'TOAN01'),
+(48, 'TOAN01'),
+(49, 'TOAN01'),
+(50, 'TOAN01')
+
+GO
+INSERT INTO BAOCAOBAITHI(MaBThi, MaHS, Diem, ThoiGianHoanThanh, SLDung) VALUES
+('TOAN01', 'HS1', 9.0, 5, 45)
+
+GO
+INSERT INTO HOIDAP(NoiDung, NguoiTao, MaCH) VALUES
+(N'Tại sao 1 cộng 1 bằng 2 mà không phải là bằng 3', 'HS1', 1),
+(N'Xin cách giải bài toán', 'HS1', 2),
+(N'Thắc mắc nên hỏi!', 'HS1', 3)
+
+GO
+INSERT INTO KETQUA(LanThi, MaHS, MaBThi, MaCau, DanAnChon, DanAnDung) VALUES
+(1, 'HS1', 'TOAN01', 1, N'd', N'd'),
+(1, 'HS1', 'TOAN01', 2, N'c', N'd'),
+(1, 'HS1', 'TOAN01', 3, N'd', N'c'),
+(1, 'HS1', 'TOAN01', 4, N'b', N'b'),
+(1, 'HS1', 'TOAN01', 5, N'a', N'a'),
+(1, 'HS1', 'TOAN01', 6, N'd', N'd'),
+(1, 'HS1', 'TOAN01', 7, N'd', N'd'),
+(1, 'HS1', 'TOAN01', 8, N'd', N'd'),
+(1, 'HS1', 'TOAN01', 9, N'd', N'd'),
+(1, 'HS1', 'TOAN01', 10, N'd', N'd'),
+(1, 'HS1', 'TOAN01', 11, N'd', N'd'),
+(1, 'HS1', 'TOAN01', 12, N'd', N'd'),
+(1, 'HS1', 'TOAN01', 13, N'd', N'd'),
+(1, 'HS1', 'TOAN01', 14, N'd', N'd'),
+(1, 'HS1', 'TOAN01', 15, N'd', N'd'),
+(1, 'HS1', 'TOAN01', 16, N'd', N'd'),
+(1, 'HS1', 'TOAN01', 17, N'd', N'd'),
+(1, 'HS1', 'TOAN01', 18, N'd', N'd'),
+(1, 'HS1', 'TOAN01', 19, N'd', N'd'),
+(1, 'HS1', 'TOAN01', 20, N'd', N'd'),
+(1, 'HS1', 'TOAN01', 21, N'd', N'd'),
+(1, 'HS1', 'TOAN01', 22, N'd', N'd'),
+(1, 'HS1', 'TOAN01', 23, N'd', N'd'),
+(1, 'HS1', 'TOAN01', 24, N'd', N'd'),
+(1, 'HS1', 'TOAN01', 25, N'd', N'd'),
+(1, 'HS1', 'TOAN01', 26, N'd', N'd'),
+(1, 'HS1', 'TOAN01', 27, N'd', N'd'),
+(1, 'HS1', 'TOAN01', 28, N'd', N'd'),
+(1, 'HS1', 'TOAN01', 29, N'd', N'd'),
+(1, 'HS1', 'TOAN01', 30, N'd', N'd'),
+(1, 'HS1', 'TOAN01', 31, N'd', N'd'),
+(1, 'HS1', 'TOAN01', 32, N'd', N'd'),
+(1, 'HS1', 'TOAN01', 33, N'd', N'd'),
+(1, 'HS1', 'TOAN01', 34, N'd', N'd'),
+(1, 'HS1', 'TOAN01', 35, N'd', N'd'),
+(1, 'HS1', 'TOAN01', 36, N'd', N'd'),
+(1, 'HS1', 'TOAN01', 37, N'd', N'd'),
+(1, 'HS1', 'TOAN01', 38, N'd', N'd'),
+(1, 'HS1', 'TOAN01', 39, N'd', N'd'),
+(1, 'HS1', 'TOAN01', 40, N'd', N'd'),
+(1, 'HS1', 'TOAN01', 41, N'd', N'd'),
+(1, 'HS1', 'TOAN01', 42, N'd', N'd'),
+(1, 'HS1', 'TOAN01', 43, N'd', N'd'),
+(1, 'HS1', 'TOAN01', 44, N'd', N'd'),
+(1, 'HS1', 'TOAN01', 45, N'd', N'd'),
+(1, 'HS1', 'TOAN01', 46, N'd', N'd'),
+(1, 'HS1', 'TOAN01', 47, N'd', N'd'),
+(1, 'HS1', 'TOAN01', 48, N'd', N'd'),
+(1, 'HS1', 'TOAN01', 49, N'd', N'd'),
+(1, 'HS1', 'TOAN01', 50, N'd', N'd')
+
+
+
+
+
+

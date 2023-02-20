@@ -20,6 +20,7 @@ public class ChangePassword extends javax.swing.JDialog {
     public ChangePassword(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        setLocationRelativeTo(parent);
     }
     
     

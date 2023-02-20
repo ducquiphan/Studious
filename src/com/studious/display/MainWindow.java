@@ -124,6 +124,11 @@ public class MainWindow extends javax.swing.JFrame {
         btnHome.setMaximumSize(new java.awt.Dimension(35, 35));
         btnHome.setPreferredSize(new java.awt.Dimension(35, 35));
         btnHome.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnHome.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnHomeActionPerformed(evt);
+            }
+        });
         jToolBar.add(btnHome);
 
         btnPersonalInfo.setBackground(new java.awt.Color(232, 255, 183));
@@ -134,6 +139,11 @@ public class MainWindow extends javax.swing.JFrame {
         btnPersonalInfo.setMaximumSize(new java.awt.Dimension(35, 35));
         btnPersonalInfo.setPreferredSize(new java.awt.Dimension(35, 35));
         btnPersonalInfo.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnPersonalInfo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPersonalInfoActionPerformed(evt);
+            }
+        });
         jToolBar.add(btnPersonalInfo);
 
         btnTeacher.setBackground(new java.awt.Color(232, 255, 183));
@@ -144,6 +154,11 @@ public class MainWindow extends javax.swing.JFrame {
         btnTeacher.setMaximumSize(new java.awt.Dimension(35, 35));
         btnTeacher.setPreferredSize(new java.awt.Dimension(35, 35));
         btnTeacher.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnTeacher.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTeacherActionPerformed(evt);
+            }
+        });
         jToolBar.add(btnTeacher);
 
         btnStudent.setBackground(new java.awt.Color(232, 255, 183));
@@ -154,6 +169,11 @@ public class MainWindow extends javax.swing.JFrame {
         btnStudent.setMaximumSize(new java.awt.Dimension(35, 35));
         btnStudent.setPreferredSize(new java.awt.Dimension(35, 35));
         btnStudent.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnStudent.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnStudentActionPerformed(evt);
+            }
+        });
         jToolBar.add(btnStudent);
 
         btnStatistic.setBackground(new java.awt.Color(232, 255, 183));
@@ -161,6 +181,11 @@ public class MainWindow extends javax.swing.JFrame {
         btnStatistic.setBorder(null);
         btnStatistic.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnStatistic.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnStatistic.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnStatisticActionPerformed(evt);
+            }
+        });
         jToolBar.add(btnStatistic);
 
         btnQna.setBackground(new java.awt.Color(232, 255, 183));
@@ -171,6 +196,11 @@ public class MainWindow extends javax.swing.JFrame {
         btnQna.setMaximumSize(new java.awt.Dimension(35, 35));
         btnQna.setPreferredSize(new java.awt.Dimension(35, 35));
         btnQna.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnQna.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnQnaActionPerformed(evt);
+            }
+        });
         jToolBar.add(btnQna);
 
         btnBack.setBackground(new java.awt.Color(232, 255, 183));
@@ -178,6 +208,11 @@ public class MainWindow extends javax.swing.JFrame {
         btnBack.setBorder(null);
         btnBack.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnBack.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnBack.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBackActionPerformed(evt);
+            }
+        });
         jToolBar.add(btnBack);
 
         btnLogout.setBackground(new java.awt.Color(232, 255, 183));
@@ -189,6 +224,11 @@ public class MainWindow extends javax.swing.JFrame {
         btnLogout.setMaximumSize(new java.awt.Dimension(35, 35));
         btnLogout.setPreferredSize(new java.awt.Dimension(35, 35));
         btnLogout.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnLogout.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLogoutActionPerformed(evt);
+            }
+        });
         jToolBar.add(btnLogout);
 
         javax.swing.GroupLayout pnlBackgroundLayout = new javax.swing.GroupLayout(pnlBackground);
@@ -196,7 +236,7 @@ public class MainWindow extends javax.swing.JFrame {
         pnlBackgroundLayout.setHorizontalGroup(
             pnlBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlBackgroundLayout.createSequentialGroup()
-                .addContainerGap(145, Short.MAX_VALUE)
+                .addContainerGap(151, Short.MAX_VALUE)
                 .addGroup(pnlBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlBackgroundLayout.createSequentialGroup()
                         .addComponent(lblTitle)
@@ -257,15 +297,62 @@ public class MainWindow extends javax.swing.JFrame {
 
     private void btnStatisticMainActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStatisticMainActionPerformed
         // TODO add your handling code here:
+        StatisticsAdmin sa = new StatisticsAdmin(this);
+        sa.setVisible(true);
     }//GEN-LAST:event_btnStatisticMainActionPerformed
 
     private void btnStudentMainActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStudentMainActionPerformed
         // TODO add your handling code here:
+        StudentManagement sm = new StudentManagement(this, rootPaneCheckingEnabled);
+        sm.setVisible(true);
     }//GEN-LAST:event_btnStudentMainActionPerformed
 
     private void btnQnaMainActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQnaMainActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnQnaMainActionPerformed
+
+    private void btnHomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHomeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnHomeActionPerformed
+
+    private void btnPersonalInfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPersonalInfoActionPerformed
+        // TODO add your handling code here:
+        PersonalInforAdmin pia = new PersonalInforAdmin(this, rootPaneCheckingEnabled);
+        pia.setVisible(true);
+    }//GEN-LAST:event_btnPersonalInfoActionPerformed
+
+    private void btnTeacherActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTeacherActionPerformed
+        // TODO add your handling code here:
+        TeacherManagement tm = new TeacherManagement(this, rootPaneCheckingEnabled);
+        tm.setVisible(true);
+    }//GEN-LAST:event_btnTeacherActionPerformed
+
+    private void btnStudentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStudentActionPerformed
+        // TODO add your handling code here:
+        StudentManagement sm = new StudentManagement(this, rootPaneCheckingEnabled);
+        sm.setVisible(true);
+    }//GEN-LAST:event_btnStudentActionPerformed
+
+    private void btnStatisticActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStatisticActionPerformed
+        // TODO add your handling code here:
+        StatisticsAdmin sa = new StatisticsAdmin(this, rootPaneCheckingEnabled);
+        sa.setVisible(true);
+    }//GEN-LAST:event_btnStatisticActionPerformed
+
+    private void btnQnaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQnaActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_btnQnaActionPerformed
+
+    private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_btnBackActionPerformed
+
+    private void btnLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoutActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_btnLogoutActionPerformed
 
     /**
      * @param args the command line arguments

@@ -94,6 +94,16 @@ public class DoTest extends java.awt.Dialog {
         btn38 = new javax.swing.JButton();
         btn39 = new javax.swing.JButton();
         btn40 = new javax.swing.JButton();
+        btn41 = new javax.swing.JButton();
+        btn42 = new javax.swing.JButton();
+        btn43 = new javax.swing.JButton();
+        btn44 = new javax.swing.JButton();
+        btn45 = new javax.swing.JButton();
+        btn46 = new javax.swing.JButton();
+        btn47 = new javax.swing.JButton();
+        btn48 = new javax.swing.JButton();
+        btn49 = new javax.swing.JButton();
+        btn50 = new javax.swing.JButton();
         pnlShowQuestion = new javax.swing.JPanel();
         lblTitleTest = new javax.swing.JLabel();
         lblQuestionNumber = new javax.swing.JLabel();
@@ -146,7 +156,7 @@ public class DoTest extends java.awt.Dialog {
         pnlContent.setBackground(new java.awt.Color(232, 255, 183));
 
         pnlButton.setBackground(new java.awt.Color(232, 255, 183));
-        pnlButton.setLayout(new java.awt.GridLayout(4, 10, 5, 5));
+        pnlButton.setLayout(new java.awt.GridLayout(5, 10, 5, 5));
 
         btn1.setBackground(new java.awt.Color(229, 229, 229));
         btn1.setText("1");
@@ -503,6 +513,96 @@ public class DoTest extends java.awt.Dialog {
         });
         pnlButton.add(btn40);
 
+        btn41.setBackground(new java.awt.Color(229, 229, 229));
+        btn41.setText("41");
+        btn41.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn41ActionPerformed(evt);
+            }
+        });
+        pnlButton.add(btn41);
+
+        btn42.setBackground(new java.awt.Color(229, 229, 229));
+        btn42.setText("42");
+        btn42.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn42ActionPerformed(evt);
+            }
+        });
+        pnlButton.add(btn42);
+
+        btn43.setBackground(new java.awt.Color(229, 229, 229));
+        btn43.setText("43");
+        btn43.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn43ActionPerformed(evt);
+            }
+        });
+        pnlButton.add(btn43);
+
+        btn44.setBackground(new java.awt.Color(229, 229, 229));
+        btn44.setText("44");
+        btn44.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn44ActionPerformed(evt);
+            }
+        });
+        pnlButton.add(btn44);
+
+        btn45.setBackground(new java.awt.Color(229, 229, 229));
+        btn45.setText("45");
+        btn45.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn45ActionPerformed(evt);
+            }
+        });
+        pnlButton.add(btn45);
+
+        btn46.setBackground(new java.awt.Color(229, 229, 229));
+        btn46.setText("46");
+        btn46.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn46ActionPerformed(evt);
+            }
+        });
+        pnlButton.add(btn46);
+
+        btn47.setBackground(new java.awt.Color(229, 229, 229));
+        btn47.setText("47");
+        btn47.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn47ActionPerformed(evt);
+            }
+        });
+        pnlButton.add(btn47);
+
+        btn48.setBackground(new java.awt.Color(229, 229, 229));
+        btn48.setText("48");
+        btn48.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn48ActionPerformed(evt);
+            }
+        });
+        pnlButton.add(btn48);
+
+        btn49.setBackground(new java.awt.Color(229, 229, 229));
+        btn49.setText("49");
+        btn49.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn49ActionPerformed(evt);
+            }
+        });
+        pnlButton.add(btn49);
+
+        btn50.setBackground(new java.awt.Color(229, 229, 229));
+        btn50.setText("50");
+        btn50.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn50ActionPerformed(evt);
+            }
+        });
+        pnlButton.add(btn50);
+
         pnlShowQuestion.setBackground(new java.awt.Color(255, 255, 255));
 
         lblTitleTest.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
@@ -559,6 +659,7 @@ public class DoTest extends java.awt.Dialog {
         pnlShowQuestion.setLayout(pnlShowQuestionLayout);
         pnlShowQuestionLayout.setHorizontalGroup(
             pnlShowQuestionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(lblTitleTest, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(pnlShowQuestionLayout.createSequentialGroup()
                 .addGap(25, 25, 25)
                 .addGroup(pnlShowQuestionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -567,8 +668,7 @@ public class DoTest extends java.awt.Dialog {
                     .addComponent(lblShowAnsB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblShowAnsA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblQuestionNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 696, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(27, Short.MAX_VALUE))
-            .addComponent(lblTitleTest, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(36, Short.MAX_VALUE))
         );
         pnlShowQuestionLayout.setVerticalGroup(
             pnlShowQuestionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -584,7 +684,7 @@ public class DoTest extends java.awt.Dialog {
                 .addComponent(lblShowAnsC, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(lblShowAnsD, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(87, Short.MAX_VALUE))
+                .addContainerGap(98, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout pnlContentLayout = new javax.swing.GroupLayout(pnlContent);
@@ -593,7 +693,7 @@ public class DoTest extends java.awt.Dialog {
             pnlContentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlContentLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(pnlContentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(pnlContentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(pnlShowQuestion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(pnlButton, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addContainerGap())
@@ -748,7 +848,7 @@ public class DoTest extends java.awt.Dialog {
                 .addComponent(pnlChooseAnswer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(pnlContent, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 31, Short.MAX_VALUE))
+                .addGap(0, 22, Short.MAX_VALUE))
         );
         pnlBackgroundLayout.setVerticalGroup(
             pnlBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -787,8 +887,9 @@ public class DoTest extends java.awt.Dialog {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(pnlBackground, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         pack();
@@ -989,6 +1090,46 @@ public class DoTest extends java.awt.Dialog {
         next();
     }//GEN-LAST:event_btnNextActionPerformed
 
+    private void btn41ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn41ActionPerformed
+        selectedQuestion(41);
+    }//GEN-LAST:event_btn41ActionPerformed
+
+    private void btn42ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn42ActionPerformed
+       selectedQuestion(42);
+    }//GEN-LAST:event_btn42ActionPerformed
+
+    private void btn43ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn43ActionPerformed
+        selectedQuestion(43);
+    }//GEN-LAST:event_btn43ActionPerformed
+
+    private void btn44ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn44ActionPerformed
+        selectedQuestion(44);
+    }//GEN-LAST:event_btn44ActionPerformed
+
+    private void btn45ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn45ActionPerformed
+        selectedQuestion(45);
+    }//GEN-LAST:event_btn45ActionPerformed
+
+    private void btn46ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn46ActionPerformed
+        selectedQuestion(46);
+    }//GEN-LAST:event_btn46ActionPerformed
+
+    private void btn47ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn47ActionPerformed
+        selectedQuestion(47);
+    }//GEN-LAST:event_btn47ActionPerformed
+
+    private void btn48ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn48ActionPerformed
+        selectedQuestion(48);
+    }//GEN-LAST:event_btn48ActionPerformed
+
+    private void btn49ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn49ActionPerformed
+        selectedQuestion(49);
+    }//GEN-LAST:event_btn49ActionPerformed
+
+    private void btn50ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn50ActionPerformed
+        selectedQuestion(50);
+    }//GEN-LAST:event_btn50ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1042,7 +1183,17 @@ public class DoTest extends java.awt.Dialog {
     private javax.swing.JButton btn39;
     private javax.swing.JButton btn4;
     private javax.swing.JButton btn40;
+    private javax.swing.JButton btn41;
+    private javax.swing.JButton btn42;
+    private javax.swing.JButton btn43;
+    private javax.swing.JButton btn44;
+    private javax.swing.JButton btn45;
+    private javax.swing.JButton btn46;
+    private javax.swing.JButton btn47;
+    private javax.swing.JButton btn48;
+    private javax.swing.JButton btn49;
     private javax.swing.JButton btn5;
+    private javax.swing.JButton btn50;
     private javax.swing.JButton btn6;
     private javax.swing.JButton btn7;
     private javax.swing.JButton btn8;
@@ -1228,10 +1379,20 @@ public class DoTest extends java.awt.Dialog {
         listButton.add(btn38);
         listButton.add(btn39);
         listButton.add(btn40);
+        listButton.add(btn41);
+        listButton.add(btn42);
+        listButton.add(btn43);
+        listButton.add(btn44);
+        listButton.add(btn45);
+        listButton.add(btn46);
+        listButton.add(btn47);
+        listButton.add(btn48);
+        listButton.add(btn49);
+        listButton.add(btn50);
     }
 
     private void setStatusButton() {
-        for (int i = 39; i >= listQOT.size(); i--) {
+        for (int i = listButton.size() - 1; i >= listQOT.size(); i--) {
             listButton.get(i).setEnabled(false);
         }
     }
@@ -1305,7 +1466,7 @@ public class DoTest extends java.awt.Dialog {
 
     private void init() {
         testEntity = tDao.selectById("TOA01");
-        sEntity = sDao.selectById("HS12345");
+        sEntity = sDao.selectById("HS25579");
         setTime();
         addButton();
         setIndexTest();
