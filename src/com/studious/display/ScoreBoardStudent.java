@@ -4,6 +4,17 @@
  */
 package com.studious.display;
 
+import com.studious.DAO.ReportDAO;
+import com.studious.dao.AccountDAO;
+import com.studious.dao.StudentDAO;
+import com.studious.entity.Account;
+import com.studious.entity.Lesson;
+import com.studious.entity.Question;
+import com.studious.entity.Student;
+import com.studious.utils.*;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Phan Qui Duc
@@ -13,9 +24,36 @@ public class ScoreBoardStudent extends javax.swing.JDialog {
     /**
      * Creates new form ScoreBoardStudent
      */
-    public ScoreBoardStudent (java.awt.Frame parent, boolean modal) {
+    public ScoreBoardStudent(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        init();
+        this.setLocationRelativeTo(parent);
+    }
+
+    private void init() {
+        setResizable(false);
+        fillToTable();
+    }
+
+    ReportDAO rdao = new ReportDAO();
+    StudentDAO sdao = new StudentDAO();
+
+    private void fillToTable() {
+        try {
+            DefaultTableModel model = (DefaultTableModel) tblScoreStudent.getModel();
+            model.setRowCount(0);
+            Auth.user = new AccountDAO().selectById("HS1");
+            //System.out.println(Auth.user.getUserID());;
+            Student student = sdao.selectById(Auth.user.getUserID());
+            List<Object[]> list = rdao.getMarkPerson(student.getStudentID());
+            for (Object[] row : list) {
+                model.addRow(new Object[]{row[0], row[1], row[2], row[3], row[4]});
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -43,16 +81,20 @@ public class ScoreBoardStudent extends javax.swing.JDialog {
         tblScoreStudent.setFont(new java.awt.Font("Fira Code Light", 0, 12)); // NOI18N
         tblScoreStudent.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"K220001", "TO01", "10", "2", "90'", "4/2/2023"},
-                {"K220002", "VL01", "9", "1", "60'", "4/2/2023"},
-                {"K220003", "HO01", "8", "3", "90'", "4/2/2023"},
-                {"K220004", "TO01", "7", "2", "90'", "4/2/2023"},
-                {"K220005", "SH01", "9", "3", "60'", "4/2/2023"}
+
             },
             new String [] {
-                "Stt", "Mã bài thi", "Điểm", "Lần thi", "Thời gian làm bài", "Ngày làm"
+                "Stt", "Mã bài thi", "Điểm", "Lần thi", "Thời gian làm bài"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane1.setViewportView(tblScoreStudent);
 
         lblTitle2.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
@@ -70,7 +112,6 @@ public class ScoreBoardStudent extends javax.swing.JDialog {
         });
 
         txtSearch.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        txtSearch.setText("TO01");
 
         javax.swing.GroupLayout pnlBackgroundLayout = new javax.swing.GroupLayout(pnlBackground);
         pnlBackground.setLayout(pnlBackgroundLayout);
@@ -129,7 +170,7 @@ public class ScoreBoardStudent extends javax.swing.JDialog {
     /**
      * @param args the command line arguments
      */
-    public static void main (String args[]) {
+    public static void main(String args[]) {
         /*
          * Set the Nimbus look and feel
          */
@@ -161,11 +202,11 @@ public class ScoreBoardStudent extends javax.swing.JDialog {
          * Create and display the dialog
          */
         java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run () {
+            public void run() {
                 ScoreBoardStudent dialog = new ScoreBoardStudent(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
-                    public void windowClosing (java.awt.event.WindowEvent e) {
+                    public void windowClosing(java.awt.event.WindowEvent e) {
                         System.exit(0);
                     }
                 });

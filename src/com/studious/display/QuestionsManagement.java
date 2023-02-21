@@ -37,10 +37,10 @@ public class QuestionsManagement extends javax.swing.JFrame {
         //setIconImage(XImage.getAppIcon());
         setResizable(false);
         doTest(false);
-        rdoChooseAnsA.setName("a");
-        rdoChooseAnsB.setName("b");
-        rdoChooseAnsC.setName("c");
-        rdoChooseAnsD.setName("d");
+//        rdoChooseAnsA.setName("a");
+//        rdoChooseAnsB.setName("b");
+//        rdoChooseAnsC.setName("c");
+//        rdoChooseAnsD.setName("d");
     }
 
     private void fillCboSubjectList() {
