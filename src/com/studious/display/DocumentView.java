@@ -8,12 +8,12 @@ package com.studious.display;
  *
  * @author Admin
  */
-public class DocumentViewTeacher extends java.awt.Dialog {
+public class DocumentView extends java.awt.Dialog {
 
     /**
-     * Creates new form DocumentView
+     * Creates new form DocumentViewStudent
      */
-    public DocumentViewTeacher(java.awt.Frame parent, boolean modal) {
+    public DocumentView(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
     }
@@ -35,7 +35,6 @@ public class DocumentViewTeacher extends java.awt.Dialog {
         jScrollPane2 = new javax.swing.JScrollPane();
         txtContent = new javax.swing.JTextArea();
 
-        setBackground(new java.awt.Color(232, 255, 183));
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
                 closeDialog(evt);
@@ -144,7 +143,7 @@ public class DocumentViewTeacher extends java.awt.Dialog {
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                DocumentViewTeacher dialog = new DocumentViewTeacher(new java.awt.Frame(), true);
+                DocumentView dialog = new DocumentView(new java.awt.Frame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     public void windowClosing(java.awt.event.WindowEvent e) {
                         System.exit(0);

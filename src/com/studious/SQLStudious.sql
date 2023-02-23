@@ -49,6 +49,7 @@ GO
 CREATE TABLE BAITHI (
 	MaBThi VARCHAR(10) NOT NULL,
 	TieuDe NVARCHAR(100),
+	ThoiGian INT,
 	MonHoc NVARCHAR(30),
 	Khoi INT,
 	NgayTao	DATE DEFAULT GETDATE(),
@@ -169,7 +170,7 @@ AS BEGIN
 	BEGIN
 		SELECT ROW_NUMBER() OVER (ORDER BY MonHoc), MonHoc, COUNT(MaCH)
 		FROM CAUHOI JOIN BAIHOC ON CAUHOI.MaBH = BAIHOC.MaBH
-		GROUP BY BAIHOC.MaBH, MonHoc
+		GROUP BY MonHoc
 	END
 
 	ELSE
@@ -177,9 +178,10 @@ AS BEGIN
 		SELECT ROW_NUMBER() OVER (ORDER BY MonHoc), MonHoc, COUNT(MaCH)
 		FROM CAUHOI JOIN BAIHOC ON CAUHOI.MaBH = BAIHOC.MaBH
 		WHERE MonHoc = @TenMonHoc
-		GROUP BY BAIHOC.MaBH, MonHoc
+		GROUP BY MonHoc
 	END
 END
+
 
 
 GO
@@ -328,14 +330,15 @@ INSERT INTO BAIHOC(TenBH, MonHoc, Khoi, MaGV) VALUES
 (N'TOPIC 3', N'Anh văn',12,'GV1')
 
 GO
-INSERT INTO BAITHI(MaBThi, TieuDe, MonHoc, Khoi, MaGV, DanhSachMaCHBT) VALUES
-('TOAN01', N'Đề thi kiểm tra cuối kỳ 1', N'Toán', 10, 'GV1', NULL)
+INSERT INTO BAITHI(MaBThi, TieuDe, ThoiGian, MonHoc, Khoi, MaGV, DanhSachMaCHBT) VALUES
+('TOAN01', N'Đề thi kiểm tra cuối kỳ 1', 45, N'Toán', 10, 'GV1', NULL)
 
 GO
+
 INSERT INTO TAILIEUONTAP(TieuDe, URLTaiLieu, MaGV, MaBH) VALUES
-(N'Tài liệu ôn thi cuối kỳ 1 môn Toán khối 10', N'tailieu/tailieuonthi.txt', 'GV1', 1)
-
+(N'Tài liệu ôn thi cuối kỳ 1 môn Toán khối 10', N'Toán học lớp 10.txt', 'GV1', 1)
 GO
+
 INSERT INTO CAUHOI(De, DapAn1, DapAn2, DapAn3, DapAn4, DapAnDung, MaBH, MaGV) VALUES 
 (N'1 + 1 = ?', N'1', N'3', N'0', N'2', N'd', 1,'GV1'),
 (N'3 x 2 = ?', N'1', N'3', N'8', N'6', N'd', 2,'GV1'),
@@ -504,10 +507,5 @@ INSERT INTO KETQUA(LanThi, MaHS, MaBThi, MaCau, DanAnChon, DanAnDung) VALUES
 (1, 'HS1', 'TOAN01', 49, N'd', N'd'),
 (1, 'HS1', 'TOAN01', 50, N'd', N'd')
 
-
-
-
-
-
-SELECT * FROM HOCSINH WHERE MaTK = 'HS1'
-exec sp_ThongKeDiemCaNhanHS 'HS1'
+select * from BAIHOC
+select * from CAUHOI

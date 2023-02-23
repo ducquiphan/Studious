@@ -21,25 +21,30 @@ public class StatisticTeacher extends javax.swing.JFrame {
     /**
      * Creates new form StatisticTeacher
      */
-    public StatisticTeacher () {
+    public StatisticTeacher() {
         initComponents();
         init();
     }
-    
+
     ReportDAO rdao = new ReportDAO();
-    
-    
-    private void init(){
+
+    private void init() {
         setLocationRelativeTo(null);
-        fillToTotalScoreTable();
+        fillToTotalScoreTable("");
+        fillToDocumentTable("", "");
+        fillToQuestionTable("", "");
+        fillToAverageScoreTable("");
+        tblAverageScore.setAutoCreateRowSorter(true);
+        tblDocument.setAutoCreateRowSorter(true);
+        tblQuestions.setAutoCreateRowSorter(true);
+        tblSumScore.setAutoCreateRowSorter(true);
     }
-    
-    private void fillToTotalScoreTable(){
+
+    private void fillToTotalScoreTable(String nameTest) {
         try {
             DefaultTableModel model = (DefaultTableModel) tblSumScore.getModel();
             model.setRowCount(0);
-            String nameTest = txtSearch.getText();
-            if(nameTest.equals("")){
+            if (nameTest.equals("")) {
                 nameTest = null;
             }
             List<Object[]> list = rdao.getMarkAllStudent(nameTest);
@@ -47,6 +52,158 @@ public class StatisticTeacher extends javax.swing.JFrame {
                 model.addRow(new Object[]{row[0], row[1], row[2], row[3], row[4], row[5], row[6]});
             }
 
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void fillToAverageScoreTable(String nameTest) {
+        try {
+            DefaultTableModel model = (DefaultTableModel) tblAverageScore.getModel();
+            model.setRowCount(0);
+            if (nameTest.equals("")) {
+                nameTest = null;
+            }
+            List<Object[]> list = rdao.getMarkAVG(nameTest);
+            for (Object[] row : list) {
+                model.addRow(new Object[]{row[0], row[1], row[2], row[3]});
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void fillToDocumentTable(String teacherName, String subject) {
+        try {
+            if (cboForAll.getSelectedIndex() == 0) {
+                tblDocument.setModel(new javax.swing.table.DefaultTableModel(
+                        new Object[][]{
+                            {null, null, null},
+                            {null, null, null},
+                            {null, null, null},
+                            {null, null, null}
+                        },
+                        new String[]{
+                            "STT", "Tên Giáo Viên", "Số Lượng Tài Liệu"
+                        }
+                ) {
+                    boolean[] canEdit = new boolean[]{
+                        false, false, false
+                    };
+
+                    public boolean isCellEditable(int rowIndex, int columnIndex) {
+                        return canEdit[columnIndex];
+                    }
+                });
+                DefaultTableModel model = (DefaultTableModel) tblDocument.getModel();
+                model.setRowCount(0);
+                if (teacherName.equals("")) {
+                    teacherName = null;
+                }
+                List<Object[]> list = rdao.getDocumentTeacher(teacherName);
+                for (Object[] row : list) {
+                    model.addRow(new Object[]{row[0], row[1], row[2]});
+                }
+            }
+            if (cboForAll.getSelectedIndex() == 1) {
+                tblDocument.setModel(new javax.swing.table.DefaultTableModel(
+                        new Object[][]{
+                            {null, null, null},
+                            {null, null, null},
+                            {null, null, null},
+                            {null, null, null}
+                        },
+                        new String[]{
+                            "STT", "Tên Môn Học", "Số Lượng Tài Liệu"
+                        }
+                ) {
+                    boolean[] canEdit = new boolean[]{
+                        false, false, false
+                    };
+
+                    public boolean isCellEditable(int rowIndex, int columnIndex) {
+                        return canEdit[columnIndex];
+                    }
+                });
+                DefaultTableModel model = (DefaultTableModel) tblDocument.getModel();
+                model.setRowCount(0);
+                if (subject.equals("")) {
+                    subject = null;
+                }
+                List<Object[]> list = rdao.getDocumentSubject(subject);
+                for (Object[] row : list) {
+                    model.addRow(new Object[]{row[0], row[1], row[2]});
+                }
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void fillToQuestionTable(String teacherName, String subject) {
+        try {
+            if (cboForAll.getSelectedIndex() == 0) {
+                tblQuestions.setModel(new javax.swing.table.DefaultTableModel(
+                        new Object[][]{
+                            {null, null, null},
+                            {null, null, null},
+                            {null, null, null},
+                            {null, null, null}
+                        },
+                        new String[]{
+                            "STT", "Tên Giáo Viên", "Số Lượng Câu Hỏi"
+                        }
+                ) {
+                    boolean[] canEdit = new boolean[]{
+                        false, false, false
+                    };
+
+                    public boolean isCellEditable(int rowIndex, int columnIndex) {
+                        return canEdit[columnIndex];
+                    }
+                });
+                DefaultTableModel model = (DefaultTableModel) tblQuestions.getModel();
+                model.setRowCount(0);
+                if (teacherName.equals("")) {
+                    teacherName = null;
+                }
+                List<Object[]> list = rdao.getQuestionOfTeacher(teacherName);
+                for (Object[] row : list) {
+                    model.addRow(new Object[]{row[0], row[1], row[2]});
+                }
+            }
+            if (cboForAll.getSelectedIndex() == 1) {
+                tblQuestions.setModel(new javax.swing.table.DefaultTableModel(
+                        new Object[][]{
+                            {null, null, null},
+                            {null, null, null},
+                            {null, null, null},
+                            {null, null, null}
+                        },
+                        new String[]{
+                            "STT", "Tên Môn Học", "Số Lượng Câu Hỏi"
+                        }
+                ) {
+                    boolean[] canEdit = new boolean[]{
+                        false, false, false
+                    };
+
+                    public boolean isCellEditable(int rowIndex, int columnIndex) {
+                        return canEdit[columnIndex];
+                    }
+                });
+                DefaultTableModel model = (DefaultTableModel) tblQuestions.getModel();
+                model.setRowCount(0);
+                if (subject.equals("")) {
+                    subject = null;
+                }
+                List<Object[]> list = rdao.getQuestionOfSubject(subject);
+                for (Object[] row : list) {
+                    model.addRow(new Object[]{row[0], row[1], row[2]});
+                }
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -66,7 +223,7 @@ public class StatisticTeacher extends javax.swing.JFrame {
         cboForAll = new javax.swing.JComboBox<>();
         txtSearch = new javax.swing.JTextField();
         lblTitle1 = new javax.swing.JLabel();
-        btnSearch2 = new javax.swing.JButton();
+        btnSearch = new javax.swing.JButton();
         jToolBar = new javax.swing.JToolBar();
         btnHome = new javax.swing.JButton();
         btnPersonalInfo = new javax.swing.JButton();
@@ -79,23 +236,15 @@ public class StatisticTeacher extends javax.swing.JFrame {
         pnlQuestion2 = new javax.swing.JPanel();
         jScrollPane5 = new javax.swing.JScrollPane();
         tblQuestions = new javax.swing.JTable();
-        cboOrderingQuestion = new javax.swing.JComboBox<>();
-        cboArrangeQuestion = new javax.swing.JComboBox<>();
         pnlDocument = new javax.swing.JPanel();
         jScrollPane6 = new javax.swing.JScrollPane();
         tblDocument = new javax.swing.JTable();
-        cboArrangeDocument = new javax.swing.JComboBox<>();
-        cboOrderingDocument = new javax.swing.JComboBox<>();
         pnlAverageScore = new javax.swing.JPanel();
         jScrollPane7 = new javax.swing.JScrollPane();
         tblAverageScore = new javax.swing.JTable();
-        cboOrderingAverageScore = new javax.swing.JComboBox<>();
-        cboArrangeAverageScore = new javax.swing.JComboBox<>();
         pnlSumScore = new javax.swing.JPanel();
         jScrollPane8 = new javax.swing.JScrollPane();
         tblSumScore = new javax.swing.JTable();
-        cboOrderingSumScore = new javax.swing.JComboBox<>();
-        cboArrangeSumScore = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -107,16 +256,21 @@ public class StatisticTeacher extends javax.swing.JFrame {
 
         cboForAll.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         cboForAll.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Môn học" }));
+        cboForAll.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cboForAllActionPerformed(evt);
+            }
+        });
 
         txtSearch.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
         lblTitle1.setBackground(new java.awt.Color(232, 255, 183));
         lblTitle1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/studious/icons/Studious-255x68.png"))); // NOI18N
 
-        btnSearch2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/studious/icons/icons8-search-24.png"))); // NOI18N
-        btnSearch2.addActionListener(new java.awt.event.ActionListener() {
+        btnSearch.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/studious/icons/icons8-search-24.png"))); // NOI18N
+        btnSearch.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSearch2ActionPerformed(evt);
+                btnSearchActionPerformed(evt);
             }
         });
 
@@ -212,41 +366,21 @@ public class StatisticTeacher extends javax.swing.JFrame {
         });
         jScrollPane5.setViewportView(tblQuestions);
 
-        cboOrderingQuestion.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        cboOrderingQuestion.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "A - Z", "Z - A" }));
-
-        cboArrangeQuestion.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        cboArrangeQuestion.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Sắp xếp theo số lượng" }));
-
         javax.swing.GroupLayout pnlQuestion2Layout = new javax.swing.GroupLayout(pnlQuestion2);
         pnlQuestion2.setLayout(pnlQuestion2Layout);
         pnlQuestion2Layout.setHorizontalGroup(
             pnlQuestion2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlQuestion2Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlQuestion2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(cboArrangeQuestion, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(cboOrderingQuestion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(568, Short.MAX_VALUE))
-            .addGroup(pnlQuestion2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlQuestion2Layout.createSequentialGroup()
-                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 752, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(139, Short.MAX_VALUE)))
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 896, Short.MAX_VALUE)
+                .addContainerGap())
         );
         pnlQuestion2Layout.setVerticalGroup(
             pnlQuestion2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlQuestion2Layout.createSequentialGroup()
-                .addContainerGap(428, Short.MAX_VALUE)
-                .addGroup(pnlQuestion2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cboArrangeQuestion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cboOrderingQuestion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(16, 16, 16))
-            .addGroup(pnlQuestion2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(pnlQuestion2Layout.createSequentialGroup()
-                    .addContainerGap()
-                    .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(57, Short.MAX_VALUE)))
+                .addContainerGap()
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 380, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(30, Short.MAX_VALUE))
         );
 
         tab.addTab("Câu hỏi", pnlQuestion2);
@@ -272,25 +406,13 @@ public class StatisticTeacher extends javax.swing.JFrame {
         });
         jScrollPane6.setViewportView(tblDocument);
 
-        cboArrangeDocument.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        cboArrangeDocument.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Sắp xếp theo số lượng" }));
-
-        cboOrderingDocument.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        cboOrderingDocument.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "A - Z", "Z - A" }));
-
         javax.swing.GroupLayout pnlDocumentLayout = new javax.swing.GroupLayout(pnlDocument);
         pnlDocument.setLayout(pnlDocumentLayout);
         pnlDocumentLayout.setHorizontalGroup(
             pnlDocumentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlDocumentLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(pnlDocumentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pnlDocumentLayout.createSequentialGroup()
-                        .addComponent(cboArrangeDocument, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(cboOrderingDocument, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 445, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane6, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 896, Short.MAX_VALUE)
                 .addContainerGap())
         );
         pnlDocumentLayout.setVerticalGroup(
@@ -298,11 +420,7 @@ public class StatisticTeacher extends javax.swing.JFrame {
             .addGroup(pnlDocumentLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 382, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(pnlDocumentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cboArrangeDocument, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cboOrderingDocument, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
+                .addGap(82, 82, 82))
         );
 
         tab.addTab("Tài liệu", pnlDocument);
@@ -328,25 +446,13 @@ public class StatisticTeacher extends javax.swing.JFrame {
         });
         jScrollPane7.setViewportView(tblAverageScore);
 
-        cboOrderingAverageScore.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        cboOrderingAverageScore.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "A - Z", "Z - A" }));
-
-        cboArrangeAverageScore.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        cboArrangeAverageScore.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Sắp xếp theo điểm trung bình" }));
-
         javax.swing.GroupLayout pnlAverageScoreLayout = new javax.swing.GroupLayout(pnlAverageScore);
         pnlAverageScore.setLayout(pnlAverageScoreLayout);
         pnlAverageScoreLayout.setHorizontalGroup(
             pnlAverageScoreLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlAverageScoreLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(pnlAverageScoreLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pnlAverageScoreLayout.createSequentialGroup()
-                        .addComponent(cboArrangeAverageScore, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(cboOrderingAverageScore, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 395, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane7, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addComponent(jScrollPane7, javax.swing.GroupLayout.DEFAULT_SIZE, 896, Short.MAX_VALUE)
                 .addContainerGap())
         );
         pnlAverageScoreLayout.setVerticalGroup(
@@ -354,11 +460,7 @@ public class StatisticTeacher extends javax.swing.JFrame {
             .addGroup(pnlAverageScoreLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 382, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(pnlAverageScoreLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cboArrangeAverageScore, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cboOrderingAverageScore, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
+                .addGap(82, 82, 82))
         );
 
         tab.addTab("Điểm trung bình", pnlAverageScore);
@@ -384,25 +486,13 @@ public class StatisticTeacher extends javax.swing.JFrame {
         });
         jScrollPane8.setViewportView(tblSumScore);
 
-        cboOrderingSumScore.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        cboOrderingSumScore.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "A - Z", "Z - A" }));
-
-        cboArrangeSumScore.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        cboArrangeSumScore.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Sắp xếp theo điểm trung bình" }));
-
         javax.swing.GroupLayout pnlSumScoreLayout = new javax.swing.GroupLayout(pnlSumScore);
         pnlSumScore.setLayout(pnlSumScoreLayout);
         pnlSumScoreLayout.setHorizontalGroup(
             pnlSumScoreLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlSumScoreLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(pnlSumScoreLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pnlSumScoreLayout.createSequentialGroup()
-                        .addComponent(cboArrangeSumScore, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(cboOrderingSumScore, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 395, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane8, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addComponent(jScrollPane8, javax.swing.GroupLayout.DEFAULT_SIZE, 896, Short.MAX_VALUE)
                 .addContainerGap())
         );
         pnlSumScoreLayout.setVerticalGroup(
@@ -410,11 +500,7 @@ public class StatisticTeacher extends javax.swing.JFrame {
             .addGroup(pnlSumScoreLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 382, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(pnlSumScoreLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cboArrangeSumScore, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cboOrderingSumScore, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
+                .addGap(82, 82, 82))
         );
 
         tab.addTab("Điểm tổng", pnlSumScore);
@@ -435,11 +521,11 @@ public class StatisticTeacher extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(cboForAll, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(12, 12, 12)
-                        .addComponent(btnSearch2, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(tab, javax.swing.GroupLayout.PREFERRED_SIZE, 908, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(16, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -452,11 +538,11 @@ public class StatisticTeacher extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(cboForAll, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtSearch, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnSearch2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnSearch, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(tab, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jToolBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jToolBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tab, javax.swing.GroupLayout.PREFERRED_SIZE, 447, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -478,23 +564,56 @@ public class StatisticTeacher extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnSearch2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearch2ActionPerformed
+    private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnSearch2ActionPerformed
+        if (tab.getSelectedIndex() == 3) {
+            fillToTotalScoreTable(txtSearch.getText());
+        }
+        if (tab.getSelectedIndex() == 2) {
+            fillToAverageScoreTable(txtSearch.getText());
+        }
+        if (tab.getSelectedIndex() == 1) {
+            fillToDocumentTable(txtSearch.getText(),txtSearch.getText());
+        }
+        if (tab.getSelectedIndex() == 0) {
+            fillToQuestionTable(txtSearch.getText(),txtSearch.getText());
+        }
+
+    }//GEN-LAST:event_btnSearchActionPerformed
 
     private void tabsStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_tabsStateChanged
         // TODO add your handling code here:
-        if (tab.getSelectedIndex() == 3) {
+        if (tab.getSelectedIndex() == 3 || tab.getSelectedIndex() == 2) {
+            txtSearch.setText("");
             DefaultComboBoxModel cbm = (DefaultComboBoxModel) cboForAll.getModel();
             cbm.removeAllElements();
             cbm.addElement("Tìm theo tên bài học");
         }
+        if (tab.getSelectedIndex() == 1 || tab.getSelectedIndex() == 0) {
+            txtSearch.setText("");
+            DefaultComboBoxModel cbm = (DefaultComboBoxModel) cboForAll.getModel();
+            cbm.removeAllElements();
+            cbm.addElement("Tìm theo tên giáo viên");
+            cbm.addElement("Tìm theo tên môn học");
+        }
     }//GEN-LAST:event_tabsStateChanged
+
+    private void cboForAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboForAllActionPerformed
+        // TODO add your handling code here:
+        if (tab.getSelectedIndex() == 1) {
+            txtSearch.setText("");
+            fillToDocumentTable("", "");
+        }
+        if (tab.getSelectedIndex() == 0) {
+            txtSearch.setText("");
+            fillToQuestionTable("", "");
+        }
+    }//GEN-LAST:event_cboForAllActionPerformed
 
     /**
      * @param args the command line arguments
      */
-    public static void main (String args[]) {
+    public static void main(String args[]) {
         /*
          * Set the Nimbus look and feel
          */
@@ -526,7 +645,7 @@ public class StatisticTeacher extends javax.swing.JFrame {
          * Create and display the form
          */
         java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run () {
+            public void run() {
                 new StatisticTeacher().setVisible(true);
             }
         });
@@ -538,25 +657,11 @@ public class StatisticTeacher extends javax.swing.JFrame {
     private javax.swing.JButton btnLesson;
     private javax.swing.JButton btnLogout;
     private javax.swing.JButton btnPersonalInfo;
-    private javax.swing.JButton btnSearch2;
+    private javax.swing.JButton btnSearch;
     private javax.swing.JButton btnStatistic;
     private javax.swing.JButton btnTest;
-    private javax.swing.JComboBox<String> cboArrangeAverageScore;
-    private javax.swing.JComboBox<String> cboArrangeDocument;
-    private javax.swing.JComboBox<String> cboArrangeQuestion;
-    private javax.swing.JComboBox<String> cboArrangeQuestion2;
-    private javax.swing.JComboBox<String> cboArrangeQuestion3;
-    private javax.swing.JComboBox<String> cboArrangeSumScore;
     private javax.swing.JComboBox<String> cboForAll;
-    private javax.swing.JComboBox<String> cboOrderingAverageScore;
-    private javax.swing.JComboBox<String> cboOrderingDocument;
-    private javax.swing.JComboBox<String> cboOrderingQuestion;
-    private javax.swing.JComboBox<String> cboOrderingQuestion2;
-    private javax.swing.JComboBox<String> cboOrderingQuestion3;
-    private javax.swing.JComboBox<String> cboOrderingSumScore;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JScrollPane jScrollPane7;
@@ -566,17 +671,11 @@ public class StatisticTeacher extends javax.swing.JFrame {
     private javax.swing.JLabel lblTitle1;
     private javax.swing.JPanel pnlAverageScore;
     private javax.swing.JPanel pnlDocument;
-    private javax.swing.JPanel pnlQuestion;
-    private javax.swing.JPanel pnlQuestion1;
     private javax.swing.JPanel pnlQuestion2;
     private javax.swing.JPanel pnlSumScore;
     private javax.swing.JTabbedPane tab;
-    private javax.swing.JTabbedPane tabs;
-    private javax.swing.JTabbedPane tabs1;
     private javax.swing.JTable tblAverageScore;
     private javax.swing.JTable tblDocument;
-    private javax.swing.JTable tblGridViewQuestion;
-    private javax.swing.JTable tblGridViewQuestion1;
     private javax.swing.JTable tblQuestions;
     private javax.swing.JTable tblSumScore;
     private javax.swing.JTextField txtSearch;

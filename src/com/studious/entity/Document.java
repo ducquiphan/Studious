@@ -10,7 +10,7 @@ public class Document {
     private int docID;
     private String docTitle;
     private String lesson;
-    private String content;
+    private String url;
     private Date creatDate;
     private String teacherID;
     private int lessonID;
@@ -19,7 +19,7 @@ public class Document {
         this.docID = docID;
         this.docTitle = docTitle;
         this.lesson = lesson;
-        this.content = content;
+        this.url = content;
         this.creatDate = creatDate;
         this.teacherID = teacherID;
         this.lessonID = lessonID;
@@ -52,12 +52,12 @@ public class Document {
         this.lesson = lesson;
     }
 
-    public String getContent() {
-        return content;
+    public String getUrl() {
+        return url;
     }
 
-    public void setContent(String content) {
-        this.content = content;
+    public void setUrl(String url) {
+        this.url = url;
     }
 
     public Date getCreatDate() {
@@ -86,6 +86,6 @@ public class Document {
 
     @Override
     public String toString() {
-        return "Document{" + "docID=" + docID + ", docTitle=" + docTitle + ", lesson=" + lesson + ", content=" + content + ", creatDate=" + creatDate + ", teacherID=" + teacherID + ", lessonID=" + lessonID + '}';
+        return "Document{" + "docID=" + docID + ", docTitle=" + docTitle + ", lesson=" + lesson + ", url=" + getUrl() + ", creatDate=" + creatDate + ", teacherID=" + teacherID + ", lessonID=" + lessonID + '}';
     }
 }

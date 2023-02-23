@@ -101,7 +101,7 @@
                       </Group>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jTabbedPane1" pref="543" max="32767" attributes="0"/>
+                  <Component id="jTabbedPane1" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -160,7 +160,7 @@
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="1" attributes="0">
-                          <EmptySpace max="32767" attributes="0"/>
+                          <EmptySpace pref="102" max="32767" attributes="0"/>
                           <Component id="btnNew" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Component id="btnInsert" min="-2" max="-2" attributes="0"/>
@@ -207,6 +207,7 @@
                                               <Component id="txtIdentifier" alignment="0" pref="200" max="32767" attributes="0"/>
                                               <Component id="txtName" alignment="0" pref="200" max="32767" attributes="0"/>
                                               <Component id="txtStudentID" alignment="0" pref="200" max="32767" attributes="0"/>
+                                              <Component id="txtBirthDay" max="32767" attributes="0"/>
                                           </Group>
                                           <EmptySpace max="32767" attributes="0"/>
                                           <Component id="lblAvatar" min="-2" pref="130" max="-2" attributes="0"/>
@@ -250,8 +251,11 @@
                                       <Component id="txtName" alignment="3" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                                  <Component id="lblBirthday" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="lblBirthday" min="-2" max="-2" attributes="0"/>
+                                      <Component id="txtBirthDay" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="3" attributes="0">
                                       <Component id="txtIdentifier" alignment="3" min="-2" max="-2" attributes="0"/>
                                       <Component id="lblIdentifier" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -324,6 +328,9 @@
                       <Font name="Segoe UI" size="14" style="0"/>
                     </Property>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtStudentIDActionPerformed"/>
+                  </Events>
                 </Component>
                 <Component class="javax.swing.JLabel" name="lblName">
                   <Properties>
@@ -575,6 +582,8 @@
                   <Properties>
                     <Property name="text" type="java.lang.String" value="&gt;|"/>
                   </Properties>
+                </Component>
+                <Component class="com.toedter.calendar.JDateChooser" name="txtBirthDay">
                 </Component>
               </SubComponents>
             </Container>

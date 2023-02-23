@@ -1,11 +1,13 @@
 package com.studious.dao;
 
+import com.studious.entity.Lesson;
 import com.studious.entity.QuestionOfTest;
 import com.studious.entity.TestReport;
 import com.studious.utils.JdbcHelper;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.DefaultComboBoxModel;
 
 /**
  *
@@ -18,6 +20,7 @@ public class QuestionOfTestDAO extends StudiousDAO<QuestionOfTest, Integer> {
     final String SELECTALL_SQL = "SELECT * FROM CAUHOIBAITHI";
     final String SELECTBYID_SQL = "SELECT * FROM CAUHOIBAITHI WHERE MaCHBT = ?";
     final String SELECTBYTESTID_SQL = "SELECT * FROM CAUHOIBAITHI WHERE MaBThi = ?";
+    final String SELECTBYQUESTIONID_SQL = "SELECT * FROM CAUHOIBAITHI WHERE MaCH = ?";
 
     @Override
 
@@ -51,6 +54,14 @@ public class QuestionOfTestDAO extends StudiousDAO<QuestionOfTest, Integer> {
 
     public List<QuestionOfTest> selectByTestId(String key) {
         List<QuestionOfTest> list = selectSql(SELECTBYTESTID_SQL, key);
+        return list;
+    }
+    
+    public List<QuestionOfTest> selectByQuestionID(Integer questionID){
+        List<QuestionOfTest> list = selectSql(SELECTBYQUESTIONID_SQL, questionID);
+        if (list.isEmpty()) {
+            return null;
+        }
         return list;
     }
 

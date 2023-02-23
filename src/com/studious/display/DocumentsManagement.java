@@ -4,6 +4,25 @@
  */
 package com.studious.display;
 
+import com.studious.dao.AccountDAO;
+import com.studious.dao.DocumentDAO;
+import com.studious.dao.LessonDAO;
+import com.studious.dao.QuestionDAO;
+import com.studious.dao.QuestionOfTestDAO;
+import com.studious.entity.Account;
+import com.studious.entity.Document;
+import com.studious.entity.Lesson;
+import com.studious.entity.Question;
+import com.studious.utils.Auth;
+import com.studious.utils.MsgBox;
+import java.awt.Image;
+import java.util.List;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
+import javax.swing.filechooser.FileNameExtensionFilter;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Admin
@@ -15,6 +34,7 @@ public class DocumentsManagement extends javax.swing.JFrame {
      */
     public DocumentsManagement() {
         initComponents();
+        init();
     }
 
     /**
@@ -33,9 +53,9 @@ public class DocumentsManagement extends javax.swing.JFrame {
         lblSubject = new javax.swing.JLabel();
         lblGrade = new javax.swing.JLabel();
         lblLessonType = new javax.swing.JLabel();
-        txtLessonTitle = new javax.swing.JTextField();
+        txtDocTitle = new javax.swing.JTextField();
         lblLessonTitle = new javax.swing.JLabel();
-        cboLessonType = new javax.swing.JComboBox<>();
+        cboLesson = new javax.swing.JComboBox<>();
         cboGrade = new javax.swing.JComboBox<>();
         btnNew = new javax.swing.JButton();
         btnInsert = new javax.swing.JButton();
@@ -49,6 +69,7 @@ public class DocumentsManagement extends javax.swing.JFrame {
         lblChooseFile = new javax.swing.JLabel();
         cboSubject = new javax.swing.JComboBox<>();
         btnChooseFile = new javax.swing.JButton();
+        lblFileChosen = new javax.swing.JLabel();
         pnlList = new javax.swing.JPanel();
         lblSubjectList = new javax.swing.JLabel();
         cboSubjectList = new javax.swing.JComboBox<>();
@@ -57,11 +78,9 @@ public class DocumentsManagement extends javax.swing.JFrame {
         btnSearchList = new javax.swing.JButton();
         txtSearchList = new javax.swing.JTextField();
         jScrollPane3 = new javax.swing.JScrollPane();
-        tblGridView = new javax.swing.JTable();
-        cboArrange = new javax.swing.JComboBox<>();
+        tblDocument = new javax.swing.JTable();
         lblLessonList = new javax.swing.JLabel();
         cboLessonList = new javax.swing.JComboBox<>();
-        btnDeleteRow = new javax.swing.JButton();
         btnView = new javax.swing.JButton();
         lblLogo = new javax.swing.JLabel();
         jToolBar = new javax.swing.JToolBar();
@@ -85,6 +104,11 @@ public class DocumentsManagement extends javax.swing.JFrame {
         tabs.setBackground(new java.awt.Color(255, 255, 255));
         tabs.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         tabs.setName(""); // NOI18N
+        tabs.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                tabsStateChanged(evt);
+            }
+        });
 
         pnlManage.setBackground(new java.awt.Color(255, 255, 255));
         pnlManage.setBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED));
@@ -101,50 +125,100 @@ public class DocumentsManagement extends javax.swing.JFrame {
         lblLessonType.setText("Bài học:");
         lblLessonType.setToolTipText("");
 
-        txtLessonTitle.setBackground(new java.awt.Color(204, 204, 204));
-        txtLessonTitle.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txtDocTitle.setBackground(new java.awt.Color(204, 204, 204));
+        txtDocTitle.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
         lblLessonTitle.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lblLessonTitle.setText("Tiêu đề:");
         lblLessonTitle.setToolTipText("");
 
-        cboLessonType.setBackground(new java.awt.Color(204, 204, 204));
-        cboLessonType.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        cboLessonType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Toán", "Vật Lí", "Hóa Học", "Tiếng Anh" }));
+        cboLesson.setBackground(new java.awt.Color(204, 204, 204));
+        cboLesson.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        cboLesson.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Toán", "Vật Lí", "Hóa Học", "Tiếng Anh" }));
 
         cboGrade.setBackground(new java.awt.Color(204, 204, 204));
         cboGrade.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         cboGrade.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "10", "11", "12" }));
+        cboGrade.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cboGradeActionPerformed(evt);
+            }
+        });
 
         btnNew.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnNew.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/studious/icons/icons8-reset-24.png"))); // NOI18N
         btnNew.setText("Tạo mới");
+        btnNew.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNewActionPerformed(evt);
+            }
+        });
 
         btnInsert.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnInsert.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/studious/icons/icons8-new-copy-24.png"))); // NOI18N
         btnInsert.setText("Thêm");
         btnInsert.setMaximumSize(new java.awt.Dimension(87, 26));
         btnInsert.setMinimumSize(new java.awt.Dimension(87, 26));
+        btnInsert.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnInsertActionPerformed(evt);
+            }
+        });
 
         btnEdit.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnEdit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/studious/icons/icons8-pencil-24 (1).png"))); // NOI18N
         btnEdit.setText("Sửa");
+        btnEdit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditActionPerformed(evt);
+            }
+        });
 
         btnUpdate.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnUpdate.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/studious/icons/icons8-available-updates-24.png"))); // NOI18N
         btnUpdate.setText("Cập nhật");
+        btnUpdate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUpdateActionPerformed(evt);
+            }
+        });
 
         btnDelete.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnDelete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/studious/icons/icons8-bin-24.png"))); // NOI18N
         btnDelete.setText("Xóa");
+        btnDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeleteActionPerformed(evt);
+            }
+        });
 
         btnFirst.setText("|<");
+        btnFirst.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFirstActionPerformed(evt);
+            }
+        });
 
         btnPrevious.setText("<<");
+        btnPrevious.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPreviousActionPerformed(evt);
+            }
+        });
 
         btnNext.setText(">>");
+        btnNext.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNextActionPerformed(evt);
+            }
+        });
 
         btnLast.setText(">|");
+        btnLast.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLastActionPerformed(evt);
+            }
+        });
 
         lblChooseFile.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lblChooseFile.setText("Chọn tài liệu:");
@@ -152,10 +226,20 @@ public class DocumentsManagement extends javax.swing.JFrame {
 
         cboSubject.setBackground(new java.awt.Color(204, 204, 204));
         cboSubject.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        cboSubject.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Toán", "Vật Lí", "Hóa Học", "Tiếng Anh" }));
+        cboSubject.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Toán", "Vật Lí", "Hóa Học", "Tiếng Anh", "Sinh", "Sử", "Địa", "Tin Học", "Công Nghệ", "Giáo Dục Công Dân", "Văn" }));
+        cboSubject.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cboSubjectActionPerformed(evt);
+            }
+        });
 
         btnChooseFile.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        btnChooseFile.setText("No file Chosen");
+        btnChooseFile.setText("Chưa có file được chọn");
+        btnChooseFile.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnChooseFileActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout pnlManageLayout = new javax.swing.GroupLayout(pnlManage);
         pnlManage.setLayout(pnlManageLayout);
@@ -184,10 +268,10 @@ public class DocumentsManagement extends javax.swing.JFrame {
                         .addGap(0, 41, Short.MAX_VALUE))
                     .addGroup(pnlManageLayout.createSequentialGroup()
                         .addGroup(pnlManageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtLessonTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 415, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtDocTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 415, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(cboSubject, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(cboGrade, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(cboLessonType, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cboLesson, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(pnlManageLayout.createSequentialGroup()
                                 .addGroup(pnlManageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                     .addComponent(btnChooseFile, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -196,9 +280,12 @@ public class DocumentsManagement extends javax.swing.JFrame {
                                         .addGap(18, 18, 18)
                                         .addComponent(btnPrevious, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addGap(18, 18, 18)
-                                .addComponent(btnNext, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(btnLast, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGroup(pnlManageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(pnlManageLayout.createSequentialGroup()
+                                        .addComponent(btnNext, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(btnLast, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(lblFileChosen))))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         pnlManageLayout.setVerticalGroup(
@@ -215,22 +302,23 @@ public class DocumentsManagement extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(pnlManageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblLessonType)
-                    .addComponent(cboLessonType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cboLesson, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(22, 22, 22)
                 .addGroup(pnlManageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblLessonTitle)
-                    .addComponent(txtLessonTitle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtDocTitle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(pnlManageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblChooseFile)
-                    .addComponent(btnChooseFile))
+                    .addComponent(btnChooseFile)
+                    .addComponent(lblFileChosen))
                 .addGap(30, 30, 30)
                 .addGroup(pnlManageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnFirst, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnPrevious, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnNext, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnLast, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 84, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 103, Short.MAX_VALUE)
                 .addGroup(pnlManageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnNew)
                     .addComponent(btnInsert, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -250,6 +338,11 @@ public class DocumentsManagement extends javax.swing.JFrame {
 
         cboSubjectList.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         cboSubjectList.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Toán" }));
+        cboSubjectList.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cboSubjectListActionPerformed(evt);
+            }
+        });
 
         lblGradeList.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lblGradeList.setText("Khối:");
@@ -257,6 +350,11 @@ public class DocumentsManagement extends javax.swing.JFrame {
 
         cboGradeList.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         cboGradeList.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "10", "11", "12" }));
+        cboGradeList.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cboGradeListActionPerformed(evt);
+            }
+        });
 
         btnSearchList.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/studious/icons/icons8-search-24.png"))); // NOI18N
         btnSearchList.addActionListener(new java.awt.event.ActionListener() {
@@ -266,9 +364,8 @@ public class DocumentsManagement extends javax.swing.JFrame {
         });
 
         txtSearchList.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        txtSearchList.setText("Tìm kiếm");
 
-        tblGridView.setModel(new javax.swing.table.DefaultTableModel(
+        tblDocument.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null},
                 {null, null, null, null, null, null},
@@ -276,14 +373,23 @@ public class DocumentsManagement extends javax.swing.JFrame {
                 {null, null, null, null, null, null}
             },
             new String [] {
-                "STT", "Mã tài liệu", "Tên tài liệu", "Môn học", "Khối", "Người dùng"
+                "STT", "Mã tài liệu", "Tên tài liệu", "Tên file", "Mã Giáo viên", "Mã Bài học"
             }
-        ));
-        jScrollPane3.setViewportView(tblGridView);
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false
+            };
 
-        cboArrange.setBackground(new java.awt.Color(233, 233, 233));
-        cboArrange.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        cboArrange.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Thống kê theo môn học" }));
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tblDocument.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblDocumentMouseClicked(evt);
+            }
+        });
+        jScrollPane3.setViewportView(tblDocument);
 
         lblLessonList.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lblLessonList.setText("Bài học:");
@@ -291,10 +397,11 @@ public class DocumentsManagement extends javax.swing.JFrame {
 
         cboLessonList.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         cboLessonList.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Hàm Logarit" }));
-
-        btnDeleteRow.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        btnDeleteRow.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/studious/icons/icons8-bin-24.png"))); // NOI18N
-        btnDeleteRow.setText("Xóa");
+        cboLessonList.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cboLessonListActionPerformed(evt);
+            }
+        });
 
         btnView.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnView.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/studious/icons/icons8-view-24.png"))); // NOI18N
@@ -305,33 +412,32 @@ public class DocumentsManagement extends javax.swing.JFrame {
         pnlListLayout.setHorizontalGroup(
             pnlListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlListLayout.createSequentialGroup()
-                .addGap(31, 31, 31)
                 .addGroup(pnlListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane3)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlListLayout.createSequentialGroup()
-                        .addGroup(pnlListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblGradeList, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(lblSubjectList, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 59, Short.MAX_VALUE)
-                            .addComponent(lblLessonList, javax.swing.GroupLayout.DEFAULT_SIZE, 59, Short.MAX_VALUE))
-                        .addGap(29, 29, 29)
-                        .addGroup(pnlListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(pnlListLayout.createSequentialGroup()
-                                .addComponent(cboLessonList, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btnSearchList, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtSearchList, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(pnlListLayout.createSequentialGroup()
-                                .addGroup(pnlListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(cboSubjectList, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(cboGradeList, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(450, 450, 450))))
                     .addGroup(pnlListLayout.createSequentialGroup()
-                        .addComponent(cboArrange, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnView, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnDeleteRow, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(31, 31, 31)
+                        .addGroup(pnlListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane3)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlListLayout.createSequentialGroup()
+                                .addGroup(pnlListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lblGradeList, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(lblSubjectList, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 59, Short.MAX_VALUE)
+                                    .addComponent(lblLessonList, javax.swing.GroupLayout.DEFAULT_SIZE, 59, Short.MAX_VALUE))
+                                .addGap(29, 29, 29)
+                                .addGroup(pnlListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addGroup(pnlListLayout.createSequentialGroup()
+                                        .addComponent(cboLessonList, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(btnSearchList, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(txtSearchList, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(pnlListLayout.createSequentialGroup()
+                                        .addGroup(pnlListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(cboSubjectList, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(cboGradeList, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGap(450, 450, 450))))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlListLayout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnView, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         pnlListLayout.setVerticalGroup(
@@ -356,10 +462,7 @@ public class DocumentsManagement extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addGroup(pnlListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cboArrange, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnDeleteRow)
-                    .addComponent(btnView))
+                .addComponent(btnView)
                 .addGap(136, 136, 136))
         );
 
@@ -370,6 +473,7 @@ public class DocumentsManagement extends javax.swing.JFrame {
 
         jToolBar.setBackground(new java.awt.Color(232, 255, 183));
         jToolBar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(232, 255, 183)));
+        jToolBar.setFloatable(false);
         jToolBar.setOrientation(javax.swing.SwingConstants.VERTICAL);
         jToolBar.setRollover(true);
 
@@ -379,8 +483,15 @@ public class DocumentsManagement extends javax.swing.JFrame {
         btnHome.setBorder(null);
         btnHome.setFocusable(false);
         btnHome.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnHome.setMaximumSize(new java.awt.Dimension(35, 35));
+        btnHome.setMaximumSize(new java.awt.Dimension(45, 45));
+        btnHome.setMinimumSize(new java.awt.Dimension(45, 45));
+        btnHome.setPreferredSize(new java.awt.Dimension(45, 45));
         btnHome.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnHome.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnHomeActionPerformed(evt);
+            }
+        });
         jToolBar.add(btnHome);
 
         btnPersonalInfo.setBackground(new java.awt.Color(232, 255, 183));
@@ -388,8 +499,9 @@ public class DocumentsManagement extends javax.swing.JFrame {
         btnPersonalInfo.setBorder(null);
         btnPersonalInfo.setFocusable(false);
         btnPersonalInfo.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnPersonalInfo.setMaximumSize(new java.awt.Dimension(35, 35));
-        btnPersonalInfo.setPreferredSize(new java.awt.Dimension(35, 35));
+        btnPersonalInfo.setMaximumSize(new java.awt.Dimension(45, 45));
+        btnPersonalInfo.setMinimumSize(new java.awt.Dimension(45, 45));
+        btnPersonalInfo.setPreferredSize(new java.awt.Dimension(45, 45));
         btnPersonalInfo.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         jToolBar.add(btnPersonalInfo);
 
@@ -398,9 +510,9 @@ public class DocumentsManagement extends javax.swing.JFrame {
         btnTeacher.setBorder(null);
         btnTeacher.setFocusable(false);
         btnTeacher.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnTeacher.setMaximumSize(new java.awt.Dimension(35, 35));
-        btnTeacher.setMinimumSize(new java.awt.Dimension(46, 44));
-        btnTeacher.setPreferredSize(new java.awt.Dimension(35, 35));
+        btnTeacher.setMaximumSize(new java.awt.Dimension(45, 45));
+        btnTeacher.setMinimumSize(new java.awt.Dimension(45, 45));
+        btnTeacher.setPreferredSize(new java.awt.Dimension(45, 45));
         btnTeacher.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         jToolBar.add(btnTeacher);
 
@@ -409,9 +521,9 @@ public class DocumentsManagement extends javax.swing.JFrame {
         btnStudent.setBorder(null);
         btnStudent.setFocusable(false);
         btnStudent.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnStudent.setMaximumSize(new java.awt.Dimension(35, 35));
-        btnStudent.setMinimumSize(new java.awt.Dimension(35, 35));
-        btnStudent.setPreferredSize(new java.awt.Dimension(46, 44));
+        btnStudent.setMaximumSize(new java.awt.Dimension(45, 45));
+        btnStudent.setMinimumSize(new java.awt.Dimension(45, 45));
+        btnStudent.setPreferredSize(new java.awt.Dimension(45, 45));
         btnStudent.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         jToolBar.add(btnStudent);
 
@@ -419,26 +531,30 @@ public class DocumentsManagement extends javax.swing.JFrame {
         btnStatistic.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/studious/icons/statistic.png"))); // NOI18N
         btnStatistic.setBorder(null);
         btnStatistic.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnStatistic.setMinimumSize(new java.awt.Dimension(46, 44));
+        btnStatistic.setMaximumSize(new java.awt.Dimension(45, 45));
+        btnStatistic.setMinimumSize(new java.awt.Dimension(45, 45));
+        btnStatistic.setPreferredSize(new java.awt.Dimension(45, 45));
         btnStatistic.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         jToolBar.add(btnStatistic);
 
         btnBack.setBackground(new java.awt.Color(232, 255, 183));
         btnBack.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/studious/icons/back.png"))); // NOI18N
+        btnBack.setBorder(null);
         btnBack.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnBack.setMaximumSize(new java.awt.Dimension(35, 35));
-        btnBack.setMinimumSize(new java.awt.Dimension(35, 35));
-        btnBack.setPreferredSize(new java.awt.Dimension(35, 35));
+        btnBack.setMaximumSize(new java.awt.Dimension(45, 45));
+        btnBack.setMinimumSize(new java.awt.Dimension(45, 45));
+        btnBack.setPreferredSize(new java.awt.Dimension(45, 45));
         btnBack.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         jToolBar.add(btnBack);
 
         btnLogout.setBackground(new java.awt.Color(232, 255, 183));
         btnLogout.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/studious/icons/logout.png"))); // NOI18N
         btnLogout.setToolTipText("");
-        btnLogout.setFocusable(false);
+        btnLogout.setBorder(null);
         btnLogout.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnLogout.setMaximumSize(new java.awt.Dimension(35, 35));
-        btnLogout.setMinimumSize(new java.awt.Dimension(35, 35));
+        btnLogout.setMaximumSize(new java.awt.Dimension(45, 45));
+        btnLogout.setMinimumSize(new java.awt.Dimension(45, 45));
+        btnLogout.setPreferredSize(new java.awt.Dimension(45, 45));
         btnLogout.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         jToolBar.add(btnLogout);
 
@@ -467,9 +583,11 @@ public class DocumentsManagement extends javax.swing.JFrame {
                     .addComponent(lblTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jToolBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tabs, javax.swing.GroupLayout.PREFERRED_SIZE, 490, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(tabs, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jToolBar, javax.swing.GroupLayout.PREFERRED_SIZE, 321, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 188, Short.MAX_VALUE)))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -488,9 +606,434 @@ public class DocumentsManagement extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    DocumentDAO ddao = new DocumentDAO();
+    LessonDAO ldao = new LessonDAO();
+    int row = -1;
+
+    private void init() {
+        fillCboSubject();
+        fillCboSubjectList();
+        tblDocument.setAutoCreateRowSorter(true);
+        clearForm();
+        setResizable(false);
+        setLocationRelativeTo(null);
+        AccountDAO adao = new AccountDAO();
+        Auth.user = adao.selectById("GV1");
+    }
+
+    private void fillCboSubject() {
+        try {
+            DefaultComboBoxModel model = (DefaultComboBoxModel) cboSubject.getModel();
+            model.removeAllElements();
+            List<Object> list = ldao.selectSubject();
+            if (list != null) {
+                for (Object subject : list) {
+                    model.addElement(subject);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void fillCboGrade() {
+        try {
+            DefaultComboBoxModel model = (DefaultComboBoxModel) cboGrade.getModel();
+            model.removeAllElements();
+            String subject = (String) cboSubject.getSelectedItem();
+            List<Object> list = ldao.selectGradeBySubject(subject);
+            if (list != null) {
+                for (Object grade : list) {
+                    model.addElement(grade);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void fillCboLesson() {
+        try {
+            DefaultComboBoxModel model = (DefaultComboBoxModel) cboLesson.getModel();
+            model.removeAllElements();
+            String subject = String.valueOf(cboSubject.getSelectedItem());
+            Integer grade = (Integer) cboGrade.getSelectedItem();
+            if (subject != null && grade != null) {
+                List<Lesson> lList = ldao.selectBySubjectAndGrade(subject, grade);
+                if (lList != null) {
+                    for (Lesson lesson : lList) {
+                        model.addElement(lesson);
+                    }
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void fillCboSubjectList() {
+        try {
+            DefaultComboBoxModel model = (DefaultComboBoxModel) cboSubjectList.getModel();
+            model.removeAllElements();
+            List<Object> list = ldao.selectSubject();
+            if (list != null) {
+                for (Object subject : list) {
+                    model.addElement(subject);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void fillCboGradeList() {
+        try {
+            DefaultComboBoxModel model = (DefaultComboBoxModel) cboGradeList.getModel();
+            model.removeAllElements();
+            String subject = (String) cboSubjectList.getSelectedItem();
+            List<Object> list = ldao.selectGradeBySubject(subject);
+            if (list != null) {
+                for (Object grade : list) {
+                    model.addElement(grade);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void fillCboLessonList() {
+        try {
+            DefaultComboBoxModel model = (DefaultComboBoxModel) cboLessonList.getModel();
+            model.removeAllElements();
+            String subject = String.valueOf(cboSubjectList.getSelectedItem());
+            Integer grade = (Integer) cboGradeList.getSelectedItem();
+            if (subject != null && grade != null) {
+                List<Lesson> list = ldao.selectBySubjectAndGrade(subject, grade);
+                if (list != null) {
+                    for (Lesson lesson : list) {
+                        model.addElement(lesson);
+                    }
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void fillTableDocuments() {
+        try {
+            DefaultTableModel model = (DefaultTableModel) tblDocument.getModel();
+            model.setRowCount(0);
+            Lesson lesson = (Lesson) cboLessonList.getSelectedItem();
+            if (lesson != null) {
+                List<Document> list = ddao.selectByLessonID(lesson.getLessonID());
+                if (list != null) {
+                    for (int i = 0; i < list.size(); i++) {
+                        Document doc = list.get(i);
+                        model.addRow(new Object[]{i + 1, doc.getDocID(), doc.getDocTitle(), doc.getUrl(), doc.getTeacherID(), doc.getLessonID()});
+                    }
+                }
+
+            }
+        } catch (Exception e) {
+            MsgBox.alert(this, e.toString());
+        }
+    }
+
+    private void insert() {
+        Document document = getForm();
+        if (isValidated()) {
+            try {
+                ddao.insert(document);
+                this.fillTableDocuments();
+                this.clearForm();
+                MsgBox.alert(this, "Thêm mới thành công!");
+            } catch (Exception e) {
+                MsgBox.alert(this, "Thêm mới thất bại");
+            }
+        }
+    }
+
+    private void update() {
+        if (isValidated()) {
+            try {
+                Document doc = this.getForm();
+                ddao.update(doc);
+                MsgBox.alert(this, "Cập nhật thành công!");
+            } catch (Exception e) {
+                MsgBox.alert(this, "Cập nhật thất bại!");
+            }
+        }
+    }
+
+    private void delete() {
+        Integer documentID = (Integer) tblDocument.getValueAt(this.row, 1);
+        Document document = ddao.selectById(documentID);
+        if (document.getTeacherID().equals(Auth.user.getUserID())) {
+            try {
+                ddao.delete(document.getDocID());
+                fillTableDocuments();
+                this.clearForm();
+                MsgBox.alert(this, "Xóa thành công!");
+            } catch (Exception e) {
+                MsgBox.alert(this, "Xóa thất bại!");
+            }
+        } else {
+            MsgBox.alert(this, "Bạn không có quyền xóa!");
+        }
+    }
+
+    private void clearForm() {
+        Document document = new Document();
+        this.setForm(document);
+        this.row = -1;
+        btnEdit.setEnabled(false);
+        btnInsert.setEnabled(true);
+        reset();
+    }
+
+    private void setForm(Document doc) {
+        cboSubject.setSelectedIndex(cboSubjectList.getSelectedIndex());
+        cboGrade.setSelectedIndex(cboGradeList.getSelectedIndex());
+        cboLesson.setSelectedIndex(cboLessonList.getSelectedIndex());
+        txtDocTitle.setText(doc.getDocTitle());
+        if (!(doc.getUrl() == null)) {
+            if (!(doc.getUrl().isBlank())) {
+                lblFileChosen.setText(doc.getUrl());
+                btnChooseFile.setText("Chọn file khác");
+            }
+        }
+        btnDelete.setEnabled(false);
+        btnUpdate.setEnabled(false);
+        btnInsert.setEnabled(false);
+    }
+
+    private Document getForm() {
+        Document document = new Document();
+        document.setDocTitle(txtDocTitle.getText());
+        DefaultComboBoxModel model = (DefaultComboBoxModel) cboLesson.getModel();
+        Lesson lesson = (Lesson) (model.getElementAt(cboLesson.getSelectedIndex()));
+        System.out.println(lesson.getLessonID());
+        document.setUrl(lblFileChosen.getText());
+        document.setLessonID(lesson.getLessonID());
+        document.setTeacherID(Auth.user.getUserID());
+        return document;
+    }
+
+    private void edit() {
+        if (Auth.user.getUserID().equals(tblDocument.getValueAt(this.row, 4))) {
+            btnDelete.setEnabled(true);
+            btnUpdate.setEnabled(true);
+            btnInsert.setEnabled(false);
+        } else {
+            MsgBox.alert(this, "Bạn không có quyền được chỉnh sửa tài liệu này!");
+        }
+    }
+
+    private void fillToForm() {
+        int index = (int) tblDocument.getValueAt(this.row, 1);
+        Document document = ddao.selectById(index);
+        this.setForm(document);
+        btnEdit.setEnabled(true);
+        tabs.setSelectedIndex(0);
+//        cboGrade.setEnabled(false);
+//        cboLesson.setEnabled(false);
+//        cboSubject.setEnabled(false);
+//        txt
+    }
+
+    private void first() {
+        this.row = 0;
+        this.fillToForm();
+    }
+
+    private void prev() {
+        if (this.row > 0) {
+            this.row--;
+            this.fillToForm();
+        }
+    }
+
+    private void next() {
+        if (this.row < tblDocument.getRowCount() - 1) {
+            this.row++;
+            this.fillToForm();
+        }
+    }
+
+    private void last() {
+        this.row = tblDocument.getRowCount() - 1;
+        this.fillToForm();
+    }
+
+    private void reset() {
+        btnChooseFile.setText("Chưa có file được chọn");
+        lblFileChosen.setText("");
+    }
+
+    private boolean isValidated() {
+        if (lblFileChosen.getText().isEmpty()) {
+            MsgBox.alert(this, "Bạn chưa thêm tài liệu!");
+            return false;
+        }
+        if (txtDocTitle.getText().isEmpty()) {
+            MsgBox.alert(this, "Tiêu đề không được để trống");
+            return false;
+        }
+        return true;
+    }
+
     private void btnSearchListActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchListActionPerformed
         // TODO add your handling code here:
+        try {
+            DefaultTableModel model = (DefaultTableModel) tblDocument.getModel();
+            model.setRowCount(0);
+            List<Document> list = ddao.selectByDocumentTitle(txtSearchList.getText());
+            if (list != null) {
+                for (int i = 0; i < list.size(); i++) {
+                    Document doc = list.get(i);
+                    model.addRow(new Object[]{i + 1, doc.getDocID(), doc.getDocTitle(), doc.getUrl(), doc.getTeacherID(), doc.getLessonID()});
+                }
+            }
+        } catch (Exception e) {
+            e.toString();
+        }
     }//GEN-LAST:event_btnSearchListActionPerformed
+
+    private void btnChooseFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChooseFileActionPerformed
+        // TODO add your handling code here:
+        JFileChooser fileChooser = new JFileChooser("file");
+        fileChooser.setAcceptAllFileFilterUsed(false);
+        FileNameExtensionFilter extFilter = new FileNameExtensionFilter("txt file", "txt");
+        fileChooser.addChoosableFileFilter(extFilter);
+        int result = fileChooser.showOpenDialog(null);
+        if (result == JFileChooser.APPROVE_OPTION) {
+            try {
+                String URL = (String) fileChooser.getSelectedFile().getName();
+                lblFileChosen.setText(URL);
+                btnChooseFile.setText("Chọn file khác");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+    }//GEN-LAST:event_btnChooseFileActionPerformed
+
+    private void cboGradeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboGradeActionPerformed
+        // TODO add your handling code here:
+        fillCboLesson();
+    }//GEN-LAST:event_cboGradeActionPerformed
+
+    private void cboSubjectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboSubjectActionPerformed
+        // TODO add your handling code here:
+        fillCboGrade();
+    }//GEN-LAST:event_cboSubjectActionPerformed
+
+    private void cboSubjectListActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboSubjectListActionPerformed
+        // TODO add your handling code here:
+        fillCboGradeList();
+    }//GEN-LAST:event_cboSubjectListActionPerformed
+
+    private void cboGradeListActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboGradeListActionPerformed
+        // TODO add your handling code here:
+        fillCboLessonList();
+    }//GEN-LAST:event_cboGradeListActionPerformed
+
+    private void cboLessonListActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboLessonListActionPerformed
+        // TODO add your handling code here:
+        fillTableDocuments();
+    }//GEN-LAST:event_cboLessonListActionPerformed
+
+    private void tblDocumentMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblDocumentMouseClicked
+        // TODO add your handling code here:
+        if (evt.getClickCount() == 1) {
+            this.row = tblDocument.rowAtPoint(evt.getPoint()); //lấy vị trí dòng được chọn
+            LessonDAO ldao = new LessonDAO();
+            Lesson lesson = ldao.selectById((Integer) tblDocument.getValueAt(row, 5));
+            cboSubjectList.setSelectedItem(lesson.getSubject());
+        }
+        if (evt.getClickCount() == 2) {
+            this.row = tblDocument.rowAtPoint(evt.getPoint()); //lấy vị trí dòng được chọn
+            if (this.row >= 0) {
+                this.fillToForm();
+                tabs.setSelectedIndex(0);
+            }
+        }
+        this.row = tblDocument.rowAtPoint(evt.getPoint());
+        //this.edit();
+    }//GEN-LAST:event_tblDocumentMouseClicked
+
+    private void btnFirstActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFirstActionPerformed
+        // TODO add your handling code here:
+        first();
+    }//GEN-LAST:event_btnFirstActionPerformed
+
+    private void btnPreviousActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPreviousActionPerformed
+        // TODO add your handling code here:
+        prev();
+    }//GEN-LAST:event_btnPreviousActionPerformed
+
+    private void btnNextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNextActionPerformed
+        // TODO add your handling code here:
+        next();
+    }//GEN-LAST:event_btnNextActionPerformed
+
+    private void btnLastActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLastActionPerformed
+        // TODO add your handling code here:
+        last();
+    }//GEN-LAST:event_btnLastActionPerformed
+
+    private void btnNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewActionPerformed
+        // TODO add your handling code here:
+        clearForm();
+    }//GEN-LAST:event_btnNewActionPerformed
+
+    private void tabsStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_tabsStateChanged
+        // TODO add your handling code here:
+        if (tabs.getSelectedIndex() == 0) {
+//            if (cboSubjectList.) {
+//                cboSubject.setSelectedIndex(cboSubjectList.getSelectedIndex());
+//                cboGrade.setSelectedIndex(cboGradeList.getSelectedIndex());
+//                cboLesson.setSelectedIndex(cboLessonList.getSelectedIndex());
+//                reset();
+//            }
+//            else{
+            cboSubject.setSelectedIndex(cboSubjectList.getSelectedIndex());
+            cboGrade.setSelectedIndex(cboGradeList.getSelectedIndex());
+            cboLesson.setSelectedIndex(cboLessonList.getSelectedIndex());
+//            }
+        }
+        if (tabs.getSelectedIndex() == 1) {
+            cboSubjectList.setSelectedIndex(cboSubject.getSelectedIndex());
+            cboGradeList.setSelectedIndex(cboGrade.getSelectedIndex());
+            cboLessonList.setSelectedIndex(cboLesson.getSelectedIndex());
+        }
+    }//GEN-LAST:event_tabsStateChanged
+
+    private void btnInsertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInsertActionPerformed
+        // TODO add your handling code here:
+        insert();
+    }//GEN-LAST:event_btnInsertActionPerformed
+
+    private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
+        // TODO add your handling code here:
+        edit();
+    }//GEN-LAST:event_btnEditActionPerformed
+
+    private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
+        // TODO add your handling code here:
+        update();
+    }//GEN-LAST:event_btnUpdateActionPerformed
+
+    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
+        // TODO add your handling code here:
+        delete();
+    }//GEN-LAST:event_btnDeleteActionPerformed
+
+    private void btnHomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHomeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnHomeActionPerformed
 
     /**
      * @param args the command line arguments
@@ -531,7 +1074,6 @@ public class DocumentsManagement extends javax.swing.JFrame {
     private javax.swing.JButton btnBack;
     private javax.swing.JButton btnChooseFile;
     private javax.swing.JButton btnDelete;
-    private javax.swing.JButton btnDeleteRow;
     private javax.swing.JButton btnEdit;
     private javax.swing.JButton btnFirst;
     private javax.swing.JButton btnHome;
@@ -548,17 +1090,17 @@ public class DocumentsManagement extends javax.swing.JFrame {
     private javax.swing.JButton btnTeacher;
     private javax.swing.JButton btnUpdate;
     private javax.swing.JButton btnView;
-    private javax.swing.JComboBox<String> cboArrange;
     private javax.swing.JComboBox<String> cboGrade;
     private javax.swing.JComboBox<String> cboGradeList;
+    private javax.swing.JComboBox<String> cboLesson;
     private javax.swing.JComboBox<String> cboLessonList;
-    private javax.swing.JComboBox<String> cboLessonType;
     private javax.swing.JComboBox<String> cboSubject;
     private javax.swing.JComboBox<String> cboSubjectList;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JToolBar jToolBar;
     private javax.swing.JLabel lblChooseFile;
+    private javax.swing.JLabel lblFileChosen;
     private javax.swing.JLabel lblGrade;
     private javax.swing.JLabel lblGradeList;
     private javax.swing.JLabel lblLessonList;
@@ -571,8 +1113,8 @@ public class DocumentsManagement extends javax.swing.JFrame {
     private javax.swing.JPanel pnlList;
     private javax.swing.JPanel pnlManage;
     private javax.swing.JTabbedPane tabs;
-    private javax.swing.JTable tblGridView;
-    private javax.swing.JTextField txtLessonTitle;
+    private javax.swing.JTable tblDocument;
+    private javax.swing.JTextField txtDocTitle;
     private javax.swing.JTextField txtSearchList;
     // End of variables declaration//GEN-END:variables
 }
