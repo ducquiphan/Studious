@@ -29,45 +29,45 @@ public class ReportDAO {
         }
     }
 
-    public List<Object[]> getQuestionOfSubject(String MonHoc) {
+    public List<Object[]> getQuestionOfSubject(String subject) {
         String sql = "{CALL  sp_ThongKeCauHoi_MonHoc(?)}";
         String[] cols = {"STT", "TenMH", "SoLuongCauHoi"};
-        return getListofArray(sql, cols, MonHoc);
+        return getListofArray(sql, cols, subject);
     }
 
-    public List<Object[]> getQuestionOfTeacher(String TenGV) {
-        String sql = "{CALL  sp_ThongKeCauHoi_GiaoVien}";
+    public List<Object[]> getQuestionOfTeacher(String teacherName) {
+        String sql = "{CALL  sp_ThongKeCauHoi_GiaoVien(?)}";
         String[] cols = {"STT", "TenGV", "SoLuongCauHoi"};
-        return getListofArray(sql, cols, TenGV);
+        return getListofArray(sql, cols, teacherName);
     }
 
-    public List<Object[]> getMarkPerson(String MaHS) {
-        String sql = "{CALL  sp_ThongKeDiemCaNhanHS}";
-        String[] cols = {"STT", "MaBThi", "Diem", "LanThi", "ThoiGianLamBai"};
-        return getListofArray(sql, cols, MaHS);
+    public List<Object[]> getMarkPerson(String studentID) {
+        String sql = "{CALL  sp_ThongKeDiemCaNhanHS(?)}";
+        String[] cols = {"STT", "MaBThi", "Diem", "LanThi", "ThoiGianHoanThanh"};
+        return getListofArray(sql, cols, studentID);
     }
 
-    public List<Object[]> getDocumentLesson(String Subject) {
-        String sql = "{CALL  sp_ThongKeTaiLieu_MonHoc}";
+    public List<Object[]> getDocumentSubject(String subject) {
+        String sql = "{CALL  sp_ThongKeTaiLieu_MonHoc(?)}";
         String[] cols = {"STT", "TenMonHoc", "SoLuongTaiLieu"};
-        return getListofArray(sql, cols, Subject);
+        return getListofArray(sql, cols, subject);
     }
 
-    public List<Object[]> getDocumentTeacher(String TenGV) {
-        String sql = "{CALL  sp_ThongKeTaiLieu_GiaoVien}";
+    public List<Object[]> getDocumentTeacher(String teacherName) {
+        String sql = "{CALL  sp_ThongKeTaiLieu_GiaoVien(?)}";
         String[] cols = {"STT", "TenGiaoVien", "SoLuongTaiLieu"};
-        return getListofArray(sql, cols, TenGV);
+        return getListofArray(sql, cols, teacherName);
     }
 
-    public List<Object[]> getMarkAllStudent(String TenBThi) {
-        String sql = "{CALL  sp_ThongKeDiemToanBoHS}";
+    public List<Object[]> getMarkAllStudent(String testName) {
+        String sql = "{CALL  sp_ThongKeDiemToanBoHS(?)}";
         String[] cols = {"MaHS", "TenHS", "Lop", "MaBThi", "TenBThi", "Diem", "NgayLam"};
-        return getListofArray(sql, cols, TenBThi);
+        return getListofArray(sql, cols, testName);
     }
 
-    public List<Object[]> getMarkAVG(String TenBThi) {
-        String sql = "{CALL  sp_ThongKeDiemTB}";
+    public List<Object[]> getMarkAVG(String testName) {
+        String sql = "{CALL  sp_ThongKeDiemTB(?)}";
         String[] cols = {"STT", "MaBThi", "DiemTBTong", "SoLanThi"};
-        return getListofArray(sql, cols, TenBThi);
+        return getListofArray(sql, cols, testName);
     }
 }

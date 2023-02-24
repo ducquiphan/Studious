@@ -12,7 +12,7 @@ import java.util.List;
  */
 public class AccountDAO extends StudiousDAO<Account, String> {
 
-    final String INSERT_SQL = "INSERT INTO TAIKHOAN(TenTaiKhoan, MatKhau, VatTro, TrangThai) VALUES (?,?,?,?)";
+    final String INSERT_SQL = "INSERT INTO TAIKHOAN(TenTaiKhoan, MatKhau, VaiTro, TrangThai) VALUES (?,?,?,?)";
     final String UPDATE_SQL = "UPDATE TAIKHOAN SET MatKhau = ?, TrangThai = ? WHERE TenTaiKhoan = ?";
     final String DELETE_SQL = "DELETE FROM TAIKHOAN WHERE TenTaiKhoan = ?";
     final String SELECTALL_SQL = "SELECT * FROM TAIKHOAN";
