@@ -3,6 +3,12 @@ package com.studious.display;
 import java.awt.event.KeyEvent;
 
 /**
+DONE:
+*WELCOME. LOGIN, FORGOT, 3 MAIN, test window 
+*
+ */
+
+/**
  *
  * @author SsuBii
  */
@@ -63,8 +69,7 @@ public class Welcome extends javax.swing.JFrame {
     private void btnWelcomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnWelcomeActionPerformed
         // TODO add your handling code here:
         this.dispose();
-        Login login = new Login();
-        login.setVisible(true);
+        openLogin();
     }//GEN-LAST:event_btnWelcomeActionPerformed
 
     private void btnWelcomeKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnWelcomeKeyPressed
@@ -116,4 +121,10 @@ public class Welcome extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel lblBackGround;
     // End of variables declaration//GEN-END:variables
+
+    void openLogin() {
+        Login window = new Login();
+        window.setVisible(true);
+    }
+
 }

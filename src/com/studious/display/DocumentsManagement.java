@@ -406,6 +406,11 @@ public class DocumentsManagement extends javax.swing.JFrame {
         btnView.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnView.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/studious/icons/icons8-view-24.png"))); // NOI18N
         btnView.setText("Xem");
+        btnView.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnViewActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout pnlListLayout = new javax.swing.GroupLayout(pnlList);
         pnlList.setLayout(pnlListLayout);
@@ -609,7 +614,8 @@ public class DocumentsManagement extends javax.swing.JFrame {
     DocumentDAO ddao = new DocumentDAO();
     LessonDAO ldao = new LessonDAO();
     int row = -1;
-
+    Integer documentID = -1;
+    
     private void init() {
         fillCboSubject();
         fillCboSubjectList();
@@ -746,6 +752,7 @@ public class DocumentsManagement extends javax.swing.JFrame {
         if (isValidated()) {
             try {
                 ddao.insert(document);
+                document.toString();
                 this.fillTableDocuments();
                 this.clearForm();
                 MsgBox.alert(this, "Thêm mới thành công!");
@@ -756,10 +763,13 @@ public class DocumentsManagement extends javax.swing.JFrame {
     }
 
     private void update() {
+        Document document = this.getForm();
+        document.setDocID(documentID);
         if (isValidated()) {
             try {
-                Document doc = this.getForm();
-                ddao.update(doc);
+                System.out.println(document.toString());
+                ddao.update(document);
+                this.fillTableDocuments();
                 MsgBox.alert(this, "Cập nhật thành công!");
             } catch (Exception e) {
                 MsgBox.alert(this, "Cập nhật thất bại!");
@@ -768,7 +778,6 @@ public class DocumentsManagement extends javax.swing.JFrame {
     }
 
     private void delete() {
-        Integer documentID = (Integer) tblDocument.getValueAt(this.row, 1);
         Document document = ddao.selectById(documentID);
         if (document.getTeacherID().equals(Auth.user.getUserID())) {
             try {
@@ -837,10 +846,6 @@ public class DocumentsManagement extends javax.swing.JFrame {
         this.setForm(document);
         btnEdit.setEnabled(true);
         tabs.setSelectedIndex(0);
-//        cboGrade.setEnabled(false);
-//        cboLesson.setEnabled(false);
-//        cboSubject.setEnabled(false);
-//        txt
     }
 
     private void first() {
@@ -956,12 +961,11 @@ public class DocumentsManagement extends javax.swing.JFrame {
         if (evt.getClickCount() == 2) {
             this.row = tblDocument.rowAtPoint(evt.getPoint()); //lấy vị trí dòng được chọn
             if (this.row >= 0) {
+                documentID = (Integer) tblDocument.getValueAt(this.row, 1);
                 this.fillToForm();
                 tabs.setSelectedIndex(0);
             }
         }
-        this.row = tblDocument.rowAtPoint(evt.getPoint());
-        //this.edit();
     }//GEN-LAST:event_tblDocumentMouseClicked
 
     private void btnFirstActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFirstActionPerformed
@@ -992,17 +996,10 @@ public class DocumentsManagement extends javax.swing.JFrame {
     private void tabsStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_tabsStateChanged
         // TODO add your handling code here:
         if (tabs.getSelectedIndex() == 0) {
-//            if (cboSubjectList.) {
-//                cboSubject.setSelectedIndex(cboSubjectList.getSelectedIndex());
-//                cboGrade.setSelectedIndex(cboGradeList.getSelectedIndex());
-//                cboLesson.setSelectedIndex(cboLessonList.getSelectedIndex());
-//                reset();
-//            }
-//            else{
             cboSubject.setSelectedIndex(cboSubjectList.getSelectedIndex());
             cboGrade.setSelectedIndex(cboGradeList.getSelectedIndex());
             cboLesson.setSelectedIndex(cboLessonList.getSelectedIndex());
-//            }
+
         }
         if (tabs.getSelectedIndex() == 1) {
             cboSubjectList.setSelectedIndex(cboSubject.getSelectedIndex());
@@ -1034,6 +1031,11 @@ public class DocumentsManagement extends javax.swing.JFrame {
     private void btnHomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHomeActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnHomeActionPerformed
+
+    private void btnViewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewActionPerformed
+        // TODO add your handling code here:
+        System.out.println(row);
+    }//GEN-LAST:event_btnViewActionPerformed
 
     /**
      * @param args the command line arguments

@@ -1,13 +1,10 @@
 package com.studious.dao;
 
-import com.studious.entity.Lesson;
 import com.studious.entity.QuestionOfTest;
-import com.studious.entity.TestReport;
 import com.studious.utils.JdbcHelper;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
-import javax.swing.DefaultComboBoxModel;
 
 /**
  *
@@ -15,8 +12,9 @@ import javax.swing.DefaultComboBoxModel;
  */
 public class QuestionOfTestDAO extends StudiousDAO<QuestionOfTest, Integer> {
 
-    final String INSERT_SQL = "INSERT INTO CAUHOIBAITHI(MaCHBT, MaCH, MaBThi) VALUES (?,?,?)";
-    final String DELETE_SQL = "DELETE FROM CAUHOIBAITHI WHERE MaCHBT = ?";
+    final String INSERT_SQL = "INSERT INTO CAUHOIBAITHI(MaCH, MaBThi) VALUES (?,?)";
+    final String DELETE_SQL = "DELETE FROM CAUHOIBAITHI WHERE MaCHBT = ? AND MaBThi = ";
+    final String DELETEBYTESTID_SQL = "DELETE FROM CAUHOIBAITHI WHERE MaBThi = ";
     final String SELECTALL_SQL = "SELECT * FROM CAUHOIBAITHI";
     final String SELECTBYID_SQL = "SELECT * FROM CAUHOIBAITHI WHERE MaCHBT = ?";
     final String SELECTBYTESTID_SQL = "SELECT * FROM CAUHOIBAITHI WHERE MaBThi = ?";
@@ -25,8 +23,8 @@ public class QuestionOfTestDAO extends StudiousDAO<QuestionOfTest, Integer> {
     @Override
 
     public void insert(QuestionOfTest entity) {
-        JdbcHelper.update(INSERT_SQL, entity.getQuestionOfTestID(), entity.getQuestionID(),
-                entity.getQuestionID());
+        JdbcHelper.update(INSERT_SQL, entity.getQuestionID(),
+                entity.getTestID());
     }
 
     @Override
@@ -35,7 +33,15 @@ public class QuestionOfTestDAO extends StudiousDAO<QuestionOfTest, Integer> {
 
     @Override
     public void delete(Integer key) {
-        JdbcHelper.update(DELETE_SQL, key);
+
+    }
+
+    public void deleteSuppor(Integer key, String maBThi) {
+        JdbcHelper.update(DELETE_SQL, key, maBThi);
+    }
+
+    public void deleteByTestID(String key) {
+        JdbcHelper.update(DELETEBYTESTID_SQL, key);
     }
 
     @Override
@@ -56,8 +62,8 @@ public class QuestionOfTestDAO extends StudiousDAO<QuestionOfTest, Integer> {
         List<QuestionOfTest> list = selectSql(SELECTBYTESTID_SQL, key);
         return list;
     }
-    
-    public List<QuestionOfTest> selectByQuestionID(Integer questionID){
+
+    public List<QuestionOfTest> selectByQuestionID(Integer questionID) {
         List<QuestionOfTest> list = selectSql(SELECTBYQUESTIONID_SQL, questionID);
         if (list.isEmpty()) {
             return null;

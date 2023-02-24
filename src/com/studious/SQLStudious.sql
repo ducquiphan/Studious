@@ -18,6 +18,7 @@ CREATE TABLE GIAOVIEN (
 	HoVaTen	NVARCHAR(50),
 	GioiTinh BIT,
 	NgaySinh DATE,
+	MaDinhDanh INT,
 	ChuyenMon NVARCHAR(30),
 	Email VARCHAR(50),
 	SoDT VARCHAR(10),
@@ -30,6 +31,7 @@ CREATE TABLE HOCSINH (
 	HoVaTen	NVARCHAR(50),
 	GioiTinh BIT,
 	NgaySinh DATE,
+	MaDinhDanh INT,
 	Email VARCHAR(50),
 	SoDT VARCHAR(10),
 	Khoi INT,
@@ -54,7 +56,6 @@ CREATE TABLE BAITHI (
 	Khoi INT,
 	NgayTao	DATE DEFAULT GETDATE(),
 	MaGV VARCHAR(10),
-	DanhSachMaCHBT VARCHAR(1000)
 )
 GO
 CREATE TABLE TAILIEUONTAP (
@@ -170,7 +171,7 @@ AS BEGIN
 	BEGIN
 		SELECT ROW_NUMBER() OVER (ORDER BY MonHoc), MonHoc, COUNT(MaCH)
 		FROM CAUHOI JOIN BAIHOC ON CAUHOI.MaBH = BAIHOC.MaBH
-		GROUP BY MonHoc
+		GROUP BY BAIHOC.MaBH, MonHoc
 	END
 
 	ELSE
@@ -178,10 +179,9 @@ AS BEGIN
 		SELECT ROW_NUMBER() OVER (ORDER BY MonHoc), MonHoc, COUNT(MaCH)
 		FROM CAUHOI JOIN BAIHOC ON CAUHOI.MaBH = BAIHOC.MaBH
 		WHERE MonHoc = @TenMonHoc
-		GROUP BY MonHoc
+		GROUP BY BAIHOC.MaBH, MonHoc
 	END
 END
-
 
 
 GO
@@ -302,6 +302,11 @@ AS BEGIN
 END
 GO
 
+CREATE PROC sp_DanhSachBaiHocTheoMon (@MonHoc NVARCHAR(100))
+AS BEGIN
+	SELECT Khoi FROM BAIHOC WHERE MonHoc = @MonHoc GROUP BY Khoi
+END
+
 
 
 
@@ -312,6 +317,11 @@ INSERT INTO TAIKHOAN(TenTaiKhoan, MatKhau, VaiTro, TrangThai) VALUES
 ('GV1', '123456', 2, 1),
 ('HS1', '123456', 3, 1),
 ('HS2', '123456', 3, 0)
+
+--INSERT INTO TAIKHOAN(TenTaiKhoan, MatKhau, VaiTro, TrangThai) VALUES
+--('GV2', '123456', 2, 1)
+
+--delete from TAIKHOAN where TenTaiKhoan = 'GV2'
 
 GO
 INSERT INTO GIAOVIEN(MaGV, HoVaTen, GioiTinh, NgaySinh, ChuyenMon, Email, SoDT, PathIMG, MaTK) VALUES 
@@ -330,8 +340,8 @@ INSERT INTO BAIHOC(TenBH, MonHoc, Khoi, MaGV) VALUES
 (N'TOPIC 3', N'Anh văn',12,'GV1')
 
 GO
-INSERT INTO BAITHI(MaBThi, TieuDe, ThoiGian, MonHoc, Khoi, MaGV, DanhSachMaCHBT) VALUES
-('TOAN01', N'Đề thi kiểm tra cuối kỳ 1', 45, N'Toán', 10, 'GV1', NULL)
+INSERT INTO BAITHI(MaBThi, TieuDe, ThoiGian, MonHoc, MaGV) VALUES
+('TOAN01', N'Đề thi kiểm tra cuối kỳ 1', 45, N'Toán', 10, 'GV1')
 
 GO
 
@@ -507,5 +517,5 @@ INSERT INTO KETQUA(LanThi, MaHS, MaBThi, MaCau, DanAnChon, DanAnDung) VALUES
 (1, 'HS1', 'TOAN01', 49, N'd', N'd'),
 (1, 'HS1', 'TOAN01', 50, N'd', N'd')
 
-select * from BAIHOC
-select * from CAUHOI
+
+select * from TAILIEUONTAP

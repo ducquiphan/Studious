@@ -12,26 +12,27 @@ import java.util.List;
  */
 public class TestDAO extends StudiousDAO<Test, String> {
 
-    final String INSERT_SQL = "INSERT INTO BAITHI(MaBThi, TieuDe, MonHoc, Khoi, NgayTao, MaGV, DanhSachMaCHBT) VALUES (?,?,?,?,?,?,?)";
-    final String UPDATE_SQL = "UPDATE BAITHI SET TieuDe = ?, MonHoc = ?, Khoi = ?, NgayTao = ?, MaGV = ?, DanhSachMaCHBT = ? WHERE MaBThi = ?";
+    final String INSERT_SQL = "INSERT INTO BAITHI(MaBthi, TieuDe, ThoiGian, MonHoc, Khoi, MaGV) VALUES (?,?,?,?,?,?)";
+    final String UPDATE_SQL = "UPDATE BAITHI SET TieuDe = ?, ThoiGian = ? MonHoc = ?, Khoi = ?, MaGV = ? WHERE MaBThi = ?";
     final String DELETE_SQL = "DELETE FROM BAITHI WHERE MaBThi = ?";
     final String SELECTALL_SQL = "SELECT * FROM BAITHI";
     final String SELECTBYID_SQL = "SELECT * FROM BAITHI WHERE MaBThi = ?";
+    final String SELECTBYSUBJECTGRADE_SQL = "SELECT * FROM BAITHI WHERE MonHoc = ? AND Khoi = ?";
 
     @Override
     public void insert(Test entity) {
         JdbcHelper.update(INSERT_SQL, entity.getTestID(), entity.getTestTitle(),
-                entity.getLesson(), entity.getGrade(),
-                entity.getCreateDate(), entity.getTeacherID(),
-                entity.getQuestionsList());
+                entity.getTimeTest(),
+                entity.getLesson(),
+                entity.getGrade(),
+                entity.getTeacherID());
     }
 
     @Override
     public void update(Test entity) {
-        JdbcHelper.update(UPDATE_SQL, entity.getTestTitle(),
+        JdbcHelper.update(UPDATE_SQL, entity.getTestTitle(), entity.getTimeTest(),
                 entity.getLesson(), entity.getGrade(),
-                entity.getCreateDate(), entity.getTeacherID(),
-                entity.getQuestionsList(), entity.getTestID());
+                entity.getTestID());
     }
 
     @Override
@@ -73,6 +74,10 @@ public class TestDAO extends StudiousDAO<Test, String> {
             throw new RuntimeException(e);
         }
         return list;
+    }
+
+    public List<Test> selectByGradeSubject(String grade, String subject) {
+        return selectSql(SELECTBYSUBJECTGRADE_SQL, subject, grade);
     }
 
 }

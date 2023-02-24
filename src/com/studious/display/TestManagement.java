@@ -1,8 +1,29 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package com.studious.display;
+
+import com.studious.dao.LessonDAO;
+import com.studious.dao.QuestionDAO;
+import com.studious.dao.QuestionOfTestDAO;
+import com.studious.dao.TestDAO;
+import com.studious.entity.Lesson;
+import com.studious.entity.Question;
+import com.studious.entity.QuestionOfTest;
+import com.studious.entity.Test;
+import com.studious.utils.MsgBox;
+import java.awt.HeadlessException;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTabbedPane;
+import javax.swing.JTable;
+import javax.swing.JTextField;
+import javax.swing.JToolBar;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -10,11 +31,11 @@ package com.studious.display;
  */
 public class TestManagement extends javax.swing.JFrame {
 
-    /**
-     * Creates new form TestManagement
-     */
-    public TestManagement () {
+    Integer time = 0;
+
+    public TestManagement() {
         initComponents();
+        init();
     }
 
     /**
@@ -32,9 +53,7 @@ public class TestManagement extends javax.swing.JFrame {
         tabs = new javax.swing.JTabbedPane();
         pnlManage = new javax.swing.JPanel();
         lblTestType = new javax.swing.JLabel();
-        cboTestType = new javax.swing.JComboBox<>();
         lblTitleTest = new javax.swing.JLabel();
-        cboTitleTest = new javax.swing.JComboBox<>();
         lblSubject = new javax.swing.JLabel();
         cboSubject = new javax.swing.JComboBox<>();
         lblAdvancedSearch = new javax.swing.JLabel();
@@ -46,9 +65,8 @@ public class TestManagement extends javax.swing.JFrame {
         btnSearch = new javax.swing.JButton();
         txtSearch = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tblCheckID = new javax.swing.JTable();
+        tblQuestion = new javax.swing.JTable();
         pnlQuestionList = new javax.swing.JPanel();
-        lblQuestionList = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblQuestionList = new javax.swing.JTable();
         btnDeleteQuestion = new javax.swing.JButton();
@@ -62,6 +80,11 @@ public class TestManagement extends javax.swing.JFrame {
         btnPrevious = new javax.swing.JButton();
         btnNext = new javax.swing.JButton();
         btnLast = new javax.swing.JButton();
+        lblQuestionList = new javax.swing.JLabel();
+        txtTitleTest = new javax.swing.JTextField();
+        lblTestType1 = new javax.swing.JLabel();
+        cboTestType = new javax.swing.JComboBox<>();
+        txtTestID = new javax.swing.JTextField();
         pnlList = new javax.swing.JPanel();
         lblTestTypeList = new javax.swing.JLabel();
         cboTestTypeList = new javax.swing.JComboBox<>();
@@ -71,7 +94,6 @@ public class TestManagement extends javax.swing.JFrame {
         txtSearchList = new javax.swing.JTextField();
         jScrollPane3 = new javax.swing.JScrollPane();
         tblGridView = new javax.swing.JTable();
-        cboArrange = new javax.swing.JComboBox<>();
         btnDeleteRow = new javax.swing.JButton();
         jToolBar = new javax.swing.JToolBar();
         btnHome = new javax.swing.JButton();
@@ -80,9 +102,9 @@ public class TestManagement extends javax.swing.JFrame {
         btnTest = new javax.swing.JButton();
         btnStatistic = new javax.swing.JButton();
         btnBack = new javax.swing.JButton();
-        btnLogout = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
 
         pnlBackground.setBackground(new java.awt.Color(232, 255, 183));
 
@@ -98,25 +120,24 @@ public class TestManagement extends javax.swing.JFrame {
         pnlManage.setBackground(new java.awt.Color(255, 255, 255));
 
         lblTestType.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        lblTestType.setText("Loại bài thi:");
+        lblTestType.setText("Mã bài thi:");
         lblTestType.setToolTipText("");
-
-        cboTestType.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        cboTestType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "15 Phút", "45 Phút", "Cuối kì", "THPTQG" }));
 
         lblTitleTest.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lblTitleTest.setText("Tiêu đề:");
         lblTitleTest.setToolTipText("");
-
-        cboTitleTest.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        cboTitleTest.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Đề thi thử môn Toán 2023" }));
 
         lblSubject.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lblSubject.setText("Môn:");
         lblSubject.setToolTipText("");
 
         cboSubject.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        cboSubject.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Toán" }));
+        cboSubject.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Toán", "Vật Lý", "Hóa Học", "Sinh Học", "Ngữ Văn", "Lịch Sử", "Địa Lý", "Giáo Dục Công Dân", "Tiếng Anh" }));
+        cboSubject.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cboSubjectActionPerformed(evt);
+            }
+        });
 
         lblAdvancedSearch.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lblAdvancedSearch.setText("Tìm kiếm mở rộng:");
@@ -131,6 +152,11 @@ public class TestManagement extends javax.swing.JFrame {
 
         cboGrade.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         cboGrade.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "10", "11", "12" }));
+        cboGrade.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cboGradeActionPerformed(evt);
+            }
+        });
 
         lblLesson.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lblLesson.setText("Bài học:");
@@ -138,6 +164,11 @@ public class TestManagement extends javax.swing.JFrame {
 
         cboLesson.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         cboLesson.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Hàm Logarit" }));
+        cboLesson.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cboLessonItemStateChanged(evt);
+            }
+        });
         cboLesson.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cboLessonActionPerformed(evt);
@@ -152,7 +183,6 @@ public class TestManagement extends javax.swing.JFrame {
         });
 
         txtSearch.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        txtSearch.setText("Tìm kiếm");
 
         javax.swing.GroupLayout pnlAdvancedSearchLayout = new javax.swing.GroupLayout(pnlAdvancedSearch);
         pnlAdvancedSearch.setLayout(pnlAdvancedSearchLayout);
@@ -182,9 +212,9 @@ public class TestManagement extends javax.swing.JFrame {
                     .addComponent(lblGrade)
                     .addComponent(cboGrade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(pnlAdvancedSearchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(pnlAdvancedSearchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblLesson)
-                    .addComponent(cboLesson, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cboLesson, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(pnlAdvancedSearchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(txtSearch)
@@ -192,65 +222,79 @@ public class TestManagement extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        tblCheckID.setModel(new javax.swing.table.DefaultTableModel(
+        tblQuestion.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
                 "STT", "Mã câu hỏi", "Nội dung", "Đáp án đúng"
             }
-        ));
-        jScrollPane1.setViewportView(tblCheckID);
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tblQuestion.getTableHeader().setReorderingAllowed(false);
+        jScrollPane1.setViewportView(tblQuestion);
 
         pnlQuestionList.setBackground(new java.awt.Color(255, 255, 255));
 
-        lblQuestionList.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        lblQuestionList.setText("Danh sách câu hỏi bài thi:");
-
         tblQuestionList.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
+
             },
             new String [] {
                 "STT", "Mã câu hỏi"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tblQuestionList.getTableHeader().setReorderingAllowed(false);
         jScrollPane2.setViewportView(tblQuestionList);
 
         javax.swing.GroupLayout pnlQuestionListLayout = new javax.swing.GroupLayout(pnlQuestionList);
         pnlQuestionList.setLayout(pnlQuestionListLayout);
         pnlQuestionListLayout.setHorizontalGroup(
             pnlQuestionListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlQuestionListLayout.createSequentialGroup()
+            .addGroup(pnlQuestionListLayout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
-                .addGroup(pnlQuestionListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblQuestionList)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 268, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         pnlQuestionListLayout.setVerticalGroup(
             pnlQuestionListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlQuestionListLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(lblQuestionList)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
         );
 
         btnDeleteQuestion.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnDeleteQuestion.setText("Xóa câu hỏi");
         btnDeleteQuestion.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btnDeleteQuestion.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        btnDeleteQuestion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeleteQuestionActionPerformed(evt);
+            }
+        });
 
         btnAddQuestion.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnAddQuestion.setText("Thêm câu hỏi");
         btnAddQuestion.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btnAddQuestion.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        btnAddQuestion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddQuestionActionPerformed(evt);
+            }
+        });
 
         btnNew.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnNew.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/studious/icons/icons8-reset-24.png"))); // NOI18N
@@ -266,47 +310,130 @@ public class TestManagement extends javax.swing.JFrame {
         btnInsert.setText("Thêm");
         btnInsert.setMaximumSize(new java.awt.Dimension(87, 26));
         btnInsert.setMinimumSize(new java.awt.Dimension(87, 26));
+        btnInsert.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnInsertActionPerformed(evt);
+            }
+        });
 
         btnEdit.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnEdit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/studious/icons/icons8-pencil-24 (1).png"))); // NOI18N
         btnEdit.setText("Sửa");
+        btnEdit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditActionPerformed(evt);
+            }
+        });
 
         btnUpdate.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnUpdate.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/studious/icons/icons8-available-updates-24.png"))); // NOI18N
         btnUpdate.setText("Cập nhật");
+        btnUpdate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUpdateActionPerformed(evt);
+            }
+        });
 
         btnDelete.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnDelete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/studious/icons/icons8-bin-24.png"))); // NOI18N
         btnDelete.setText("Xóa");
+        btnDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeleteActionPerformed(evt);
+            }
+        });
 
         btnFirst.setText("|<");
+        btnFirst.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFirstActionPerformed(evt);
+            }
+        });
 
         btnPrevious.setText("<<");
 
         btnNext.setText(">>");
 
         btnLast.setText(">|");
+        btnLast.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLastActionPerformed(evt);
+            }
+        });
+
+        lblQuestionList.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        lblQuestionList.setText("Danh sách câu hỏi bài thi:");
+
+        txtTitleTest.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtTitleTestActionPerformed(evt);
+            }
+        });
+
+        lblTestType1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lblTestType1.setText("Loại bài thi:");
+        lblTestType1.setToolTipText("");
+
+        cboTestType.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        cboTestType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "15 Phút", "45 Phút", "60 Phút", "THPTQG" }));
+        cboTestType.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cboTestTypeActionPerformed(evt);
+            }
+        });
+
+        txtTestID.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtTestIDActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout pnlManageLayout = new javax.swing.GroupLayout(pnlManage);
         pnlManage.setLayout(pnlManageLayout);
         pnlManageLayout.setHorizontalGroup(
             pnlManageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlManageLayout.createSequentialGroup()
+                .addGap(31, 31, 31)
                 .addGroup(pnlManageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnlManageLayout.createSequentialGroup()
-                        .addGap(31, 31, 31)
+                        .addGroup(pnlManageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(lblTestType, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lblTitleTest, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(74, 74, 74)
+                        .addGroup(pnlManageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(txtTitleTest, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 255, Short.MAX_VALUE)
+                            .addComponent(txtTestID))
+                        .addGap(49, 49, 49)
                         .addGroup(pnlManageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblAdvancedSearch)
                             .addGroup(pnlManageLayout.createSequentialGroup()
-                                .addGroup(pnlManageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(lblTestType, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(lblTitleTest, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(lblSubject, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addGap(74, 74, 74)
-                                .addGroup(pnlManageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(cboTitleTest, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(cboSubject, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(cboTestType, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(lblSubject, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(74, 74, 74))
+                            .addGroup(pnlManageLayout.createSequentialGroup()
+                                .addComponent(lblTestType1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(39, 39, 39)))
+                        .addGroup(pnlManageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(cboTestType, 0, 268, Short.MAX_VALUE)
+                            .addComponent(cboSubject, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(pnlManageLayout.createSequentialGroup()
+                        .addComponent(btnFirst, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnPrevious, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnNext, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnLast, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(pnlManageLayout.createSequentialGroup()
+                        .addComponent(btnNew)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnInsert, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnUpdate)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(pnlManageLayout.createSequentialGroup()
+                        .addGroup(pnlManageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(pnlManageLayout.createSequentialGroup()
                                 .addGroup(pnlManageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                     .addComponent(pnlAdvancedSearch, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -314,49 +441,35 @@ public class TestManagement extends javax.swing.JFrame {
                                 .addGap(18, 18, 18)
                                 .addGroup(pnlManageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(btnDeleteQuestion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(btnAddQuestion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 68, Short.MAX_VALUE)
-                        .addComponent(pnlQuestionList, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlManageLayout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(btnAddQuestion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addComponent(lblAdvancedSearch))
+                        .addGap(18, 18, 18)
                         .addGroup(pnlManageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(pnlManageLayout.createSequentialGroup()
-                                .addComponent(btnFirst, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(btnPrevious, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(btnNext, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(btnLast, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(pnlManageLayout.createSequentialGroup()
-                                .addComponent(btnNew)
-                                .addGap(18, 18, 18)
-                                .addComponent(btnInsert, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(btnEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(btnUpdate)
-                                .addGap(18, 18, 18)
-                                .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap())
+                            .addComponent(lblQuestionList)
+                            .addComponent(pnlQuestionList, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(27, 27, 27))
         );
         pnlManageLayout.setVerticalGroup(
             pnlManageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlManageLayout.createSequentialGroup()
-                .addGap(17, 17, 17)
-                .addGroup(pnlManageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblTestType)
-                    .addComponent(cboTestType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(34, 34, 34)
+                .addGroup(pnlManageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnlManageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(lblTestType1)
+                        .addComponent(cboTestType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtTestID, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE))
+                    .addComponent(lblTestType))
                 .addGap(18, 18, 18)
-                .addGroup(pnlManageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(pnlManageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblTitleTest)
-                    .addComponent(cboTitleTest, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                    .addGroup(pnlManageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(txtTitleTest, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE)
+                        .addComponent(lblSubject)
+                        .addComponent(cboSubject, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(39, 39, 39)
                 .addGroup(pnlManageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblSubject)
-                    .addComponent(cboSubject, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(lblAdvancedSearch)
+                    .addComponent(lblAdvancedSearch)
+                    .addComponent(lblQuestionList))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnlManageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(pnlManageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -375,14 +488,14 @@ public class TestManagement extends javax.swing.JFrame {
                     .addComponent(btnPrevious, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnNext, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnLast, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(30, 30, 30)
                 .addGroup(pnlManageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnNew)
                     .addComponent(btnInsert, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnEdit)
                     .addComponent(btnUpdate)
                     .addComponent(btnDelete))
-                .addContainerGap())
+                .addGap(18, 18, 18))
         );
 
         tabs.addTab("Quản lí", pnlManage);
@@ -394,7 +507,17 @@ public class TestManagement extends javax.swing.JFrame {
         lblTestTypeList.setToolTipText("");
 
         cboTestTypeList.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        cboTestTypeList.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "15 Phút", "45 Phút", "Cuối kì", "THPTQG" }));
+        cboTestTypeList.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "15 Phút", "45 Phút", "60 Phút", "THPTQG" }));
+        cboTestTypeList.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cboTestTypeListItemStateChanged(evt);
+            }
+        });
+        cboTestTypeList.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cboTestTypeListActionPerformed(evt);
+            }
+        });
 
         lblSubjectList.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lblSubjectList.setText("Môn:");
@@ -402,6 +525,16 @@ public class TestManagement extends javax.swing.JFrame {
 
         cboSubjectList.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         cboSubjectList.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Toán" }));
+        cboSubjectList.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cboSubjectListItemStateChanged(evt);
+            }
+        });
+        cboSubjectList.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cboSubjectListActionPerformed(evt);
+            }
+        });
 
         btnSearchList.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/studious/icons/icons8-search-24.png"))); // NOI18N
         btnSearchList.addActionListener(new java.awt.event.ActionListener() {
@@ -411,24 +544,25 @@ public class TestManagement extends javax.swing.JFrame {
         });
 
         txtSearchList.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        txtSearchList.setText("Tìm kiếm");
 
         tblGridView.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+
             },
             new String [] {
                 "STT", "Mã đề thi", "Tên bài thi", "Ngày tạo", "Người tạo", "Số lượng câu hỏi"
             }
-        ));
-        jScrollPane3.setViewportView(tblGridView);
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false
+            };
 
-        cboArrange.setBackground(new java.awt.Color(233, 233, 233));
-        cboArrange.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        cboArrange.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Thống kê theo môn học" }));
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tblGridView.getTableHeader().setReorderingAllowed(false);
+        jScrollPane3.setViewportView(tblGridView);
 
         btnDeleteRow.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnDeleteRow.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/studious/icons/icons8-bin-24.png"))); // NOI18N
@@ -453,15 +587,14 @@ public class TestManagement extends javax.swing.JFrame {
                             .addGroup(pnlListLayout.createSequentialGroup()
                                 .addGroup(pnlListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(lblSubjectList, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(lblTestTypeList, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addComponent(lblTestTypeList, javax.swing.GroupLayout.DEFAULT_SIZE, 91, Short.MAX_VALUE))
                                 .addGap(29, 29, 29)
                                 .addGroup(pnlListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(cboTestTypeList, 0, 175, Short.MAX_VALUE)
                                     .addComponent(cboSubjectList, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                         .addGap(550, 550, 550))
                     .addGroup(pnlListLayout.createSequentialGroup()
-                        .addComponent(cboArrange, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(btnDeleteRow, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap())))
         );
@@ -483,9 +616,7 @@ public class TestManagement extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 376, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(27, 27, 27)
-                .addGroup(pnlListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cboArrange, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnDeleteRow))
+                .addComponent(btnDeleteRow)
                 .addGap(18, 18, 18))
         );
 
@@ -501,15 +632,18 @@ public class TestManagement extends javax.swing.JFrame {
         btnHome.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/studious/icons/home.png"))); // NOI18N
         btnHome.setFocusable(false);
         btnHome.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnHome.setMaximumSize(new java.awt.Dimension(35, 35));
+        btnHome.setMaximumSize(new java.awt.Dimension(45, 45));
+        btnHome.setMinimumSize(new java.awt.Dimension(45, 45));
+        btnHome.setPreferredSize(new java.awt.Dimension(45, 45));
         btnHome.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         jToolBar.add(btnHome);
 
         btnPersonalInfo.setBackground(new java.awt.Color(232, 255, 183));
         btnPersonalInfo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/studious/icons/account.png"))); // NOI18N
-        btnPersonalInfo.setFocusable(false);
         btnPersonalInfo.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnPersonalInfo.setMaximumSize(new java.awt.Dimension(35, 35));
+        btnPersonalInfo.setMaximumSize(new java.awt.Dimension(45, 45));
+        btnPersonalInfo.setMinimumSize(new java.awt.Dimension(45, 45));
+        btnPersonalInfo.setPreferredSize(new java.awt.Dimension(45, 45));
         btnPersonalInfo.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         jToolBar.add(btnPersonalInfo);
 
@@ -517,7 +651,9 @@ public class TestManagement extends javax.swing.JFrame {
         btnLesson.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/studious/icons/lessons.png"))); // NOI18N
         btnLesson.setFocusable(false);
         btnLesson.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnLesson.setMaximumSize(new java.awt.Dimension(35, 35));
+        btnLesson.setMaximumSize(new java.awt.Dimension(45, 45));
+        btnLesson.setMinimumSize(new java.awt.Dimension(45, 45));
+        btnLesson.setPreferredSize(new java.awt.Dimension(45, 45));
         btnLesson.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         jToolBar.add(btnLesson);
 
@@ -525,30 +661,34 @@ public class TestManagement extends javax.swing.JFrame {
         btnTest.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/studious/icons/mockExam.png"))); // NOI18N
         btnTest.setFocusable(false);
         btnTest.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnTest.setMaximumSize(new java.awt.Dimension(35, 35));
+        btnTest.setMaximumSize(new java.awt.Dimension(45, 45));
+        btnTest.setMinimumSize(new java.awt.Dimension(45, 45));
+        btnTest.setPreferredSize(new java.awt.Dimension(45, 45));
         btnTest.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         jToolBar.add(btnTest);
 
         btnStatistic.setBackground(new java.awt.Color(232, 255, 183));
         btnStatistic.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/studious/icons/statistic.png"))); // NOI18N
         btnStatistic.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnStatistic.setMaximumSize(new java.awt.Dimension(45, 45));
+        btnStatistic.setMinimumSize(new java.awt.Dimension(45, 45));
+        btnStatistic.setPreferredSize(new java.awt.Dimension(45, 45));
         btnStatistic.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         jToolBar.add(btnStatistic);
 
         btnBack.setBackground(new java.awt.Color(232, 255, 183));
         btnBack.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/studious/icons/back.png"))); // NOI18N
         btnBack.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnBack.setMaximumSize(new java.awt.Dimension(45, 45));
+        btnBack.setMinimumSize(new java.awt.Dimension(45, 45));
+        btnBack.setPreferredSize(new java.awt.Dimension(45, 45));
         btnBack.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnBack.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBackActionPerformed(evt);
+            }
+        });
         jToolBar.add(btnBack);
-
-        btnLogout.setBackground(new java.awt.Color(232, 255, 183));
-        btnLogout.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/studious/icons/logout.png"))); // NOI18N
-        btnLogout.setToolTipText("");
-        btnLogout.setFocusable(false);
-        btnLogout.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnLogout.setMaximumSize(new java.awt.Dimension(35, 35));
-        btnLogout.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jToolBar.add(btnLogout);
 
         javax.swing.GroupLayout pnlBackgroundLayout = new javax.swing.GroupLayout(pnlBackground);
         pnlBackground.setLayout(pnlBackgroundLayout);
@@ -556,13 +696,14 @@ public class TestManagement extends javax.swing.JFrame {
             pnlBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlBackgroundLayout.createSequentialGroup()
                 .addGap(105, 105, 105)
-                .addGroup(pnlBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(pnlBackgroundLayout.createSequentialGroup()
-                        .addComponent(lblLogo)
-                        .addGap(402, 402, 402)
-                        .addComponent(lblTitle))
-                    .addComponent(tabs, javax.swing.GroupLayout.PREFERRED_SIZE, 859, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(lblLogo)
+                .addGap(402, 402, 402)
+                .addComponent(lblTitle)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlBackgroundLayout.createSequentialGroup()
+                .addContainerGap(105, Short.MAX_VALUE)
+                .addComponent(tabs, javax.swing.GroupLayout.PREFERRED_SIZE, 876, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(28, Short.MAX_VALUE))
             .addGroup(pnlBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(pnlBackgroundLayout.createSequentialGroup()
                     .addContainerGap()
@@ -577,12 +718,12 @@ public class TestManagement extends javax.swing.JFrame {
                     .addComponent(lblTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblLogo))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(tabs, javax.swing.GroupLayout.DEFAULT_SIZE, 632, Short.MAX_VALUE))
+                .addComponent(tabs))
             .addGroup(pnlBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(pnlBackgroundLayout.createSequentialGroup()
                     .addGap(246, 246, 246)
                     .addComponent(jToolBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(247, Short.MAX_VALUE)))
+                    .addContainerGap(186, Short.MAX_VALUE)))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -593,16 +734,301 @@ public class TestManagement extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(pnlBackground, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(pnlBackground, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    String testID;
+    int timeTest;
+    String titleTest;
+    String subject;
+    int grade;
+    Lesson lEntity = new Lesson();
+    LessonDAO lDao = new LessonDAO();
+    String search;
+
+    TestDAO tDao = new TestDAO();
+    QuestionDAO qDAO = new QuestionDAO();
+    QuestionOfTestDAO qotDAO = new QuestionOfTestDAO();
+    List<QuestionOfTest> qotList = new ArrayList<QuestionOfTest>();
+    int index = -1;
+
+    private void init(){
+        setLocationRelativeTo(null);
+        setValue();
+        fillCboSubject(true);
+        fillCboGrade();
+        fillCboLesson();
+        fillTblQuestion();
+        setStatus(true);
+        fillTableTestList();
+    }
+    
+    //hàm cập nhật giá trị đầu vào:
+    private void setValue() {
+        testID = txtTestID.getText();
+        titleTest = txtTitleTest.getText();
+        subject = cboSubject.getSelectedItem().toString();
+        grade = Integer.valueOf(cboGrade.getSelectedItem().toString());
+        search = txtSearch.getText();
+        if (!cboTestType.getSelectedItem().equals("THPTQG")) {
+            timeTest = Integer.valueOf(cboTestType.getSelectedItem().toString().substring(0, 2));
+        } else {
+            String subject = (String) cboSubject.getSelectedItem();
+            switch (subject) {
+                case "Toán" -> {
+                    timeTest = 90;
+                }
+                case "Vật Lý","Hóa Học","Sinh Học","Lịch Sử","Địa Lý","Giáo Dục Công Dân" -> {
+                    timeTest = 50;
+                }
+                case "Tiếng Anh" ->
+                    timeTest = 50;
+                default ->
+                    throw new AssertionError();
+            }
+        }
+    }
+
+    private Test getForm() {
+        setValue();
+        if (titleTest.equals("") || (tblQuestionList.getRowCount() == 0)) {
+            return null;
+        } else {
+            Test tEntity = new Test(testID, titleTest, timeTest, subject, grade, "GV1");
+            return tEntity;
+        }
+
+    }
+
+    private void fillCboSubject(boolean check) {
+        try {
+            DefaultComboBoxModel model = (DefaultComboBoxModel) cboSubjectList.getModel();
+            model.removeAllElements();
+            if (check) {
+                model.addElement("Toán");
+                model.addElement("Vật Lý");
+                model.addElement("Hóa Học");
+                model.addElement("Sinh Học");
+                model.addElement("Ngữ Văn");
+                model.addElement("Lịch Sử");
+                model.addElement("Địa Lý");
+                model.addElement("Giáo Dục Công Dân");
+                model.addElement("Tiếng Anh");
+            } else {
+                model.addElement("Toán");
+                model.addElement("Vật Lý");
+                model.addElement("Hóa Học");
+                model.addElement("Sinh Học");
+                model.addElement("Lịch Sử");
+                model.addElement("Địa Lý");
+                model.addElement("Giáo Dục Công Dân");
+                model.addElement("Tiếng Anh");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void fillCboLesson() {
+        try {
+            DefaultComboBoxModel model = (DefaultComboBoxModel) cboLesson.getModel();
+            model.removeAllElements();
+            String subject = String.valueOf(cboSubject.getSelectedItem());
+            Integer grade = (Integer) cboGrade.getSelectedItem();
+            if (subject != null && grade != null) {
+                List<Lesson> list = lDao.selectBySubjectAndGrade(subject, grade);
+                if (list != null) {
+                    for (Lesson lesson : list) {
+                        model.addElement(lesson);
+                    }
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void fillCboGrade() {
+        try {
+            DefaultComboBoxModel model = (DefaultComboBoxModel) cboGrade.getModel();
+            model.removeAllElements();
+            String subject = (String) cboSubject.getSelectedItem();
+            List<Object> list = lDao.selectGradeBySubject(subject);
+            if (list != null) {
+                for (Object grade : list) {
+                    model.addElement(grade);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void fillTblQuestion() {
+        lEntity = (Lesson) cboLesson.getSelectedItem();
+        if (lEntity == null) {
+            lEntity = new Lesson();
+        }
+        List<Question> qList = qDAO.selectByLessonID(lEntity.getLessonID());
+        DefaultTableModel model = (DefaultTableModel) tblQuestion.getModel();
+
+        model.setRowCount(0);
+        if (qList != null) {
+            for (int i = 0; i < qList.size(); i++) {
+                Question entity = qList.get(i);
+                Object[] row = {
+                    i + 1,
+                    entity.getQuestionID(),
+                    entity.getQuestion(),
+                    entity.getAns()
+                };
+                model.addRow(row);
+            }
+        }
+    }
+
+    private void fillTblQuestionOfTest() {
+        setValue();
+        DefaultTableModel model = (DefaultTableModel) tblQuestionList.getModel();
+        model.setRowCount(0);
+        for (int i = 0; i < qotList.size(); i++) {
+            QuestionOfTest entity = qotList.get(i);
+            Object[] row = {
+                i + 1,
+                entity.getQuestionID()
+            };
+            model.addRow(row);
+        }
+    }
+    
+    private void fillTblQuestions(){
+        DefaultTableModel model = (DefaultTableModel) tblGridView.getModel();
+        model.setRowCount(0);
+        
+    }
+
+    private void insertQuestionOfTest() {
+        for (QuestionOfTest entity : qotList) {
+            qotDAO.insert(entity);
+        }
+    }
+
+    private void setTestIDForQOT() {
+        for (QuestionOfTest entity : qotList) {
+            String ID = txtTestID.getText();
+            entity.setTestID(testID);
+        }
+    }
+
+    private void addQOT() {
+        setValue();
+        index = tblQuestion.getSelectedRow();
+        int questionID = (int) tblQuestion.getValueAt(index, 1);
+        QuestionOfTest entity = new QuestionOfTest();
+        entity.setQuestionID(questionID);
+        entity.setTestID(testID);
+        qotList.add(entity);
+        fillTblQuestionOfTest();
+    }
+
+    private void deleteQOT() {
+        index = tblQuestionList.getSelectedRow();
+        qotList.remove(index);
+        fillTblQuestionOfTest();
+    }
+
+    private void resetForm() {
+        txtTestID.setText("");
+        txtTitleTest.setText("");
+        txtSearch.setText("");
+        cboTestType.setSelectedIndex(0);
+        cboGrade.setSelectedIndex(0);
+        cboSubject.setSelectedIndex(0);
+        index = -1;
+    }
+
+    private void setStatus(boolean s) {
+        txtTestID.setEditable(s);
+        txtTitleTest.setEditable(s);
+        btnInsert.setEnabled(s);
+        btnUpdate.setEnabled(!s);
+        btnEdit.setEnabled(s);
+    }
+
+    private void insertTest() {
+        Test tEntity = getForm();
+        if (tEntity == null) {
+            MsgBox.alert(this, "Vui lòng điền đầy đủ thông tin");
+        } else {
+            try {
+                tDao.insert(tEntity);
+                setTestIDForQOT();
+                insertQuestionOfTest();
+                MsgBox.alert(this, "Tạo bài thi thành công");
+                fillTblQuestionOfTest();
+                resetForm();
+            } catch (Exception e) {
+                MsgBox.alert(this, "Lỗi truy vấn dữ liệu");
+            }
+        }
+    }
+
+    private void deleteTest() {
+        setValue();
+        String testID = txtTestID.getText();
+        try {
+            qotDAO.deleteByTestID(testID);
+            tDao.delete(testID);
+            resetForm();
+            MsgBox.alert(this, "Xóa bài thi thành công");
+        } catch (Exception e) {
+            MsgBox.alert(this, "Lỗi truy vấn dữ liệu");
+        }
+    }
+
+    private void updateTest() {
+        setValue();
+        Test tEntity = new Test();
+        tEntity.setTestTitle(testID);
+        tEntity.setTimeTest(timeTest);
+        tEntity.setLesson(subject);
+        tEntity.setGrade(grade);
+        tEntity.setTeacherID(testID);
+        try {
+            tDao.update(tEntity);
+            MsgBox.alert(this, "Cập nhật bài thi thành công");
+        } catch (Exception e) {
+            MsgBox.alert(this, "Lỗi truy vấn dữ liệu");
+        }
+    }
+
+    private void fillTableTestList() {
+        setValue();
+        String gradeList = cboTestTypeList.getSelectedItem().toString().substring(0, 2);
+        System.out.println(gradeList);
+        String subjectList = cboSubjectList.getSelectedItem().toString();
+        System.out.println(subjectList);
+        DefaultTableModel model = (DefaultTableModel) tblGridView.getModel();
+        model.setRowCount(0);
+        List<Test> tList = tDao.selectByGradeSubject(gradeList, subjectList);
+        for (int i = 0; i < tList.size(); i++) {
+            Object[] row = {
+                i + 1,
+                tList.get(i).getTestID(),
+                tList.get(i).getTestTitle(),
+                tList.get(i).getCreateDate(),
+                tList.get(i).getTeacherID(),
+                tList.size()
+            };
+            model.addRow(row);
+        }
+    }
+
     private void cboLessonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboLessonActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_cboLessonActionPerformed
 
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
@@ -610,17 +1036,123 @@ public class TestManagement extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSearchActionPerformed
 
     private void btnNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewActionPerformed
-        // TODO add your handling code here:
+        resetForm();
+        setStatus(true);
     }//GEN-LAST:event_btnNewActionPerformed
 
     private void btnSearchListActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchListActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnSearchListActionPerformed
 
+    private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnBackActionPerformed
+
+    private void btnLastActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLastActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnLastActionPerformed
+
+    private void txtTitleTestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTitleTestActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtTitleTestActionPerformed
+
+    private void txtTestIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTestIDActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtTestIDActionPerformed
+
+    private void cboTestTypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboTestTypeActionPerformed
+        // TODO add your handling code here:
+        String testType = (String) cboTestType.getSelectedItem();
+        switch (testType) {
+            case "15 Phút","45 Phút","60 Phút" -> {
+                fillCboSubject(true);
+            }
+            case "THPTQG" -> {
+                fillCboSubject(false);
+            }
+            default ->
+                throw new AssertionError();
+        }
+    }//GEN-LAST:event_cboTestTypeActionPerformed
+
+    private void btnAddQuestionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddQuestionActionPerformed
+        addQOT();
+    }//GEN-LAST:event_btnAddQuestionActionPerformed
+
+    private void cboGradeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboGradeActionPerformed
+
+        fillCboLesson();
+        
+    }//GEN-LAST:event_cboGradeActionPerformed
+
+    private void cboLessonItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cboLessonItemStateChanged
+
+        fillTblQuestion();
+        
+    }//GEN-LAST:event_cboLessonItemStateChanged
+
+    private void btnDeleteQuestionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteQuestionActionPerformed
+        deleteQOT();
+    }//GEN-LAST:event_btnDeleteQuestionActionPerformed
+
+    private void cboSubjectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboSubjectActionPerformed
+        fillCboGrade();
+        
+    }//GEN-LAST:event_cboSubjectActionPerformed
+
+    private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
+        setStatus(false);
+    }//GEN-LAST:event_btnEditActionPerformed
+
+    private void btnInsertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInsertActionPerformed
+        insertTest();
+    }//GEN-LAST:event_btnInsertActionPerformed
+
+    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
+        deleteTest();
+    }//GEN-LAST:event_btnDeleteActionPerformed
+
+    private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
+        updateTest();
+    }//GEN-LAST:event_btnUpdateActionPerformed
+
+    private void cboTestTypeListItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cboTestTypeListItemStateChanged
+        
+    }//GEN-LAST:event_cboTestTypeListItemStateChanged
+
+    private void cboSubjectListItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cboSubjectListItemStateChanged
+        
+    }//GEN-LAST:event_cboSubjectListItemStateChanged
+
+    private void cboTestTypeListActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboTestTypeListActionPerformed
+        // TODO add your handling code here:
+        String testType = (String) cboTestType.getSelectedItem();
+        switch (testType) {
+            case "15 Phút","45 Phút","60 Phút" -> {
+                fillCboSubject(true);
+            }
+            case "THPTQG" -> {
+                fillCboSubject(false);
+            }
+            default ->
+                throw new AssertionError();
+        }
+        setValue();
+    }//GEN-LAST:event_cboTestTypeListActionPerformed
+
+    private void cboSubjectListActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboSubjectListActionPerformed
+        // TODO add your handling code here:
+        fillTblQuestions();
+    }//GEN-LAST:event_cboSubjectListActionPerformed
+
+    private void btnFirstActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFirstActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnFirstActionPerformed
+
     /**
      * @param args the command line arguments
      */
-    public static void main (String args[]) {
+    public static void main(String args[]) {
         /*
          * Set the Nimbus look and feel
          */
@@ -652,7 +1184,7 @@ public class TestManagement extends javax.swing.JFrame {
          * Create and display the form
          */
         java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run () {
+            public void run() {
                 new TestManagement().setVisible(true);
             }
         });
@@ -670,7 +1202,6 @@ public class TestManagement extends javax.swing.JFrame {
     private javax.swing.JButton btnInsert;
     private javax.swing.JButton btnLast;
     private javax.swing.JButton btnLesson;
-    private javax.swing.JButton btnLogout;
     private javax.swing.JButton btnNew;
     private javax.swing.JButton btnNext;
     private javax.swing.JButton btnPersonalInfo;
@@ -680,14 +1211,12 @@ public class TestManagement extends javax.swing.JFrame {
     private javax.swing.JButton btnStatistic;
     private javax.swing.JButton btnTest;
     private javax.swing.JButton btnUpdate;
-    private javax.swing.JComboBox<String> cboArrange;
     private javax.swing.JComboBox<String> cboGrade;
     private javax.swing.JComboBox<String> cboLesson;
     private javax.swing.JComboBox<String> cboSubject;
     private javax.swing.JComboBox<String> cboSubjectList;
     private javax.swing.JComboBox<String> cboTestType;
     private javax.swing.JComboBox<String> cboTestTypeList;
-    private javax.swing.JComboBox<String> cboTitleTest;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
@@ -700,6 +1229,7 @@ public class TestManagement extends javax.swing.JFrame {
     private javax.swing.JLabel lblSubject;
     private javax.swing.JLabel lblSubjectList;
     private javax.swing.JLabel lblTestType;
+    private javax.swing.JLabel lblTestType1;
     private javax.swing.JLabel lblTestTypeList;
     private javax.swing.JLabel lblTitle;
     private javax.swing.JLabel lblTitleTest;
@@ -709,10 +1239,13 @@ public class TestManagement extends javax.swing.JFrame {
     private javax.swing.JPanel pnlManage;
     private javax.swing.JPanel pnlQuestionList;
     private javax.swing.JTabbedPane tabs;
-    private javax.swing.JTable tblCheckID;
     private javax.swing.JTable tblGridView;
+    private javax.swing.JTable tblQuestion;
     private javax.swing.JTable tblQuestionList;
     private javax.swing.JTextField txtSearch;
     private javax.swing.JTextField txtSearchList;
+    private javax.swing.JTextField txtTestID;
+    private javax.swing.JTextField txtTitleTest;
     // End of variables declaration//GEN-END:variables
+
 }

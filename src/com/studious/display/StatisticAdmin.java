@@ -1,11 +1,8 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package com.studious.display;
 
 import com.studious.DAO.ReportDAO;
 import java.util.List;
+import javax.swing.JFrame;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -17,11 +14,19 @@ public class StatisticAdmin extends javax.swing.JFrame {
     /**
      * Creates new form StatisticAdmin
      */
-    public StatisticAdmin () {
+    
+    JFrame window;
+    public StatisticAdmin() {
         initComponents();
         init();
     }
-    
+
+    public StatisticAdmin(JFrame window) {
+        this.window = window;
+        initComponents();
+        init();
+    }
+
     ReportDAO rdao = new ReportDAO();
 
     private void init() {
@@ -204,7 +209,7 @@ public class StatisticAdmin extends javax.swing.JFrame {
             e.printStackTrace();
         }
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -229,7 +234,7 @@ public class StatisticAdmin extends javax.swing.JFrame {
         cboForAll = new javax.swing.JComboBox<>();
         btnSearch = new javax.swing.JButton();
         txtSearch = new javax.swing.JTextField();
-        jTabbedPane1 = new javax.swing.JTabbedPane();
+        tab = new javax.swing.JTabbedPane();
         pnlQuestion2 = new javax.swing.JPanel();
         jScrollPane5 = new javax.swing.JScrollPane();
         tblQuestions = new javax.swing.JTable();
@@ -377,7 +382,7 @@ public class StatisticAdmin extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jTabbedPane1.addTab("Câu hỏi", pnlQuestion2);
+        tab.addTab("Câu hỏi", pnlQuestion2);
 
         tblDocument.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -417,7 +422,7 @@ public class StatisticAdmin extends javax.swing.JFrame {
                 .addGap(82, 82, 82))
         );
 
-        jTabbedPane1.addTab("Tài liệu", pnlDocument);
+        tab.addTab("Tài liệu", pnlDocument);
 
         tblAverageScore.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -457,7 +462,7 @@ public class StatisticAdmin extends javax.swing.JFrame {
                 .addGap(82, 82, 82))
         );
 
-        jTabbedPane1.addTab("Điểm trung bình", pnlAverageScore);
+        tab.addTab("Điểm trung bình", pnlAverageScore);
 
         tblSumScore.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -497,7 +502,7 @@ public class StatisticAdmin extends javax.swing.JFrame {
                 .addGap(82, 82, 82))
         );
 
-        jTabbedPane1.addTab("Điểm tổng", pnlSumScore);
+        tab.addTab("Điểm tổng", pnlSumScore);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -519,7 +524,7 @@ public class StatisticAdmin extends javax.swing.JFrame {
                             .addComponent(btnSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                             .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(jTabbedPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 908, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(tab, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 908, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(12, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -537,7 +542,7 @@ public class StatisticAdmin extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 445, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(tab, javax.swing.GroupLayout.PREFERRED_SIZE, 445, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -580,17 +585,17 @@ public class StatisticAdmin extends javax.swing.JFrame {
             fillToAverageScoreTable(txtSearch.getText());
         }
         if (tab.getSelectedIndex() == 1) {
-            fillToDocumentTable(txtSearch.getText(),txtSearch.getText());
+            fillToDocumentTable(txtSearch.getText(), txtSearch.getText());
         }
         if (tab.getSelectedIndex() == 0) {
-            fillToQuestionTable(txtSearch.getText(),txtSearch.getText());
+            fillToQuestionTable(txtSearch.getText(), txtSearch.getText());
         }
     }//GEN-LAST:event_btnSearchActionPerformed
 
     /**
      * @param args the command line arguments
      */
-    public static void main (String args[]) {
+    public static void main(String args[]) {
         /*
          * Set the Nimbus look and feel
          */
@@ -622,7 +627,7 @@ public class StatisticAdmin extends javax.swing.JFrame {
          * Create and display the form
          */
         java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run () {
+            public void run() {
                 new StatisticAdmin().setVisible(true);
             }
         });
@@ -644,21 +649,17 @@ public class StatisticAdmin extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JScrollPane jScrollPane8;
-    private javax.swing.JScrollPane jScrollPane9;
-    private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JToolBar jToolBar1;
     private javax.swing.JLabel lblTitle;
     private javax.swing.JLabel lblTitle1;
     private javax.swing.JPanel pnlAverageScore;
     private javax.swing.JPanel pnlDocument;
     private javax.swing.JPanel pnlQuestion2;
-    private javax.swing.JPanel pnlQuestion3;
     private javax.swing.JPanel pnlSumScore;
-    private javax.swing.JTabbedPane tab1;
+    private javax.swing.JTabbedPane tab;
     private javax.swing.JTable tblAverageScore;
     private javax.swing.JTable tblDocument;
     private javax.swing.JTable tblQuestions;
-    private javax.swing.JTable tblQuestions1;
     private javax.swing.JTable tblSumScore;
     private javax.swing.JTextField txtSearch;
     // End of variables declaration//GEN-END:variables

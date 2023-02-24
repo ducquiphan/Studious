@@ -25,25 +25,42 @@ public class LessonsTeacher extends javax.swing.JFrame {
     private void initComponents() {
 
         pnlBackground = new javax.swing.JPanel();
+        btnLesson = new javax.swing.JButton();
         btnQuestion = new javax.swing.JButton();
         btnDocument = new javax.swing.JButton();
         lblTitle = new javax.swing.JLabel();
         jToolBar = new javax.swing.JToolBar();
-        btnHome = new javax.swing.JButton();
-        btnPersonalInfo = new javax.swing.JButton();
-        btnLessons = new javax.swing.JButton();
-        btnTest = new javax.swing.JButton();
-        btnStatistic = new javax.swing.JButton();
-        btnBack = new javax.swing.JButton();
-        btnLogout = new javax.swing.JButton();
-        btnLesson = new javax.swing.JButton();
+        btnHome1 = new javax.swing.JButton();
+        btnTest1 = new javax.swing.JButton();
+        btnBack1 = new javax.swing.JButton();
+        btnStatistic1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setSize(new java.awt.Dimension(0, 0));
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         pnlBackground.setBackground(new java.awt.Color(232, 255, 183));
         pnlBackground.setForeground(new java.awt.Color(232, 255, 183));
+
+        btnLesson.setFont(new java.awt.Font("Inter", 0, 24)); // NOI18N
+        btnLesson.setForeground(new java.awt.Color(8, 115, 6));
+        btnLesson.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/studious/icons/open-book.png"))); // NOI18N
+        btnLesson.setText("Quản lí bài học");
+        btnLesson.setToolTipText("");
+        btnLesson.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        btnLesson.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnLesson.setIconTextGap(1);
+        btnLesson.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnLesson.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLessonActionPerformed(evt);
+            }
+        });
 
         btnQuestion.setFont(new java.awt.Font("Inter", 0, 24)); // NOI18N
         btnQuestion.setForeground(new java.awt.Color(8, 115, 6));
@@ -86,79 +103,60 @@ public class LessonsTeacher extends javax.swing.JFrame {
         jToolBar.setOrientation(javax.swing.SwingConstants.VERTICAL);
         jToolBar.setRollover(true);
 
-        btnHome.setBackground(new java.awt.Color(232, 255, 183));
-        btnHome.setForeground(new java.awt.Color(232, 255, 183));
-        btnHome.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/studious/icons/home.png"))); // NOI18N
-        btnHome.setBorder(null);
-        btnHome.setFocusable(false);
-        btnHome.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnHome.setMaximumSize(new java.awt.Dimension(35, 35));
-        btnHome.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jToolBar.add(btnHome);
-
-        btnPersonalInfo.setBackground(new java.awt.Color(232, 255, 183));
-        btnPersonalInfo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/studious/icons/account.png"))); // NOI18N
-        btnPersonalInfo.setBorder(null);
-        btnPersonalInfo.setFocusable(false);
-        btnPersonalInfo.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnPersonalInfo.setMaximumSize(new java.awt.Dimension(35, 35));
-        btnPersonalInfo.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jToolBar.add(btnPersonalInfo);
-
-        btnLessons.setBackground(new java.awt.Color(232, 255, 183));
-        btnLessons.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/studious/icons/lessons.png"))); // NOI18N
-        btnLessons.setBorder(null);
-        btnLessons.setFocusable(false);
-        btnLessons.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnLessons.setMaximumSize(new java.awt.Dimension(35, 35));
-        btnLessons.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jToolBar.add(btnLessons);
-
-        btnTest.setBackground(new java.awt.Color(232, 255, 183));
-        btnTest.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/studious/icons/mockExam.png"))); // NOI18N
-        btnTest.setBorder(null);
-        btnTest.setFocusable(false);
-        btnTest.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnTest.setMaximumSize(new java.awt.Dimension(35, 35));
-        btnTest.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jToolBar.add(btnTest);
-
-        btnStatistic.setBackground(new java.awt.Color(232, 255, 183));
-        btnStatistic.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/studious/icons/statistic.png"))); // NOI18N
-        btnStatistic.setBorder(null);
-        btnStatistic.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnStatistic.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jToolBar.add(btnStatistic);
-
-        btnBack.setBackground(new java.awt.Color(232, 255, 183));
-        btnBack.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/studious/icons/back.png"))); // NOI18N
-        btnBack.setBorder(null);
-        btnBack.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnBack.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jToolBar.add(btnBack);
-
-        btnLogout.setBackground(new java.awt.Color(232, 255, 183));
-        btnLogout.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/studious/icons/logout.png"))); // NOI18N
-        btnLogout.setToolTipText("");
-        btnLogout.setBorder(null);
-        btnLogout.setFocusable(false);
-        btnLogout.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnLogout.setMaximumSize(new java.awt.Dimension(35, 35));
-        btnLogout.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jToolBar.add(btnLogout);
-
-        btnLesson.setFont(new java.awt.Font("Inter", 0, 24)); // NOI18N
-        btnLesson.setForeground(new java.awt.Color(8, 115, 6));
-        btnLesson.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/studious/icons/open-book.png"))); // NOI18N
-        btnLesson.setText("Quản lí bài học");
-        btnLesson.setToolTipText("");
-        btnLesson.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        btnLesson.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnLesson.setIconTextGap(1);
-        btnLesson.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        btnLesson.addActionListener(new java.awt.event.ActionListener() {
+        btnHome1.setBackground(new java.awt.Color(232, 255, 183));
+        btnHome1.setForeground(new java.awt.Color(232, 255, 183));
+        btnHome1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/studious/icons/home.png"))); // NOI18N
+        btnHome1.setBorder(null);
+        btnHome1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnHome1.setMaximumSize(new java.awt.Dimension(45, 45));
+        btnHome1.setMinimumSize(new java.awt.Dimension(45, 45));
+        btnHome1.setPreferredSize(new java.awt.Dimension(45, 45));
+        btnHome1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnHome1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnLessonActionPerformed(evt);
+                btnHome1ActionPerformed(evt);
+            }
+        });
+
+        btnTest1.setBackground(new java.awt.Color(232, 255, 183));
+        btnTest1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/studious/icons/mockExam.png"))); // NOI18N
+        btnTest1.setBorder(null);
+        btnTest1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnTest1.setMaximumSize(new java.awt.Dimension(45, 45));
+        btnTest1.setMinimumSize(new java.awt.Dimension(45, 45));
+        btnTest1.setPreferredSize(new java.awt.Dimension(45, 45));
+        btnTest1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnTest1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTest1ActionPerformed(evt);
+            }
+        });
+
+        btnBack1.setBackground(new java.awt.Color(232, 255, 183));
+        btnBack1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/studious/icons/back.png"))); // NOI18N
+        btnBack1.setBorder(null);
+        btnBack1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnBack1.setMaximumSize(new java.awt.Dimension(45, 45));
+        btnBack1.setMinimumSize(new java.awt.Dimension(45, 45));
+        btnBack1.setPreferredSize(new java.awt.Dimension(45, 45));
+        btnBack1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnBack1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBack1ActionPerformed(evt);
+            }
+        });
+
+        btnStatistic1.setBackground(new java.awt.Color(232, 255, 183));
+        btnStatistic1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/studious/icons/statistic.png"))); // NOI18N
+        btnStatistic1.setBorder(null);
+        btnStatistic1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnStatistic1.setMaximumSize(new java.awt.Dimension(45, 45));
+        btnStatistic1.setMinimumSize(new java.awt.Dimension(45, 45));
+        btnStatistic1.setPreferredSize(new java.awt.Dimension(45, 45));
+        btnStatistic1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnStatistic1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnStatistic1ActionPerformed(evt);
             }
         });
 
@@ -167,23 +165,29 @@ public class LessonsTeacher extends javax.swing.JFrame {
         pnlBackgroundLayout.setHorizontalGroup(
             pnlBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlBackgroundLayout.createSequentialGroup()
-                .addContainerGap(95, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addGroup(pnlBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnHome1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnStatistic1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnTest1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnBack1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
                 .addGroup(pnlBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlBackgroundLayout.createSequentialGroup()
+                        .addComponent(lblTitle)
+                        .addGap(280, 280, 280))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlBackgroundLayout.createSequentialGroup()
                         .addComponent(btnLesson, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(61, 61, 61)
+                        .addGap(50, 50, 50)
                         .addComponent(btnDocument, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(49, 49, 49)
                         .addComponent(btnQuestion, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(95, 95, 95))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlBackgroundLayout.createSequentialGroup()
-                        .addComponent(lblTitle)
-                        .addGap(280, 280, 280))))
+                        .addGap(95, 95, 95))))
             .addGroup(pnlBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(pnlBackgroundLayout.createSequentialGroup()
                     .addContainerGap()
                     .addComponent(jToolBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(858, Short.MAX_VALUE)))
+                    .addContainerGap(894, Short.MAX_VALUE)))
         );
         pnlBackgroundLayout.setVerticalGroup(
             pnlBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -192,15 +196,22 @@ public class LessonsTeacher extends javax.swing.JFrame {
                 .addComponent(lblTitle)
                 .addGap(50, 50, 50)
                 .addGroup(pnlBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnLesson, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnDocument, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnQuestion, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnLesson, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
+                    .addComponent(btnQuestion, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(79, 79, 79))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlBackgroundLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(btnHome1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnStatistic1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnTest1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnBack1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(209, 209, 209))
             .addGroup(pnlBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(pnlBackgroundLayout.createSequentialGroup()
                     .addGap(188, 188, 188)
                     .addComponent(jToolBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(180, Short.MAX_VALUE)))
+                    .addContainerGap(412, Short.MAX_VALUE)))
         );
 
         getContentPane().add(pnlBackground, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 900, 600));
@@ -209,16 +220,36 @@ public class LessonsTeacher extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnQuestionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQuestionActionPerformed
-        // TODO add your handling code here:
+        openQuestionsManagement();
     }//GEN-LAST:event_btnQuestionActionPerformed
 
     private void btnDocumentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDocumentActionPerformed
-        // TODO add your handling code here:
+        openDocumentsManagement();
     }//GEN-LAST:event_btnDocumentActionPerformed
 
     private void btnLessonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLessonActionPerformed
-        // TODO add your handling code here:
+        openLessonsManagement();
     }//GEN-LAST:event_btnLessonActionPerformed
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        back();
+    }//GEN-LAST:event_formWindowClosing
+
+    private void btnHome1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHome1ActionPerformed
+        openHome();
+    }//GEN-LAST:event_btnHome1ActionPerformed
+
+    private void btnStatistic1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStatistic1ActionPerformed
+        openStatisticTeacher();
+    }//GEN-LAST:event_btnStatistic1ActionPerformed
+
+    private void btnTest1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTest1ActionPerformed
+        openTestWindow();
+    }//GEN-LAST:event_btnTest1ActionPerformed
+
+    private void btnBack1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBack1ActionPerformed
+        back();
+    }//GEN-LAST:event_btnBack1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -246,8 +277,6 @@ public class LessonsTeacher extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(LessonsTeacher.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-        //</editor-fold>
-
 
 
         /* Create and display the form */
@@ -259,18 +288,54 @@ public class LessonsTeacher extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnBack;
+    private javax.swing.JButton btnBack1;
     private javax.swing.JButton btnDocument;
-    private javax.swing.JButton btnHome;
+    private javax.swing.JButton btnHome1;
     private javax.swing.JButton btnLesson;
-    private javax.swing.JButton btnLessons;
-    private javax.swing.JButton btnLogout;
-    private javax.swing.JButton btnPersonalInfo;
     private javax.swing.JButton btnQuestion;
-    private javax.swing.JButton btnStatistic;
-    private javax.swing.JButton btnTest;
+    private javax.swing.JButton btnStatistic1;
+    private javax.swing.JButton btnTest1;
     private javax.swing.JToolBar jToolBar;
     private javax.swing.JLabel lblTitle;
     private javax.swing.JPanel pnlBackground;
     // End of variables declaration//GEN-END:variables
+
+    void openLessonsManagement() {
+        LessonsManagement window = new LessonsManagement();
+        window.setVisible(true);
+        this.dispose();
+    }
+
+    void openDocumentsManagement() {
+        DocumentsManagement window = new DocumentsManagement();
+        window.setVisible(true);
+        this.dispose();
+    }
+
+    void openQuestionsManagement() {
+        QuestionsManagement window = new QuestionsManagement();
+        window.setVisible(true);
+    }
+
+    void openHome() {
+        Login.main.setVisible(true);
+        this.dispose();
+    }
+
+    void openTestWindow() {
+        TestWindow window = new TestWindow(this);
+        window.setVisible(true);
+        this.dispose();
+    }
+
+    void openStatisticTeacher() {
+        StatisticTeacher window = new StatisticTeacher();
+        window.setVisible(true);
+    }
+
+    void back() {
+        Login.main.setVisible(true);
+        this.dispose();
+    }
+
 }

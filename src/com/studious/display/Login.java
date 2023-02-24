@@ -19,9 +19,6 @@ public class Login extends javax.swing.JFrame {
         setTitle("Studious - Đăng nhập");
         this.setLocationRelativeTo(null);
     }
-    
-    AccountDAO dao = new AccountDAO();
-    public static JFrame main;
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -46,6 +43,11 @@ public class Login extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
         setResizable(false);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
         addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 formKeyPressed(evt);
@@ -233,6 +235,10 @@ public class Login extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_txtPasswordKeyPressed
 
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        end();
+    }//GEN-LAST:event_formWindowClosing
+
     /**
      * @param args the command line arguments
      */
@@ -263,7 +269,7 @@ public class Login extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Login().setVisible(true);
+                new Login();
             }
         });
     }
@@ -281,7 +287,9 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JTextField txtUsername;
     // End of variables declaration//GEN-END:variables
 
-    
+    AccountDAO dao = new AccountDAO();
+    public static JFrame main;
+
     private void login() {
         String username = txtUsername.getText();
         String pass = new String(txtPassword.getPassword());
@@ -305,10 +313,10 @@ public class Login extends javax.swing.JFrame {
     }
 
     private void openMainForm(int index) {
-        if (index == 1 ) {
+        if (index == 1) {
             main = new MainWindow();
             main.setVisible(true);
-        } else if (index == 3){
+        } else if (index == 3) {
             main = new MainWindowStudents();
             main.setVisible(true);
         } else {
@@ -316,14 +324,11 @@ public class Login extends javax.swing.JFrame {
             main.setVisible(true);
         }
         this.dispose();
-        //ChangePassword test = new ChangePassword();
-        //test.setVisible(true);
     }
 
     private void openForgotPassForm() {
         ForgotPassword fg = new ForgotPassword(this, true);
         fg.setVisible(true);
-        this.setEnabled(false);
     }
 
     private void end() {

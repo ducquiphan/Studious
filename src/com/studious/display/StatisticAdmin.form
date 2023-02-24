@@ -68,7 +68,7 @@
                               <Component id="txtSearch" min="-2" pref="198" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <Component id="jTabbedPane1" alignment="1" min="-2" pref="908" max="-2" attributes="0"/>
+                      <Component id="tab" alignment="1" min="-2" pref="908" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace pref="12" max="32767" attributes="0"/>
               </Group>
@@ -91,7 +91,7 @@
                   <EmptySpace pref="18" max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="jToolBar1" min="-2" max="-2" attributes="0"/>
-                      <Component id="jTabbedPane1" min="-2" pref="445" max="-2" attributes="0"/>
+                      <Component id="tab" min="-2" pref="445" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="32767" attributes="0"/>
               </Group>
@@ -291,7 +291,7 @@
             </Property>
           </Properties>
         </Component>
-        <Container class="javax.swing.JTabbedPane" name="jTabbedPane1">
+        <Container class="javax.swing.JTabbedPane" name="tab">
 
           <Layout class="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout"/>
           <SubComponents>

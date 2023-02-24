@@ -9,7 +9,6 @@ import com.studious.entity.Teacher;
 import com.studious.utils.Auth;
 import com.studious.utils.MsgBox;
 import java.awt.Frame;
-import static java.lang.ProcessBuilder.Redirect.to;
 import java.util.Properties;
 import javax.mail.Message;
 import javax.mail.MessagingException;

@@ -1,7 +1,6 @@
 package com.studious.entity;
 
 import java.util.Date;
-import java.util.List;
 
 /**
  *
@@ -21,16 +20,17 @@ public class Test {
     public Test() {
     }
 
-    public Test(String testID, String testTitle, int timeTest, String lesson, int grade, Date createDate, String teacherID, String questionsList) {
+    public Test(String testID, String testTitle, int timeTest, String lesson, int grade, String teacherID) {
         this.testID = testID;
         this.testTitle = testTitle;
         this.timeTest = timeTest;
         this.lesson = lesson;
         this.grade = grade;
-        this.createDate = createDate;
         this.teacherID = teacherID;
-        this.questionsList = questionsList;
     }
+
+
+    
 
     public String getTestID() {
         return testID;

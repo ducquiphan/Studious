@@ -1,25 +1,16 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
-package com.studious.display;
 
-import com.studious.dao.AccountDAO;
+package com.studious.display;
 import com.studious.dao.LessonDAO;
 import com.studious.dao.QuestionDAO;
 import com.studious.dao.QuestionOfTestDAO;
-import com.studious.dao.StudentDAO;
 import com.studious.entity.Lesson;
 import com.studious.entity.Question;
-import com.studious.entity.Student;
 import com.studious.utils.Auth;
 import com.studious.utils.MsgBox;
 import java.awt.Color;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
-import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
-
 /**
  *
  * @author Admin
@@ -42,19 +33,22 @@ public class QuestionsManagement extends javax.swing.JFrame {
     List<Lesson> lList;
 
     private void init() {
-        this.setLocationRelativeTo(null);
+        this.setLocationRelativeTo(this);
         this.fillCboSubjectList();
         this.fillCboSubject();
-        tblQuestions.setAutoCreateRowSorter(true);
         //setIconImage(XImage.getAppIcon());
         setResizable(false);
         doTest(false);
-        Auth.user = adao.selectById("GV1");
+//        rdoChooseAnsA.setName("a");
+//        rdoChooseAnsB.setName("b");
+//        rdoChooseAnsC.setName("c");
+//        rdoChooseAnsD.setName("d");
     }
 
+    
     private void insert() {
-        Question qt = getForm();
         if (isValidated()) {
+            Question qt = getForm();
             try {
                 qdao.insert(qt);
                 this.fillTableQuestions();
@@ -69,7 +63,19 @@ public class QuestionsManagement extends javax.swing.JFrame {
     private void update() {
         if (isValidated()) {
             try {
-                Question qt = getForm();
+                int questionID = (int) tblQuestions.getValueAt(this.row, 1);
+                Question qt = new Question();
+                qt.setQuestion(txtTitleQuestion.getText());
+                qt.setAns1(txtAnswer1.getText());
+                qt.setAns2(txtAnswer2.getText());
+                qt.setAns3(txtAnswer3.getText());
+                qt.setAns4(txtAnswer4.getText());
+                qt.setAns((String) cboRightAns.getSelectedItem());
+                int indexLesson = cboLesson.getSelectedIndex();
+                Lesson lessonEntity = lList.get(indexLesson);
+                qt.setLessonID(lessonEntity.getLessonID());
+                qt.setTeacherID(Auth.user.getUserID());
+                qt.setQuestionID(questionID);
                 qdao.update(qt);
                 this.fillTableQuestions();
                 MsgBox.alert(this, "Cập nhật thành công!");
@@ -81,11 +87,12 @@ public class QuestionsManagement extends javax.swing.JFrame {
 
     private void delete() {
         Integer questionID = (Integer) tblQuestions.getValueAt(this.row, 1);
-        Question question = qdao.selectById(questionID);
-        if (question.getTeacherID().equals(Auth.user.getUserID())) {
+        Question qList = qdao.selectById(questionID);
+        if (qList.getTeacherID().equals(Auth.user.getUserID())) {
             if (qotdao.selectByQuestionID(questionID) == null) {
                 try {
-                    qdao.delete(question.getQuestionID());
+                    Question qt = qdao.selectById(questionID);
+                    qdao.delete(qt.getQuestionID());
                     fillTableQuestions();
                     this.clearForm();
                     MsgBox.alert(this, "Xóa thành công!");
@@ -100,20 +107,10 @@ public class QuestionsManagement extends javax.swing.JFrame {
         }
     }
 
-    private void fillToForm() {
-        int index = (int) tblQuestions.getValueAt(this.row, 1);
-        Question question = qdao.selectById(index);
-        this.setForm(question);
-        btnEdit.setEnabled(true);
-        tabs.setSelectedIndex(0);
-    }
-
     private void clearForm() {
         Question qt = new Question();
         this.setForm(qt);
         this.row = -1;
-        btnEdit.setEnabled(false);
-        btnInsert.setEnabled(true);
     }
 
     private void setForm(Question qt) {
@@ -126,9 +123,6 @@ public class QuestionsManagement extends javax.swing.JFrame {
         txtAnswer3.setText(qt.getAns3());
         txtAnswer4.setText(qt.getAns4());
         cboRightAns.setSelectedItem(qt.getAns());
-        btnDelete.setEnabled(false);
-        btnUpdate.setEnabled(false);
-        btnInsert.setEnabled(false);
     }
 
     private Question getForm() {
@@ -145,41 +139,38 @@ public class QuestionsManagement extends javax.swing.JFrame {
         qt.setTeacherID(Auth.user.getUserID());
         return qt;
     }
-
+    
     private void edit() {
-        if (Auth.user.getUserID().equals(tblQuestions.getValueAt(this.row, 4))) {
-            btnDelete.setEnabled(true);
-            btnUpdate.setEnabled(true);
-            btnInsert.setEnabled(false);
-        } else {
-            MsgBox.alert(this, "Bạn không có quyền được chỉnh sửa tài liệu này!");
-        }
+        int index = (int) tblQuestions.getValueAt(this.row, 1);
+        Question qt = qdao.selectById(index);
+        this.setForm(qt);
+        tabs.setSelectedIndex(0);
     }
 
     private void first() {
         this.row = 0;
-        this.fillToForm();
+        this.edit();
     }
 
     private void prev() {
         if (this.row > 0) {
             this.row--;
-            this.fillToForm();
+            this.edit();
         }
     }
 
     private void next() {
         if (this.row < tblQuestions.getRowCount() - 1) {
             this.row++;
-            this.fillToForm();
+            this.edit();
         }
     }
 
     private void last() {
         this.row = tblQuestions.getRowCount() - 1;
-        this.fillToForm();
+        this.edit();
     }
-
+    
     private void fillCboSubjectList() {
         try {
             DefaultComboBoxModel model = (DefaultComboBoxModel) cboSubjectList.getModel();
@@ -229,7 +220,7 @@ public class QuestionsManagement extends javax.swing.JFrame {
             e.printStackTrace();
         }
     }
-
+    
     private void fillCboSubject() {
         try {
             DefaultComboBoxModel model = (DefaultComboBoxModel) cboSubject.getModel();
@@ -319,42 +310,35 @@ public class QuestionsManagement extends javax.swing.JFrame {
             pnlQuest.setVisible(check);
         }
     }
-
-    private boolean isValidated() {
-        if (txtTitleQuestion.getText().isEmpty()) {
+    
+    private boolean isValidated(){
+        if(txtTitleQuestion.getText().isEmpty()){
             MsgBox.alert(this, "Tiêu đề không được đề trống!");
             return false;
         }
-
-        if (txtAnswer1.getText().isEmpty()) {
+        
+        if(txtAnswer1.getText().isEmpty()){
             MsgBox.alert(this, "Đáp án 1 không được đề trống!");
             return false;
         }
-
-        if (txtAnswer2.getText().isEmpty()) {
+        
+        if(txtAnswer2.getText().isEmpty()){
             MsgBox.alert(this, "Đáp án 2 không được đề trống!");
             return false;
         }
-
-        if (txtAnswer3.getText().isEmpty()) {
+        
+        if(txtAnswer3.getText().isEmpty()){
             MsgBox.alert(this, "Đáp án 3 không được đề trống!");
             return false;
         }
-
-        if (txtAnswer4.getText().isEmpty()) {
+        
+        if(txtAnswer4.getText().isEmpty()){
             MsgBox.alert(this, "Đáp án 4 không được đề trống!");
             return false;
         }
         return true;
     }
-
-    AccountDAO adao = new AccountDAO();
-
-    private void send() {
-        Auth.user = adao.selectById("HS1");
-        String cmt = txtReply.getText();
-    }
-
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -413,17 +397,16 @@ public class QuestionsManagement extends javax.swing.JFrame {
         btnRemake = new javax.swing.JButton();
         rdoChooseAnsC = new javax.swing.JRadioButton();
         pnlQnA = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        lblAvatar = new javax.swing.JLabel();
+        lblName = new javax.swing.JLabel();
+        lblID = new javax.swing.JLabel();
+        lblComment = new javax.swing.JLabel();
+        btnReport = new javax.swing.JButton();
+        btnDeleteComment = new javax.swing.JButton();
         jPanel5 = new javax.swing.JPanel();
+        lblReply = new javax.swing.JLabel();
         btnSend = new javax.swing.JButton();
-        txtReply = new javax.swing.JTextField();
-        pnlAns1 = new javax.swing.JPanel();
-        lblQnAID1 = new javax.swing.JLabel();
-        lblAvatar1 = new javax.swing.JLabel();
-        lblName1 = new javax.swing.JLabel();
-        lblID1 = new javax.swing.JLabel();
-        lblComment1 = new javax.swing.JLabel();
-        btnReport1 = new javax.swing.JButton();
-        btnDeleteComment1 = new javax.swing.JButton();
         pnlList = new javax.swing.JPanel();
         lblSubjectList = new javax.swing.JLabel();
         cboSubjectList = new javax.swing.JComboBox<>();
@@ -458,11 +441,6 @@ public class QuestionsManagement extends javax.swing.JFrame {
         lblTitle.setText("QUẢN LÝ CÂU HỎI");
 
         tabs.setBackground(new java.awt.Color(255, 255, 255));
-        tabs.addChangeListener(new javax.swing.event.ChangeListener() {
-            public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                tabsStateChanged(evt);
-            }
-        });
 
         pnlManage.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -873,18 +851,43 @@ public class QuestionsManagement extends javax.swing.JFrame {
 
         pnlQnA.setBackground(new java.awt.Color(255, 255, 255));
 
-        jPanel5.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel5.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        lblName.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lblName.setText("Nguyễn Gia Phúc");
 
-        btnSend.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/studious/icons/icons8-right-arrow-35.png"))); // NOI18N
-        btnSend.setBorder(null);
-        btnSend.addActionListener(new java.awt.event.ActionListener() {
+        lblID.setBackground(new java.awt.Color(255, 255, 255));
+        lblID.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lblID.setForeground(new java.awt.Color(153, 153, 153));
+        lblID.setText("@PS12345");
+
+        lblComment.setBackground(new java.awt.Color(255, 255, 255));
+        lblComment.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lblComment.setForeground(new java.awt.Color(153, 153, 153));
+        lblComment.setText("Đáp án B là sai nhé!");
+        lblComment.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        btnReport.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnReport.setText("Báo cáo");
+        btnReport.setBorder(null);
+
+        btnDeleteComment.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnDeleteComment.setText("Xóa");
+        btnDeleteComment.setBorder(null);
+        btnDeleteComment.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSendActionPerformed(evt);
+                btnDeleteCommentActionPerformed(evt);
             }
         });
 
-        txtReply.setText("jTextField1");
+        jPanel5.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel5.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        lblReply.setBackground(new java.awt.Color(255, 255, 255));
+        lblReply.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lblReply.setForeground(new java.awt.Color(153, 153, 153));
+        lblReply.setText("TRẢ LỜI");
+
+        btnSend.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/studious/icons/icons8-right-arrow-35.png"))); // NOI18N
+        btnSend.setBorder(null);
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -892,9 +895,9 @@ public class QuestionsManagement extends javax.swing.JFrame {
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(txtReply, javax.swing.GroupLayout.PREFERRED_SIZE, 580, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnSend, javax.swing.GroupLayout.DEFAULT_SIZE, 56, Short.MAX_VALUE)
+                .addComponent(lblReply, javax.swing.GroupLayout.PREFERRED_SIZE, 574, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnSend, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel5Layout.setVerticalGroup(
@@ -902,82 +905,9 @@ public class QuestionsManagement extends javax.swing.JFrame {
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(txtReply)
+                    .addComponent(lblReply, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnSend, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        pnlAns1.setBackground(new java.awt.Color(255, 255, 255));
-
-        lblQnAID1.setText("QNA1");
-
-        lblName1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        lblName1.setText("Nguyễn Gia Phúc");
-
-        lblID1.setBackground(new java.awt.Color(255, 255, 255));
-        lblID1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        lblID1.setForeground(new java.awt.Color(153, 153, 153));
-        lblID1.setText("@PS12345");
-
-        lblComment1.setBackground(new java.awt.Color(255, 255, 255));
-        lblComment1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        lblComment1.setForeground(new java.awt.Color(153, 153, 153));
-        lblComment1.setText("Đáp án B là sai nhé!");
-        lblComment1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-
-        btnReport1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        btnReport1.setText("Báo cáo");
-        btnReport1.setBorder(null);
-
-        btnDeleteComment1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        btnDeleteComment1.setText("Xóa");
-        btnDeleteComment1.setBorder(null);
-        btnDeleteComment1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnDeleteComment1ActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout pnlAns1Layout = new javax.swing.GroupLayout(pnlAns1);
-        pnlAns1.setLayout(pnlAns1Layout);
-        pnlAns1Layout.setHorizontalGroup(
-            pnlAns1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlAns1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(lblAvatar1, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(pnlAns1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pnlAns1Layout.createSequentialGroup()
-                        .addComponent(lblID1, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(lblQnAID1))
-                    .addComponent(lblName1, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblComment1, javax.swing.GroupLayout.PREFERRED_SIZE, 592, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(pnlAns1Layout.createSequentialGroup()
-                        .addComponent(btnReport1)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnDeleteComment1)))
-                .addContainerGap())
-        );
-        pnlAns1Layout.setVerticalGroup(
-            pnlAns1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlAns1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(pnlAns1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(pnlAns1Layout.createSequentialGroup()
-                        .addComponent(lblName1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(pnlAns1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblID1)
-                            .addComponent(lblQnAID1)))
-                    .addComponent(lblAvatar1, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(lblComment1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(pnlAns1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnReport1)
-                    .addComponent(btnDeleteComment1))
-                .addContainerGap())
         );
 
         javax.swing.GroupLayout pnlQnALayout = new javax.swing.GroupLayout(pnlQnA);
@@ -986,18 +916,40 @@ public class QuestionsManagement extends javax.swing.JFrame {
             pnlQnALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlQnALayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(pnlQnALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(pnlQnALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(pnlQnALayout.createSequentialGroup()
-                        .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(pnlAns1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
+                        .addComponent(lblAvatar, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addGroup(pnlQnALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblName, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblID, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblComment, javax.swing.GroupLayout.PREFERRED_SIZE, 592, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(pnlQnALayout.createSequentialGroup()
+                                .addComponent(btnReport)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnDeleteComment))))
+                    .addComponent(jLabel1)
+                    .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         pnlQnALayout.setVerticalGroup(
             pnlQnALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlQnALayout.createSequentialGroup()
-                .addGap(40, 40, 40)
-                .addComponent(pnlAns1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap()
+                .addComponent(jLabel1)
+                .addGap(18, 18, 18)
+                .addGroup(pnlQnALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(pnlQnALayout.createSequentialGroup()
+                        .addComponent(lblName)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(lblID))
+                    .addComponent(lblAvatar, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(lblComment, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pnlQnALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnReport)
+                    .addComponent(btnDeleteComment))
                 .addGap(18, 18, 18)
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -1098,28 +1050,23 @@ public class QuestionsManagement extends javax.swing.JFrame {
 
         tblQuestions.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null}
             },
             new String [] {
                 "STT", "Mã câu hỏi", "Câu hỏi", "Đáp án đúng", "Đáp án 1", "Đáp án 2", "Đáp án 3", "Đáp án 4"
             }
         ) {
-            Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.Integer.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
-            };
             boolean[] canEdit = new boolean [] {
                 false, false, false, false, false, false, false, false
             };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
-        tblQuestions.getTableHeader().setReorderingAllowed(false);
         tblQuestions.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tblQuestionsMouseClicked(evt);
@@ -1401,7 +1348,7 @@ public class QuestionsManagement extends javax.swing.JFrame {
                 }
             }
             default ->
-                throw new AssertionError();
+            throw new AssertionError();
 
         }
         btnCheck.setEnabled(false);
@@ -1417,9 +1364,9 @@ public class QuestionsManagement extends javax.swing.JFrame {
         btnRemake.setEnabled(false);
     }//GEN-LAST:event_btnRemakeActionPerformed
 
-    private void btnDeleteComment1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteComment1ActionPerformed
+    private void btnDeleteCommentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteCommentActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnDeleteComment1ActionPerformed
+    }//GEN-LAST:event_btnDeleteCommentActionPerformed
 
     private void cboSubjectListActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboSubjectListActionPerformed
         // TODO add your handling code here:
@@ -1450,22 +1397,15 @@ public class QuestionsManagement extends javax.swing.JFrame {
 
     private void tblQuestionsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblQuestionsMouseClicked
         // TODO add your handling code here:
-        this.row = tblQuestions.rowAtPoint(evt.getPoint());
-        if (evt.getClickCount() == 1) {
-            this.row = tblQuestions.rowAtPoint(evt.getPoint()); //lấy vị trí dòng được chọn
-            Question question = qdao.selectById((Integer) tblQuestions.getValueAt(row, 1));
-            Lesson lesson = ldao.selectById((Integer) question.getLessonID());
-            cboSubjectList.setSelectedItem(lesson.getSubject());
-        }
         if (evt.getClickCount() == 2) {
             this.row = tblQuestions.rowAtPoint(evt.getPoint()); //lấy vị trí dòng được chọn
             if (this.row >= 0) {
                 //this.edit();
                 tabs.setSelectedIndex(0);
-                this.fillToForm();
             }
         }
-        
+        this.row = tblQuestions.rowAtPoint(evt.getPoint());
+        this.edit();
     }//GEN-LAST:event_tblQuestionsMouseClicked
 
     private void cboLessonListActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboLessonListActionPerformed
@@ -1491,7 +1431,7 @@ public class QuestionsManagement extends javax.swing.JFrame {
 
     private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
         // TODO add your handling code here:
-        edit();
+        insert();
     }//GEN-LAST:event_btnEditActionPerformed
 
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
@@ -1534,33 +1474,6 @@ public class QuestionsManagement extends javax.swing.JFrame {
         fillCboGrade();
     }//GEN-LAST:event_cboSubjectActionPerformed
 
-    private void btnSendActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSendActionPerformed
-        // TODO add your handling code here:
-        send();
-    }//GEN-LAST:event_btnSendActionPerformed
-
-    private void tabsStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_tabsStateChanged
-        // TODO add your handling code here:
-        if (tabs.getSelectedIndex() == 0) {
-//            if (cboSubjectList.) {
-//                cboSubject.setSelectedIndex(cboSubjectList.getSelectedIndex());
-//                cboGrade.setSelectedIndex(cboGradeList.getSelectedIndex());
-//                cboLesson.setSelectedIndex(cboLessonList.getSelectedIndex());
-//                reset();
-//            }
-//            else{
-            cboSubject.setSelectedIndex(cboSubjectList.getSelectedIndex());
-            cboGrade.setSelectedIndex(cboGradeList.getSelectedIndex());
-            cboLesson.setSelectedIndex(cboLessonList.getSelectedIndex());
-//            }
-        }
-        if (tabs.getSelectedIndex() == 2) {
-            cboSubjectList.setSelectedIndex(cboSubject.getSelectedIndex());
-            cboGradeList.setSelectedIndex(cboGrade.getSelectedIndex());
-            cboLessonList.setSelectedIndex(cboLesson.getSelectedIndex());
-        }
-    }//GEN-LAST:event_tabsStateChanged
-
     /**
      * @param args the command line arguments
      */
@@ -1600,7 +1513,7 @@ public class QuestionsManagement extends javax.swing.JFrame {
     private javax.swing.JButton btnBack;
     private javax.swing.JButton btnCheck;
     private javax.swing.JButton btnDelete;
-    private javax.swing.JButton btnDeleteComment1;
+    private javax.swing.JButton btnDeleteComment;
     private javax.swing.JButton btnDo;
     private javax.swing.JButton btnEdit;
     private javax.swing.JButton btnFirst;
@@ -1614,7 +1527,7 @@ public class QuestionsManagement extends javax.swing.JFrame {
     private javax.swing.JButton btnPersonalInfo;
     private javax.swing.JButton btnPrevious;
     private javax.swing.JButton btnRemake;
-    private javax.swing.JButton btnReport1;
+    private javax.swing.JButton btnReport;
     private javax.swing.JButton btnSearchList;
     private javax.swing.JButton btnSend;
     private javax.swing.JButton btnStatistic;
@@ -1629,6 +1542,7 @@ public class QuestionsManagement extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cboSubject;
     private javax.swing.JComboBox<String> cboSubjectList;
     private javax.swing.ButtonGroup grpButtonAns;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel5;
@@ -1640,17 +1554,17 @@ public class QuestionsManagement extends javax.swing.JFrame {
     private javax.swing.JLabel lblAnswer2;
     private javax.swing.JLabel lblAnswer3;
     private javax.swing.JLabel lblAnswer4;
-    private javax.swing.JLabel lblAvatar1;
-    private javax.swing.JLabel lblComment1;
+    private javax.swing.JLabel lblAvatar;
+    private javax.swing.JLabel lblComment;
     private javax.swing.JLabel lblCorrectAns;
     private javax.swing.JLabel lblGrade;
     private javax.swing.JLabel lblGradeList;
-    private javax.swing.JLabel lblID1;
+    private javax.swing.JLabel lblID;
     private javax.swing.JLabel lblLesson;
     private javax.swing.JLabel lblLessonList;
     private javax.swing.JLabel lblLogo;
-    private javax.swing.JLabel lblName1;
-    private javax.swing.JLabel lblQnAID1;
+    private javax.swing.JLabel lblName;
+    private javax.swing.JLabel lblReply;
     private javax.swing.JLabel lblResult;
     private javax.swing.JLabel lblShowQuestionDoTest;
     private javax.swing.JLabel lblSubject;
@@ -1658,7 +1572,6 @@ public class QuestionsManagement extends javax.swing.JFrame {
     private javax.swing.JLabel lblTitle;
     private javax.swing.JLabel lblTitleDoTest;
     private javax.swing.JLabel lblTitleQuestion;
-    private javax.swing.JPanel pnlAns1;
     private javax.swing.JPanel pnlBackground;
     private javax.swing.JPanel pnlDoTest;
     private javax.swing.JPanel pnlList;
@@ -1675,7 +1588,6 @@ public class QuestionsManagement extends javax.swing.JFrame {
     private javax.swing.JTextField txtAnswer2;
     private javax.swing.JTextField txtAnswer3;
     private javax.swing.JTextField txtAnswer4;
-    private javax.swing.JTextField txtReply;
     private javax.swing.JTextField txtSearchList;
     private javax.swing.JTextField txtTitleQuestion;
     // End of variables declaration//GEN-END:variables

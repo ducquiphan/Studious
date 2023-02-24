@@ -1,5 +1,8 @@
 package com.studious.display;
 
+import com.studious.utils.Auth;
+import com.studious.utils.MsgBox;
+
 /**
  *
  * @author SsuBii
@@ -31,17 +34,21 @@ public class MainWindow extends javax.swing.JFrame {
         btnStudentMain = new javax.swing.JButton();
         btnQnaMain = new javax.swing.JButton();
         jToolBar = new javax.swing.JToolBar();
-        btnHome = new javax.swing.JButton();
-        btnPersonalInfo = new javax.swing.JButton();
         btnTeacher = new javax.swing.JButton();
+        btnPersonalInfo = new javax.swing.JButton();
+        btnHome = new javax.swing.JButton();
         btnStudent = new javax.swing.JButton();
         btnStatistic = new javax.swing.JButton();
         btnQna = new javax.swing.JButton();
-        btnBack = new javax.swing.JButton();
         btnLogout = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setSize(new java.awt.Dimension(0, 0));
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         pnlBackground.setBackground(new java.awt.Color(232, 255, 183));
         pnlBackground.setForeground(new java.awt.Color(232, 255, 183));
@@ -115,41 +122,9 @@ public class MainWindow extends javax.swing.JFrame {
         jToolBar.setOrientation(javax.swing.SwingConstants.VERTICAL);
         jToolBar.setRollover(true);
 
-        btnHome.setBackground(new java.awt.Color(232, 255, 183));
-        btnHome.setForeground(new java.awt.Color(232, 255, 183));
-        btnHome.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/studious/icons/home.png"))); // NOI18N
-        btnHome.setBorder(null);
-        btnHome.setFocusable(false);
-        btnHome.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnHome.setMaximumSize(new java.awt.Dimension(35, 35));
-        btnHome.setPreferredSize(new java.awt.Dimension(35, 35));
-        btnHome.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        btnHome.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnHomeActionPerformed(evt);
-            }
-        });
-        jToolBar.add(btnHome);
-
-        btnPersonalInfo.setBackground(new java.awt.Color(232, 255, 183));
-        btnPersonalInfo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/studious/icons/account.png"))); // NOI18N
-        btnPersonalInfo.setBorder(null);
-        btnPersonalInfo.setFocusable(false);
-        btnPersonalInfo.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnPersonalInfo.setMaximumSize(new java.awt.Dimension(35, 35));
-        btnPersonalInfo.setPreferredSize(new java.awt.Dimension(35, 35));
-        btnPersonalInfo.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        btnPersonalInfo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnPersonalInfoActionPerformed(evt);
-            }
-        });
-        jToolBar.add(btnPersonalInfo);
-
         btnTeacher.setBackground(new java.awt.Color(232, 255, 183));
         btnTeacher.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/studious/icons/teacher.png"))); // NOI18N
         btnTeacher.setBorder(null);
-        btnTeacher.setFocusable(false);
         btnTeacher.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnTeacher.setMaximumSize(new java.awt.Dimension(35, 35));
         btnTeacher.setPreferredSize(new java.awt.Dimension(35, 35));
@@ -159,12 +134,37 @@ public class MainWindow extends javax.swing.JFrame {
                 btnTeacherActionPerformed(evt);
             }
         });
-        jToolBar.add(btnTeacher);
+
+        btnPersonalInfo.setBackground(new java.awt.Color(232, 255, 183));
+        btnPersonalInfo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/studious/icons/account.png"))); // NOI18N
+        btnPersonalInfo.setBorder(null);
+        btnPersonalInfo.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnPersonalInfo.setMaximumSize(new java.awt.Dimension(35, 35));
+        btnPersonalInfo.setPreferredSize(new java.awt.Dimension(35, 35));
+        btnPersonalInfo.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnPersonalInfo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPersonalInfoActionPerformed(evt);
+            }
+        });
+
+        btnHome.setBackground(new java.awt.Color(232, 255, 183));
+        btnHome.setForeground(new java.awt.Color(232, 255, 183));
+        btnHome.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/studious/icons/home.png"))); // NOI18N
+        btnHome.setBorder(null);
+        btnHome.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnHome.setMaximumSize(new java.awt.Dimension(35, 35));
+        btnHome.setPreferredSize(new java.awt.Dimension(35, 35));
+        btnHome.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnHome.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnHomeActionPerformed(evt);
+            }
+        });
 
         btnStudent.setBackground(new java.awt.Color(232, 255, 183));
         btnStudent.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/studious/icons/student.png"))); // NOI18N
         btnStudent.setBorder(null);
-        btnStudent.setFocusable(false);
         btnStudent.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnStudent.setMaximumSize(new java.awt.Dimension(35, 35));
         btnStudent.setPreferredSize(new java.awt.Dimension(35, 35));
@@ -174,7 +174,6 @@ public class MainWindow extends javax.swing.JFrame {
                 btnStudentActionPerformed(evt);
             }
         });
-        jToolBar.add(btnStudent);
 
         btnStatistic.setBackground(new java.awt.Color(232, 255, 183));
         btnStatistic.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/studious/icons/statistic.png"))); // NOI18N
@@ -186,12 +185,10 @@ public class MainWindow extends javax.swing.JFrame {
                 btnStatisticActionPerformed(evt);
             }
         });
-        jToolBar.add(btnStatistic);
 
         btnQna.setBackground(new java.awt.Color(232, 255, 183));
         btnQna.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/studious/icons/QnA.png"))); // NOI18N
         btnQna.setBorder(null);
-        btnQna.setFocusable(false);
         btnQna.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnQna.setMaximumSize(new java.awt.Dimension(35, 35));
         btnQna.setPreferredSize(new java.awt.Dimension(35, 35));
@@ -201,25 +198,11 @@ public class MainWindow extends javax.swing.JFrame {
                 btnQnaActionPerformed(evt);
             }
         });
-        jToolBar.add(btnQna);
-
-        btnBack.setBackground(new java.awt.Color(232, 255, 183));
-        btnBack.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/studious/icons/back.png"))); // NOI18N
-        btnBack.setBorder(null);
-        btnBack.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnBack.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        btnBack.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnBackActionPerformed(evt);
-            }
-        });
-        jToolBar.add(btnBack);
 
         btnLogout.setBackground(new java.awt.Color(232, 255, 183));
         btnLogout.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/studious/icons/logout.png"))); // NOI18N
         btnLogout.setToolTipText("");
         btnLogout.setBorder(null);
-        btnLogout.setFocusable(false);
         btnLogout.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnLogout.setMaximumSize(new java.awt.Dimension(35, 35));
         btnLogout.setPreferredSize(new java.awt.Dimension(35, 35));
@@ -229,14 +212,22 @@ public class MainWindow extends javax.swing.JFrame {
                 btnLogoutActionPerformed(evt);
             }
         });
-        jToolBar.add(btnLogout);
 
         javax.swing.GroupLayout pnlBackgroundLayout = new javax.swing.GroupLayout(pnlBackground);
         pnlBackground.setLayout(pnlBackgroundLayout);
         pnlBackgroundLayout.setHorizontalGroup(
             pnlBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlBackgroundLayout.createSequentialGroup()
-                .addContainerGap(151, Short.MAX_VALUE)
+                .addGap(21, 21, 21)
+                .addGroup(pnlBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnHome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnPersonalInfo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnTeacher, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnStudent, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnStatistic)
+                    .addComponent(btnQna, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnLogout, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 95, Short.MAX_VALUE)
                 .addGroup(pnlBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlBackgroundLayout.createSequentialGroup()
                         .addComponent(lblTitle)
@@ -259,14 +250,31 @@ public class MainWindow extends javax.swing.JFrame {
         pnlBackgroundLayout.setVerticalGroup(
             pnlBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlBackgroundLayout.createSequentialGroup()
-                .addGap(100, 100, 100)
-                .addComponent(lblTitle)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
-                .addGroup(pnlBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnTeacherMain, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnStatisticMain, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnStudentMain, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnQnaMain, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(pnlBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(pnlBackgroundLayout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnHome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, 0)
+                        .addComponent(btnPersonalInfo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, 0)
+                        .addComponent(btnTeacher, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, 0)
+                        .addComponent(btnStudent, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, 0)
+                        .addComponent(btnStatistic)
+                        .addGap(0, 0, 0)
+                        .addComponent(btnQna, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, 0)
+                        .addComponent(btnLogout, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(pnlBackgroundLayout.createSequentialGroup()
+                        .addGap(100, 100, 100)
+                        .addComponent(lblTitle)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
+                        .addGroup(pnlBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnTeacherMain, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnStatisticMain, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnStudentMain, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnQnaMain, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(143, 143, 143))
             .addGroup(pnlBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(pnlBackgroundLayout.createSequentialGroup()
@@ -290,69 +298,52 @@ public class MainWindow extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnTeacherMainActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTeacherMainActionPerformed
-        // TODO add your handling code here:
-        TeacherManagement teacherManagement = new TeacherManagement(this, rootPaneCheckingEnabled);
-        teacherManagement.setVisible(true);
+        openTeacherManagement();
     }//GEN-LAST:event_btnTeacherMainActionPerformed
 
     private void btnStatisticMainActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStatisticMainActionPerformed
-        // TODO add your handling code here:
-        StatisticsAdmin sa = new StatisticsAdmin(this);
-        sa.setVisible(true);
+        openStatisticAdmin();
     }//GEN-LAST:event_btnStatisticMainActionPerformed
 
     private void btnStudentMainActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStudentMainActionPerformed
-        // TODO add your handling code here:
-        StudentManagement sm = new StudentManagement(this, rootPaneCheckingEnabled);
-        sm.setVisible(true);
+        openStudentManagement();
     }//GEN-LAST:event_btnStudentMainActionPerformed
 
     private void btnQnaMainActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQnaMainActionPerformed
-        // TODO add your handling code here:
+        openQuesAndAns();
     }//GEN-LAST:event_btnQnaMainActionPerformed
 
     private void btnHomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHomeActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_btnHomeActionPerformed
 
     private void btnPersonalInfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPersonalInfoActionPerformed
-        // TODO add your handling code here:
-        PersonalInforAdmin pia = new PersonalInforAdmin(this, rootPaneCheckingEnabled);
-        pia.setVisible(true);
+        openPersonallnforAdmin();
     }//GEN-LAST:event_btnPersonalInfoActionPerformed
 
     private void btnTeacherActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTeacherActionPerformed
-        // TODO add your handling code here:
-        TeacherManagement tm = new TeacherManagement(this, rootPaneCheckingEnabled);
-        tm.setVisible(true);
+        openTeacherManagement();
     }//GEN-LAST:event_btnTeacherActionPerformed
 
     private void btnStudentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStudentActionPerformed
-        // TODO add your handling code here:
-        StudentManagement sm = new StudentManagement(this, rootPaneCheckingEnabled);
-        sm.setVisible(true);
+        openStudentManagement();
     }//GEN-LAST:event_btnStudentActionPerformed
 
     private void btnStatisticActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStatisticActionPerformed
-        // TODO add your handling code here:
-        StatisticsAdmin sa = new StatisticsAdmin(this, rootPaneCheckingEnabled);
-        sa.setVisible(true);
+        openStatisticAdmin();
     }//GEN-LAST:event_btnStatisticActionPerformed
 
     private void btnQnaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQnaActionPerformed
-        // TODO add your handling code here:
-        
+        openQuesAndAns();
     }//GEN-LAST:event_btnQnaActionPerformed
 
-    private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
-        // TODO add your handling code here:
-        
-    }//GEN-LAST:event_btnBackActionPerformed
-
     private void btnLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoutActionPerformed
-        // TODO add your handling code here:
-        
+        logOut();
     }//GEN-LAST:event_btnLogoutActionPerformed
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        end();
+    }//GEN-LAST:event_formWindowClosing
 
     /**
      * @param args the command line arguments
@@ -391,7 +382,6 @@ public class MainWindow extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnBack;
     private javax.swing.JButton btnHome;
     private javax.swing.JButton btnLogout;
     private javax.swing.JButton btnPersonalInfo;
@@ -407,4 +397,45 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JLabel lblTitle;
     private javax.swing.JPanel pnlBackground;
     // End of variables declaration//GEN-END:variables
+
+    void openTeacherManagement() {
+        TeacherManagement window = new TeacherManagement(this, true);
+        window.setVisible(true);
+    }
+
+    void openStudentManagement() {
+        StudentManagement window = new StudentManagement(this, true);
+        window.setVisible(true);
+    }
+
+    void openStatisticAdmin() {
+        StatisticAdmin window = new StatisticAdmin(this);
+        window.setVisible(true);
+    }
+
+    void openQuesAndAns() {
+        MsgBox.alert(this, "Chức năng đang trong quá trình phát triển");
+    }
+
+    void openLogin() {
+        Login window = new Login();
+        window.setVisible(true);
+    }
+
+    void openPersonallnforAdmin() {
+        PersonalInforAdmin window = new PersonalInforAdmin(this, true);
+        window.setVisible(true);
+    }
+
+    void logOut() {
+        Auth.user = null;
+        openLogin();
+        this.dispose();
+    }
+
+    private void end() {
+        if (MsgBox.confirm(this, "Bạn muốn đóng ứng dụng ?")) {
+            System.exit(0);
+        }
+    }
 }
