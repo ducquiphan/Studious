@@ -1,5 +1,6 @@
 package com.studious.display;
 
+import com.studious.utils.XImage;
 import java.awt.event.KeyEvent;
 
 /**
@@ -19,6 +20,7 @@ public class Welcome extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         setTitle("Studious");
         this.getRootPane().setDefaultButton(btnWelcome);
+        this.setIconImage(XImage.getAppIcon());
 
     }
 

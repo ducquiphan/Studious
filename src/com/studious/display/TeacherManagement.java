@@ -1,4 +1,28 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/AWTForms/Dialog.java to edit this template
+ */
 package com.studious.display;
+
+import com.studious.dao.AccountDAO;
+import com.studious.dao.TeacherDAO;
+import com.studious.entity.Account;
+import com.studious.entity.Teacher;
+import com.studious.utils.Auth;
+import com.studious.utils.CheckForm;
+import com.studious.utils.MsgBox;
+import com.studious.utils.XDate;
+import com.studious.utils.XImage;
+import static java.awt.Color.getHSBColor;
+import static java.awt.Color.white;
+import java.awt.HeadlessException;
+import java.awt.Image;
+import java.util.List;
+import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
+import javax.swing.JTextField;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -9,10 +33,10 @@ public class TeacherManagement extends java.awt.Dialog {
     /**
      * Creates new form TeacherManagement
      */
-    public TeacherManagement(java.awt.Frame parent, boolean modal) {
+    public TeacherManagement (java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        setLocationRelativeTo(parent);
+        this.init();
     }
 
     /**
@@ -49,13 +73,12 @@ public class TeacherManagement extends java.awt.Dialog {
         btnEdit = new javax.swing.JButton();
         btnUpdate = new javax.swing.JButton();
         btnDelete = new javax.swing.JButton();
-        btnFirst = new javax.swing.JButton();
-        btnPrevious = new javax.swing.JButton();
-        btnNext = new javax.swing.JButton();
-        btnLast = new javax.swing.JButton();
+        txtBirthDate = new com.toedter.calendar.JDateChooser();
+        lblStatus = new javax.swing.JLabel();
+        cboStatus = new javax.swing.JComboBox<>();
         pnlList = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tblGridView = new javax.swing.JTable();
+        tblTeachers = new javax.swing.JTable();
         btnDeleteRow = new javax.swing.JButton();
         txtSearch = new javax.swing.JTextField();
         lblTitle1 = new javax.swing.JLabel();
@@ -132,6 +155,11 @@ public class TeacherManagement extends java.awt.Dialog {
 
         btnAddAvatar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/studious/icons/icons8-new-copy-24.png"))); // NOI18N
         btnAddAvatar.setText("Thêm ảnh");
+        btnAddAvatar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddAvatarActionPerformed(evt);
+            }
+        });
 
         lblSpeciality.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lblSpeciality.setText("Chuyên môn:");
@@ -143,37 +171,102 @@ public class TeacherManagement extends java.awt.Dialog {
         btnNew.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnNew.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/studious/icons/icons8-reset-24.png"))); // NOI18N
         btnNew.setText("Tạo mới");
+        btnNew.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNewActionPerformed(evt);
+            }
+        });
 
         btnInsert.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnInsert.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/studious/icons/icons8-new-copy-24.png"))); // NOI18N
         btnInsert.setText("Thêm");
         btnInsert.setMaximumSize(new java.awt.Dimension(87, 26));
         btnInsert.setMinimumSize(new java.awt.Dimension(87, 26));
+        btnInsert.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnInsertActionPerformed(evt);
+            }
+        });
 
         btnEdit.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnEdit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/studious/icons/icons8-pencil-24 (1).png"))); // NOI18N
         btnEdit.setText("Sửa");
+        btnEdit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditActionPerformed(evt);
+            }
+        });
 
         btnUpdate.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnUpdate.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/studious/icons/icons8-available-updates-24.png"))); // NOI18N
         btnUpdate.setText("Cập nhật");
+        btnUpdate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUpdateActionPerformed(evt);
+            }
+        });
 
         btnDelete.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnDelete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/studious/icons/icons8-bin-24.png"))); // NOI18N
         btnDelete.setText("Xóa");
+        btnDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeleteActionPerformed(evt);
+            }
+        });
 
-        btnFirst.setText("|<");
+        lblStatus.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lblStatus.setText("Trạng thái");
+        lblStatus.setToolTipText("");
 
-        btnPrevious.setText("<<");
-
-        btnNext.setText(">>");
-
-        btnLast.setText(">|");
+        cboStatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Hiệu lực", "Vô hiệu hóa" }));
 
         javax.swing.GroupLayout pnlManageLayout = new javax.swing.GroupLayout(pnlManage);
         pnlManage.setLayout(pnlManageLayout);
         pnlManageLayout.setHorizontalGroup(
             pnlManageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlManageLayout.createSequentialGroup()
+                .addGap(32, 32, 32)
+                .addGroup(pnlManageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnlManageLayout.createSequentialGroup()
+                        .addComponent(lblStatus)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 62, Short.MAX_VALUE)
+                        .addComponent(cboStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(389, 389, 389))
+                    .addGroup(pnlManageLayout.createSequentialGroup()
+                        .addGroup(pnlManageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblTeacherID)
+                            .addComponent(lblName)
+                            .addComponent(lblBirthday)
+                            .addComponent(lblIdentifier)
+                            .addComponent(lblEmail)
+                            .addComponent(lblGender)
+                            .addComponent(lblSpeciality))
+                        .addGap(34, 34, 34)
+                        .addGroup(pnlManageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pnlManageLayout.createSequentialGroup()
+                                .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(pnlManageLayout.createSequentialGroup()
+                                .addGroup(pnlManageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(pnlManageLayout.createSequentialGroup()
+                                        .addGroup(pnlManageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(pnlManageLayout.createSequentialGroup()
+                                                .addComponent(rdoMale)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                .addComponent(rdoFemale, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addComponent(txtSpeciality, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(btnAddAvatar, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(pnlManageLayout.createSequentialGroup()
+                                        .addGroup(pnlManageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(txtIdentifier, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
+                                            .addComponent(txtName, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
+                                            .addComponent(txtTeacherID, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
+                                            .addComponent(txtBirthDate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(lblAvatar, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(120, 120, 120))))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlManageLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnNew)
@@ -185,50 +278,7 @@ public class TeacherManagement extends java.awt.Dialog {
                 .addComponent(btnUpdate)
                 .addGap(18, 18, 18)
                 .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(84, 84, 84))
-            .addGroup(pnlManageLayout.createSequentialGroup()
-                .addGap(32, 32, 32)
-                .addGroup(pnlManageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblTeacherID)
-                    .addComponent(lblName)
-                    .addComponent(lblBirthday)
-                    .addComponent(lblIdentifier)
-                    .addComponent(lblEmail)
-                    .addComponent(lblGender)
-                    .addComponent(lblSpeciality))
-                .addGap(34, 34, 34)
-                .addGroup(pnlManageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pnlManageLayout.createSequentialGroup()
-                        .addComponent(btnFirst, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnPrevious, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnNext, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnLast, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(pnlManageLayout.createSequentialGroup()
-                        .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlManageLayout.createSequentialGroup()
-                        .addGroup(pnlManageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(pnlManageLayout.createSequentialGroup()
-                                .addGroup(pnlManageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(txtIdentifier, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
-                                    .addComponent(txtName, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
-                                    .addComponent(txtTeacherID, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(lblAvatar, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(pnlManageLayout.createSequentialGroup()
-                                .addComponent(rdoMale)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(rdoFemale, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pnlManageLayout.createSequentialGroup()
-                                .addComponent(txtSpeciality, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 144, Short.MAX_VALUE)
-                                .addComponent(btnAddAvatar, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(115, 115, 115))))
+                .addGap(85, 85, 85))
         );
         pnlManageLayout.setVerticalGroup(
             pnlManageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -244,7 +294,9 @@ public class TeacherManagement extends java.awt.Dialog {
                             .addComponent(lblName)
                             .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
-                        .addComponent(lblBirthday)
+                        .addGroup(pnlManageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(lblBirthday)
+                            .addComponent(txtBirthDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(20, 20, 20)
                         .addGroup(pnlManageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txtIdentifier, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -267,11 +319,9 @@ public class TeacherManagement extends java.awt.Dialog {
                     .addComponent(lblEmail))
                 .addGap(18, 18, 18)
                 .addGroup(pnlManageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnFirst, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnPrevious, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnNext, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnLast, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
+                    .addComponent(cboStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblStatus))
+                .addGap(33, 33, 33)
                 .addGroup(pnlManageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnNew)
                     .addComponent(btnInsert, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -286,7 +336,7 @@ public class TeacherManagement extends java.awt.Dialog {
         pnlList.setBackground(new java.awt.Color(255, 255, 255));
         pnlList.setBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED));
 
-        tblGridView.setModel(new javax.swing.table.DefaultTableModel(
+        tblTeachers.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null},
                 {null, null, null, null, null, null},
@@ -296,12 +346,31 @@ public class TeacherManagement extends java.awt.Dialog {
             new String [] {
                 "Mã GV", "Họ tên", "Ngày sinh", "Mã định danh", "Giới tính", "Email"
             }
-        ));
-        jScrollPane1.setViewportView(tblGridView);
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tblTeachers.getTableHeader().setReorderingAllowed(false);
+        tblTeachers.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblTeachersMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(tblTeachers);
 
         btnDeleteRow.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnDeleteRow.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/studious/icons/icons8-bin-24.png"))); // NOI18N
         btnDeleteRow.setText("Xóa");
+        btnDeleteRow.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeleteRowActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout pnlListLayout = new javax.swing.GroupLayout(pnlList);
         pnlList.setLayout(pnlListLayout);
@@ -329,7 +398,6 @@ public class TeacherManagement extends java.awt.Dialog {
         tabs.addTab("Danh sách", pnlList);
 
         txtSearch.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        txtSearch.setText("Tìm kiếm");
 
         lblTitle1.setBackground(new java.awt.Color(232, 255, 183));
         lblTitle1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/studious/icons/Studious-255x68.png"))); // NOI18N
@@ -348,17 +416,18 @@ public class TeacherManagement extends java.awt.Dialog {
             .addGroup(pnlTeacherLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(pnlTeacherLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pnlTeacherLayout.createSequentialGroup()
-                        .addComponent(lblTitle1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(pnlTeacherLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblTitle, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlTeacherLayout.createSequentialGroup()
-                                .addComponent(btnSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(pnlTeacherLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(pnlTeacherLayout.createSequentialGroup()
+                            .addGap(515, 515, 515)
+                            .addComponent(btnSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlTeacherLayout.createSequentialGroup()
+                            .addComponent(lblTitle1)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lblTitle)))
                     .addComponent(tabs, javax.swing.GroupLayout.PREFERRED_SIZE, 750, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(15, 15, 15))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         pnlTeacherLayout.setVerticalGroup(
             pnlTeacherLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -369,11 +438,11 @@ public class TeacherManagement extends java.awt.Dialog {
                     .addComponent(lblTitle1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnlTeacherLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtSearch))
+                    .addComponent(txtSearch)
+                    .addComponent(btnSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(tabs)
-                .addContainerGap())
+                .addComponent(tabs, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -399,18 +468,118 @@ public class TeacherManagement extends java.awt.Dialog {
     }//GEN-LAST:event_closeDialog
 
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
-        // TODO add your handling code here:
+        try {
+            DefaultTableModel model = (DefaultTableModel) tblTeachers.getModel();
+            model.setRowCount(0);
+            List<Teacher> list = (List<Teacher>) dao.selectByName(txtSearch.getText());
+            if (list != null) {
+                for (Teacher st : list) {
+                    Object[] row = {
+                        st.getTeacherID(),
+                        st.getFullname(),
+                        st.getBirthDate(),
+                        st.getAccountID(),
+                        st.isGender() ? "Nam" : "Nữ",
+                        st.getEmail()
+                    };
+                    model.addRow(row);
+                }
+            }
+        } catch (Exception e) {
+            e.toString();
+        }
     }//GEN-LAST:event_btnSearchActionPerformed
+
+    private void btnNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewActionPerformed
+        this.clearForm();
+    }//GEN-LAST:event_btnNewActionPerformed
+
+    private void btnInsertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInsertActionPerformed
+        if (CheckForm.checkNullText(txtTeacherID)
+                && CheckForm.checkNullText(txtName)
+                && CheckForm.checkNullText(txtSpeciality)
+                && CheckForm.checkNullText(txtIdentifier)
+                && CheckForm.checkNullText(txtEmail)) {
+            if (CheckForm.checkTeacherID(txtTeacherID)
+                    && CheckForm.checkName(txtName)
+                    && CheckForm.checkEmail(txtEmail)
+                    && CheckForm.checkIdentity(txtIdentifier)) {
+                if (checkSameID(txtTeacherID)
+                        && checkTrungMadinhdanh(txtIdentifier)) {
+                    this.insertaccount();
+                    this.insert();
+                }
+            }
+        }
+    }//GEN-LAST:event_btnInsertActionPerformed
+
+    private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
+        this.edit();
+    }//GEN-LAST:event_btnEditActionPerformed
+
+    private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
+        if (CheckForm.checkNullText(txtName)
+                && CheckForm.checkNullText(txtSpeciality)
+                && CheckForm.checkNullText(txtIdentifier)
+                && CheckForm.checkNullText(txtEmail)) {
+            if (CheckForm.checkTeacherID(txtTeacherID)
+                    && CheckForm.checkName(txtName)
+                    && CheckForm.checkEmail(txtEmail)
+                    && CheckForm.checkIdentity(txtIdentifier)) {
+                this.update();
+            }
+        }
+    }//GEN-LAST:event_btnUpdateActionPerformed
+
+    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
+        this.delete();
+    }//GEN-LAST:event_btnDeleteActionPerformed
+
+    private void btnDeleteRowActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteRowActionPerformed
+        this.delete();
+    }//GEN-LAST:event_btnDeleteRowActionPerformed
+
+    private void tblTeachersMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblTeachersMouseClicked
+        if (evt.getClickCount() == 2) {
+            this.row = tblTeachers.rowAtPoint(evt.getPoint());
+            if (this.row >= 0) {
+                fillToForm();
+                tabs.setSelectedIndex(0);
+            }
+        }
+    }//GEN-LAST:event_tblTeachersMouseClicked
+
+    private void btnAddAvatarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddAvatarActionPerformed
+        JFileChooser jfc = new JFileChooser();
+        int chon = jfc.showOpenDialog(null);
+        try {
+            if (chon == JFileChooser.APPROVE_OPTION) {
+                String filename = jfc.getSelectedFile().getName();
+                pathString = filename;
+
+                if (pathString != null) {
+                    ImageIcon nvA = new ImageIcon(new ImageIcon(hinhPath + pathString).getImage()
+                            .getScaledInstance(lblAvatar.getWidth(), lblAvatar.getHeight(), Image.SCALE_DEFAULT));
+                    lblAvatar.setIcon(nvA);
+                }
+            }
+            else {
+                JOptionPane.showMessageDialog(this, "Bạn chưa chọn ảnh?");
+            }
+        } catch (Exception e) {
+            System.out.println("Bạn chưa chọn ảnh!!!");
+        }
+    }//GEN-LAST:event_btnAddAvatarActionPerformed
 
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
+    public static void main (String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
+            public void run () {
                 TeacherManagement dialog = new TeacherManagement(new java.awt.Frame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                    public void windowClosing(java.awt.event.WindowEvent e) {
+                    public void windowClosing (java.awt.event.WindowEvent e) {
                         System.exit(0);
                     }
                 });
@@ -425,15 +594,12 @@ public class TeacherManagement extends java.awt.Dialog {
     private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnDeleteRow;
     private javax.swing.JButton btnEdit;
-    private javax.swing.JButton btnFirst;
     private javax.swing.JButton btnInsert;
-    private javax.swing.JButton btnLast;
     private javax.swing.JButton btnNew;
-    private javax.swing.JButton btnNext;
-    private javax.swing.JButton btnPrevious;
     private javax.swing.JButton btnSearch;
     private javax.swing.JButton btnUpdate;
     private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.JComboBox<String> cboStatus;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblAvatar;
     private javax.swing.JLabel lblBirthday;
@@ -442,6 +608,7 @@ public class TeacherManagement extends java.awt.Dialog {
     private javax.swing.JLabel lblIdentifier;
     private javax.swing.JLabel lblName;
     private javax.swing.JLabel lblSpeciality;
+    private javax.swing.JLabel lblStatus;
     private javax.swing.JLabel lblTeacherID;
     private javax.swing.JLabel lblTitle;
     private javax.swing.JLabel lblTitle1;
@@ -451,7 +618,8 @@ public class TeacherManagement extends java.awt.Dialog {
     private javax.swing.JRadioButton rdoFemale;
     private javax.swing.JRadioButton rdoMale;
     private javax.swing.JTabbedPane tabs;
-    private javax.swing.JTable tblGridView;
+    private javax.swing.JTable tblTeachers;
+    private com.toedter.calendar.JDateChooser txtBirthDate;
     private javax.swing.JTextField txtEmail;
     private javax.swing.JTextField txtIdentifier;
     private javax.swing.JTextField txtName;
@@ -459,4 +627,213 @@ public class TeacherManagement extends java.awt.Dialog {
     private javax.swing.JTextField txtSpeciality;
     private javax.swing.JTextField txtTeacherID;
     // End of variables declaration//GEN-END:variables
+
+    TeacherDAO dao = new TeacherDAO();
+    AccountDAO adao = new AccountDAO();
+    int row = 0;
+    public String pathString = "";
+    public String hinhPath = "src\\com\\studious\\images\\";
+
+    void init () {
+        setLocationRelativeTo(this);
+        tabs.setSelectedIndex(1);
+        setIconImage(XImage.getAppIcon());
+        setResizable(false);
+        fillTable();
+        this.updateStatus(true);
+        Auth.user = adao.selectById("AD01");
+    }
+
+    private void fillTable () {
+        DefaultTableModel model = (DefaultTableModel) tblTeachers.getModel();
+        model.setRowCount(0);
+        try {
+            List<Teacher> list = (List<Teacher>) dao.selectAll();
+            for (Teacher tc : list) {
+                Object[] row = {
+                    tc.getTeacherID(),
+                    tc.getFullname(),
+                    tc.getBirthDate(),
+                    tc.getIdentifier(),
+                    tc.isGender() ? "Nam" : "Nữ",
+                    tc.getEmail()
+                };
+                model.addRow(row);
+            }
+        } catch (Exception e) {
+            MsgBox.alert(this, "Lỗi truy vấn dữ liệu!");
+        }
+    }
+
+    private void fillToForm () {
+        String index = (String) tblTeachers.getValueAt(this.row, 0);
+        Teacher tc = dao.selectById(index);
+        this.setForm(tc);
+        tabs.setSelectedIndex(0);
+    }
+
+    private void setForm (Teacher tc) {
+        txtTeacherID.setText(tc.getTeacherID());
+        txtName.setText(tc.getFullname());
+        txtIdentifier.setText(tc.getIdentifier());
+        txtBirthDate.setDate(tc.getBirthDate());
+        txtSpeciality.setText(tc.getMajor());
+        rdoMale.setSelected(tc.isGender());
+        rdoFemale.setSelected(!tc.isGender());
+        txtEmail.setText(tc.getEmail());
+        pathString = tc.getAvtURL();
+        ImageIcon nvA = new ImageIcon(new ImageIcon(hinhPath + pathString).getImage()
+                .getScaledInstance(lblAvatar.getWidth(), lblAvatar.getHeight(), Image.SCALE_DEFAULT));
+        lblAvatar.setIcon(nvA);
+    }
+
+    private Teacher getForm () {
+        Teacher tc = new Teacher();
+        tc.setTeacherID(txtTeacherID.getText());
+        tc.setFullname(txtName.getText());
+        tc.setBirthDate(txtBirthDate.getDate());
+        tc.setIdentifier(txtIdentifier.getText());
+        tc.setMajor(txtSpeciality.getText());
+        if (rdoMale.isSelected()) {
+            tc.setGender(true);
+        }
+        else {
+            tc.setGender(false);
+        }
+        tc.setEmail(txtEmail.getText());
+        tc.setAvtURL(lblAvatar.getText());
+        tc.setAccountID(txtTeacherID.getText());
+        return tc;
+    }
+
+    private void insert () {
+        Teacher tc = getForm();
+        try {
+            dao.insert(tc);
+            this.fillTable();
+            this.clearForm();
+            MsgBox.alert(this, "Thêm mới thành công!");
+        } catch (Exception e) {
+            MsgBox.alert(this, "Thêm mới thất bại!");
+        }
+    }
+
+    private void insertaccount () {
+        Account ac = new Account();
+        ac.setUserID(txtTeacherID.getText());
+        ac.setPassword("123");
+        ac.setRole(2);
+        ac.setStatus(true);
+
+        System.out.print(ac);
+        try {
+            adao.insert(ac);
+            MsgBox.alert(this, "Thêm tài khoản thành công!");
+        } catch (Exception e) {
+            MsgBox.alert(this, "Thêm tài khoản thất bại!");
+        }
+    }
+
+    void clearForm () {
+        Teacher tc = new Teacher();
+//                   st.setAccountID(Auth.user.getUserID());
+        tc.setBirthDate(XDate.now());
+        this.setForm(tc);
+        updateStatus(true);
+    }
+
+    private void update () {
+        Teacher tc = getForm();
+        try {
+            dao.update(tc);
+            this.fillTable();
+            this.clearForm();
+            MsgBox.alert(this, "Sửa thành công");
+        } catch (Exception e) {
+            e.printStackTrace();
+            MsgBox.alert(this, "Sửa thất bại");
+        }
+    }
+
+    private void delete () {
+        if (MsgBox.confirm(this, "Bạn thực sự muốn xóa giáo viên này?")) {
+            String magv = txtTeacherID.getText();
+            try {
+                dao.delete(magv);
+                this.fillTable();
+                this.clearForm();
+                MsgBox.alert(this, "Xóa thành công!");
+            } catch (HeadlessException e) {
+                MsgBox.alert(this, "Xóa thất bại!");
+            }
+        }
+    }
+
+    private void edit () {
+        try {
+            String mahs = (String) tblTeachers.getValueAt(this.row, 0);
+            Teacher tc = dao.selectById(mahs);
+            if (tc != null) {
+                this.setForm(tc);
+                this.updateStatus(false);
+            }
+        } catch (Exception e) {
+            MsgBox.alert(this, "Lỗi truy vấn dữ liệu!");
+        }
+    }
+
+    private void updateStatus (boolean insertable) {
+        txtTeacherID.setEditable(insertable);
+        btnInsert.setEnabled(insertable);
+        btnEdit.setEnabled(insertable);
+        btnUpdate.setEnabled(!insertable);
+        btnDelete.setEnabled(!insertable);
+    }
+
+    public boolean checkSameID (JTextField txt) {
+        txt.setBackground(white);
+        if (dao.selectById(txt.getText()) == null) {
+            return true;
+        }
+        else {
+            txt.setBackground(getHSBColor(299, 21, 96));
+            MsgBox.alert(this, txt.getName() + " đã bị tồn tại.");
+            return false;
+        }
+    }
+
+    public boolean checkTrungMadinhdanh (JTextField txt) {
+        txt.setBackground(white);
+        if (dao.selectByMdd(txt.getText()) == null) {
+            return true;
+        }
+        else {
+            txt.setBackground(getHSBColor(299, 21, 96));
+            MsgBox.alert(this, txt.getName() + " đã bị tồn tại.");
+            return false;
+        }
+    }
+//           void first() {
+//                      this.row = 0;
+//                      this.edit();
+//           }
+//
+//           void prev() {
+//                      if(this.row > 0){
+//                                this.row--;
+//                                this.edit();
+//                      }
+//           }
+//    
+//            void next(){
+//                     if(this.row < tblGridView.getRowCount()-1){
+//                                this.row++;
+//                                this.edit();
+//                     }
+//            }
+//    
+//            void last() {
+//                this.row = tblGridView.getRowCount()-1;
+//                this.edit();
+//            }
 }

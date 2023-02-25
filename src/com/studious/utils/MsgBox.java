@@ -3,6 +3,7 @@ package com.studious.utils;
 import java.awt.Component;
 import javax.swing.JOptionPane;
 
+
 /**
  *
  * @author Nguyễn Văn Sĩ
@@ -21,4 +22,8 @@ public class MsgBox {
     public static String prompt(Component parent, String message) {
         return JOptionPane.showInputDialog(parent, message, "Studious", JOptionPane.INFORMATION_MESSAGE);
     }
+    
+//    public static void balloonTip(Component parent, String message){
+//        BalloonTip tip = new BalloonTip();
+//    }
 }

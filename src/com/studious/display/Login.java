@@ -5,6 +5,7 @@ import com.studious.entity.Account;
 import javax.swing.JFrame;
 import com.studious.utils.Auth;
 import com.studious.utils.MsgBox;
+import com.studious.utils.XImage;
 import java.awt.event.KeyEvent;
 
 /**
@@ -18,6 +19,7 @@ public class Login extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         setTitle("Studious - Đăng nhập");
         this.setLocationRelativeTo(null);
+        this.setIconImage(XImage.getAppIcon());
     }
 
     /**

@@ -15,23 +15,23 @@ public class Teacher {
     private String fullname;
     private boolean gender;
     private Date birthDate;
+    private String identifier;
     private String major;
     private String email;
-    private String phone;
     private String avtURL;
     private String accountID;
 
     public Teacher() {
     }
 
-    public Teacher(String teacherID, String fullname, boolean gender, Date birthDate, String major, String email, String phone, String avtURL, String accountID) {
+    public Teacher(String teacherID, String fullname, boolean gender, Date birthDate, String identifier, String major, String email, String avtURL, String accountID) {
         this.teacherID = teacherID;
         this.fullname = fullname;
         this.gender = gender;
         this.birthDate = birthDate;
+        this.identifier = identifier;
         this.major = major;
         this.email = email;
-        this.phone = phone;
         this.avtURL = avtURL;
         this.accountID = accountID;
     }
@@ -68,6 +68,14 @@ public class Teacher {
         this.birthDate = birthDate;
     }
 
+     public String getIdentifier() {
+        return identifier;
+    }
+
+    public void setIdentifier(String identifier) {
+        this.identifier = identifier;
+    }
+    
     public String getMajor() {
         return major;
     }
@@ -82,14 +90,6 @@ public class Teacher {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
     }
 
     public String getAvtURL() {

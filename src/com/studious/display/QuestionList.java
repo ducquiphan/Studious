@@ -4,10 +4,12 @@ import com.studious.dao.LessonDAO;
 import com.studious.dao.QuestionDAO;
 import com.studious.entity.Lesson;
 import com.studious.entity.Question;
+import com.studious.utils.Auth;
 import com.studious.utils.MsgBox;
 import java.awt.Color;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JFrame;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -19,10 +21,17 @@ public class QuestionList extends javax.swing.JFrame {
     /**
      * Creates new form Main
      */
+    
+    JFrame window;
+    
     public QuestionList() {
         initComponents();
-        setLocationRelativeTo(null);
-        setTitle("Studious - Câu hỏi");
+        init();
+    }
+    
+    public QuestionList(JFrame window) {
+        initComponents();
+        this.window = window;
         init();
     }
 
@@ -49,8 +58,8 @@ public class QuestionList extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tblQuestion = new javax.swing.JTable();
         btnDo = new javax.swing.JButton();
-        btnSearch1 = new javax.swing.JTextField();
-        btnSearch3 = new javax.swing.JButton();
+        btnSearch = new javax.swing.JButton();
+        txtSearch = new javax.swing.JTextField();
         pnlDoTest = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jPanel1 = new javax.swing.JPanel();
@@ -81,9 +90,9 @@ public class QuestionList extends javax.swing.JFrame {
         jToolBar = new javax.swing.JToolBar();
         btnHome = new javax.swing.JButton();
         btnPersonalInfo = new javax.swing.JButton();
-        btnLesson = new javax.swing.JButton();
-        btnTest = new javax.swing.JButton();
-        btnScore = new javax.swing.JButton();
+        btnLessons1 = new javax.swing.JButton();
+        btnTest1 = new javax.swing.JButton();
+        btnScore1 = new javax.swing.JButton();
         btnBack = new javax.swing.JButton();
         btnLogout = new javax.swing.JButton();
 
@@ -98,15 +107,15 @@ public class QuestionList extends javax.swing.JFrame {
         lblTitle.setText("CÂU HỎI");
 
         tabs.setBackground(new java.awt.Color(255, 255, 255));
-        tabs.setFont(new java.awt.Font("Inter", 0, 20)); // NOI18N
+        tabs.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
         pnlList.setBackground(new java.awt.Color(255, 255, 255));
 
-        lblSubject.setFont(new java.awt.Font("Inter", 0, 20)); // NOI18N
+        lblSubject.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         lblSubject.setText("Môn:");
 
         cboSubject.setBackground(new java.awt.Color(233, 233, 233));
-        cboSubject.setFont(new java.awt.Font("Montserrat Thin", 1, 16)); // NOI18N
+        cboSubject.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         cboSubject.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Toán", "Vật lý", "Hóa học", "Sinh học" }));
         cboSubject.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -114,11 +123,11 @@ public class QuestionList extends javax.swing.JFrame {
             }
         });
 
-        lblGrade.setFont(new java.awt.Font("Inter", 0, 20)); // NOI18N
+        lblGrade.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         lblGrade.setText("Khối:");
 
         cboGrade.setBackground(new java.awt.Color(233, 233, 233));
-        cboGrade.setFont(new java.awt.Font("Montserrat Thin", 1, 16)); // NOI18N
+        cboGrade.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         cboGrade.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "10", "11", "12" }));
         cboGrade.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -127,7 +136,7 @@ public class QuestionList extends javax.swing.JFrame {
         });
 
         cboLesson.setBackground(new java.awt.Color(233, 233, 233));
-        cboLesson.setFont(new java.awt.Font("Montserrat Thin", 1, 16)); // NOI18N
+        cboLesson.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         cboLesson.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Toán", "Vật lý", "Hóa học", "Sinh học" }));
         cboLesson.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -135,7 +144,7 @@ public class QuestionList extends javax.swing.JFrame {
             }
         });
 
-        lblLesson.setFont(new java.awt.Font("Inter", 0, 20)); // NOI18N
+        lblLesson.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         lblLesson.setText("Bài học:");
 
         tblQuestion.setFont(new java.awt.Font("Fira Code Light", 0, 12)); // NOI18N
@@ -179,15 +188,14 @@ public class QuestionList extends javax.swing.JFrame {
             }
         });
 
-        btnSearch1.setFont(new java.awt.Font("Readex Pro Medium", 0, 14)); // NOI18N
-        btnSearch1.setText("Tìm kiếm");
-
-        btnSearch3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/studious/icons/icons8-search-24.png"))); // NOI18N
-        btnSearch3.addActionListener(new java.awt.event.ActionListener() {
+        btnSearch.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/studious/icons/icons8-search-24.png"))); // NOI18N
+        btnSearch.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSearch3ActionPerformed(evt);
+                btnSearchActionPerformed(evt);
             }
         });
+
+        txtSearch.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
         javax.swing.GroupLayout pnlListLayout = new javax.swing.GroupLayout(pnlList);
         pnlList.setLayout(pnlListLayout);
@@ -210,10 +218,11 @@ public class QuestionList extends javax.swing.JFrame {
                                 .addGroup(pnlListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                     .addComponent(cboSubject, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(cboLesson, javax.swing.GroupLayout.Alignment.LEADING, 0, 220, Short.MAX_VALUE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 153, Short.MAX_VALUE)
-                                .addComponent(btnSearch3, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnSearch1, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 201, Short.MAX_VALUE)
+                                .addComponent(btnSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(8, 8, 8))
                             .addComponent(cboGrade, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pnlListLayout.createSequentialGroup()
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -233,20 +242,20 @@ public class QuestionList extends javax.swing.JFrame {
                     .addComponent(cboGrade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(pnlListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlListLayout.createSequentialGroup()
-                        .addComponent(btnSearch1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(23, 23, 23))
                     .addGroup(pnlListLayout.createSequentialGroup()
                         .addGroup(pnlListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(pnlListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(lblLesson)
                                 .addComponent(cboLesson, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(btnSearch3, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(btnDo)
-                .addGap(29, 29, 29))
+                            .addComponent(btnSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnDo)
+                        .addGap(29, 29, 29))
+                    .addGroup(pnlListLayout.createSequentialGroup()
+                        .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
 
         tabs.addTab("Danh sách", pnlList);
@@ -539,56 +548,100 @@ public class QuestionList extends javax.swing.JFrame {
         lblLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/studious/icons/Studious-255x68.png"))); // NOI18N
 
         jToolBar.setBackground(new java.awt.Color(232, 255, 183));
-        jToolBar.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        jToolBar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(232, 255, 183)));
         jToolBar.setFloatable(false);
         jToolBar.setOrientation(javax.swing.SwingConstants.VERTICAL);
+        jToolBar.setRollover(true);
 
         btnHome.setBackground(new java.awt.Color(232, 255, 183));
         btnHome.setForeground(new java.awt.Color(232, 255, 183));
         btnHome.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/studious/icons/home.png"))); // NOI18N
         btnHome.setFocusable(false);
         btnHome.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnHome.setMaximumSize(new java.awt.Dimension(35, 35));
+        btnHome.setMaximumSize(new java.awt.Dimension(45, 45));
+        btnHome.setMinimumSize(new java.awt.Dimension(45, 45));
+        btnHome.setPreferredSize(new java.awt.Dimension(45, 45));
         btnHome.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnHome.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnHomeActionPerformed(evt);
+            }
+        });
         jToolBar.add(btnHome);
 
         btnPersonalInfo.setBackground(new java.awt.Color(232, 255, 183));
         btnPersonalInfo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/studious/icons/account.png"))); // NOI18N
         btnPersonalInfo.setFocusable(false);
         btnPersonalInfo.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnPersonalInfo.setMaximumSize(new java.awt.Dimension(35, 35));
-        btnPersonalInfo.setPreferredSize(new java.awt.Dimension(35, 35));
+        btnPersonalInfo.setMaximumSize(new java.awt.Dimension(45, 45));
+        btnPersonalInfo.setMinimumSize(new java.awt.Dimension(45, 45));
+        btnPersonalInfo.setPreferredSize(new java.awt.Dimension(45, 45));
         btnPersonalInfo.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnPersonalInfo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPersonalInfoActionPerformed(evt);
+            }
+        });
         jToolBar.add(btnPersonalInfo);
 
-        btnLesson.setBackground(new java.awt.Color(232, 255, 183));
-        btnLesson.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/studious/icons/lessons.png"))); // NOI18N
-        btnLesson.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnLesson.setMaximumSize(new java.awt.Dimension(35, 35));
-        btnLesson.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jToolBar.add(btnLesson);
+        btnLessons1.setBackground(new java.awt.Color(232, 255, 183));
+        btnLessons1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/studious/icons/lessons.png"))); // NOI18N
+        btnLessons1.setFocusable(false);
+        btnLessons1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnLessons1.setMaximumSize(new java.awt.Dimension(45, 45));
+        btnLessons1.setMinimumSize(new java.awt.Dimension(45, 45));
+        btnLessons1.setPreferredSize(new java.awt.Dimension(45, 45));
+        btnLessons1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnLessons1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLessons1ActionPerformed(evt);
+            }
+        });
+        jToolBar.add(btnLessons1);
 
-        btnTest.setBackground(new java.awt.Color(232, 255, 183));
-        btnTest.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/studious/icons/mockExam.png"))); // NOI18N
-        btnTest.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnTest.setMaximumSize(new java.awt.Dimension(35, 35));
-        btnTest.setPreferredSize(new java.awt.Dimension(35, 35));
-        btnTest.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jToolBar.add(btnTest);
+        btnTest1.setBackground(new java.awt.Color(232, 255, 183));
+        btnTest1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/studious/icons/mockExam.png"))); // NOI18N
+        btnTest1.setFocusable(false);
+        btnTest1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnTest1.setMaximumSize(new java.awt.Dimension(45, 45));
+        btnTest1.setMinimumSize(new java.awt.Dimension(45, 45));
+        btnTest1.setPreferredSize(new java.awt.Dimension(45, 45));
+        btnTest1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnTest1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTest1ActionPerformed(evt);
+            }
+        });
+        jToolBar.add(btnTest1);
 
-        btnScore.setBackground(new java.awt.Color(232, 255, 183));
-        btnScore.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/studious/icons/score.png"))); // NOI18N
-        btnScore.setFocusable(false);
-        btnScore.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnScore.setMaximumSize(new java.awt.Dimension(35, 35));
-        btnScore.setPreferredSize(new java.awt.Dimension(35, 35));
-        btnScore.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jToolBar.add(btnScore);
+        btnScore1.setBackground(new java.awt.Color(232, 255, 183));
+        btnScore1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/studious/icons/score.png"))); // NOI18N
+        btnScore1.setFocusable(false);
+        btnScore1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnScore1.setMaximumSize(new java.awt.Dimension(45, 45));
+        btnScore1.setMinimumSize(new java.awt.Dimension(45, 45));
+        btnScore1.setPreferredSize(new java.awt.Dimension(45, 45));
+        btnScore1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnScore1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnScore1ActionPerformed(evt);
+            }
+        });
+        jToolBar.add(btnScore1);
 
         btnBack.setBackground(new java.awt.Color(232, 255, 183));
         btnBack.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/studious/icons/back.png"))); // NOI18N
+        btnBack.setFocusable(false);
         btnBack.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnBack.setMaximumSize(new java.awt.Dimension(45, 45));
+        btnBack.setMinimumSize(new java.awt.Dimension(45, 45));
+        btnBack.setPreferredSize(new java.awt.Dimension(45, 45));
         btnBack.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnBack.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBackActionPerformed(evt);
+            }
+        });
         jToolBar.add(btnBack);
 
         btnLogout.setBackground(new java.awt.Color(232, 255, 183));
@@ -596,9 +649,15 @@ public class QuestionList extends javax.swing.JFrame {
         btnLogout.setToolTipText("");
         btnLogout.setFocusable(false);
         btnLogout.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnLogout.setMaximumSize(new java.awt.Dimension(35, 35));
-        btnLogout.setPreferredSize(new java.awt.Dimension(35, 35));
+        btnLogout.setMaximumSize(new java.awt.Dimension(45, 45));
+        btnLogout.setMinimumSize(new java.awt.Dimension(45, 45));
+        btnLogout.setPreferredSize(new java.awt.Dimension(45, 45));
         btnLogout.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnLogout.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLogoutActionPerformed(evt);
+            }
+        });
         jToolBar.add(btnLogout);
 
         javax.swing.GroupLayout pnlBackgroundLayout = new javax.swing.GroupLayout(pnlBackground);
@@ -606,8 +665,9 @@ public class QuestionList extends javax.swing.JFrame {
         pnlBackgroundLayout.setHorizontalGroup(
             pnlBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlBackgroundLayout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(jToolBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(36, 36, 36)
+                .addGap(22, 22, 22)
                 .addGroup(pnlBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(tabs, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(pnlBackgroundLayout.createSequentialGroup()
@@ -655,15 +715,12 @@ public class QuestionList extends javax.swing.JFrame {
     Question quest = null;
     
     private void init() {
-        this.setLocationRelativeTo(this);
+        setLocationRelativeTo(null);
+        setTitle("Studious - Câu hỏi");
         this.fillCboSubjectList();
         //setIconImage(XImage.getAppIcon());
         setResizable(false);
         doTest(false);
-        rdoChooseAnsA.setName("a");
-        rdoChooseAnsB.setName("b");
-        rdoChooseAnsC.setName("c");
-        rdoChooseAnsD.setName("d");
     }
     private void cboGradeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboGradeActionPerformed
         // TODO add your handling code here:
@@ -675,9 +732,22 @@ public class QuestionList extends javax.swing.JFrame {
         fillCboGradeList();
     }//GEN-LAST:event_cboSubjectActionPerformed
 
-    private void btnSearch3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearch3ActionPerformed
+    private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnSearch3ActionPerformed
+        try {
+            DefaultTableModel model = (DefaultTableModel) tblQuestion.getModel();
+            model.setRowCount(0);
+            List<Question> list = qdao.selectByQuestion(txtSearch.getText());
+            if (list != null) {
+                for (int i = 0; i < list.size(); i++) {
+                    Question question = list.get(i);
+                    model.addRow(new Object[]{i + 1, question.getQuestionID(), question.getQuestion(), question.getAns(), question.getAns1(), question.getAns2(), question.getAns3(), question.getAns4()});
+                }
+            }
+        } catch (Exception e) {
+            e.toString();
+        }
+    }//GEN-LAST:event_btnSearchActionPerformed
 
     private void rdoChooseAnsAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdoChooseAnsAActionPerformed
         // TODO add your handling code here:
@@ -816,7 +886,7 @@ public class QuestionList extends javax.swing.JFrame {
     private void doTest(boolean check) {
         if (check) {
             grpButtonAns.clearSelection();
-            pnlQnA.setVisible(check);
+            pnlQnA.setVisible(false);
             pnlQuest.setVisible(check);
             Integer questionID = (Integer) tblQuestion.getValueAt(this.row, 1);
             quest = qdao.selectById(questionID);
@@ -830,7 +900,7 @@ public class QuestionList extends javax.swing.JFrame {
             rdoChooseAnsD.setText(quest.getAns4());
 
         } else {
-            pnlQnA.setVisible(check);
+            pnlQnA.setVisible(false);
             pnlQuest.setVisible(check);
         }
     }
@@ -867,6 +937,46 @@ public class QuestionList extends javax.swing.JFrame {
         }
         this.row = tblQuestion.rowAtPoint(evt.getPoint());
     }//GEN-LAST:event_tblQuestionMouseClicked
+
+    private void btnHomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHomeActionPerformed
+        Login.main.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnHomeActionPerformed
+
+    private void btnPersonalInfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPersonalInfoActionPerformed
+        PersonalInforStudent window = new PersonalInforStudent(this, true);
+        window.setVisible(true);
+    }//GEN-LAST:event_btnPersonalInfoActionPerformed
+
+    private void btnLessons1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLessons1ActionPerformed
+        LessonsStudent window = new LessonsStudent(this);
+        window.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnLessons1ActionPerformed
+
+    private void btnTest1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTest1ActionPerformed
+        TestList window = new TestList(this);
+        window.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnTest1ActionPerformed
+
+    private void btnScore1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnScore1ActionPerformed
+        ScoreBoardStudent window = new ScoreBoardStudent(this, true);
+        window.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnScore1ActionPerformed
+
+    private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
+        window.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnBackActionPerformed
+
+    private void btnLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoutActionPerformed
+        Auth.user = null;
+        Login window = new Login();
+        window.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnLogoutActionPerformed
 
     /**
      * @param args the command line arguments
@@ -909,16 +1019,15 @@ public class QuestionList extends javax.swing.JFrame {
     private javax.swing.JButton btnDeleteComment;
     private javax.swing.JButton btnDo;
     private javax.swing.JButton btnHome;
-    private javax.swing.JButton btnLesson;
+    private javax.swing.JButton btnLessons1;
     private javax.swing.JButton btnLogout;
     private javax.swing.JButton btnPersonalInfo;
     private javax.swing.JButton btnRemake;
     private javax.swing.JButton btnReport;
-    private javax.swing.JButton btnScore;
-    private javax.swing.JTextField btnSearch1;
-    private javax.swing.JButton btnSearch3;
+    private javax.swing.JButton btnScore1;
+    private javax.swing.JButton btnSearch;
     private javax.swing.JButton btnSend;
-    private javax.swing.JButton btnTest;
+    private javax.swing.JButton btnTest1;
     private javax.swing.JComboBox<String> cboGrade;
     private javax.swing.JComboBox<String> cboLesson;
     private javax.swing.JComboBox<String> cboSubject;
@@ -955,5 +1064,6 @@ public class QuestionList extends javax.swing.JFrame {
     private javax.swing.JRadioButton rdoChooseAnsD;
     private javax.swing.JTabbedPane tabs;
     private javax.swing.JTable tblQuestion;
+    private javax.swing.JTextField txtSearch;
     // End of variables declaration//GEN-END:variables
 }

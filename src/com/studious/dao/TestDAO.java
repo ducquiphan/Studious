@@ -18,6 +18,7 @@ public class TestDAO extends StudiousDAO<Test, String> {
     final String SELECTALL_SQL = "SELECT * FROM BAITHI";
     final String SELECTBYID_SQL = "SELECT * FROM BAITHI WHERE MaBThi = ?";
     final String SELECTBYSUBJECTGRADE_SQL = "SELECT * FROM BAITHI WHERE MonHoc = ? AND Khoi = ?";
+    final String SELECTBYSUBJECTANDTIME_SQL = "SELECT * FROM BAITHI WHERE MonHoc = ? AND ThoiGian = ?";
 
     @Override
     public void insert(Test entity) {
@@ -63,11 +64,11 @@ public class TestDAO extends StudiousDAO<Test, String> {
                 Test entity = new Test();
                 entity.setTestID(rs.getString(1));
                 entity.setTestTitle(rs.getString(2));
-                entity.setLesson(rs.getString(3));
-                entity.setGrade(rs.getInt(4));
-                entity.setCreateDate(rs.getDate(5));
-                entity.setTeacherID(rs.getString(6));
-                entity.setQuestionsList(rs.getString(7));
+                entity.setTimeTest(rs.getInt(3));
+                entity.setLesson(rs.getString(4));
+                entity.setGrade(rs.getInt(5));
+                entity.setCreateDate(rs.getDate(6));
+                entity.setTeacherID(rs.getString(7));
                 list.add(entity);
             }
         } catch (Exception e) {
@@ -80,4 +81,16 @@ public class TestDAO extends StudiousDAO<Test, String> {
         return selectSql(SELECTBYSUBJECTGRADE_SQL, subject, grade);
     }
 
+    public List<Test> selectBySubjectAndTime(String subject, Integer timeTest){
+        return selectSql(SELECTBYSUBJECTANDTIME_SQL, subject, timeTest);
+    }
+    
+    public List<Test> selectBtTestTitleAndSubjectAndTime(String testTitle, String subject, Integer timeTest){
+        String sql = "SELECT * FROM BAITHI WHERE TieuDe LIKE N'%"+testTitle+"%' AND MonHoc = "+subject+" AND ThoiGian = "+timeTest;
+        List<Test> list = selectSql(sql);
+        if (list.isEmpty()) {
+            return null;
+        }
+        return list;
+    }
 }

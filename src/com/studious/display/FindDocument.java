@@ -37,7 +37,6 @@ public class FindDocument extends javax.swing.JFrame {
         lblLesson = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblScoreStudent = new javax.swing.JTable();
-        cboStatisticsBySubject = new javax.swing.JComboBox<>();
         btnView = new javax.swing.JButton();
         btnDelete = new javax.swing.JButton();
         btnSearch = new javax.swing.JButton();
@@ -60,20 +59,20 @@ public class FindDocument extends javax.swing.JFrame {
         lblTitle.setBackground(new java.awt.Color(232, 255, 183));
         lblTitle.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/studious/icons/Studious-255x68.png"))); // NOI18N
 
-        lblTitle1.setFont(new java.awt.Font("Inter", 1, 32)); // NOI18N
+        lblTitle1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         lblTitle1.setForeground(new java.awt.Color(47, 106, 1));
         lblTitle1.setText("TÌM KIẾM TÀI LIỆU");
 
         tabs.setBackground(new java.awt.Color(255, 255, 255));
-        tabs.setFont(new java.awt.Font("Inter", 0, 20)); // NOI18N
+        tabs.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
-        lblSubject.setFont(new java.awt.Font("Inter", 0, 20)); // NOI18N
+        lblSubject.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         lblSubject.setText("Môn:");
 
         cboSubject.setBackground(new java.awt.Color(233, 233, 233));
-        cboSubject.setFont(new java.awt.Font("Montserrat Thin", 1, 16)); // NOI18N
+        cboSubject.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         cboSubject.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Toán", "Vật lý", "Hóa học", "Sinh học" }));
         cboSubject.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -81,11 +80,11 @@ public class FindDocument extends javax.swing.JFrame {
             }
         });
 
-        lblGrade.setFont(new java.awt.Font("Inter", 0, 20)); // NOI18N
+        lblGrade.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         lblGrade.setText("Khối:");
 
         cboGrade.setBackground(new java.awt.Color(233, 233, 233));
-        cboGrade.setFont(new java.awt.Font("Montserrat Thin", 1, 16)); // NOI18N
+        cboGrade.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         cboGrade.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "10", "11", "12" }));
         cboGrade.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -94,10 +93,10 @@ public class FindDocument extends javax.swing.JFrame {
         });
 
         cboLesson.setBackground(new java.awt.Color(233, 233, 233));
-        cboLesson.setFont(new java.awt.Font("Montserrat Thin", 1, 16)); // NOI18N
+        cboLesson.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         cboLesson.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Toán", "Vật lý", "Hóa học", "Sinh học" }));
 
-        lblLesson.setFont(new java.awt.Font("Inter", 0, 20)); // NOI18N
+        lblLesson.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         lblLesson.setText("Bài học:");
 
         tblScoreStudent.setFont(new java.awt.Font("Fira Code Light", 0, 12)); // NOI18N
@@ -110,10 +109,6 @@ public class FindDocument extends javax.swing.JFrame {
             }
         ));
         jScrollPane1.setViewportView(tblScoreStudent);
-
-        cboStatisticsBySubject.setBackground(new java.awt.Color(233, 233, 233));
-        cboStatisticsBySubject.setFont(new java.awt.Font("Montserrat Thin", 1, 16)); // NOI18N
-        cboStatisticsBySubject.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Thống kê theo môn học" }));
 
         btnView.setBackground(new java.awt.Color(221, 221, 221));
         btnView.setFont(new java.awt.Font("Inter", 0, 16)); // NOI18N
@@ -156,11 +151,9 @@ public class FindDocument extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(cboGrade, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(22, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(cboStatisticsBySubject, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnView)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnDelete)
@@ -193,11 +186,9 @@ public class FindDocument extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(cboStatisticsBySubject, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(btnView)
-                        .addComponent(btnDelete)))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnView)
+                    .addComponent(btnDelete))
                 .addContainerGap(45, Short.MAX_VALUE))
         );
 
@@ -451,7 +442,6 @@ public class FindDocument extends javax.swing.JFrame {
     private javax.swing.JButton btnView;
     private javax.swing.JComboBox<String> cboGrade;
     private javax.swing.JComboBox<String> cboLesson;
-    private javax.swing.JComboBox<String> cboStatisticsBySubject;
     private javax.swing.JComboBox<String> cboSubject;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;

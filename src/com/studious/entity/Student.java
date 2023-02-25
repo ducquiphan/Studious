@@ -12,23 +12,23 @@ public class Student {
     private String fullname;
     private boolean gender;
     private Date birthDate;
+    private String identity ;
     private int grade;
     private String email;
-    private String phone;
     private String avtURL;
     private String accountID;
 
     public Student() {
     }
 
-    public Student(String studentID, String fullname, boolean gender, Date birthDate, int grade, String email, String phone, String avtURL, String accountID) {
+    public Student(String studentID, String fullname, boolean gender, Date birthDate, String identity, int grade, String email, String avtURL, String accountID) {
         this.studentID = studentID;
         this.fullname = fullname;
         this.gender = gender;
         this.birthDate = birthDate;
+        this.identity = identity;
         this.grade = grade;
         this.email = email;
-        this.phone = phone;
         this.avtURL = avtURL;
         this.accountID = accountID;
     }
@@ -65,12 +65,20 @@ public class Student {
         this.birthDate = birthDate;
     }
 
-    public int getGrade() {
+        public int getGrade() {
         return grade;
     }
 
     public void setGrade(int grade) {
         this.grade = grade;
+    }
+    
+    public String getIdentity() {
+        return identity;
+    }
+
+    public void setIdentity(String identity) {
+        this.identity = identity;
     }
 
     public String getEmail() {
@@ -79,14 +87,6 @@ public class Student {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
     }
 
     public String getAvtURL() {
@@ -103,11 +103,6 @@ public class Student {
 
     public void setAccountID(String accountID) {
         this.accountID = accountID;
-    }
-
-    @Override
-    public String toString() {
-        return getFullname();
     }
     
     

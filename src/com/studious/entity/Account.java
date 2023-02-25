@@ -56,12 +56,10 @@ public class Account {
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("Account{");
-        sb.append(", role=").append(role);
-        sb.append('}');
-        return sb.toString();
+        return "Account{" + "userID=" + userID + ", password=" + password + ", role=" + role + ", status=" + status + '}';
     }
+
+
 
     
 }
