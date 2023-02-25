@@ -4,9 +4,6 @@ package com.studious.display;
 import com.studious.DAO.ReportDAO;
 import com.studious.dao.AccountDAO;
 import com.studious.dao.StudentDAO;
-import com.studious.entity.Account;
-import com.studious.entity.Lesson;
-import com.studious.entity.Question;
 import com.studious.entity.Student;
 import com.studious.utils.*;
 import java.util.List;
@@ -29,8 +26,11 @@ public class ScoreBoardStudent extends javax.swing.JDialog {
     }
 
     private void init() {
+        setTitle("Studious - Bảng điểm");
         setResizable(false);
         fillToTable();
+        setIconImage(XImage.getAppIcon());
+        tblScoreStudent.setAutoCreateRowSorter(true);
     }
 
     ReportDAO rdao = new ReportDAO();

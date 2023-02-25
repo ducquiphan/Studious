@@ -11,7 +11,9 @@ import com.studious.entity.Result;
 import com.studious.entity.Student;
 import com.studious.entity.Test;
 import com.studious.utils.MsgBox;
+import com.studious.utils.XImage;
 import java.awt.Color;
+import java.awt.Frame;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -30,10 +32,21 @@ public class DoTest extends java.awt.Dialog {
     /**
      * Creates new form DoTest
      */
+    Frame parent;
+
     public DoTest(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
+        this.parent = parent;
+        init();
+    }
+
+    public DoTest(java.awt.Frame parent, boolean modal) {
+        super(parent, modal);
+        initComponents();
+        setLocationRelativeTo(null);
+        this.parent = parent;
         init();
     }
 
@@ -899,11 +912,11 @@ public class DoTest extends java.awt.Dialog {
      * Closes the dialog
      */
     private void closeDialog(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_closeDialog
-        EndTest();
+        endTest();
     }//GEN-LAST:event_closeDialog
 
     private void btnEndTestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEndTestActionPerformed
-        EndTest();
+        endTest();
     }//GEN-LAST:event_btnEndTestActionPerformed
 
     private void rdoChooseAnsAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdoChooseAnsAActionPerformed
@@ -1095,7 +1108,7 @@ public class DoTest extends java.awt.Dialog {
     }//GEN-LAST:event_btn41ActionPerformed
 
     private void btn42ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn42ActionPerformed
-       selectedQuestion(42);
+        selectedQuestion(42);
     }//GEN-LAST:event_btn42ActionPerformed
 
     private void btn43ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn43ActionPerformed
@@ -1406,11 +1419,11 @@ public class DoTest extends java.awt.Dialog {
         }
     }
 
-    private void EndTest() {
+    private void endTest() {
         if (MsgBox.confirm(this, "Bạn có chắc chắn muốn kết thúc bài thi không ?")) {
             timeDefaul = Integer.parseInt(lblTime.getText().substring(0, 2));
             timeTested = 60 - timeDefaul;
-            DoTestReport ReportTest = new DoTestReport();
+            TestReport ReportTest = new TestReport(parent, true);
             ReportTest.setVisible(true);
             this.setVisible(false);
             this.dispose();
@@ -1450,9 +1463,8 @@ public class DoTest extends java.awt.Dialog {
                         ss = 59;
                     }
                 }
-
                 if (mm == 0 && ss == 0) {
-                    EndTest();
+                    endTest();
                 }
                 lblTime.setText(format.format(new Date(0, 0, 0, 0, mm, ss)));
             }
@@ -1465,6 +1477,8 @@ public class DoTest extends java.awt.Dialog {
     }
 
     private void init() {
+        setTitle("Studious - Làm bài thi");
+        setIconImage(XImage.getAppIcon());
         testEntity = tDao.selectById("TOA01");
         sEntity = sDao.selectById("HS25579");
         setTime();

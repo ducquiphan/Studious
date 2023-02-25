@@ -15,6 +15,7 @@ import com.studious.entity.Lesson;
 import com.studious.entity.Question;
 import com.studious.utils.Auth;
 import com.studious.utils.MsgBox;
+import com.studious.utils.XImage;
 import java.awt.Image;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
@@ -103,6 +104,11 @@ public class DocumentsManagement extends javax.swing.JFrame {
         btnLogout = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         jPanel1.setBackground(new java.awt.Color(232, 255, 183));
         jPanel1.setForeground(new java.awt.Color(232, 255, 183));
@@ -640,9 +646,7 @@ public class DocumentsManagement extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -658,14 +662,14 @@ public class DocumentsManagement extends javax.swing.JFrame {
     Integer documentID = -1;
     
     private void init() {
+        setTitle("Syudious - Quản lý tài liệu");
         fillCboSubject();
         fillCboSubjectList();
         tblDocument.setAutoCreateRowSorter(true);
         clearForm();
         setResizable(false);
         setLocationRelativeTo(null);
-        AccountDAO adao = new AccountDAO();
-        Auth.user = adao.selectById("GV1");
+        setIconImage(XImage.getAppIcon());
     }
 
     private void fillCboSubject() {
@@ -1117,6 +1121,12 @@ public class DocumentsManagement extends javax.swing.JFrame {
         window.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnLogoutActionPerformed
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        // TODO add your handling code here:
+        window.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_formWindowClosing
 
     /**
      * @param args the command line arguments

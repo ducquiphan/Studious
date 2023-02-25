@@ -655,6 +655,7 @@ public class StudentManagement extends java.awt.Dialog {
     public String avtPath = "src\\com\\studious\\images\\";
 
     void init () {
+        tblStudents.setAutoCreateRowSorter(true);
         setLocationRelativeTo(this);
         tabs.setSelectedIndex(1);
         setIconImage(XImage.getAppIcon());

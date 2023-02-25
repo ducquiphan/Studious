@@ -3,6 +3,7 @@ package com.studious.display;
 import com.studious.DAO.ReportDAO;
 import com.studious.utils.Auth;
 import com.studious.utils.MsgBox;
+import com.studious.utils.XImage;
 import java.util.List;
 import javax.swing.JFrame;
 import javax.swing.table.DefaultTableModel;
@@ -32,6 +33,7 @@ public class StatisticAdmin extends javax.swing.JFrame {
     ReportDAO rdao = new ReportDAO();
 
     private void init() {
+        setIconImage(XImage.getAppIcon());
         setLocationRelativeTo(null);
         fillToTotalScoreTable("");
         fillToDocumentTable("", "");
@@ -251,6 +253,11 @@ public class StatisticAdmin extends javax.swing.JFrame {
         btnLogout = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         jPanel1.setBackground(new java.awt.Color(232, 255, 183));
 
@@ -691,6 +698,12 @@ public class StatisticAdmin extends javax.swing.JFrame {
         window.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnLogoutActionPerformed
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        // TODO add your handling code here:
+        window.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_formWindowClosing
 
     /**
      * @param args the command line arguments

@@ -441,8 +441,10 @@ public class LessonManagement extends java.awt.Dialog {
     int row = 0;
 
     void init () {
-        setLocationRelativeTo(this);
+        tblLesson.setAutoCreateRowSorter(true);
         tabs.setSelectedIndex(1);
+        setLocationRelativeTo(null);
+        setTitle("Studious - Quản lý bài học");
         setIconImage(XImage.getAppIcon());
         setResizable(false);
         fillTable();

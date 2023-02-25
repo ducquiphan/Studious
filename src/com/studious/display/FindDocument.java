@@ -1,5 +1,17 @@
 package com.studious.display;
 
+import com.studious.dao.DocumentDAO;
+import com.studious.dao.LessonDAO;
+import com.studious.entity.Document;
+import com.studious.entity.Lesson;
+import com.studious.utils.Auth;
+import com.studious.utils.MsgBox;
+import com.studious.utils.XImage;
+import java.util.List;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JFrame;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author SsuBii
@@ -9,10 +21,29 @@ public class FindDocument extends javax.swing.JFrame {
     /**
      * Creates new form Main
      */
+    
+    DocumentDAO ddao = new DocumentDAO();
+    LessonDAO ldao = new LessonDAO();
+    JFrame window;
+    int row;
+    
     public FindDocument() {
         initComponents();
+        init();
+    }
+    
+    public FindDocument(JFrame window) {
+        this.window = window;
+        initComponents();
+        init();
+    }
+    
+    public void init(){
+        fillCboSubject();
+        setIconImage(XImage.getAppIcon());
         setLocationRelativeTo(null);
         setTitle("Studious - Tìm kiếm tài liệu");
+        tblDocument.setAutoCreateRowSorter(true);
     }
 
     /**
@@ -36,22 +67,29 @@ public class FindDocument extends javax.swing.JFrame {
         cboLesson = new javax.swing.JComboBox<>();
         lblLesson = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tblScoreStudent = new javax.swing.JTable();
+        tblDocument = new javax.swing.JTable();
         btnView = new javax.swing.JButton();
-        btnDelete = new javax.swing.JButton();
         btnSearch = new javax.swing.JButton();
         txtSearch = new javax.swing.JTextField();
         jToolBar = new javax.swing.JToolBar();
         btnHome = new javax.swing.JButton();
         btnPersonalInfo = new javax.swing.JButton();
-        btnLesson = new javax.swing.JButton();
-        btnTest = new javax.swing.JButton();
-        btnScore = new javax.swing.JButton();
+        btnLessons1 = new javax.swing.JButton();
+        btnTest1 = new javax.swing.JButton();
+        btnScore1 = new javax.swing.JButton();
         btnBack = new javax.swing.JButton();
         btnLogout = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setSize(new java.awt.Dimension(0, 0));
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
+            }
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         pnlBackground.setBackground(new java.awt.Color(232, 255, 183));
         pnlBackground.setForeground(new java.awt.Color(232, 255, 183));
@@ -68,11 +106,11 @@ public class FindDocument extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
-        lblSubject.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        lblSubject.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lblSubject.setText("Môn:");
 
         cboSubject.setBackground(new java.awt.Color(233, 233, 233));
-        cboSubject.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        cboSubject.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         cboSubject.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Toán", "Vật lý", "Hóa học", "Sinh học" }));
         cboSubject.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -80,11 +118,11 @@ public class FindDocument extends javax.swing.JFrame {
             }
         });
 
-        lblGrade.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        lblGrade.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lblGrade.setText("Khối:");
 
         cboGrade.setBackground(new java.awt.Color(233, 233, 233));
-        cboGrade.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        cboGrade.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         cboGrade.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "10", "11", "12" }));
         cboGrade.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -93,32 +131,51 @@ public class FindDocument extends javax.swing.JFrame {
         });
 
         cboLesson.setBackground(new java.awt.Color(233, 233, 233));
-        cboLesson.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        cboLesson.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         cboLesson.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Toán", "Vật lý", "Hóa học", "Sinh học" }));
+        cboLesson.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cboLessonActionPerformed(evt);
+            }
+        });
 
-        lblLesson.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        lblLesson.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lblLesson.setText("Bài học:");
 
-        tblScoreStudent.setFont(new java.awt.Font("Fira Code Light", 0, 12)); // NOI18N
-        tblScoreStudent.setModel(new javax.swing.table.DefaultTableModel(
+        tblDocument.setFont(new java.awt.Font("Fira Code Light", 0, 12)); // NOI18N
+        tblDocument.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Stt", "Mã tài liệu", "Tên tài liệu", "Môn học", "Khối", "Người đăng"
+                "Stt", "Mã tài liệu", "Tên tài liệu", "Môn học"
             }
-        ));
-        jScrollPane1.setViewportView(tblScoreStudent);
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tblDocument.getTableHeader().setReorderingAllowed(false);
+        tblDocument.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblDocumentMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(tblDocument);
 
         btnView.setBackground(new java.awt.Color(221, 221, 221));
         btnView.setFont(new java.awt.Font("Inter", 0, 16)); // NOI18N
         btnView.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/studious/icons/icons8-view-24.png"))); // NOI18N
         btnView.setText("Xem");
-
-        btnDelete.setBackground(new java.awt.Color(221, 221, 221));
-        btnDelete.setFont(new java.awt.Font("Inter", 0, 16)); // NOI18N
-        btnDelete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/studious/icons/icons8-bin-24.png"))); // NOI18N
-        btnDelete.setText("Xóa");
+        btnView.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnViewActionPerformed(evt);
+            }
+        });
 
         btnSearch.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/studious/icons/icons8-search-24.png"))); // NOI18N
         btnSearch.addActionListener(new java.awt.event.ActionListener() {
@@ -128,39 +185,36 @@ public class FindDocument extends javax.swing.JFrame {
         });
 
         txtSearch.setFont(new java.awt.Font("Readex Pro Medium", 0, 14)); // NOI18N
-        txtSearch.setText("Tìm kiếm");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(14, 14, 14)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblLesson)
-                    .addComponent(lblGrade)
-                    .addComponent(lblSubject))
-                .addGap(56, 56, 56)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(cboSubject, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(cboLesson, javax.swing.GroupLayout.Alignment.LEADING, 0, 220, Short.MAX_VALUE))
-                        .addGap(114, 114, 114)
-                        .addComponent(btnSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(cboGrade, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(22, Short.MAX_VALUE))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnView)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnDelete)
-                .addGap(25, 25, 25))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1)
+                        .addGap(14, 14, 14)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblLesson)
+                            .addComponent(lblGrade)
+                            .addComponent(lblSubject))
+                        .addGap(56, 56, 56)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(cboSubject, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(cboLesson, javax.swing.GroupLayout.Alignment.LEADING, 0, 220, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(cboGrade, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 756, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnView)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -186,16 +240,14 @@ public class FindDocument extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnView)
-                    .addComponent(btnDelete))
+                .addComponent(btnView)
                 .addContainerGap(45, Short.MAX_VALUE))
         );
 
         tabs.addTab("Danh sách", jPanel1);
 
         jToolBar.setBackground(new java.awt.Color(232, 255, 183));
-        jToolBar.setBorder(null);
+        jToolBar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(232, 255, 183)));
         jToolBar.setFloatable(false);
         jToolBar.setOrientation(javax.swing.SwingConstants.VERTICAL);
         jToolBar.setRollover(true);
@@ -203,69 +255,109 @@ public class FindDocument extends javax.swing.JFrame {
         btnHome.setBackground(new java.awt.Color(232, 255, 183));
         btnHome.setForeground(new java.awt.Color(232, 255, 183));
         btnHome.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/studious/icons/home.png"))); // NOI18N
-        btnHome.setBorder(null);
         btnHome.setFocusable(false);
         btnHome.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnHome.setMaximumSize(new java.awt.Dimension(35, 35));
+        btnHome.setMaximumSize(new java.awt.Dimension(45, 45));
+        btnHome.setMinimumSize(new java.awt.Dimension(45, 45));
+        btnHome.setPreferredSize(new java.awt.Dimension(45, 45));
         btnHome.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnHome.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnHomeActionPerformed(evt);
+            }
+        });
         jToolBar.add(btnHome);
 
         btnPersonalInfo.setBackground(new java.awt.Color(232, 255, 183));
         btnPersonalInfo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/studious/icons/account.png"))); // NOI18N
-        btnPersonalInfo.setBorder(null);
         btnPersonalInfo.setFocusable(false);
         btnPersonalInfo.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnPersonalInfo.setMaximumSize(new java.awt.Dimension(35, 35));
+        btnPersonalInfo.setMaximumSize(new java.awt.Dimension(45, 45));
+        btnPersonalInfo.setMinimumSize(new java.awt.Dimension(45, 45));
+        btnPersonalInfo.setPreferredSize(new java.awt.Dimension(45, 45));
         btnPersonalInfo.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnPersonalInfo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPersonalInfoActionPerformed(evt);
+            }
+        });
         jToolBar.add(btnPersonalInfo);
 
-        btnLesson.setBackground(new java.awt.Color(232, 255, 183));
-        btnLesson.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/studious/icons/lessons.png"))); // NOI18N
-        btnLesson.setBorder(null);
-        btnLesson.setFocusable(false);
-        btnLesson.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnLesson.setMaximumSize(new java.awt.Dimension(35, 35));
-        btnLesson.setMinimumSize(new java.awt.Dimension(46, 44));
-        btnLesson.setPreferredSize(new java.awt.Dimension(46, 44));
-        btnLesson.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jToolBar.add(btnLesson);
+        btnLessons1.setBackground(new java.awt.Color(232, 255, 183));
+        btnLessons1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/studious/icons/lessons.png"))); // NOI18N
+        btnLessons1.setFocusable(false);
+        btnLessons1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnLessons1.setMaximumSize(new java.awt.Dimension(45, 45));
+        btnLessons1.setMinimumSize(new java.awt.Dimension(45, 45));
+        btnLessons1.setPreferredSize(new java.awt.Dimension(45, 45));
+        btnLessons1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnLessons1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLessons1ActionPerformed(evt);
+            }
+        });
+        jToolBar.add(btnLessons1);
 
-        btnTest.setBackground(new java.awt.Color(232, 255, 183));
-        btnTest.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/studious/icons/mockExam.png"))); // NOI18N
-        btnTest.setBorder(null);
-        btnTest.setFocusable(false);
-        btnTest.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnTest.setMaximumSize(new java.awt.Dimension(35, 35));
-        btnTest.setMinimumSize(new java.awt.Dimension(46, 44));
-        btnTest.setPreferredSize(new java.awt.Dimension(46, 44));
-        btnTest.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jToolBar.add(btnTest);
+        btnTest1.setBackground(new java.awt.Color(232, 255, 183));
+        btnTest1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/studious/icons/mockExam.png"))); // NOI18N
+        btnTest1.setFocusable(false);
+        btnTest1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnTest1.setMaximumSize(new java.awt.Dimension(45, 45));
+        btnTest1.setMinimumSize(new java.awt.Dimension(45, 45));
+        btnTest1.setPreferredSize(new java.awt.Dimension(45, 45));
+        btnTest1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnTest1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTest1ActionPerformed(evt);
+            }
+        });
+        jToolBar.add(btnTest1);
 
-        btnScore.setBackground(new java.awt.Color(232, 255, 183));
-        btnScore.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/studious/icons/score.png"))); // NOI18N
-        btnScore.setBorder(null);
-        btnScore.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnScore.setMaximumSize(new java.awt.Dimension(35, 35));
-        btnScore.setMinimumSize(new java.awt.Dimension(46, 44));
-        btnScore.setPreferredSize(new java.awt.Dimension(46, 44));
-        btnScore.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jToolBar.add(btnScore);
+        btnScore1.setBackground(new java.awt.Color(232, 255, 183));
+        btnScore1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/studious/icons/score.png"))); // NOI18N
+        btnScore1.setFocusable(false);
+        btnScore1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnScore1.setMaximumSize(new java.awt.Dimension(45, 45));
+        btnScore1.setMinimumSize(new java.awt.Dimension(45, 45));
+        btnScore1.setPreferredSize(new java.awt.Dimension(45, 45));
+        btnScore1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnScore1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnScore1ActionPerformed(evt);
+            }
+        });
+        jToolBar.add(btnScore1);
 
         btnBack.setBackground(new java.awt.Color(232, 255, 183));
         btnBack.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/studious/icons/back.png"))); // NOI18N
         btnBack.setBorder(null);
+        btnBack.setFocusable(false);
         btnBack.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnBack.setMaximumSize(new java.awt.Dimension(45, 45));
+        btnBack.setMinimumSize(new java.awt.Dimension(45, 45));
+        btnBack.setPreferredSize(new java.awt.Dimension(45, 45));
         btnBack.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnBack.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBackActionPerformed(evt);
+            }
+        });
         jToolBar.add(btnBack);
 
         btnLogout.setBackground(new java.awt.Color(232, 255, 183));
         btnLogout.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/studious/icons/logout.png"))); // NOI18N
         btnLogout.setToolTipText("");
-        btnLogout.setBorder(null);
         btnLogout.setFocusable(false);
         btnLogout.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnLogout.setMaximumSize(new java.awt.Dimension(35, 35));
+        btnLogout.setMaximumSize(new java.awt.Dimension(45, 45));
+        btnLogout.setMinimumSize(new java.awt.Dimension(45, 45));
+        btnLogout.setPreferredSize(new java.awt.Dimension(45, 45));
         btnLogout.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnLogout.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLogoutActionPerformed(evt);
+            }
+        });
         jToolBar.add(btnLogout);
 
         javax.swing.GroupLayout pnlBackgroundLayout = new javax.swing.GroupLayout(pnlBackground);
@@ -275,7 +367,7 @@ public class FindDocument extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlBackgroundLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jToolBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addGroup(pnlBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(pnlBackgroundLayout.createSequentialGroup()
                         .addComponent(lblTitle)
@@ -294,15 +386,14 @@ public class FindDocument extends javax.swing.JFrame {
                     .addGroup(pnlBackgroundLayout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(lblTitle)))
+                .addGap(18, 18, 18)
                 .addGroup(pnlBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnlBackgroundLayout.createSequentialGroup()
-                        .addGap(18, 18, 18)
                         .addComponent(tabs)
                         .addGap(27, 27, 27))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlBackgroundLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(pnlBackgroundLayout.createSequentialGroup()
                         .addComponent(jToolBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(164, 164, 164))))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -321,15 +412,100 @@ public class FindDocument extends javax.swing.JFrame {
 
     private void cboGradeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboGradeActionPerformed
         // TODO add your handling code here:
+        fillCboLesson();
     }//GEN-LAST:event_cboGradeActionPerformed
 
     private void cboSubjectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboSubjectActionPerformed
         // TODO add your handling code here:
+        fillCboGrade();
+        
     }//GEN-LAST:event_cboSubjectActionPerformed
 
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
         // TODO add your handling code here:
+        try {
+            DefaultTableModel model = (DefaultTableModel) tblDocument.getModel();
+            model.setRowCount(0);
+            List<Document> list = ddao.selectByDocumentTitle(txtSearch.getText());
+            if (list != null) {
+                for (int i = 0; i < list.size(); i++) {
+                    Document doc = list.get(i);
+                    Lesson lesson = ldao.selectById(doc.getLessonID());
+                    model.addRow(new Object[]{i + 1, doc.getDocID(), doc.getDocTitle(), lesson.getSubject()});
+                }
+            }
+        } catch (Exception e) {
+            e.toString();
+        }
     }//GEN-LAST:event_btnSearchActionPerformed
+
+    private void cboLessonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboLessonActionPerformed
+        // TODO add your handling code here:
+        fillTblDocument();
+    }//GEN-LAST:event_cboLessonActionPerformed
+
+    private void btnHomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHomeActionPerformed
+        Login.main.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnHomeActionPerformed
+
+    private void btnPersonalInfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPersonalInfoActionPerformed
+        PersonalInforStudent window = new PersonalInforStudent(this, true);
+        window.setVisible(true);
+    }//GEN-LAST:event_btnPersonalInfoActionPerformed
+
+    private void btnLessons1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLessons1ActionPerformed
+        LessonsStudent window = new LessonsStudent(this);
+        window.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnLessons1ActionPerformed
+
+    private void btnTest1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTest1ActionPerformed
+        TestList window = new TestList(this);
+        window.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnTest1ActionPerformed
+
+    private void btnScore1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnScore1ActionPerformed
+        ScoreBoardStudent window = new ScoreBoardStudent(this, true);
+        window.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnScore1ActionPerformed
+
+    private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
+        window.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnBackActionPerformed
+
+    private void btnLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoutActionPerformed
+        Auth.user = null;
+        Login window = new Login();
+        window.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnLogoutActionPerformed
+
+    private void btnViewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewActionPerformed
+        // TODO add your handling code here:
+        
+        Document document = ddao.selectById((Integer) tblDocument.getValueAt(row, 1));
+        DocumentView dv = new DocumentView(this, rootPaneCheckingEnabled, document.getUrl(), document.getDocTitle());
+        dv.setVisible(true);
+    }//GEN-LAST:event_btnViewActionPerformed
+
+    private void tblDocumentMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblDocumentMouseClicked
+        // TODO add your handling code here:
+        row = tblDocument.getSelectedRow();
+    }//GEN-LAST:event_tblDocumentMouseClicked
+
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_formWindowClosed
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        // TODO add your handling code here:
+        Login.main.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_formWindowClosing
 
     /**
      * @param args the command line arguments
@@ -357,68 +533,7 @@ public class FindDocument extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(FindDocument.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
+        
         //</editor-fold>
 
         /* Create and display the form */
@@ -431,14 +546,13 @@ public class FindDocument extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBack;
-    private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnHome;
-    private javax.swing.JButton btnLesson;
+    private javax.swing.JButton btnLessons1;
     private javax.swing.JButton btnLogout;
     private javax.swing.JButton btnPersonalInfo;
-    private javax.swing.JButton btnScore;
+    private javax.swing.JButton btnScore1;
     private javax.swing.JButton btnSearch;
-    private javax.swing.JButton btnTest;
+    private javax.swing.JButton btnTest1;
     private javax.swing.JButton btnView;
     private javax.swing.JComboBox<String> cboGrade;
     private javax.swing.JComboBox<String> cboLesson;
@@ -453,7 +567,77 @@ public class FindDocument extends javax.swing.JFrame {
     private javax.swing.JLabel lblTitle1;
     private javax.swing.JPanel pnlBackground;
     private javax.swing.JTabbedPane tabs;
-    private javax.swing.JTable tblScoreStudent;
+    private javax.swing.JTable tblDocument;
     private javax.swing.JTextField txtSearch;
     // End of variables declaration//GEN-END:variables
+
+    private void fillCboSubject(){
+        try {
+            DefaultComboBoxModel model = (DefaultComboBoxModel) cboSubject.getModel();
+            model.removeAllElements();
+            List<Object> list = ldao.selectSubject();
+            if (list != null) {
+                for (Object subject : list) {
+                    model.addElement(subject);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    
+    private void fillCboLesson() {
+         try {
+            DefaultComboBoxModel model = (DefaultComboBoxModel) cboLesson.getModel();
+            model.removeAllElements();
+            String subject = String.valueOf(cboSubject.getSelectedItem());
+            Integer grade = (Integer) cboGrade.getSelectedItem();
+            if (subject != null && grade != null) {
+                List<Lesson> lList = ldao.selectBySubjectAndGrade(subject, grade);
+                if (lList != null) {
+                    for (Lesson lesson : lList) {
+                        model.addElement(lesson);
+                    }
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void fillCboGrade() {
+        try {
+            DefaultComboBoxModel model = (DefaultComboBoxModel) cboGrade.getModel();
+            model.removeAllElements();
+            String subject = (String) cboSubject.getSelectedItem();
+            List<Object> list = ldao.selectGradeBySubject(subject);
+            if (list != null) {
+                for (Object grade : list) {
+                    model.addElement(grade);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void fillTblDocument() {
+        try {
+            DefaultTableModel model = (DefaultTableModel) tblDocument.getModel();
+            model.setRowCount(0);
+            Lesson lesson = (Lesson) cboLesson.getSelectedItem();
+            if (lesson != null) {
+                List<Document> list = ddao.selectByLessonID(lesson.getLessonID());
+                if (list != null) {
+                    for (int i = 0; i < list.size(); i++) {
+                        Document doc = list.get(i);
+                        model.addRow(new Object[]{i + 1, doc.getDocID(), doc.getDocTitle(), lesson.getSubject()});
+                    }
+                }
+
+            }
+        } catch (Exception e) {
+            MsgBox.alert(this, e.toString());
+        }
+    }
 }

@@ -8,6 +8,7 @@ import com.studious.entity.Student;
 import com.studious.entity.Teacher;
 import com.studious.utils.Auth;
 import com.studious.utils.MsgBox;
+import com.studious.utils.XImage;
 import java.awt.Frame;
 import java.util.Properties;
 import javax.mail.Message;
@@ -36,6 +37,7 @@ public class ForgotPassword extends javax.swing.JDialog {
         initComponents();
         setLocationRelativeTo(null);
         setTitle("Studious - Quên mật khẩu");
+        setIconImage(XImage.getAppIcon());
         this.getRootPane().setDefaultButton(btnConfirm);
     }
 

@@ -2,6 +2,7 @@ package com.studious.display;
 
 import com.studious.utils.Auth;
 import com.studious.utils.MsgBox;
+import com.studious.utils.XImage;
 
 /**
  *
@@ -13,6 +14,7 @@ public class MainWindowStudents extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null);
         setTitle("Studious - Màn hình chính");
+        setIconImage(XImage.getAppIcon());
     }
 
     /**

@@ -130,26 +130,23 @@
                               <EmptySpace max="32767" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="1" attributes="0">
-                              <Group type="103" groupAlignment="1" attributes="0">
-                                  <Group type="102" attributes="0">
-                                      <Component id="rdoMale" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                      <Component id="rdoFemale" min="-2" pref="98" max="-2" attributes="0"/>
-                                      <EmptySpace max="32767" attributes="0"/>
-                                      <Component id="btnAddAvatar" min="-2" pref="115" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Group type="102" attributes="0">
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="txtIdentifier" alignment="0" min="-2" pref="200" max="-2" attributes="0"/>
-                                          <Component id="txtBirthday" alignment="0" min="-2" pref="200" max="-2" attributes="0"/>
-                                          <Component id="txtName" alignment="0" min="-2" pref="200" max="-2" attributes="0"/>
-                                          <Component id="txtID" alignment="0" min="-2" pref="200" max="-2" attributes="0"/>
-                                      </Group>
-                                      <EmptySpace pref="65" max="32767" attributes="0"/>
-                                      <Component id="lblAvatar" min="-2" pref="115" max="-2" attributes="0"/>
-                                  </Group>
+                              <Component id="rdoMale" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Component id="rdoFemale" min="-2" pref="98" max="-2" attributes="0"/>
+                              <EmptySpace max="32767" attributes="0"/>
+                              <Component id="btnAddAvatar" min="-2" pref="142" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="1" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="txtIdentifier" alignment="0" min="-2" pref="200" max="-2" attributes="0"/>
+                                  <Component id="txtBirthday" alignment="0" min="-2" pref="200" max="-2" attributes="0"/>
+                                  <Component id="txtName" alignment="0" min="-2" pref="200" max="-2" attributes="0"/>
+                                  <Component id="txtID" alignment="0" min="-2" pref="200" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace min="-2" pref="60" max="-2" attributes="0"/>
+                              <EmptySpace pref="78" max="32767" attributes="0"/>
+                              <Component id="lblAvatar" min="-2" pref="115" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="47" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -263,6 +260,9 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="&#x110;&#x1ed5;i m&#x1ead;t kh&#x1ea9;u"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnChangePassActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JTextField" name="txtBirthday">
               <Properties>

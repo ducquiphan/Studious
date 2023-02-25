@@ -1,6 +1,7 @@
 package com.studious.display;
 
 import com.studious.utils.Auth;
+import com.studious.utils.XImage;
 import javax.swing.JFrame;
 
 /**
@@ -15,6 +16,7 @@ public class LessonsStudent extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null);
         setTitle("Studious - Bài học");
+        setIconImage(XImage.getAppIcon());
     }
 
     public LessonsStudent(JFrame window) {
@@ -22,6 +24,8 @@ public class LessonsStudent extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null);
         setTitle("Studious - Bài học");
+        setIconImage(XImage.getAppIcon());
+
     }
 
     /**
@@ -353,6 +357,4 @@ public class LessonsStudent extends javax.swing.JFrame {
     private javax.swing.JPanel pnlBackground;
     // End of variables declaration//GEN-END:variables
 
-
-    
 }

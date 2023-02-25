@@ -6,6 +6,7 @@ import com.studious.entity.Lesson;
 import com.studious.entity.Question;
 import com.studious.utils.Auth;
 import com.studious.utils.MsgBox;
+import com.studious.utils.XImage;
 import java.awt.Color;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
@@ -98,6 +99,11 @@ public class QuestionList extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setSize(new java.awt.Dimension(0, 0));
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         pnlBackground.setBackground(new java.awt.Color(232, 255, 183));
         pnlBackground.setForeground(new java.awt.Color(232, 255, 183));
@@ -715,10 +721,11 @@ public class QuestionList extends javax.swing.JFrame {
     Question quest = null;
     
     private void init() {
+        tblQuestion.setAutoCreateRowSorter(true);
         setLocationRelativeTo(null);
         setTitle("Studious - Câu hỏi");
         this.fillCboSubjectList();
-        //setIconImage(XImage.getAppIcon());
+        setIconImage(XImage.getAppIcon());
         setResizable(false);
         doTest(false);
     }
@@ -977,6 +984,12 @@ public class QuestionList extends javax.swing.JFrame {
         window.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnLogoutActionPerformed
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        // TODO add your handling code here:
+        window.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_formWindowClosing
 
     /**
      * @param args the command line arguments

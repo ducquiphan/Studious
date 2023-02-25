@@ -8,17 +8,15 @@ import com.studious.dao.AccountDAO;
 import com.studious.dao.LessonDAO;
 import com.studious.dao.QuestionDAO;
 import com.studious.dao.QuestionOfTestDAO;
-import com.studious.dao.StudentDAO;
 import com.studious.entity.Lesson;
 import com.studious.entity.Question;
-import com.studious.entity.Student;
 import com.studious.utils.Auth;
 import com.studious.utils.MsgBox;
+import com.studious.utils.XImage;
 import java.awt.Color;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JFrame;
-import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -30,14 +28,13 @@ public class QuestionsManagement extends javax.swing.JFrame {
     /**
      * Creates new form QuestionsManagement
      */
-    
     JFrame window;
-    
+
     public QuestionsManagement() {
         initComponents();
         init();
     }
-    
+
     public QuestionsManagement(JFrame window) {
         initComponents();
         this.window = window;
@@ -52,11 +49,12 @@ public class QuestionsManagement extends javax.swing.JFrame {
     List<Lesson> lList;
 
     private void init() {
+        setTitle("Studious - Quản lý câu hỏi");
         this.setLocationRelativeTo(null);
         this.fillCboSubjectList();
         this.fillCboSubject();
         tblQuestions.setAutoCreateRowSorter(true);
-        //setIconImage(XImage.getAppIcon());
+        setIconImage(XImage.getAppIcon());
         setResizable(false);
         doTest(false);
         Auth.user = adao.selectById("GV1");
@@ -459,6 +457,11 @@ public class QuestionsManagement extends javax.swing.JFrame {
         btnLogout = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         pnlBackground.setBackground(new java.awt.Color(232, 255, 183));
 
@@ -1554,7 +1557,7 @@ public class QuestionsManagement extends javax.swing.JFrame {
                 this.fillToForm();
             }
         }
-        
+
     }//GEN-LAST:event_tblQuestionsMouseClicked
 
     private void cboLessonListActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboLessonListActionPerformed
@@ -1689,6 +1692,12 @@ public class QuestionsManagement extends javax.swing.JFrame {
         window.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnLogoutActionPerformed
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        // TODO add your handling code here:
+        window.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_formWindowClosing
 
     /**
      * @param args the command line arguments

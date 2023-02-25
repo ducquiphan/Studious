@@ -12,6 +12,7 @@ import com.studious.entity.Teacher;
 import com.studious.entity.Test;
 import com.studious.utils.Auth;
 import com.studious.utils.MsgBox;
+import com.studious.utils.XImage;
 import java.awt.HeadlessException;
 import java.util.ArrayList;
 import java.util.List;
@@ -107,6 +108,11 @@ public class TestManagement extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         pnlBackground.setBackground(new java.awt.Color(232, 255, 183));
 
@@ -628,7 +634,7 @@ public class TestManagement extends javax.swing.JFrame {
                     .addComponent(btnSearchList, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 376, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(123, 123, 123))
+                .addGap(105, 105, 105))
         );
 
         tabs.addTab("Danh sách", pnlList);
@@ -812,6 +818,7 @@ public class TestManagement extends javax.swing.JFrame {
     private int index = -1;
 
     private void init () {
+        setTitle("Studious - Quản lý bài thi thử");
         setLocationRelativeTo(null);
         fillCboSubject(true);
         fillCboSubjectList(true);
@@ -821,6 +828,10 @@ public class TestManagement extends javax.swing.JFrame {
         fillTblTestList("");
         clearForm();
         setValue();
+        tblGridView.setAutoCreateRowSorter(true);
+        tblQuestion.setAutoCreateRowSorter(true);
+        tblQuestionList.setAutoCreateRowSorter(true);
+        setIconImage(XImage.getAppIcon());
     }
 
     //hàm cập nhật giá trị đầu vào:
@@ -1295,7 +1306,7 @@ public class TestManagement extends javax.swing.JFrame {
         String testType = (String) cboTestTypeList.getSelectedItem();
         switch (testType) {
             case "15 Phút","45 Phút","60 Phút" -> {
-                fillCboSubjectList(false);
+                fillCboSubjectList(true);
             }
             case "THPTQG" -> {
                 fillCboSubjectList(false);
@@ -1394,6 +1405,12 @@ public class TestManagement extends javax.swing.JFrame {
         window.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnLogoutActionPerformed
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        // TODO add your handling code here:
+        Login.main.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_formWindowClosing
 
     /**
      * @param args the command line arguments

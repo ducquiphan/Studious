@@ -5,11 +5,9 @@
 package com.studious.display;
 
 import com.studious.DAO.ReportDAO;
-import com.studious.dao.AccountDAO;
 import com.studious.utils.Auth;
+import com.studious.utils.XImage;
 import java.util.List;
-import javax.swing.ComboBoxModel;
-import javax.swing.DefaultComboBoxModel;
 import javax.swing.JFrame;
 import javax.swing.table.DefaultTableModel;
 
@@ -38,6 +36,8 @@ public class StatisticTeacher extends javax.swing.JFrame {
     ReportDAO rdao = new ReportDAO();
 
     private void init () {
+        setTitle("Studious - Bảng điểm");
+        setIconImage(XImage.getAppIcon());
         setLocationRelativeTo(null);
         fillToTotalScoreTable("");
         fillToDocumentTable("", "");
@@ -45,7 +45,7 @@ public class StatisticTeacher extends javax.swing.JFrame {
         fillToAverageScoreTable("");
         tblAverageScore.setAutoCreateRowSorter(true);
         tblDocument.setAutoCreateRowSorter(true);
-        tblQuestions3.setAutoCreateRowSorter(true);
+        tblQuestions.setAutoCreateRowSorter(true);
         tblSumScore.setAutoCreateRowSorter(true);
     }
 
@@ -154,7 +154,7 @@ public class StatisticTeacher extends javax.swing.JFrame {
     private void fillToQuestionTable (String teacherName, String subject) {
         try {
             if (cboForAll.getSelectedIndex() == 0) {
-                tblQuestions3.setModel(new javax.swing.table.DefaultTableModel(
+                tblQuestions.setModel(new javax.swing.table.DefaultTableModel(
                         new Object[][]{
                             {null, null, null},
                             {null, null, null},
@@ -173,7 +173,7 @@ public class StatisticTeacher extends javax.swing.JFrame {
                         return canEdit[columnIndex];
                     }
                 });
-                DefaultTableModel model = (DefaultTableModel) tblQuestions3.getModel();
+                DefaultTableModel model = (DefaultTableModel) tblQuestions.getModel();
                 model.setRowCount(0);
                 if (teacherName.equals("")) {
                     teacherName = null;
@@ -184,7 +184,7 @@ public class StatisticTeacher extends javax.swing.JFrame {
                 }
             }
             if (cboForAll.getSelectedIndex() == 1) {
-                tblQuestions3.setModel(new javax.swing.table.DefaultTableModel(
+                tblQuestions.setModel(new javax.swing.table.DefaultTableModel(
                         new Object[][]{
                             {null, null, null},
                             {null, null, null},
@@ -203,7 +203,7 @@ public class StatisticTeacher extends javax.swing.JFrame {
                         return canEdit[columnIndex];
                     }
                 });
-                DefaultTableModel model = (DefaultTableModel) tblQuestions3.getModel();
+                DefaultTableModel model = (DefaultTableModel) tblQuestions.getModel();
                 model.setRowCount(0);
                 if (subject.equals("")) {
                     subject = null;
@@ -241,21 +241,26 @@ public class StatisticTeacher extends javax.swing.JFrame {
         btnStatistic = new javax.swing.JButton();
         btnBack = new javax.swing.JButton();
         btnLogout = new javax.swing.JButton();
-        javax.swing.JTabbedPane tab4 = new javax.swing.JTabbedPane();
-        pnlQuestion6 = new javax.swing.JPanel();
-        jScrollPane15 = new javax.swing.JScrollPane();
-        tblQuestions3 = new javax.swing.JTable();
-        pnlDocument2 = new javax.swing.JPanel();
-        jScrollPane16 = new javax.swing.JScrollPane();
+        tab = new javax.swing.JTabbedPane();
+        pnlQuestion7 = new javax.swing.JPanel();
+        jScrollPane19 = new javax.swing.JScrollPane();
+        tblQuestions = new javax.swing.JTable();
+        pnlDocument3 = new javax.swing.JPanel();
+        jScrollPane20 = new javax.swing.JScrollPane();
         tblDocument = new javax.swing.JTable();
-        pnlAverageScore2 = new javax.swing.JPanel();
-        jScrollPane17 = new javax.swing.JScrollPane();
+        pnlAverageScore3 = new javax.swing.JPanel();
+        jScrollPane21 = new javax.swing.JScrollPane();
         tblAverageScore = new javax.swing.JTable();
-        pnlSumScore2 = new javax.swing.JPanel();
-        jScrollPane18 = new javax.swing.JScrollPane();
+        pnlSumScore3 = new javax.swing.JPanel();
+        jScrollPane22 = new javax.swing.JScrollPane();
         tblSumScore = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         jPanel1.setBackground(new java.awt.Color(232, 255, 183));
 
@@ -401,18 +406,10 @@ public class StatisticTeacher extends javax.swing.JFrame {
         });
         jToolBar.add(btnLogout);
 
-        tab4.setToolTipText("");
-        tab4.setName(""); // NOI18N
-        tab4.addChangeListener(new javax.swing.event.ChangeListener() {
-            public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                tab4tab2sStateChanged(evt);
-            }
-        });
+        pnlQuestion7.setToolTipText("");
+        pnlQuestion7.setName(""); // NOI18N
 
-        pnlQuestion6.setToolTipText("");
-        pnlQuestion6.setName(""); // NOI18N
-
-        tblQuestions3.setModel(new javax.swing.table.DefaultTableModel(
+        tblQuestions.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null},
                 {null, null, null},
@@ -431,26 +428,26 @@ public class StatisticTeacher extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane15.setViewportView(tblQuestions3);
+        jScrollPane19.setViewportView(tblQuestions);
 
-        javax.swing.GroupLayout pnlQuestion6Layout = new javax.swing.GroupLayout(pnlQuestion6);
-        pnlQuestion6.setLayout(pnlQuestion6Layout);
-        pnlQuestion6Layout.setHorizontalGroup(
-            pnlQuestion6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlQuestion6Layout.createSequentialGroup()
+        javax.swing.GroupLayout pnlQuestion7Layout = new javax.swing.GroupLayout(pnlQuestion7);
+        pnlQuestion7.setLayout(pnlQuestion7Layout);
+        pnlQuestion7Layout.setHorizontalGroup(
+            pnlQuestion7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlQuestion7Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane15, javax.swing.GroupLayout.DEFAULT_SIZE, 879, Short.MAX_VALUE)
+                .addComponent(jScrollPane19, javax.swing.GroupLayout.DEFAULT_SIZE, 896, Short.MAX_VALUE)
                 .addContainerGap())
         );
-        pnlQuestion6Layout.setVerticalGroup(
-            pnlQuestion6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlQuestion6Layout.createSequentialGroup()
+        pnlQuestion7Layout.setVerticalGroup(
+            pnlQuestion7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlQuestion7Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane15, javax.swing.GroupLayout.PREFERRED_SIZE, 380, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(24, Short.MAX_VALUE))
+                .addComponent(jScrollPane19, javax.swing.GroupLayout.PREFERRED_SIZE, 380, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        tab4.addTab("Câu hỏi", pnlQuestion6);
+        tab.addTab("Câu hỏi", pnlQuestion7);
 
         tblDocument.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -471,26 +468,26 @@ public class StatisticTeacher extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane16.setViewportView(tblDocument);
+        jScrollPane20.setViewportView(tblDocument);
 
-        javax.swing.GroupLayout pnlDocument2Layout = new javax.swing.GroupLayout(pnlDocument2);
-        pnlDocument2.setLayout(pnlDocument2Layout);
-        pnlDocument2Layout.setHorizontalGroup(
-            pnlDocument2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlDocument2Layout.createSequentialGroup()
+        javax.swing.GroupLayout pnlDocument3Layout = new javax.swing.GroupLayout(pnlDocument3);
+        pnlDocument3.setLayout(pnlDocument3Layout);
+        pnlDocument3Layout.setHorizontalGroup(
+            pnlDocument3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlDocument3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane16, javax.swing.GroupLayout.DEFAULT_SIZE, 879, Short.MAX_VALUE)
+                .addComponent(jScrollPane20, javax.swing.GroupLayout.DEFAULT_SIZE, 896, Short.MAX_VALUE)
                 .addContainerGap())
         );
-        pnlDocument2Layout.setVerticalGroup(
-            pnlDocument2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlDocument2Layout.createSequentialGroup()
+        pnlDocument3Layout.setVerticalGroup(
+            pnlDocument3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlDocument3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane16, javax.swing.GroupLayout.PREFERRED_SIZE, 382, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane20, javax.swing.GroupLayout.PREFERRED_SIZE, 382, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(82, 82, 82))
         );
 
-        tab4.addTab("Tài liệu", pnlDocument2);
+        tab.addTab("Tài liệu", pnlDocument3);
 
         tblAverageScore.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -511,26 +508,26 @@ public class StatisticTeacher extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane17.setViewportView(tblAverageScore);
+        jScrollPane21.setViewportView(tblAverageScore);
 
-        javax.swing.GroupLayout pnlAverageScore2Layout = new javax.swing.GroupLayout(pnlAverageScore2);
-        pnlAverageScore2.setLayout(pnlAverageScore2Layout);
-        pnlAverageScore2Layout.setHorizontalGroup(
-            pnlAverageScore2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlAverageScore2Layout.createSequentialGroup()
+        javax.swing.GroupLayout pnlAverageScore3Layout = new javax.swing.GroupLayout(pnlAverageScore3);
+        pnlAverageScore3.setLayout(pnlAverageScore3Layout);
+        pnlAverageScore3Layout.setHorizontalGroup(
+            pnlAverageScore3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlAverageScore3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane17, javax.swing.GroupLayout.DEFAULT_SIZE, 879, Short.MAX_VALUE)
+                .addComponent(jScrollPane21, javax.swing.GroupLayout.DEFAULT_SIZE, 896, Short.MAX_VALUE)
                 .addContainerGap())
         );
-        pnlAverageScore2Layout.setVerticalGroup(
-            pnlAverageScore2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlAverageScore2Layout.createSequentialGroup()
+        pnlAverageScore3Layout.setVerticalGroup(
+            pnlAverageScore3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlAverageScore3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane17, javax.swing.GroupLayout.PREFERRED_SIZE, 382, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane21, javax.swing.GroupLayout.PREFERRED_SIZE, 382, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(82, 82, 82))
         );
 
-        tab4.addTab("Điểm trung bình", pnlAverageScore2);
+        tab.addTab("Điểm trung bình", pnlAverageScore3);
 
         tblSumScore.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -551,51 +548,48 @@ public class StatisticTeacher extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane18.setViewportView(tblSumScore);
+        jScrollPane22.setViewportView(tblSumScore);
 
-        javax.swing.GroupLayout pnlSumScore2Layout = new javax.swing.GroupLayout(pnlSumScore2);
-        pnlSumScore2.setLayout(pnlSumScore2Layout);
-        pnlSumScore2Layout.setHorizontalGroup(
-            pnlSumScore2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlSumScore2Layout.createSequentialGroup()
+        javax.swing.GroupLayout pnlSumScore3Layout = new javax.swing.GroupLayout(pnlSumScore3);
+        pnlSumScore3.setLayout(pnlSumScore3Layout);
+        pnlSumScore3Layout.setHorizontalGroup(
+            pnlSumScore3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlSumScore3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane18, javax.swing.GroupLayout.DEFAULT_SIZE, 879, Short.MAX_VALUE)
+                .addComponent(jScrollPane22, javax.swing.GroupLayout.DEFAULT_SIZE, 896, Short.MAX_VALUE)
                 .addContainerGap())
         );
-        pnlSumScore2Layout.setVerticalGroup(
-            pnlSumScore2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlSumScore2Layout.createSequentialGroup()
+        pnlSumScore3Layout.setVerticalGroup(
+            pnlSumScore3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlSumScore3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane18, javax.swing.GroupLayout.PREFERRED_SIZE, 382, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane22, javax.swing.GroupLayout.PREFERRED_SIZE, 382, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(82, 82, 82))
         );
 
-        tab4.addTab("Điểm tổng", pnlSumScore2);
+        tab.addTab("Điểm tổng", pnlSumScore3);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(105, 105, 105)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(lblTitle1)
-                                .addGap(579, 579, 579)
-                                .addComponent(lblTitle))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(cboForAll, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(12, 12, 12)
-                                .addComponent(btnSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jToolBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(tab4, javax.swing.GroupLayout.PREFERRED_SIZE, 908, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap()
+                .addComponent(jToolBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(52, 52, 52)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addComponent(lblTitle1)
+                            .addGap(579, 579, 579)
+                            .addComponent(lblTitle))
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addComponent(cboForAll, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(12, 12, 12)
+                            .addComponent(btnSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(tab, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 908, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(32, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -605,7 +599,7 @@ public class StatisticTeacher extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(lblTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblTitle1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(10, 10, 10)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(cboForAll, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtSearch, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -613,8 +607,8 @@ public class StatisticTeacher extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jToolBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tab4, javax.swing.GroupLayout.PREFERRED_SIZE, 447, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
+                    .addComponent(tab, javax.swing.GroupLayout.PREFERRED_SIZE, 437, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(16, 16, 16))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -704,9 +698,11 @@ public class StatisticTeacher extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_btnLogoutActionPerformed
 
-    private void tab4tab2sStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_tab4tab2sStateChanged
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         // TODO add your handling code here:
-    }//GEN-LAST:event_tab4tab2sStateChanged
+        window.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_formWindowClosing
 
     /**
      * @param args the command line arguments
@@ -760,28 +756,21 @@ public class StatisticTeacher extends javax.swing.JFrame {
     private javax.swing.JButton btnTest;
     private javax.swing.JComboBox<String> cboForAll;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JScrollPane jScrollPane15;
-    private javax.swing.JScrollPane jScrollPane16;
-    private javax.swing.JScrollPane jScrollPane17;
-    private javax.swing.JScrollPane jScrollPane18;
-    private javax.swing.JScrollPane jScrollPane5;
-    private javax.swing.JScrollPane jScrollPane9;
+    private javax.swing.JScrollPane jScrollPane19;
+    private javax.swing.JScrollPane jScrollPane20;
+    private javax.swing.JScrollPane jScrollPane21;
+    private javax.swing.JScrollPane jScrollPane22;
     private javax.swing.JToolBar jToolBar;
     private javax.swing.JLabel lblTitle;
     private javax.swing.JLabel lblTitle1;
-    private javax.swing.JPanel pnlAverageScore2;
-    private javax.swing.JPanel pnlDocument2;
-    private javax.swing.JPanel pnlQuestion2;
-    private javax.swing.JPanel pnlQuestion3;
-    private javax.swing.JPanel pnlQuestion6;
-    private javax.swing.JPanel pnlSumScore2;
+    private javax.swing.JPanel pnlAverageScore3;
+    private javax.swing.JPanel pnlDocument3;
+    private javax.swing.JPanel pnlQuestion7;
+    private javax.swing.JPanel pnlSumScore3;
     private javax.swing.JTabbedPane tab;
-    private javax.swing.JTabbedPane tab1;
     private javax.swing.JTable tblAverageScore;
     private javax.swing.JTable tblDocument;
     private javax.swing.JTable tblQuestions;
-    private javax.swing.JTable tblQuestions1;
-    private javax.swing.JTable tblQuestions3;
     private javax.swing.JTable tblSumScore;
     private javax.swing.JTextField txtSearch;
     // End of variables declaration//GEN-END:variables

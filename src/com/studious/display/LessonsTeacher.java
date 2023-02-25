@@ -1,6 +1,7 @@
 package com.studious.display;
 
 import com.studious.utils.Auth;
+import com.studious.utils.XImage;
 import javax.swing.JFrame;
 
 /**
@@ -19,6 +20,7 @@ public class LessonsTeacher extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null);
         setTitle("Studious - Bài học");
+        setIconImage(XImage.getAppIcon());
     }
     
     public LessonsTeacher(JFrame window) {
@@ -26,6 +28,7 @@ public class LessonsTeacher extends javax.swing.JFrame {
         this.window = window;
         setLocationRelativeTo(null);
         setTitle("Studious - Bài học");
+        setIconImage(XImage.getAppIcon());
     }
 
     /**
@@ -68,7 +71,7 @@ public class LessonsTeacher extends javax.swing.JFrame {
         btnLesson.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/studious/icons/open-book.png"))); // NOI18N
         btnLesson.setText("Quản lí bài học");
         btnLesson.setToolTipText("");
-        btnLesson.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        btnLesson.setBorder(null);
         btnLesson.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnLesson.setIconTextGap(1);
         btnLesson.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -83,7 +86,7 @@ public class LessonsTeacher extends javax.swing.JFrame {
         btnQuestion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/studious/icons/question 1.png"))); // NOI18N
         btnQuestion.setText("Câu hỏi");
         btnQuestion.setToolTipText("");
-        btnQuestion.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        btnQuestion.setBorder(null);
         btnQuestion.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnQuestion.setIconTextGap(1);
         btnQuestion.setMaximumSize(new java.awt.Dimension(170, 140));
@@ -101,7 +104,7 @@ public class LessonsTeacher extends javax.swing.JFrame {
         btnDocument.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/studious/icons/documents 1.png"))); // NOI18N
         btnDocument.setText("Tài liệu");
         btnDocument.setToolTipText("");
-        btnDocument.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        btnDocument.setBorder(null);
         btnDocument.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnDocument.setIconTextGap(1);
         btnDocument.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);

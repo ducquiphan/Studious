@@ -7,6 +7,7 @@ package com.studious.display;
 import com.studious.dao.AccountDAO;
 import com.studious.utils.Auth;
 import com.studious.utils.MsgBox;
+import com.studious.utils.XImage;
 
 /**
  *
@@ -20,7 +21,13 @@ public class ChangePassword extends javax.swing.JDialog {
     public ChangePassword(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        setLocationRelativeTo(parent);
+        setLocationRelativeTo(null);
+        init();
+    }
+    
+    private void init(){
+        setTitle("Studious - Đổi mật khẩu");
+        setIconImage(XImage.getAppIcon());
     }
     
     
@@ -71,16 +78,16 @@ public class ChangePassword extends javax.swing.JDialog {
         lblTitle.setForeground(new java.awt.Color(1, 93, 10));
         lblTitle.setText("ĐỔI MẬT KHẨU");
 
-        lblOldPassword.setFont(new java.awt.Font("Inter", 0, 18)); // NOI18N
+        lblOldPassword.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         lblOldPassword.setText("Mật khẩu hiện tại");
 
         txtOldPassword.setBackground(new java.awt.Color(217, 217, 217));
         txtOldPassword.setFont(new java.awt.Font("Inter", 0, 14)); // NOI18N
 
-        lblNewPass.setFont(new java.awt.Font("Inter", 0, 18)); // NOI18N
+        lblNewPass.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         lblNewPass.setText("Mật khẩu mới");
 
-        lblConfirmPass.setFont(new java.awt.Font("Inter", 0, 18)); // NOI18N
+        lblConfirmPass.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         lblConfirmPass.setText("Xác nhận mật khẩu mới");
 
         txtNewPassword.setBackground(new java.awt.Color(217, 217, 217));
@@ -90,7 +97,7 @@ public class ChangePassword extends javax.swing.JDialog {
         txtConfirmPassword.setFont(new java.awt.Font("Inter", 0, 14)); // NOI18N
 
         btnUpdate.setBackground(new java.awt.Color(232, 255, 183));
-        btnUpdate.setFont(new java.awt.Font("Inter", 0, 18)); // NOI18N
+        btnUpdate.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         btnUpdate.setText("Cập nhật");
         btnUpdate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -99,7 +106,7 @@ public class ChangePassword extends javax.swing.JDialog {
         });
 
         btnBack.setBackground(new java.awt.Color(232, 255, 183));
-        btnBack.setFont(new java.awt.Font("Inter", 0, 18)); // NOI18N
+        btnBack.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         btnBack.setText("Quay lại");
         btnBack.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -129,16 +136,16 @@ public class ChangePassword extends javax.swing.JDialog {
                     .addGroup(pnlBackGroundLayout.createSequentialGroup()
                         .addGap(116, 116, 116)
                         .addComponent(lblTitle)))
-                .addContainerGap(54, Short.MAX_VALUE))
+                .addContainerGap(39, Short.MAX_VALUE))
         );
         pnlBackGroundLayout.setVerticalGroup(
             pnlBackGroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlBackGroundLayout.createSequentialGroup()
                 .addGap(26, 26, 26)
                 .addComponent(lblTitle)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(24, 24, 24)
                 .addComponent(lblOldPassword)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtOldPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(lblNewPass)

@@ -5,6 +5,7 @@
 package com.studious.display;
 
 import com.studious.utils.XFile;
+import com.studious.utils.XImage;
 import java.awt.GraphicsEnvironment;
 
 /**
@@ -19,16 +20,22 @@ public class DocumentView extends java.awt.Dialog {
     public DocumentView (java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        this.setBounds(GraphicsEnvironment.getLocalGraphicsEnvironment().getMaximumWindowBounds());
+        init();
     }
 
     public DocumentView (java.awt.Frame parent, boolean modal, String nameFile, String title) {
         super(parent, modal);
         initComponents();
-        this.setLocationRelativeTo(null);
         lblDocumentTitle.setText(title);
         XFile.read(nameFile, txtContent);
         txtContent.setEditable(false);
+        init();
+    }
+    
+    public void init(){
+        this.setLocationRelativeTo(null);
+        setIconImage(XImage.getAppIcon());
+        setTitle("Studious - Xem tài liệu");
         this.setBounds(GraphicsEnvironment.getLocalGraphicsEnvironment().getMaximumWindowBounds());
     }
 

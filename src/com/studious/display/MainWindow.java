@@ -358,9 +358,12 @@ public class MainWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_btnStudentActionPerformed
 
     private void btnStatisticActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStatisticActionPerformed
+
+        // TODO add your handling code here:
         StatisticAdmin window = new StatisticAdmin(this);
         this.dispose();
         window.setVisible(true);
+
     }//GEN-LAST:event_btnStatisticActionPerformed
 
     private void btnQnaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQnaActionPerformed

@@ -4,6 +4,8 @@
  */
 package com.studious.display;
 
+import com.studious.utils.XImage;
+
 /**
  *
  * @author Admin
@@ -16,6 +18,9 @@ public class QuestAndAns extends java.awt.Dialog {
     public QuestAndAns(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        setIconImage(XImage.getAppIcon());
+        setTitle("Studious - Hỏi đáp");
+        setLocationRelativeTo(null);
     }
 
     /**
